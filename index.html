@@ -96,8 +96,8 @@
   }
   .order-btn:hover{ background:#d5551f; transform:translateY(-2px); }
   .order-btn.outline{
-    background:transparent;
-    border:1.5px solid rgba(255,247,237,0.35);
+    background:var(--fox);
+    border:1.5px solid transparent;
     color:var(--cream);
   }
 
@@ -253,25 +253,25 @@
     <div class="section-title">Menu</div>
 
     <div class="cat-title">Grilled Chicken</div>
-    <div class="cat-note">Spicy Algerian &middot; Louisiana BBQ &middot; Honeyracha</div>
+    <div class="cat-note">Spicy Algerian (Mild) &middot; Louisiana BBQ (Classic) &middot; Honeyracha (Mild)</div>
     <div class="menu-row"><span class="name">Quarter</span><span class="fill"></span><span class="price">£5.49</span></div>
     <div class="menu-row"><span class="name">Half</span><span class="fill"></span><span class="price">£9.49</span></div>
     <div class="menu-row"><span class="name">Full</span><span class="fill"></span><span class="price">£16.99</span></div>
 
     <div class="cat-title">Grilled Wings <span class="cat-note">(6pc)</span></div>
-    <div class="menu-row"><span class="name">Masala Chilli</span><span class="fill"></span><span class="price">£6.99</span></div>
-    <div class="menu-row"><span class="name">Sticky BBQ</span><span class="fill"></span><span class="price">£6.99</span></div>
-    <div class="menu-row"><span class="name">Honeyracha</span><span class="fill"></span><span class="price">£6.99</span></div>
+    <div class="menu-row"><span class="name">Masala Chilli <em>(Mild)</em></span><span class="fill"></span><span class="price">£6.99</span></div>
+    <div class="menu-row"><span class="name">Sticky BBQ <em>(Classic)</em></span><span class="fill"></span><span class="price">£6.99</span></div>
+    <div class="menu-row"><span class="name">Honeyracha <em>(Mild)</em></span><span class="fill"></span><span class="price">£6.99</span></div>
 
     <div class="cat-title">Fried Wings <span class="cat-note">(6pc)</span></div>
-    <div class="menu-row"><span class="name">Buffalo</span><span class="fill"></span><span class="price">£6.49</span></div>
-    <div class="menu-row"><span class="name">Volcano</span><span class="fill"></span><span class="price">£6.49</span></div>
-    <div class="menu-row"><span class="name">Hot Hot</span><span class="fill"></span><span class="price">£6.49</span></div>
+    <div class="menu-row"><span class="name">Buffalo <em>(Mild)</em></span><span class="fill"></span><span class="price">£6.49</span></div>
+    <div class="menu-row"><span class="name">Volcano <em>(Hot)</em></span><span class="fill"></span><span class="price">£6.49</span></div>
+    <div class="menu-row"><span class="name">Hot Hot <em>(Extra Hot)</em></span><span class="fill"></span><span class="price">£6.49</span></div>
 
     <div class="cat-title">Tenders <span class="cat-note">(4pc)</span></div>
-    <div class="menu-row"><span class="name">Louisiana BBQ</span><span class="fill"></span><span class="price">£7.99</span></div>
-    <div class="menu-row"><span class="name">Buffalo</span><span class="fill"></span><span class="price">£7.99</span></div>
-    <div class="menu-row"><span class="name">Masala Chilli</span><span class="fill"></span><span class="price">£7.99</span></div>
+    <div class="menu-row"><span class="name">Louisiana BBQ <em>(Classic)</em></span><span class="fill"></span><span class="price">£7.99</span></div>
+    <div class="menu-row"><span class="name">Buffalo <em>(Mild)</em></span><span class="fill"></span><span class="price">£7.99</span></div>
+    <div class="menu-row"><span class="name">Masala Chilli <em>(Mild)</em></span><span class="fill"></span><span class="price">£7.99</span></div>
 
     <div class="cat-title">Fries</div>
     <div class="menu-row"><span class="name">Classic Salted</span><span class="fill"></span><span class="price">£2.99</span></div>
@@ -288,10 +288,13 @@
     <div class="menu-row"><span class="name">Mozzarella Chips (6pc)</span><span class="fill"></span><span class="price">£4.99</span></div>
     <div class="menu-row"><span class="name">Naan — Plain</span><span class="fill"></span><span class="price">£2.29</span></div>
     <div class="menu-row"><span class="name">Naan — Garlic Butter</span><span class="fill"></span><span class="price">£2.79</span></div>
+    <div class="menu-row"><span class="name">Garlic Bread</span><span class="fill"></span><span class="price">£1.00</span></div>
     <div class="menu-row"><span class="name">Onion Rings (8pc)</span><span class="fill"></span><span class="price">£3.49</span></div>
     <div class="menu-row"><span class="name">Halloumi Fries (6pc)</span><span class="fill"></span><span class="price">£4.99</span></div>
     <div class="menu-row"><span class="name">Veg Samosas (4pc)</span><span class="fill"></span><span class="price">£3.99</span></div>
-    <div class="menu-row"><span class="name">Extra Sauce Pot</span><span class="fill"></span><span class="price">£0.50</span></div>
+    <div class="menu-row"><span class="name">Veg Spring Roll (4pc)</span><span class="fill"></span><span class="price">£3.00</span></div>
+    <div class="menu-row"><span class="name">Sauce Dip — Small</span><span class="fill"></span><span class="price">£0.30</span></div>
+    <div class="menu-row"><span class="name">Sauce Dip — Large</span><span class="fill"></span><span class="price">£0.50</span></div>
 
     <div class="cat-title">Buldak Fire Noodles <span class="cat-note">— Signature, Hot</span></div>
     <div class="menu-row"><span class="name">Buldak Fire Noodles</span><span class="fill"></span><span class="price">£8.49</span></div>
@@ -302,26 +305,31 @@
     <div class="menu-row"><span class="name">Nuggets (6pc) + Fries</span><span class="fill"></span><span class="price">£4.99</span></div>
     <div class="menu-row"><span class="name">Tenders (2pc) + Fries</span><span class="fill"></span><span class="price">£5.49</span></div>
     <div class="menu-row"><span class="name">Mozzarella Chips (3pc) + Fries</span><span class="fill"></span><span class="price">£4.99</span></div>
+    <div class="menu-row"><span class="name">Add Fruit Shoot / Water</span><span class="fill"></span><span class="price">+£1.00</span></div>
 
     <div class="cat-title">Drinks</div>
     <div class="menu-row"><span class="name">Water</span><span class="fill"></span><span class="price">£1.00</span></div>
-    <div class="menu-row"><span class="name">Cans (assorted)</span><span class="fill"></span><span class="price">£1.29</span></div>
-    <div class="menu-row"><span class="name">Large Bottles 1.5L</span><span class="fill"></span><span class="price">£2.99</span></div>
+    <div class="menu-row"><span class="name">Cans — Coca-Cola, Diet Coke, Coke Zero, Sprite/7up, Dr Pepper</span><span class="fill"></span><span class="price">£1.29</span></div>
+    <div class="menu-row"><span class="name">Large Bottles 1.5L — Coca-Cola, Diet Coke, Sprite/7up</span><span class="fill"></span><span class="price">£2.99</span></div>
 
-    <div class="cat-title">Combos</div>
-    <div class="menu-row"><span class="name">Wing Deal</span><span class="fill"></span><span class="price">£9.99</span></div>
-    <div class="menu-row"><span class="name">Tender Meal</span><span class="fill"></span><span class="price">£10.99</span></div>
-    <div class="menu-row"><span class="name">Grilled Chicken Meal</span><span class="fill"></span><span class="price">£12.49</span></div>
-    <div class="menu-row"><span class="name">Sharer Box</span><span class="fill"></span><span class="price">£19.99</span></div>
-    <div class="menu-row"><span class="name">Buldak Combo</span><span class="fill"></span><span class="price">£12.99</span></div>
+    <div class="cat-title">Meals</div>
+    <div class="menu-row"><span class="name">Fried Wing Meal <em>(6 Fried Wings + Fries + Drink)</em></span><span class="fill"></span><span class="price">£8.49</span></div>
+    <div class="menu-row"><span class="name">Grilled Wing Meal <em>(6 Grilled Wings + Fries + Drink)</em></span><span class="fill"></span><span class="price">£8.99</span></div>
+    <div class="menu-row"><span class="name">Tender Meal <em>(4 Tenders + Fries + Drink)</em></span><span class="fill"></span><span class="price">£9.99</span></div>
+    <div class="menu-row"><span class="name">Grilled Chicken Meal <em>(Half Chicken + Fries + Drink)</em></span><span class="fill"></span><span class="price">£11.49</span></div>
+    <div class="menu-row"><span class="name">Buldak Meal <em>(Buldak Noodles + 3 Tenders + Drink)</em></span><span class="fill"></span><span class="price">£11.49</span></div>
+
+    <div class="cat-title">Sharer Boxes</div>
+    <div class="menu-row"><span class="name">Lone Fox <em>(Quarter Chicken + 3 Wings + Fries + Drink)</em></span><span class="fill"></span><span class="price">£10.99</span></div>
+    <div class="menu-row"><span class="name">Fox Pack <em>(Half Chicken + 6 Wings + Fries + Drink)</em></span><span class="fill"></span><span class="price">£17.99</span></div>
+    <div class="menu-row"><span class="name">Fox Feast <em>(Full Chicken + 12 Wings + Fries + Drink)</em></span><span class="fill"></span><span class="price">£28.99</span></div>
 
     <div class="section-title">Heat Guide</div>
     <div class="heat-list">
-      <div class="heat-item"><span class="flames">●○○○○</span><span class="sauces">Mild — Louisiana BBQ, Sticky BBQ</span></div>
-      <div class="heat-item"><span class="flames">●●○○○</span><span class="sauces">Medium — Masala Chilli, Honeyracha, Spicy Algerian</span></div>
-      <div class="heat-item"><span class="flames">●●●○○</span><span class="sauces">Medium-Hot — Buffalo</span></div>
-      <div class="heat-item"><span class="flames">●●●●○</span><span class="sauces">Hot — Volcano, Buldak</span></div>
-      <div class="heat-item"><span class="flames">●●●●●</span><span class="sauces">Extra Hot — Hot Hot Wing Sauce</span></div>
+      <div class="heat-item"><span class="flames">●○○○</span><span class="sauces">Classic — Louisiana BBQ, Sticky BBQ</span></div>
+      <div class="heat-item"><span class="flames">●●○○</span><span class="sauces">Mild — Masala Chilli, Honeyracha, Spicy Algerian, Buffalo</span></div>
+      <div class="heat-item"><span class="flames">●●●○</span><span class="sauces">Hot — Volcano, Buldak</span></div>
+      <div class="heat-item"><span class="flames">●●●●</span><span class="sauces">Extra Hot — Hot Hot Wing Sauce</span></div>
     </div>
 
   </div>
