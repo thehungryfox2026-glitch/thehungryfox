@@ -54,9 +54,9 @@
 
   /* ===== HEADER / HERO ===== */
   .hero{
-    background:radial-gradient(120% 90% at 50% -10%, #5C3B27 0%, var(--bark) 55%, #2E1C10 100%);
+    background:radial-gradient(120% 90% at 50% -10%, #7A5238 0%, #55371F 55%, #402813 100%);
     color:var(--cream);
-    padding:34px 0 40px;
+    padding:34px 0 20px;
     text-align:center;
     position:relative;
     overflow:hidden;
@@ -76,7 +76,8 @@
     border:1px solid rgba(231,197,131,0.35);
     padding:6px 14px; border-radius:99px; margin-bottom:18px;
   }
-  .hero-logo{width:min(80%,300px); margin:0 auto 2px;}
+  .hero-logo-wrap{width:min(80%,300px); height:170px; margin:0 auto 2px; overflow:hidden; display:flex; align-items:center; justify-content:center;}
+  .hero-logo{width:100%; transform:scale(1.35); margin:0;}
   .hero .tag{
     color:#E9D9BC; font-size:15.5px; font-weight:500; max-width:340px;
     margin:0 auto 28px;
@@ -255,7 +256,7 @@
   footer .fine{font-size:11.5px; color:#8A7259;}
 
   @media (min-width:480px){
-    .hero-logo{width:min(70%,340px);}
+    .hero-logo-wrap{width:min(70%,340px); height:190px;}
   }
 </style>
 </head>
@@ -267,7 +268,7 @@
   <div class="hero">
     <div class="wrap">
       <span class="badge-place">📍 Thurrock, Essex · Halal</span>
-      <img class="hero-logo" src="hungry-fox-logo-dark.png" alt="The Hungry Fox">
+      <div class="hero-logo-wrap"><img class="hero-logo" src="hungry-fox-logo-dark.png" alt="The Hungry Fox"></div>
       <p class="tag">Home-cooked fried &amp; baked chicken, hand-tossed in your flavour, made fresh to order.</p>
 
       <div class="call-card">
@@ -412,6 +413,7 @@
         <div class="inner">
           <div class="item-row"><span class="name">Water</span><span class="price">£1.00</span></div>
           <div class="item-row"><span class="name">Cans <small>Coca-Cola, Diet Coke, Pepsi, Pepsi Max, Sprite/7up, Dr Pepper, Tango</small></span><span class="price">£1.29</span></div>
+          <div class="item-row"><span class="name">Red Bull</span><span class="price">£2.15</span></div>
           <div class="item-row"><span class="name">Large Bottles 1.5L <small>Coca-Cola, Diet Coke, Pepsi, Pepsi Max, Sprite/7up, Tango</small></span><span class="price">£2.99</span></div>
         </div>
       </details>
