@@ -1,495 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Hungry Fox — Thurrock | Call to Order &amp; Save 10%</title>
-<meta name="description" content="Halal fried &amp; oven-baked chicken in Thurrock. Call direct for 10% off and free delivery — orders over £20.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,600&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bark:#3B2517;
-    --bark-2:#4E3222;
-    --ember:#C1622E;
-    --ember-2:#A24E23;
-    --cream:#F1E7D2;
-    --paper:#F6EFDD;
-    --gold:#B9932E;
-    --ink:#2A1A10;
-    --line: rgba(59,37,23,0.14);
-    --shadow: 0 14px 34px rgba(43,26,16,0.16);
-    --radius: 18px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Karla', sans-serif;
-    font-size:16px;
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3,.display{
-    font-family:'Fraunces', serif;
-    font-weight:700;
-    color:var(--bark);
-    margin:0;
-    letter-spacing:-0.01em;
-  }
-  a{color:inherit;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:640px;margin:0 auto;padding:0 20px;}
-  .eyebrow{
-    font-family:'Karla',sans-serif;
-    font-weight:800;
-    font-size:12.5px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--ember-2);
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hungry Fox — Thurrock | Call to Order & Save 10%</title>
+    <style>
+        /* Base Reset & Variables */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  /* ===== HEADER / HERO ===== */
-  .hero{
-    background:radial-gradient(120% 90% at 50% -10%, #7A5238 0%, #55371F 55%, #402813 100%);
-    color:var(--cream);
-    padding:34px 0 20px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-  }
-  .hero::after{
-    content:"";
-    position:absolute; inset:auto 0 0 0; height:46px;
-    background:linear-gradient(180deg, rgba(46,28,16,0) 0%, var(--paper) 70%);
-    border-radius:60% 60% 0 0 / 100% 100% 0 0;
-    transform:scaleX(1.4);
-  }
-  .badge-place{
-    display:inline-flex; align-items:center; gap:6px;
-    font-size:12.5px; font-weight:700; letter-spacing:0.05em;
-    color:#E7C583; text-transform:uppercase;
-    background:rgba(255,255,255,0.07);
-    border:1px solid rgba(231,197,131,0.35);
-    padding:6px 14px; border-radius:99px; margin-bottom:18px;
-  }
-  .hero-logo-wrap{width:min(80%,300px); height:170px; margin:0 auto 2px; overflow:hidden; display:flex; align-items:center; justify-content:center;}
-  .hero-logo{width:100%; transform:scale(1.35); margin:0;}
-  .hero .tag{
-    color:#E9D9BC; font-size:15.5px; font-weight:500; max-width:340px;
-    margin:0 auto 28px;
-  }
+        :root {
+            /* Theme Colors */
+            --fox-orange: #E66B27;
+            --fox-gold: #F3D39B;
+            /* Top Part: 60% lighter background */
+            --bg-top: #FFF9F3; 
+            /* Bottom Part: Close in tone to top part */
+            --bg-bottom: #FFF1E6; 
+            --text-dark: #332211;
+            --text-light: #775533;
+            --white: #ffffff;
+        }
 
-  /* call-to-order card */
-  .call-card{
-    background:linear-gradient(180deg, var(--ember) 0%, var(--ember-2) 100%);
-    border-radius:22px;
-    padding:22px 20px 24px;
-    margin:0 12px;
-    box-shadow:0 18px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
-    position:relative;
-  }
-  .call-card .stamp{
-    position:absolute; top:-16px; right:8px;
-    width:78px; height:78px;
-    background:var(--gold);
-    color:var(--bark);
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    text-align:center;
-    font-family:'Fraunces',serif; font-weight:900;
-    font-size:12px; line-height:1.05;
-    transform:rotate(9deg);
-    border:3px solid var(--paper);
-    box-shadow:0 6px 14px rgba(0,0,0,0.3);
-  }
-  .call-card h2{
-    color:#fff; font-size:22px; line-height:1.15; margin-bottom:4px;
-    text-align:left; padding-right:70px;
-  }
-  .call-card p{
-    color:#FBE6D2; text-align:left; font-size:14px; margin:0; padding-right:70px;
-  }
-  .call-btn{
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    background:var(--bark);
-    color:#fff;
-    text-decoration:none;
-    font-family:'Fraunces',serif; font-weight:700; font-size:20px;
-    padding:16px 18px;
-    border-radius:14px;
-    margin:22px 0;
-    box-shadow:0 4px 0 #1F130B, 0 8px 14px rgba(0,0,0,0.25);
-    transition:transform .12s ease;
-  }
-  .call-btn:active{transform:translateY(4px); box-shadow:0 1px 0 #1F130B;}
-  .call-btn svg{flex-shrink:0;}
-  .call-sub{
-    text-align:center; color:#FBE6D2; font-size:12.5px; margin-top:0; opacity:0.85;
-  }
-  .call-sub b{color:#fff;}
+        body {
+            background-color: var(--bg-top);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-  /* ===== SECTION GENERIC ===== */
-  section{padding:38px 0;}
-  .section-head{text-align:center; margin-bottom:22px;}
-  .section-head h2{font-size:26px; margin-top:4px;}
-  .section-head p.sub{color:#6B5644; font-size:14.5px; margin-top:6px;}
+        /* Top Hero Section */
+        .hero-section {
+            background-color: var(--bg-top);
+            text-align: center;
+            padding: 60px 20px 100px 20px;
+            position: relative;
+        }
 
-  /* ===== REVIEWS ===== */
-  .reviews{background:var(--cream);}
-  .stars{font-size:20px; letter-spacing:3px; color:var(--gold); margin-bottom:8px;}
-  .review-card{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:20px;
-    text-align:center;
-  }
-  .review-card p{font-size:14.5px; color:#5B4534; margin:0;}
-  .review-btn{
-    display:inline-flex; align-items:center; gap:8px;
-    background:var(--bark); color:#fff; text-decoration:none;
-    font-weight:700; font-size:15px;
-    padding:13px 22px; border-radius:12px;
-    margin:18px 0;
-    box-shadow:0 3px 0 rgba(0,0,0,0.25);
-  }
-  .review-note{font-size:12.5px; color:#8A7259; margin-top:0;}
+        /* Repaired Logo Layout with Even Text Gaps */
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
 
-  /* ===== APPS (secondary) ===== */
-  .apps{text-align:center;}
-  .apps .section-head p.sub{max-width:420px; margin-left:auto; margin-right:auto;}
-  .app-row{display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
-  .app-btn{
-    flex:1 1 auto; min-width:100px;
-    border:1.5px solid var(--line);
-    background:var(--paper);
-    color:var(--bark);
-    text-decoration:none;
-    font-weight:700; font-size:13.5px;
-    padding:12px 10px; border-radius:12px; text-align:center;
-  }
+        .logo-svg {
+            width: 180px;
+            height: auto;
+            margin-bottom: 25px; /* Even gap between icon and text */
+        }
 
-  /* ===== MENU ===== */
-  .menu{background:var(--cream);}
-  .menu-group{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    margin-bottom:12px;
-    overflow:hidden;
-  }
-  .menu-group summary{
-    list-style:none;
-    cursor:pointer;
-    padding:16px 18px;
-    display:flex; align-items:center; justify-content:space-between; gap:10px;
-    font-family:'Fraunces',serif; font-weight:700; color:var(--bark); font-size:17px;
-  }
-  .menu-group summary::-webkit-details-marker{display:none;}
-  .menu-group summary .chev{
-    font-family:'Karla',sans-serif; font-size:18px; color:var(--ember); transition:transform .2s ease; flex-shrink:0;
-  }
-  .menu-group[open] summary .chev{transform:rotate(45deg);}
-  .menu-group .inner{padding:0 18px 18px;}
-  .item-row{
-    display:flex; justify-content:space-between; gap:12px;
-    padding:9px 0; border-top:1px dashed var(--line);
-    font-size:14.5px;
-  }
-  .item-row:first-child{border-top:none;}
-  .item-row .name{color:#3B2A1D;}
-  .item-row .name small{display:block; color:#8A7259; font-size:12px; font-weight:500;}
-  .item-row .price{font-weight:700; color:var(--ember-2); white-space:nowrap;}
-  .note-block{
-    background:#F1E1C4; border-radius:10px; padding:12px 14px; font-size:13.5px; color:#5B4025; margin-bottom:10px;
-  }
-  .note-block b{color:var(--ember-2);}
-  .flag-new{
-    display:inline-block; font-size:10.5px; font-weight:800; letter-spacing:0.04em;
-    color:#fff; background:var(--ember); border-radius:5px; padding:1px 6px; margin-left:6px; vertical-align:2px;
-  }
+        .brand-title {
+            font-family: 'Georgia', serif;
+            font-size: 2.8rem;
+            color: var(--fox-orange);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 400;
+            margin: 0;
+            padding: 0;
+        }
 
-  /* heat guide */
-  .heat-guide{display:flex; flex-direction:column; gap:8px; font-size:13.5px;}
-  .heat-row{display:flex; align-items:center; gap:10px;}
-  .heat-dots{letter-spacing:2px; color:var(--ember); width:64px; flex-shrink:0;}
-  .heat-row .lvl{font-weight:800; color:var(--bark); width:78px; flex-shrink:0;}
-  .heat-row .list{color:#5B4534;}
+        .hero-tagline {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-top: 15px;
+            font-weight: 500;
+        }
 
-  /* ===== STICKY CALL BAR ===== */
-  .sticky-call{
-    position:fixed; left:0; right:0; bottom:0; z-index:40;
-    background:var(--bark);
-    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
-    display:flex; align-items:center; gap:10px;
-    box-shadow:0 -8px 24px rgba(0,0,0,0.25);
-  }
-  .sticky-call .txt{color:#E9D9BC; font-size:11.5px; line-height:1.2; flex:1;}
-  .sticky-call .txt b{color:#fff; display:block; font-size:13px;}
-  .sticky-call a{
-    background:var(--ember); color:#fff; text-decoration:none;
-    font-weight:800; font-size:14px; padding:11px 18px; border-radius:11px;
-    white-space:nowrap;
-  }
-  main{padding-bottom:78px;}
+        /* Promo Badge Grid */
+        .promo-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+            flex-wrap: wrap;
+        }
 
-  /* ===== FOOTER ===== */
-  footer{
-    background:var(--bark); color:#E9D9BC;
-    padding:34px 0 24px; text-align:center;
-  }
-  footer .foot-logo{width:64px; margin:0 auto 12px; opacity:0.95;}
-  footer h3{color:#fff; font-size:19px; margin-bottom:6px;}
-  footer .meta{font-size:13px; color:#C9B593; margin-bottom:16px;}
-  footer .socials{display:flex; gap:10px; justify-content:center; margin-bottom:18px; flex-wrap:wrap;}
-  footer .socials a{
-    height:auto; width:auto; border-radius:99px;
-    border:1px solid rgba(233,217,188,0.35);
-    display:inline-flex; align-items:center; justify-content:center;
-    text-decoration:none; color:#E9D9BC; font-size:13px; font-weight:700;
-    padding:9px 16px;
-  }
-  footer .fine{font-size:11.5px; color:#8A7259;}
+        .promo-badge {
+            background: var(--white);
+            border: 2px dashed var(--fox-orange);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: var(--fox-orange);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
 
-  @media (min-width:480px){
-    .hero-logo-wrap{width:min(70%,340px); height:190px;}
-  }
-</style>
+        .cta-button {
+            display: inline-block;
+            background-color: var(--fox-orange);
+            color: var(--white);
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(230, 107, 39, 0.3);
+            transition: transform 0.2s, background-color 0.2s;
+            margin-top: 15px;
+        }
+
+        .cta-button:hover {
+            background-color: #d45a16;
+            transform: translateY(-2px);
+        }
+
+        /* Transition B — Clean Curve Divider */
+        .curve-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .curve-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 70px;
+        }
+
+        .curve-divider .shape-fill {
+            fill: var(--bg-bottom); /* Smooth transition into bottom color */
+        }
+
+        /* Bottom Menu Section */
+        .menu-section {
+            background-color: var(--bg-bottom);
+            padding: 80px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 50px;
+        }
+
+        /* Menu Grid Design */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .menu-category {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .category-title {
+            font-size: 1.4rem;
+            color: var(--fox-orange);
+            border-bottom: 2px solid var(--bg-bottom);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+
+        .item-info h4 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .item-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .item-price {
+            font-weight: bold;
+            color: var(--text-dark);
+            white-space: nowrap;
+        }
+
+        /* App Links & Review Section */
+        .footer-widgets {
+            background-color: var(--white);
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 20px;
+            margin-top: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .app-btn {
+            background: var(--bg-bottom);
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .app-btn:hover {
+            background: var(--fox-gold);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            background-color: var(--bg-bottom);
+        }
+    </style>
 </head>
 <body>
 
-<main>
+    <!-- Top Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <!-- Repaired Logo Container with clean Vector representation & even text gaps -->
+            <div class="logo-container">
+                <!-- SVG Fox Representation modeled after your logo layout -->
+                <svg class="logo-svg" viewBox="0 0 100 90" xmlns="http://w3.org">
+                    <!-- Outer Ears -->
+                    <path d="M 15 15 L 35 35 L 20 45 Z" fill="#D45A16" />
+                    <path d="M 85 15 L 65 35 L 80 45 Z" fill="#D45A16" />
+                    <!-- Inner Ears -->
+                    <path d="M 18 19 L 32 35 L 23 41 Z" fill="#F3D39B" />
+                    <path d="M 82 19 L 68 35 L 77 41 Z" fill="#F3D39B" />
+                    <!-- Main Face Structure -->
+                    <path d="M 15 45 L 35 35 L 50 55 L 65 35 L 85 45 L 50 80 Z" fill="#E66B27" />
+                    <!-- White Cheeks -->
+                    <path d="M 15 45 L 35 50 L 50 65 L 35 35 Z" fill="#FFFFFF" />
+                    <path d="M 85 45 L 65 50 L 50 65 L 65 35 Z" fill="#FFFFFF" />
+                    <!-- Inner Light Snout -->
+                    <path d="M 42 62 L 58 62 L 50 80 Z" fill="#FFFFFF" />
+                    <!-- Nose Tip -->
+                    <path d="M 47 76 L 53 76 L 50 80 Z" fill="#332211" />
+                    <!-- Eyes -->
+                    <polygon points="35,48 43,46 40,51" fill="#F3D39B" />
+                    <polygon points="65,48 57,46 60,51" fill="#F3D39B" />
+                    <polygon points="36,48 41,47 39,50" fill="#332211" />
+                    <polygon points="64,48 59,47 61,50" fill="#332211" />
+                </svg>
+                <h1 class="brand-title">The Hungry Fox</h1>
+                <p class="hero-tagline">Thurrock, Essex · Halal · Open Daily 10:00–22:30</p>
+            </div>
 
-  <!-- ===== HERO / CALL-FIRST ===== -->
-  <div class="hero">
-    <div class="wrap">
-      <span class="badge-place">📍 Thurrock, Essex · Halal</span>
-      <div class="hero-logo-wrap"><img class="hero-logo" src="hungry-fox-logo-dark.png" alt="The Hungry Fox"></div>
-      <p class="tag">Home-cooked fried &amp; baked chicken, hand-tossed in your flavour, made fresh to order.</p>
+            <div class="promo-container">
+                <div class="promo-badge">10% OFF PHONE ORDERS</div>
+                <div class="promo-badge">FREE DELIVERY OVER £20</div>
+            </div>
 
-      <div class="call-card">
-        <div class="stamp">10%<br>OFF<br>+ FREE<br>DELIVERY</div>
-        <h2>Call to Order &amp; Save 10%</h2>
-        <p>Ring us direct and get 10% off your order plus free delivery on orders over £20 — every time.</p>
-        <a class="call-btn" href="tel:+447356257445">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="currentColor"/></svg>
-          Call 07356 257445
-        </a>
-        <p class="call-sub">Open daily 10:00–22:30 · <b>10% off orders over £20</b></p>
-      </div>
-    </div>
-  </div>
+            <p style="max-width: 600px; margin: 0 auto 25px auto; color: var(--text-light);">
+                Home-cooked fried & baked chicken, hand-tossed in your flavour, made fresh to order. Ring us direct to save on every order.
+            </p>
 
-  <!-- ===== REVIEWS ===== -->
-  <section class="reviews">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Just eaten?</span>
-        <h2>Tell the neighbourhood</h2>
-        <p class="sub">Two minutes of your time helps this little kitchen a lot more than you'd think.</p>
-      </div>
-      <div class="review-card">
-        <div class="stars">★★★★★</div>
-        <p>If you enjoyed your food, a quick Google review means the world — and helps the next hungry fox find us.</p>
-        <a class="review-btn" href="https://share.google/XYmPVKtnrGNFafC4n" target="_blank" rel="noopener">
-          ⭐ Leave a Google Review
-        </a>
-        <p class="review-note">Takes under 60 seconds — no account needed.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== APPS (secondary) ===== -->
-  <section class="apps">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Prefer an app?</span>
-        <h2 style="font-size:20px;">Also on delivery apps</h2>
-        <p class="sub">Click below to find us on your favourite delivery app.</p>
-      </div>
-      <div class="app-row">
-        <a class="app-btn" href="#" target="_blank" rel="noopener">Deliveroo</a>
-        <a class="app-btn" href="#" target="_blank" rel="noopener">Uber Eats</a>
-        <a class="app-btn" href="#" target="_blank" rel="noopener">Just Eat</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== MENU ===== -->
-  <section class="menu">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">The Menu</span>
-        <h2>What's Cooking</h2>
-        <p class="sub">Tap a section to open it. Ring us to order — 10% off + free delivery on orders over £20.</p>
-      </div>
-
-      <details class="menu-group" open>
-        <summary>Flavour Choice <span class="chev">+</span></summary>
-        <div class="inner">
-          <p style="font-size:13px;color:#8A7259;margin:0 0 10px;">Applies to any Oven Baked Chicken, Wings or Tenders below.</p>
-          <div class="note-block"><b>Classic</b> — Louisiana BBQ, Sticky BBQ</div>
-          <div class="note-block"><b>Mild</b> — Honeyracha, Spicy Algerian, Buffalo</div>
-          <div class="note-block"><b>Hot</b> — Volcano, Naga Sauce, Mango Habanero</div>
-          <div class="note-block"><b>Extra Hot</b> — Hot Hot</div>
+            <a href="tel:07356257445" class="cta-button">📞 Call 07356 257445 to Order</a>
         </div>
-      </details>
 
-      <details class="menu-group">
-        <summary>Oven Baked Chicken <span class="chev">+</span></summary>
-        <div class="inner">
-          <div class="item-row"><span class="name">Quarter</span><span class="price">£5.49</span></div>
-          <div class="item-row"><span class="name">Half</span><span class="price">£8.49</span></div>
-          <div class="item-row"><span class="name">Full</span><span class="price">£12.49</span></div>
+        <!-- Transition Option B: Clean Curve Divider -->
+        <div class="curve-divider">
+            <svg data-name="Layer 1" xmlns="http://w3.org" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,42.4V0Z" class="shape-fill"></path>
+            </svg>
         </div>
-      </details>
+    </section>
 
-      <details class="menu-group">
-        <summary>Wings &amp; Tenders <span class="chev">+</span></summary>
-        <div class="inner">
-          <div class="item-row"><span class="name">Oven Baked Wings <small>6 pieces</small></span><span class="price">£6.99</span></div>
-          <div class="item-row"><span class="name">Fried Wings <small>6 pieces</small></span><span class="price">£6.49</span></div>
-          <div class="item-row"><span class="name">Tenders <small>6 pieces</small></span><span class="price">£7.49</span></div>
-        </div>
-      </details>
-
-      <details class="menu-group">
-        <summary>Fries &amp; Wedges <span class="chev">+</span></summary>
-        <div class="inner">
-          <div class="item-row"><span class="name">Plain Fries <small>with / without salt</small></span><span class="price">£2.99</span></div>
-          <div class="item-row"><span class="name">Seasoned Fries <small>Cajun · Peri-Peri · Nashville · Chipotle Chilli Salt <span class="flag-new">NEW</span></small></span><span class="price">£3.49</span></div>
-          <div class="item-row"><span class="name">Chicken Loaded Fries</span><span class="price">£5.00</span></div>
-          <div class="item-row"><span class="name">Chicken Loaded Fries + Cheese</span><span class="price">£5.50</span></div>
-          <div class="item-row"><span class="name">Plain Wedges <small>with / without salt</small></span><span class="price">£3.49</span></div>
-          <div class="item-row"><span class="name">Seasoned Wedges <small>Cajun · Peri-Peri · Nashville · Chipotle Chilli Salt <span class="flag-new">NEW</span></small></span><span class="price">£3.99</span></div>
-          <div class="item-row"><span class="name">Add any flavour sauce toss / drizzle</span><span class="price">+£0.50</span></div>
-        </div>
-      </details>
-
-      <details class="menu-group">
-        <summary>Sides &amp; Extras <span class="chev">+</span></summary>
-        <div class="inner">
-          <div class="item-row"><span class="name">Mozzarella Sticks <small>6pc</small></span><span class="price">£4.99</span></div>
-          <div class="item-row"><span class="name">Naan — Plain</span><span class="price">£1.00</span></div>
-          <div class="item-row"><span class="name">Naan — Garlic</span><span class="price">£2.79</span></div>
-          <div class="item-row"><span class="name">Garlic Bread</span><span class="price">£1.00</span></div>
-          <div class="item-row"><span class="name">Onion Rings <small>8pc</small></span><span class="price">£3.49</span></div>
-          <div class="item-row"><span class="name">Halloumi Fries <small>6pc</small></span><span class="price">£4.99</span></div>
-          <div class="item-row"><span class="name">Veg Samosas <small>4pc</small></span><span class="price">£3.49</span></div>
-          <div class="item-row"><span class="name">Veg Spring Roll <small>4pc</small></span><span class="price">£3.49</span></div>
-          <div class="item-row"><span class="name">Beans</span><span class="price">£1.99</span></div>
-          <div class="item-row"><span class="name">Coleslaw</span><span class="price">£1.99</span></div>
-          <div class="item-row"><span class="name">Dip — Small</span><span class="price">£0.30</span></div>
-          <div class="item-row"><span class="name">Dip — Large</span><span class="price">£0.50</span></div>
-        </div>
-      </details>
-
-      <details class="menu-group">
-        <summary>Buldak Fire Noodles <small style="font-weight:500;">— Signature, Hot</small> <span class="chev">+</span></summary>
-        <div class="inner">
-          <div class="item-row"><span class="name">Buldak Fire Noodles</span><span class="price">£7.49</span></div>
-          <div class="item-row"><span class="name">Add fried egg</span><span class="price">+£1.00</span></div>
-          <div class="item-row"><span class="name">Add 3 chicken tenders</span><span class="price">+£3.50</span></div>
-        </div>
-      </details>
-
-      <details class="menu-group">
-        <summary>Kids Menu <small style="font-weight:500;">— Classic &amp; Mild</small> <span class="chev">+</span></summary>
-        <div class="inner">
-          <div class="item-row"><span class="name">Nuggets <small>6pc + Fries</small></span><span class="price">£4.99</span></div>
-          <div class="item-row"><span class="name">Tenders <small>3pc + Fries</small></span><span class="price">£4.99</span></div>
-          <div class="item-row"><span class="name">Wings <small>3pc + Fries</small></span><span class="price">£4.99</span></div>
-          <div class="item-row"><span class="name">Mozzarella Sticks <small>3pc + Fries</small></span><span class="price">£4.99</span></div>
-          <div class="item-row"><span class="name">Add Fruit Shoot / Water</span><span class="price">+£1.00</span></div>
-        </div>
-      </details>
-
-      <details class="menu-group">
-        <summary>Drinks <span class="chev">+</span></summary>
-        <div class="inner">
-          <div class="item-row"><span class="name">Water</span><span class="price">£1.00</span></div>
-          <div class="item-row"><span class="name">Cans <small>Coca-Cola, Diet Coke, Pepsi, Pepsi Max, Sprite/7up, Dr Pepper, Tango</small></span><span class="price">£1.29</span></div>
-          <div class="item-row"><span class="name">Red Bull</span><span class="price">£2.15</span></div>
-          <div class="item-row"><span class="name">Large Bottles 1.5L <small>Coca-Cola, Diet Coke, Pepsi, Pepsi Max, Sprite/7up, Tango</small></span><span class="price">£2.99</span></div>
-        </div>
-      </details>
-
-      <details class="menu-group">
-        <summary>Meals <span class="chev">+</span></summary>
-        <div class="inner">
-          <div class="item-row"><span class="name">Quarter Chicken Meal <small>Quarter Chicken + Fries + Drink</small></span><span class="price">£7.49</span></div>
-          <div class="item-row"><span class="name">Half Chicken Meal <small>Half Chicken + Fries + Drink</small></span><span class="price">£10.49</span></div>
-          <div class="item-row"><span class="name">Fried Wing Meal <small>6 Fried Wings + Fries + Drink</small></span><span class="price">£8.49</span></div>
-          <div class="item-row"><span class="name">Oven Baked Wing Meal <small>6 Oven Baked Wings + Fries + Drink</small></span><span class="price">£8.99</span></div>
-          <div class="item-row"><span class="name">Tender Meal <small>6 Tenders + Fries + Drink</small></span><span class="price">£8.99</span></div>
-          <div class="item-row"><span class="name">Buldak Meal <small>Buldak Noodles + Drink</small></span><span class="price">£8.49</span></div>
-          <div class="item-row"><span class="name">↳ Add 3 tenders to Buldak Meal</span><span class="price">+£3.50</span></div>
-        </div>
-      </details>
-
-      <details class="menu-group">
-        <summary>Wing Bundles <span class="chev">+</span></summary>
-        <div class="inner">
-          <div class="item-row"><span class="name">15 Wings <small>Oven Baked</small></span><span class="price">£15.99</span></div>
-          <div class="item-row"><span class="name">15 Wings <small>Fried</small></span><span class="price">£15.49</span></div>
-          <div class="item-row"><span class="name">20 Wing Party Bundle <small>Oven Baked — +4 Fries + Bottle Drink + Side</small></span><span class="price">£22.99</span></div>
-          <div class="item-row"><span class="name">20 Wing Party Bundle <small>Fried — +4 Fries + Bottle Drink + Side</small></span><span class="price">£21.99</span></div>
-          <div class="item-row"><span class="name">25 Wings <small>Oven Baked</small></span><span class="price">£23.99</span></div>
-          <div class="item-row"><span class="name">25 Wings <small>Fried</small></span><span class="price">£22.99</span></div>
-          <p style="font-size:12.5px;color:#8A7259;margin:8px 0 0;">Side choice: Beans, Coleslaw or Plain Naan (free) — upgrade to Garlic Naan, Onion Rings or Mozzarella Sticks +£1.00</p>
-        </div>
-      </details>
-
-      <details class="menu-group">
-        <summary>Sharer Boxes <span class="chev">+</span></summary>
-        <div class="inner">
-          <div class="item-row"><span class="name">Lone Fox <small>¼ Chicken + 3 Wings + Fries + Can Drink</small></span><span class="price">£10.99</span></div>
-          <div class="item-row"><span class="name">Fox Pack <small>½ Chicken + 4 Wings + 2 Fries + Can Drink</small></span><span class="price">£18.49</span></div>
-          <div class="item-row"><span class="name">Fox Feast <small>Full Chicken + 8 Wings + 4 Fries + Bottle Drink</small></span><span class="price">£28.99</span></div>
-        </div>
-      </details>
-
-      <details class="menu-group">
-        <summary>Heat Guide <span class="chev">+</span></summary>
-        <div class="inner">
-          <div class="heat-guide">
-            <div class="heat-row"><span class="heat-dots">●○○○</span><span class="lvl">Classic</span><span class="list">Louisiana BBQ, Sticky BBQ</span></div>
-            <div class="heat-row"><span class="heat-dots">●●○○</span><span class="lvl">Mild</span><span class="list">Honeyracha, Spicy Algerian, Buffalo</span></div>
-            <div class="heat-row"><span class="heat-dots">●●●○</span><span class="lvl">Hot</span><span class="list">Volcano, Naga Sauce, Mango Habanero</span></div>
-            <div class="heat-row"><span class="heat-dots">●●●●</span><span class="lvl">Extra Hot</span><span class="list">Hot Hot</span></div>
-          </div>
-        </div>
-      </details>
-
-    </div>
-  </section>
-
-</main>
-
-<!-- ===== STICKY CALL BAR ===== -->
-<div class="sticky-call">
-  <div class="txt"><b>10% off + free delivery</b>on phone orders over £20</div>
-  <a href="tel:+447356257445">📞 Call Now</a>
-</div>
-
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="wrap">
-    <img class="foot-logo" src="hungry-fox-logo-dark.png" alt="">
-    <h3>The Hungry Fox</h3>
-    <p class="meta">Thurrock, Essex · Halal · Open daily 10:00–22:30</p>
-    <div class="socials">
-      <a href="#" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
-      <a href="#" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
-      <a href="#" target="_blank" rel="noopener" aria-label="TikTok">TikTok</a>
-    </div>
-    <p class="fine">© The Hungry Fox — Registered food business, Thurrock Council</p>
-  </div>
-</footer>
-
-</body>
-</html>
+    <!-- Bottom Menu Section -->
+    <section class="menu-section">
+        <div class="container">
+            <h2 class="section-title">What's Cooking</h2>
