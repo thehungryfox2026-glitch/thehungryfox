@@ -174,6 +174,31 @@
     background:#F1E1C4; border-radius:10px; padding:12px 14px; font-size:13.5px; color:#5B4025; margin-bottom:10px;
   }
   .note-block b{color:var(--ember-2);}
+  .drizzle-note{
+    background:var(--ember-light,#FBE6D2);
+    border-radius:8px;
+    padding:10px 14px;
+    font-size:13px;
+    font-weight:700;
+    color:#7A2E00;
+    margin-top:8px;
+  }
+  .flavour-banner{
+    border:2px solid var(--ember);
+    border-radius:var(--radius);
+    padding:18px 18px 16px;
+    margin-bottom:16px;
+  }
+  .flavour-banner h3{
+    font-family:'Fraunces',serif;
+    font-weight:900;
+    font-size:22px;
+    color:var(--ember);
+    margin:0 0 4px;
+  }
+  .flavour-banner .flavour-sub{
+    font-size:13.5px; font-weight:600; color:var(--bark); margin:0 0 12px;
+  }
 
   /* heat guide */
   .heat-guide{display:flex; flex-direction:column; gap:8px; font-size:13.5px;}
@@ -265,15 +290,13 @@
         <p class="sub">Everything on offer, all in one place.</p>
       </div>
 
-      <div class="menu-group">
-        <div class="menu-head">Flavour Choice</div>
-        <div class="inner">
-          <p style="font-size:13px;color:#8A7259;margin:0 0 10px;">Applies to any Baked Chicken, Wings or Tenders below.</p>
-          <div class="note-block"><b>Classic</b> — Louisiana BBQ, Sticky BBQ</div>
-          <div class="note-block"><b>Mild</b> — Honeyracha, Spicy Algerian, Buffalo</div>
-          <div class="note-block"><b>Hot</b> — Volcano, Naga Sauce, Mango Habanero</div>
-          <div class="note-block"><b>Extra Hot</b> — Hot Hot</div>
-        </div>
+      <div class="flavour-banner">
+        <h3>Choose Your Flavour</h3>
+        <p class="flavour-sub">Pick one for any Baked Chicken, Wings or Tenders</p>
+        <div class="note-block"><b>Classic</b> — Louisiana BBQ, Sticky BBQ</div>
+        <div class="note-block"><b>Mild</b> — Honeyracha, Spicy Algerian, Buffalo</div>
+        <div class="note-block"><b>Hot</b> — Volcano, Naga Sauce, Mango Habanero</div>
+        <div class="note-block"><b>Extra Hot</b> — Hot Hot</div>
       </div>
 
       <div class="menu-group">
@@ -300,24 +323,24 @@
           <div class="item-row"><span class="name">Plain Fries <small>with / without salt</small></span><span class="price">£2.99</span></div>
           <div class="item-row"><span class="name">Seasoned Fries <small>Cajun · Peri-Peri · Nashville · Chipotle Chilli Salt</small></span><span class="price">£3.49</span></div>
           <div class="item-row"><span class="name">Chicken Loaded Fries</span><span class="price">£5.00</span></div>
-          <div class="item-row"><span class="name">Chicken Loaded Fries + Cheese</span><span class="price">£5.50</span></div>
+          <div class="item-row"><span class="name">Chicken and Cheese Loaded Fries</span><span class="price">£5.50</span></div>
           <div class="item-row"><span class="name">Plain Wedges <small>with / without salt</small></span><span class="price">£3.49</span></div>
           <div class="item-row"><span class="name">Seasoned Wedges <small>Cajun · Peri-Peri · Nashville · Chipotle Chilli Salt</small></span><span class="price">£3.99</span></div>
-          <div class="item-row"><span class="name">Add any flavour sauce toss / drizzle</span><span class="price">+£0.50</span></div>
+          <p class="drizzle-note">Add any flavour sauce drizzle +£0.50</p>
         </div>
       </div>
 
       <div class="menu-group">
         <div class="menu-head">Sides &amp; Extras</div>
         <div class="inner">
-          <div class="item-row"><span class="name">Mozzarella Sticks <small>6pc</small></span><span class="price">£4.99</span></div>
+          <div class="item-row"><span class="name">Mozzarella Sticks <small>6pc — with a dip</small></span><span class="price">£4.99</span></div>
           <div class="item-row"><span class="name">Naan — Plain</span><span class="price">£1.00</span></div>
           <div class="item-row"><span class="name">Naan — Garlic</span><span class="price">£2.79</span></div>
           <div class="item-row"><span class="name">Garlic Bread</span><span class="price">£1.00</span></div>
-          <div class="item-row"><span class="name">Onion Rings <small>8pc</small></span><span class="price">£3.49</span></div>
-          <div class="item-row"><span class="name">Halloumi Fries <small>6pc</small></span><span class="price">£4.99</span></div>
-          <div class="item-row"><span class="name">Veg Samosas <small>4pc</small></span><span class="price">£3.49</span></div>
-          <div class="item-row"><span class="name">Veg Spring Roll <small>4pc</small></span><span class="price">£3.49</span></div>
+          <div class="item-row"><span class="name">Onion Rings <small>8pc — with a dip</small></span><span class="price">£3.49</span></div>
+          <div class="item-row"><span class="name">Halloumi Fries <small>6pc — with a dip</small></span><span class="price">£4.99</span></div>
+          <div class="item-row"><span class="name">Veg Samosas <small>4pc — with a dip</small></span><span class="price">£3.49</span></div>
+          <div class="item-row"><span class="name">Veg Spring Roll <small>4pc — with a dip</small></span><span class="price">£3.49</span></div>
           <div class="item-row"><span class="name">Beans</span><span class="price">£1.99</span></div>
           <div class="item-row"><span class="name">Coleslaw</span><span class="price">£1.99</span></div>
           <div class="item-row"><span class="name">Dip — Small</span><span class="price">£0.30</span></div>
