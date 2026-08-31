@@ -10,14 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,600&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bark:#3B2517;
-    --bark-2:#4E3222;
-    --ember:#C1622E;
-    --ember-2:#A24E23;
-    --cream:#F1E7D2;
-    --paper:#F6EFDD;
-    --gold:#B9932E;
-    --ink:#2A1A10;
+    --bark:#1B4B6B;
+    --bark-2:#17405C;
+    --ember:#2B7DA6;
+    --ember-2:#1F6690;
+    --cream:#F7F1E4;
+    --paper:#FAF5EA;
+    --gold:#6FA8C8;
+    --ink:#23343E;
     --line: rgba(59,37,23,0.14);
     --shadow: 0 14px 34px rgba(43,26,16,0.16);
     --radius: 18px;
@@ -54,7 +54,7 @@
 
   /* ===== HEADER / HERO ===== */
   .hero{
-    background:radial-gradient(120% 90% at 50% -10%, #7A5238 0%, #55371F 55%, #402813 100%);
+    background:radial-gradient(120% 90% at 50% -10%, #1B4B6B 0%, #17405C 55%, #0F3550 100%);
     color:var(--cream);
     padding:34px 0 44px;
     text-align:center;
@@ -71,7 +71,7 @@
   .badge-place{
     display:inline-flex; align-items:center; gap:6px;
     font-size:12.5px; font-weight:700; letter-spacing:0.05em;
-    color:#E7C583; text-transform:uppercase;
+    color:#A9CFE3; text-transform:uppercase;
     background:rgba(255,255,255,0.07);
     border:1px solid rgba(231,197,131,0.35);
     padding:6px 14px; border-radius:99px; margin-bottom:18px;
@@ -79,7 +79,7 @@
   .hero-logo-wrap{width:min(80%,300px); margin:0 auto 2px; display:flex; align-items:center; justify-content:center;}
   .hero-logo{width:100%; height:auto; display:block; margin:0;}
   .hero .tag{
-    color:#E9D9BC; font-size:15.5px; font-weight:500; max-width:340px;
+    color:#C9DCE8; font-size:15.5px; font-weight:500; max-width:340px;
     margin:0 auto 22px; position:relative; padding-bottom:20px;
   }
   .hero .tag::after{
@@ -93,7 +93,7 @@
   section{padding:38px 0;}
   .section-head{text-align:center; margin-bottom:22px;}
   .section-head h2{font-size:26px; margin-top:4px;}
-  .section-head p.sub{color:#6B5644; font-size:14.5px; margin-top:6px;}
+  .section-head p.sub{color:#5A6B78; font-size:14.5px; margin-top:6px;}
 
   /* ===== REVIEWS ===== */
   .reviews{background:var(--cream);}
@@ -105,7 +105,7 @@
     padding:20px;
     text-align:center;
   }
-  .review-card p{font-size:14.5px; color:#5B4534; margin:0;}
+  .review-card p{font-size:14.5px; color:#5A6B78; margin:0;}
   .review-btn{
     display:inline-flex; align-items:center; gap:8px;
     background:var(--bark); color:#fff; text-decoration:none;
@@ -114,7 +114,7 @@
     margin:18px 0;
     box-shadow:0 3px 0 rgba(0,0,0,0.25);
   }
-  .review-note{font-size:12.5px; color:#8A7259; margin-top:0;}
+  .review-note{font-size:12.5px; color:#6B8394; margin-top:0;}
 
   /* ===== APPS (primary — order now) ===== */
   .apps{text-align:center; background:var(--cream);}
@@ -130,19 +130,34 @@
     padding:14px 10px; border-radius:12px; text-align:center;
     box-shadow:0 4px 0 rgba(0,0,0,0.18), 0 6px 12px rgba(0,0,0,0.12);
     transition:transform .12s ease;
+    position:relative;
   }
   .app-btn:active{transform:translateY(3px); box-shadow:0 1px 0 rgba(0,0,0,0.18);}
   .app-btn.deliveroo{background:#00CCBC;}
   .app-btn.ubereats{background:#06C167;}
   .app-btn.justeat{background:#FF8000;}
-  .app-note{font-size:12.5px; color:#8A7259; margin-top:16px;}
+  .app-btn.soon{
+    opacity:0.6;
+    pointer-events:none;
+    box-shadow:none;
+  }
+  .app-btn .soon-badge{
+    display:block;
+    font-size:9.5px;
+    font-weight:700;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    margin-top:2px;
+    opacity:0.9;
+  }
+  .app-note{font-size:12.5px; color:#6B8394; margin-top:16px;}
   .footer-order{
     display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
     margin:0 0 18px;
   }
   .footer-order a{
     border:1px solid rgba(233,217,188,0.35);
-    color:#E9D9BC; text-decoration:none;
+    color:#C9DCE8; text-decoration:none;
     font-weight:700; font-size:12.5px;
     padding:8px 14px; border-radius:99px;
   }
@@ -167,20 +182,20 @@
     font-size:14.5px;
   }
   .item-row:first-child{border-top:none;}
-  .item-row .name{color:#3B2A1D;}
-  .item-row .name small{display:block; color:#8A7259; font-size:12px; font-weight:500;}
+  .item-row .name{color:#23343E;}
+  .item-row .name small{display:block; color:#6B8394; font-size:12px; font-weight:500;}
   .item-row .price{font-weight:700; color:var(--ember-2); white-space:nowrap;}
   .note-block{
-    background:#F1E1C4; border-radius:10px; padding:12px 14px; font-size:13.5px; color:#5B4025; margin-bottom:10px;
+    background:#E4EFF5; border-radius:10px; padding:12px 14px; font-size:13.5px; color:#1F4C63; margin-bottom:10px;
   }
   .note-block b{color:var(--ember-2);}
   .drizzle-note{
-    background:var(--ember-light,#FBE6D2);
+    background:var(--ember-light,#DCEAF2);
     border-radius:8px;
     padding:10px 14px;
     font-size:13px;
     font-weight:700;
-    color:#7A2E00;
+    color:#17405C;
     margin-top:8px;
   }
   .flavour-banner{
@@ -205,27 +220,27 @@
   .heat-row{display:flex; align-items:center; gap:10px;}
   .heat-dots{letter-spacing:2px; color:var(--ember); width:64px; flex-shrink:0;}
   .heat-row .lvl{font-weight:800; color:var(--bark); width:78px; flex-shrink:0;}
-  .heat-row .list{color:#5B4534;}
+  .heat-row .list{color:#5A6B78;}
 
 
 
   /* ===== FOOTER ===== */
   footer{
-    background:var(--bark); color:#E9D9BC;
+    background:var(--bark); color:#C9DCE8;
     padding:34px 0 24px; text-align:center;
   }
   footer .foot-logo{width:64px; margin:0 auto 12px; opacity:0.95;}
   footer h3{color:#fff; font-size:19px; margin-bottom:6px;}
-  footer .meta{font-size:13px; color:#C9B593; margin-bottom:16px;}
+  footer .meta{font-size:13px; color:#9FC1D6; margin-bottom:16px;}
   footer .socials{display:flex; gap:10px; justify-content:center; margin-bottom:18px; flex-wrap:wrap;}
   footer .socials a{
     height:auto; width:auto; border-radius:99px;
     border:1px solid rgba(233,217,188,0.35);
     display:inline-flex; align-items:center; justify-content:center;
-    text-decoration:none; color:#E9D9BC; font-size:13px; font-weight:700;
+    text-decoration:none; color:#C9DCE8; font-size:13px; font-weight:700;
     padding:9px 16px;
   }
-  footer .fine{font-size:11.5px; color:#8A7259;}
+  footer .fine{font-size:11.5px; color:#6B8394;}
 
   @media (min-width:480px){
     .hero-logo-wrap{width:min(70%,340px);}
@@ -254,11 +269,11 @@
         <p class="sub">Tap below to order for delivery or collection.</p>
       </div>
       <div class="app-row">
-        <a class="app-btn deliveroo" href="#" target="_blank" rel="noopener">Deliveroo</a>
-        <a class="app-btn ubereats" href="#" target="_blank" rel="noopener">Uber Eats</a>
-        <a class="app-btn justeat" href="#" target="_blank" rel="noopener">Just Eat</a>
+        <a class="app-btn deliveroo soon" href="#" aria-disabled="true">Deliveroo<span class="soon-badge">Coming soon</span></a>
+        <a class="app-btn ubereats" href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener">Uber Eats</a>
+        <a class="app-btn justeat soon" href="#" aria-disabled="true">Just Eat<span class="soon-badge">Coming soon</span></a>
       </div>
-      <p class="app-note">Links coming soon — check back shortly.</p>
+      <p class="app-note">Order now on Uber Eats — Deliveroo &amp; Just Eat coming soon.</p>
     </div>
   </section>
 
@@ -400,7 +415,7 @@
           <div class="item-row"><span class="name">20 Wing Party Bundle <small>Fried — +4 Fries + Bottle Drink + Side</small></span><span class="price">£21.99</span></div>
           <div class="item-row"><span class="name">25 Wings <small>Baked</small></span><span class="price">£23.99</span></div>
           <div class="item-row"><span class="name">25 Wings <small>Fried</small></span><span class="price">£22.99</span></div>
-          <p style="font-size:12.5px;color:#8A7259;margin:8px 0 0;">Side choice: Beans, Coleslaw or Plain Naan (free) — upgrade to Garlic Naan, Onion Rings or Mozzarella Sticks +£1.00</p>
+          <p style="font-size:12.5px;color:#6B8394;margin:8px 0 0;">Side choice: Beans, Coleslaw or Plain Naan (free) — upgrade to Garlic Naan, Onion Rings or Mozzarella Sticks +£1.00</p>
         </div>
       </div>
 
@@ -437,9 +452,9 @@
     <h3>The Hungry Fox</h3>
     <p class="meta">Thurrock, Essex · Halal · Open daily 10:00–22:30</p>
     <div class="footer-order">
-      <a href="#" target="_blank" rel="noopener">Deliveroo</a>
-      <a href="#" target="_blank" rel="noopener">Uber Eats</a>
-      <a href="#" target="_blank" rel="noopener">Just Eat</a>
+      <a href="#" aria-disabled="true" style="opacity:0.55;">Deliveroo (soon)</a>
+      <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener">Uber Eats</a>
+      <a href="#" aria-disabled="true" style="opacity:0.55;">Just Eat (soon)</a>
     </div>
     <div class="socials">
       <a href="#" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
