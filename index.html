@@ -3,11 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Hungry Fox — Thurrock | Halal Fried &amp; Baked Chicken</title>
-<meta name="description" content="Halal fried &amp; baked chicken in Thurrock. Order via Deliveroo, Uber Eats or Just Eat.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,600&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>The Hungry Fox — Thurrock | Halal Fried & Baked Chicken</title>
+<meta name="description" content="Halal fried & baked chicken in Thurrock. Order via Uber Eats.">
 <style>
   :root{
     --bark:#1B4B6B;
@@ -18,44 +15,21 @@
     --paper:#FAF5EA;
     --gold:#6FA8C8;
     --ink:#23343E;
-    --line: rgba(59,37,23,0.14);
-    --shadow: 0 14px 34px rgba(43,26,16,0.16);
-    --radius: 18px;
+    --line:#DCD3C2;
+    --radius:18px;
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  *{box-sizing:border-box; margin:0; padding:0;}
   body{
-    margin:0;
-    background:var(--paper);
+    font-family:'Georgia','Times New Roman',serif;
+    background:var(--cream);
     color:var(--ink);
-    font-family:'Karla', sans-serif;
-    font-size:16px;
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3,.display{
-    font-family:'Fraunces', serif;
-    font-weight:700;
-    color:var(--bark);
-    margin:0;
-    letter-spacing:-0.01em;
-  }
-  a{color:inherit;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:640px;margin:0 auto;padding:0 20px;}
-  .eyebrow{
-    font-family:'Karla',sans-serif;
-    font-weight:800;
-    font-size:12.5px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--ember-2);
-  }
+  .wrap{max-width:600px; margin:0 auto; padding:0 18px;}
 
-  /* ===== HEADER / HERO ===== */
+  /* ===== HERO ===== */
   .hero{
     background:radial-gradient(120% 90% at 50% -10%, #1B4B6B 0%, #17405C 55%, #0F3550 100%);
-    color:var(--cream);
+    color:#fff;
     padding:34px 0 44px;
     text-align:center;
     position:relative;
@@ -64,7 +38,7 @@
   .hero::after{
     content:"";
     position:absolute; inset:auto 0 0 0; height:46px;
-    background:linear-gradient(180deg, rgba(46,28,16,0) 0%, var(--paper) 70%);
+    background:linear-gradient(180deg, rgba(15,53,80,0) 0%, var(--paper) 70%);
     border-radius:60% 60% 0 0 / 100% 100% 0 0;
     transform:scaleX(1.4);
   }
@@ -73,7 +47,7 @@
     font-size:12.5px; font-weight:700; letter-spacing:0.05em;
     color:#A9CFE3; text-transform:uppercase;
     background:rgba(255,255,255,0.07);
-    border:1px solid rgba(231,197,131,0.35);
+    border:1px solid rgba(169,207,227,0.35);
     padding:6px 14px; border-radius:99px; margin-bottom:18px;
   }
   .hero-logo-wrap{width:min(80%,300px); margin:0 auto 2px; display:flex; align-items:center; justify-content:center;}
@@ -89,178 +63,94 @@
     background:var(--ember);
   }
 
-  /* ===== SECTION GENERIC ===== */
-  section{padding:38px 0;}
-  .section-head{text-align:center; margin-bottom:22px;}
-  .section-head h2{font-size:26px; margin-top:4px;}
-  .section-head p.sub{color:#5A6B78; font-size:14.5px; margin-top:6px;}
-
-  /* ===== REVIEWS ===== */
-  .reviews{background:var(--cream);}
-  .stars{font-size:20px; letter-spacing:3px; color:var(--gold); margin-bottom:8px;}
-  .review-card{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:20px;
-    text-align:center;
-  }
-  .review-card p{font-size:14.5px; color:#5A6B78; margin:0;}
-  .review-btn{
-    display:inline-flex; align-items:center; gap:8px;
-    background:var(--bark); color:#fff; text-decoration:none;
-    font-weight:700; font-size:15px;
-    padding:13px 22px; border-radius:12px;
-    margin:18px 0;
-    box-shadow:0 3px 0 rgba(0,0,0,0.25);
-  }
-  .review-note{font-size:12.5px; color:#6B8394; margin-top:0;}
-
-  /* ===== APPS (primary — order now) ===== */
-  .apps{text-align:center; background:var(--cream);}
-  .apps .eyebrow{color:var(--ember-2);}
-  .apps .section-head p.sub{max-width:420px; margin-left:auto; margin-right:auto;}
+  /* ===== APPS ===== */
+  .apps{text-align:center; background:var(--cream); padding:36px 0;}
+  .apps .eyebrow{color:var(--ember-2); font-size:12.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;}
+  .section-head{margin-bottom:16px;}
+  .section-head h2{font-family:'Georgia',serif; font-size:22px; color:var(--bark); margin:6px 0 4px;}
+  .section-head p.sub{font-size:13.5px; color:#5A6B78; max-width:420px; margin:0 auto;}
   .app-row{display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
   .app-btn{
     flex:1 1 auto; min-width:100px;
-    border:none;
-    color:#fff;
-    text-decoration:none;
+    border:none; color:#fff; text-decoration:none;
     font-weight:800; font-size:14px;
     padding:14px 10px; border-radius:12px; text-align:center;
     box-shadow:0 4px 0 rgba(0,0,0,0.18), 0 6px 12px rgba(0,0,0,0.12);
-    transition:transform .12s ease;
-    position:relative;
+    transition:transform .12s ease; position:relative;
   }
   .app-btn:active{transform:translateY(3px); box-shadow:0 1px 0 rgba(0,0,0,0.18);}
-  .app-btn.deliveroo{background:#00CCBC;}
   .app-btn.ubereats{background:#06C167;}
+  .app-btn.deliveroo{background:#00CCBC;}
   .app-btn.justeat{background:#FF8000;}
-  .app-btn.soon{
-    opacity:0.6;
-    pointer-events:none;
-    box-shadow:none;
-  }
-  .app-btn .soon-badge{
-    display:block;
-    font-size:9.5px;
-    font-weight:700;
-    letter-spacing:0.03em;
-    text-transform:uppercase;
-    margin-top:2px;
-    opacity:0.9;
-  }
+  .app-btn.soon{opacity:0.6; pointer-events:none; box-shadow:none;}
+  .app-btn .soon-badge{display:block; font-size:9.5px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; margin-top:2px; opacity:0.9;}
   .app-note{font-size:12.5px; color:#6B8394; margin-top:16px;}
-  .footer-order{
-    display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
-    margin:0 0 18px;
+
+  /* ===== REVIEWS ===== */
+  .reviews{background:var(--paper); padding:36px 0; text-align:center;}
+  .review-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 20px; max-width:420px; margin:0 auto;
   }
-  .footer-order a{
-    border:1px solid rgba(233,217,188,0.35);
-    color:#C9DCE8; text-decoration:none;
-    font-weight:700; font-size:12.5px;
-    padding:8px 14px; border-radius:99px;
+  .stars{color:var(--gold); font-size:20px; margin-bottom:8px;}
+  .review-card p{font-size:14px; color:var(--ink); margin-bottom:14px;}
+  .review-btn{
+    display:inline-block; background:var(--ember); color:#fff; text-decoration:none;
+    font-weight:700; font-size:14px; padding:12px 22px; border-radius:12px;
   }
+  .review-note{font-size:12px; color:#6B8394; margin-top:10px;}
 
   /* ===== MENU ===== */
-  .menu{background:var(--cream);}
-  .menu-group{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    margin-bottom:12px;
-    overflow:hidden;
-  }
-  .menu-group .menu-head{
-    padding:16px 18px 4px;
-    font-family:'Fraunces',serif; font-weight:700; color:var(--bark); font-size:17px;
-  }
-  .menu-group .inner{padding:0 18px 18px;}
-  .item-row{
-    display:flex; justify-content:space-between; gap:12px;
-    padding:9px 0; border-top:1px dashed var(--line);
-    font-size:14.5px;
-  }
-  .item-row:first-child{border-top:none;}
-  .item-row .name{color:#23343E;}
-  .item-row .name small{display:block; color:#6B8394; font-size:12px; font-weight:500;}
-  .item-row .price{font-weight:700; color:var(--ember-2); white-space:nowrap;}
-  .note-block{
-    background:#E4EFF5; border-radius:10px; padding:12px 14px; font-size:13.5px; color:#1F4C63; margin-bottom:10px;
-  }
-  .note-block b{color:var(--ember-2);}
-  .drizzle-note{
-    background:var(--ember-light,#DCEAF2);
-    border-radius:8px;
-    padding:10px 14px;
-    font-size:13px;
-    font-weight:700;
-    color:#17405C;
-    margin-top:8px;
-  }
+  .menu{background:var(--cream); padding:36px 0 20px;}
   .flavour-banner{
     border:2px solid var(--ember);
     border-radius:var(--radius);
     padding:18px 18px 16px;
     margin-bottom:16px;
+    background:#fff;
   }
   .flavour-banner h3{
-    font-family:'Fraunces',serif;
-    font-weight:900;
-    font-size:22px;
-    color:var(--ember);
-    margin:0 0 4px;
+    font-family:'Georgia',serif; font-weight:800; font-size:22px; color:var(--ember); margin:0 0 4px;
   }
-  .flavour-banner .flavour-sub{
-    font-size:13.5px; font-weight:600; color:var(--bark); margin:0 0 12px;
-  }
+  .flavour-banner .flavour-sub{font-size:13.5px; font-weight:600; color:var(--bark); margin:0 0 12px;}
+  .note-block{background:#EAF2F7; border-radius:10px; padding:12px 14px; font-size:13.5px; color:var(--ink); margin-bottom:10px;}
+  .note-block b{color:var(--ember-2);}
 
-  /* heat guide */
-  .heat-guide{display:flex; flex-direction:column; gap:8px; font-size:13.5px;}
-  .heat-row{display:flex; align-items:center; gap:10px;}
-  .heat-dots{letter-spacing:2px; color:var(--ember); width:64px; flex-shrink:0;}
-  .heat-row .lvl{font-weight:800; color:var(--bark); width:78px; flex-shrink:0;}
-  .heat-row .list{color:#5A6B78;}
-
-
+  .menu-group{background:#fff; border:1px solid var(--line); border-radius:var(--radius); margin-bottom:12px; overflow:hidden;}
+  .menu-group .menu-head{padding:16px 18px 4px; font-family:'Georgia',serif; font-weight:700; color:var(--bark); font-size:17px;}
+  .menu-group .menu-head small{font-weight:500; font-size:12.5px; color:#5A6B78;}
+  .menu-group .inner{padding:0 18px 18px;}
+  .item-row{display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-top:1px dashed var(--line); font-size:14.5px;}
+  .item-row:first-child{border-top:none;}
+  .item-row .name{color:var(--ink);}
+  .item-row .name small{display:block; color:#6B8394; font-size:12px; font-weight:500;}
+  .item-row .price{font-weight:700; color:var(--ember-2); white-space:nowrap;}
+  .drizzle-note{background:#DCEAF2; border-radius:8px; padding:10px 14px; font-size:13px; font-weight:700; color:#17405C; margin-top:8px;}
+  .highlight-note{background:#DCEAF2; border-radius:10px; padding:12px 14px; font-size:13px; color:#17405C; margin-top:10px; line-height:1.5;}
 
   /* ===== FOOTER ===== */
-  footer{
-    background:var(--bark); color:#C9DCE8;
-    padding:34px 0 24px; text-align:center;
-  }
-  footer .foot-logo{width:64px; margin:0 auto 12px; opacity:0.95;}
-  footer h3{color:#fff; font-size:19px; margin-bottom:6px;}
-  footer .meta{font-size:13px; color:#9FC1D6; margin-bottom:16px;}
-  footer .socials{display:flex; gap:10px; justify-content:center; margin-bottom:18px; flex-wrap:wrap;}
-  footer .socials a{
-    height:auto; width:auto; border-radius:99px;
-    border:1px solid rgba(233,217,188,0.35);
-    display:inline-flex; align-items:center; justify-content:center;
-    text-decoration:none; color:#C9DCE8; font-size:13px; font-weight:700;
-    padding:9px 16px;
-  }
-  footer .fine{font-size:11.5px; color:#6B8394;}
-
-  @media (min-width:480px){
-    .hero-logo-wrap{width:min(70%,340px);}
-  }
+  footer{background:var(--bark); color:#C9DCE8; padding:36px 0 24px; text-align:center;}
+  footer h3{font-family:'Georgia',serif; font-size:20px; color:#fff; margin-bottom:6px;}
+  footer .meta{font-size:13px; margin-bottom:16px;}
+  .footer-order{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:0 0 18px;}
+  .footer-order a{border:1px solid rgba(233,217,188,0.35); color:#C9DCE8; text-decoration:none; font-weight:700; font-size:12.5px; padding:8px 14px; border-radius:99px;}
+  .socials{display:flex; gap:14px; justify-content:center; margin-bottom:16px;}
+  .socials a{color:#C9DCE8; text-decoration:none; font-size:13px; font-weight:600; border-bottom:1px solid rgba(201,220,232,0.4);}
+  footer .fine{font-size:11.5px; color:#9FC1D6;}
 </style>
 </head>
 <body>
-
-<main>
 
   <!-- ===== HERO ===== -->
   <div class="hero">
     <div class="wrap">
       <span class="badge-place">📍 Thurrock, Essex · Halal</span>
-      <div class="hero-logo-wrap"><img class="hero-logo" src="hungry-fox-logo-dark.png" alt="The Hungry Fox"></div>
-      <p class="tag">Home-cooked fried &amp; baked chicken, hand-tossed in your flavour, made fresh to order.</p>
+      <div class="hero-logo-wrap"><img class="hero-logo" src="/home/claude/logo_1.png" alt="The Hungry Fox"></div>
+      <p class="tag">Home-cooked fried and baked chicken, hand-tossed in your flavour, made fresh to order.</p>
     </div>
   </div>
 
-  <!-- ===== APPS (primary — order now) ===== -->
+  <!-- ===== APPS ===== -->
   <section class="apps">
     <div class="wrap">
       <div class="section-head">
@@ -308,53 +198,58 @@
       <div class="flavour-banner">
         <h3>Choose Your Flavour</h3>
         <p class="flavour-sub">Pick one for any Baked Chicken, Wings or Tenders</p>
-        <div class="note-block"><b>Classic</b> — Louisiana BBQ, Sticky BBQ</div>
-        <div class="note-block"><b>Mild</b> — Honeyracha, Spicy Algerian, Buffalo</div>
-        <div class="note-block"><b>Hot</b> — Volcano, Naga Sauce, Mango Habanero</div>
+        <div class="note-block"><b>Classic</b> — Sticky BBQ, Garlic Parmesan</div>
+        <div class="note-block"><b>Mild</b> — Honeyracha, Spicy Algerian, Smoky Cajun, Buffalo</div>
+        <div class="note-block"><b>Hot</b> — Spicy BBQ, Volcano, Naga Sauce, Mango Habanero</div>
         <div class="note-block"><b>Extra Hot</b> — Hot Hot</div>
       </div>
 
       <div class="menu-group">
-        <div class="menu-head">Baked Chicken</div>
+        <div class="menu-head">Solo Mains</div>
         <div class="inner">
-          <div class="item-row"><span class="name">Quarter</span><span class="price">£5.49</span></div>
-          <div class="item-row"><span class="name">Half</span><span class="price">£8.49</span></div>
-          <div class="item-row"><span class="name">Full</span><span class="price">£12.49</span></div>
-        </div>
-      </div>
-
-      <div class="menu-group">
-        <div class="menu-head">Wings &amp; Tenders</div>
-        <div class="inner">
-          <div class="item-row"><span class="name">Baked Wings <small>6 pieces</small></span><span class="price">£6.99</span></div>
-          <div class="item-row"><span class="name">Fried Wings <small>6 pieces</small></span><span class="price">£6.49</span></div>
-          <div class="item-row"><span class="name">Tenders <small>6 pieces</small></span><span class="price">£7.49</span></div>
+          <div class="item-row"><span class="name">Quarter Baked Chicken</span><span class="price">£5.49</span></div>
+          <div class="item-row"><span class="name">Half Baked Chicken</span><span class="price">£8.49</span></div>
+          <div class="item-row"><span class="name">Whole Baked Chicken</span><span class="price">£12.49</span></div>
+          <div class="item-row"><span class="name">Baked Wings <small>6pc</small></span><span class="price">£6.99</span></div>
+          <div class="item-row"><span class="name">Fried Wings <small>6pc</small></span><span class="price">£6.49</span></div>
+          <div class="item-row"><span class="name">Tenders <small>6pc</small></span><span class="price">£7.49</span></div>
+          <div class="item-row"><span class="name">Chilli Cheese Nuggets <small>6pc</small></span><span class="price">£4.99</span></div>
+          <div class="item-row"><span class="name">Buldak Fire Noodles</span><span class="price">£7.49</span></div>
+          <div class="item-row"><span class="name">↳ Add fried egg</span><span class="price">+£1.00</span></div>
+          <div class="item-row"><span class="name">↳ Add 3 chicken tenders</span><span class="price">+£3.50</span></div>
         </div>
       </div>
 
       <div class="menu-group">
         <div class="menu-head">Fries &amp; Wedges</div>
         <div class="inner">
-          <div class="item-row"><span class="name">Plain Fries <small>with / without salt</small></span><span class="price">£2.99</span></div>
-          <div class="item-row"><span class="name">Seasoned Fries <small>Cajun · Peri-Peri · Nashville · Chipotle Chilli Salt</small></span><span class="price">£3.49</span></div>
+          <p style="font-size:12.5px;color:#5A6B78;margin:0 0 10px;">Choose your seasoning: No Salt, Regular Salt, Chipotle Chilli Salt, Peri Peri, or Cajun Dust</p>
+          <div class="item-row"><span class="name">Fries <small>Small</small></span><span class="price">£1.50</span></div>
+          <div class="item-row"><span class="name">Fries <small>Large</small></span><span class="price">£2.99</span></div>
+          <div class="item-row"><span class="name">Wedges</span><span class="price">£3.49</span></div>
           <div class="item-row"><span class="name">Chicken Loaded Fries</span><span class="price">£5.00</span></div>
-          <div class="item-row"><span class="name">Chicken and Cheese Loaded Fries</span><span class="price">£5.50</span></div>
-          <div class="item-row"><span class="name">Plain Wedges <small>with / without salt</small></span><span class="price">£3.49</span></div>
-          <div class="item-row"><span class="name">Seasoned Wedges <small>Cajun · Peri-Peri · Nashville · Chipotle Chilli Salt</small></span><span class="price">£3.99</span></div>
+          <div class="item-row"><span class="name">Chicken &amp; Cheese Loaded Fries</span><span class="price">£5.50</span></div>
+          <div class="item-row"><span class="name">Chicken Loaded Wedges</span><span class="price">£5.50</span></div>
+          <div class="item-row"><span class="name">Chicken &amp; Cheese Loaded Wedges</span><span class="price">£6.00</span></div>
         </div>
       </div>
 
       <div class="menu-group">
-        <div class="menu-head">Sides &amp; Extras</div>
+        <div class="menu-head">Side &amp; Extras</div>
         <div class="inner">
-          <div class="item-row"><span class="name">Mozzarella Sticks <small>6pc — with a dip</small></span><span class="price">£4.99</span></div>
           <div class="item-row"><span class="name">Naan — Plain</span><span class="price">£1.00</span></div>
-          <div class="item-row"><span class="name">Naan — Garlic</span><span class="price">£2.79</span></div>
-          <div class="item-row"><span class="name">Garlic Bread</span><span class="price">£1.00</span></div>
+          <div class="item-row"><span class="name">Naan — Garlic</span><span class="price">£2.19</span></div>
+          <div class="item-row"><span class="name">Garlic Bread <small>4pc</small></span><span class="price">£1.99</span></div>
+          <div class="item-row"><span class="name">Cheesy Garlic Bread <small>4pc</small></span><span class="price">£2.99</span></div>
+          <div class="item-row"><span class="name">Mozzarella Sticks <small>6pc — with a dip</small></span><span class="price">£4.99</span></div>
           <div class="item-row"><span class="name">Onion Rings <small>8pc — with a dip</small></span><span class="price">£3.49</span></div>
           <div class="item-row"><span class="name">Halloumi Fries <small>6pc — with a dip</small></span><span class="price">£4.99</span></div>
           <div class="item-row"><span class="name">Veg Samosas <small>4pc — with a dip</small></span><span class="price">£3.49</span></div>
           <div class="item-row"><span class="name">Veg Spring Roll <small>4pc — with a dip</small></span><span class="price">£3.49</span></div>
+          <div class="item-row"><span class="name">Chilli Cheese Nuggets <small>3pc</small></span><span class="price">£2.79</span></div>
+          <div class="item-row"><span class="name">Plain Pitta Bread</span><span class="price">£0.99</span></div>
+          <div class="item-row"><span class="name">Peri Peri Pitta Bread</span><span class="price">£1.29</span></div>
+          <div class="item-row"><span class="name">Cheesy Pitta Bread</span><span class="price">£1.49</span></div>
           <div class="item-row"><span class="name">Beans</span><span class="price">£1.99</span></div>
           <div class="item-row"><span class="name">Coleslaw</span><span class="price">£1.99</span></div>
           <div class="item-row"><span class="name">Dip — Small</span><span class="price">£0.30</span></div>
@@ -363,21 +258,12 @@
       </div>
 
       <div class="menu-group">
-        <div class="menu-head">Buldak Fire Noodles <small style="font-weight:500;">— Signature, Hot</small></div>
+        <div class="menu-head">Kids Menu <small>— Choose Classic or Mild flavour</small></div>
         <div class="inner">
-          <div class="item-row"><span class="name">Buldak Fire Noodles</span><span class="price">£7.49</span></div>
-          <div class="item-row"><span class="name">Add fried egg</span><span class="price">+£1.00</span></div>
-          <div class="item-row"><span class="name">Add 3 chicken tenders</span><span class="price">+£3.50</span></div>
-        </div>
-      </div>
-
-      <div class="menu-group">
-        <div class="menu-head">Kids Meals <small style="font-weight:500;">— Choose Classic or Mild flavour</small></div>
-        <div class="inner">
-          <div class="item-row"><span class="name">Nugget Meal <small>4pc + Fries + Kids Drink</small></span><span class="price">£4.99</span></div>
-          <div class="item-row"><span class="name">Tender Meal <small>2pc + Fries + Kids Drink</small></span><span class="price">£4.99</span></div>
-          <div class="item-row"><span class="name">Wing Meal <small>3pc + Fries + Kids Drink</small></span><span class="price">£4.99</span></div>
-          <div class="item-row"><span class="name">Mozzarella Meal <small>4pc + Fries + Kids Drink</small></span><span class="price">£4.99</span></div>
+          <div class="item-row"><span class="name">Kids Chicken Nuggets Meal <small>4pc + Fries + Kids Drink</small></span><span class="price">£4.99</span></div>
+          <div class="item-row"><span class="name">Kids Chicken Tenders Meal <small>2pc + Fries + Kids Drink</small></span><span class="price">£4.99</span></div>
+          <div class="item-row"><span class="name">Kids Wings Meal <small>3pc, baked or fried + Fries + Kids Drink</small></span><span class="price">£4.99</span></div>
+          <div class="item-row"><span class="name">Kids Mozzarella Sticks Meal <small>4pc + Fries + Kids Drink</small></span><span class="price">£4.99</span></div>
         </div>
       </div>
 
@@ -385,84 +271,77 @@
         <div class="menu-head">Drinks</div>
         <div class="inner">
           <div class="item-row"><span class="name">Water</span><span class="price">£1.00</span></div>
-          <div class="item-row"><span class="name">Cans <small>Coca-Cola, Diet Coke, Pepsi, Pepsi Max, Sprite/7up, Dr Pepper, Tango</small></span><span class="price">£1.29</span></div>
+          <div class="item-row"><span class="name">Cans <small>Coke, Diet Coke, Pepsi, Pepsi Max, 7up, Tango Orange, Tango Apple, Dr Pepper</small></span><span class="price">£1.29</span></div>
+          <div class="item-row"><span class="name">Fruit Shoot</span><span class="price">£1.00</span></div>
           <div class="item-row"><span class="name">Red Bull</span><span class="price">£2.15</span></div>
-          <div class="item-row"><span class="name">Large Bottles 1.5L <small>Coca-Cola, Diet Coke, Pepsi, Pepsi Max, Sprite/7up, Tango</small></span><span class="price">£2.99</span></div>
+          <div class="item-row"><span class="name">Large Bottles <small>1.5L — Coke, Diet Coke, Pepsi, Pepsi Max, 7up, Tango</small></span><span class="price">£2.99</span></div>
         </div>
       </div>
 
       <div class="menu-group">
         <div class="menu-head">Meals</div>
         <div class="inner">
-          <div class="item-row"><span class="name">Quarter Chicken Meal <small>Quarter Chicken + Fries + Drink</small></span><span class="price">£7.49</span></div>
-          <div class="item-row"><span class="name">Half Chicken Meal <small>Half Chicken + Fries + Drink</small></span><span class="price">£10.49</span></div>
-          <div class="item-row"><span class="name">Fried Wing Meal <small>6 Fried Wings + Fries + Drink</small></span><span class="price">£8.49</span></div>
-          <div class="item-row"><span class="name">Baked Wing Meal <small>6 Baked Wings + Fries + Drink</small></span><span class="price">£8.99</span></div>
-          <div class="item-row"><span class="name">Tender Meal <small>6 Tenders + Fries + Drink</small></span><span class="price">£8.99</span></div>
-          <div class="item-row"><span class="name">Buldak Meal <small>Buldak Noodles + Drink</small></span><span class="price">£8.49</span></div>
-          <div class="item-row"><span class="name">↳ Add 3 tenders to Buldak Meal</span><span class="price">+£3.50</span></div>
-          <div class="item-row"><span class="name">↳ Add fried egg to Buldak Meal</span><span class="price">+£1.00</span></div>
+          <div class="item-row"><span class="name">Quarter Baked Chicken Meal</span><span class="price">£7.49</span></div>
+          <div class="item-row"><span class="name">Half Baked Chicken Meal</span><span class="price">£10.49</span></div>
+          <div class="item-row"><span class="name">Fried Wings Meal <small>6pc</small></span><span class="price">£8.49</span></div>
+          <div class="item-row"><span class="name">Baked Wings Meal <small>6pc</small></span><span class="price">£8.99</span></div>
+          <div class="item-row"><span class="name">Tenders Meal <small>6pc</small></span><span class="price">£8.99</span></div>
+          <div class="item-row"><span class="name">Chilli Cheese Nuggets Meal <small>6pc</small></span><span class="price">£6.99</span></div>
+          <div class="item-row"><span class="name">Buldak Fire Noodles Meal <small>Noodle + Drink</small></span><span class="price">£8.49</span></div>
+          <div class="item-row"><span class="name">↳ Add 3 tenders</span><span class="price">+£3.50</span></div>
+          <div class="item-row"><span class="name">↳ Add fried egg</span><span class="price">+£1.00</span></div>
         </div>
       </div>
 
       <div class="menu-group">
         <div class="menu-head">Wing Bundles</div>
         <div class="inner">
-          <div class="item-row"><span class="name">15 Wings <small>Baked</small></span><span class="price">£15.99</span></div>
-          <div class="item-row"><span class="name">15 Wings <small>Fried</small></span><span class="price">£15.49</span></div>
-          <div class="item-row"><span class="name">20 Wing Party Bundle <small>Baked — +4 Fries + Bottle Drink + Side</small></span><span class="price">£22.99</span></div>
-          <div class="item-row"><span class="name">20 Wing Party Bundle <small>Fried — +4 Fries + Bottle Drink + Side</small></span><span class="price">£21.99</span></div>
-          <div class="item-row"><span class="name">25 Wings <small>Baked</small></span><span class="price">£23.99</span></div>
-          <div class="item-row"><span class="name">25 Wings <small>Fried</small></span><span class="price">£22.99</span></div>
-          <p style="font-size:12.5px;color:#6B8394;margin:8px 0 0;">Side choice: Beans, Coleslaw or Plain Naan (free) — upgrade to Garlic Naan, Onion Rings or Mozzarella Sticks +£1.00</p>
+          <div class="item-row"><span class="name">15 Wings Bundle <small>Baked</small></span><span class="price">£18.99</span></div>
+          <div class="item-row"><span class="name">15 Wings Bundle <small>Fried</small></span><span class="price">£18.49</span></div>
+          <p style="font-size:12.5px;color:#5A6B78;margin:2px 0 10px;">2 Fries + 1.5L Bottle Drink + 1 Side</p>
+          <div class="item-row"><span class="name">20 Wing Party Bundle <small>Baked</small></span><span class="price">£23.99</span></div>
+          <div class="item-row"><span class="name">20 Wing Party Bundle <small>Fried</small></span><span class="price">£22.99</span></div>
+          <p style="font-size:12.5px;color:#5A6B78;margin:2px 0 0;">4 Fries + 1.5L Bottle Drink + 1 Side</p>
+          <div class="highlight-note">
+            <b>Free side:</b> Plain Naan, Beans, Coleslaw, or Plain Pitta Bread.<br>
+            <b>Upgrade for +£1.00:</b> Peri Peri Pitta, Cheesy Pitta, Garlic Naan, Onion Rings (4pc), Mozzarella Sticks (2pc), or Halloumi Fries (2pc).
+          </div>
+          <div class="item-row" style="margin-top:10px;"><span class="name">25 Wings <small>Baked</small></span><span class="price">£21.99</span></div>
+          <div class="item-row"><span class="name">25 Wings <small>Fried</small></span><span class="price">£20.99</span></div>
+          <p style="font-size:12.5px;color:#5A6B78;margin:2px 0 0;">Wings only — no sides included</p>
         </div>
       </div>
 
       <div class="menu-group">
         <div class="menu-head">Sharer Boxes</div>
         <div class="inner">
-          <div class="item-row"><span class="name">Lone Fox <small>¼ Chicken + 3 Wings + Fries + Can Drink</small></span><span class="price">£10.99</span></div>
-          <div class="item-row"><span class="name">Fox Pack <small>½ Chicken + 4 Wings + 2 Fries + Can Drink</small></span><span class="price">£18.49</span></div>
-          <div class="item-row"><span class="name">Fox Feast <small>Full Chicken + 8 Wings + 4 Fries + Bottle Drink</small></span><span class="price">£28.99</span></div>
-        </div>
-      </div>
-
-      <div class="menu-group">
-        <div class="menu-head">Heat Guide</div>
-        <div class="inner">
-          <div class="heat-guide">
-            <div class="heat-row"><span class="heat-dots">●○○○</span><span class="lvl">Classic</span><span class="list">Louisiana BBQ, Sticky BBQ</span></div>
-            <div class="heat-row"><span class="heat-dots">●●○○</span><span class="lvl">Mild</span><span class="list">Honeyracha, Spicy Algerian, Buffalo</span></div>
-            <div class="heat-row"><span class="heat-dots">●●●○</span><span class="lvl">Hot</span><span class="list">Volcano, Naga Sauce, Mango Habanero</span></div>
-            <div class="heat-row"><span class="heat-dots">●●●●</span><span class="lvl">Extra Hot</span><span class="list">Hot Hot</span></div>
-          </div>
+          <div class="item-row"><span class="name">Lone Fox <small>¼ Chicken + 3 Wings + Fries + 330ml Drink</small></span><span class="price">£10.99</span></div>
+          <div class="item-row"><span class="name">Fox Pack <small>½ Chicken + 4 Wings + 2 Fries + Two 330ml Drinks</small></span><span class="price">£18.99</span></div>
+          <div class="item-row"><span class="name">Fox Feast <small>Full Chicken + 8 Wings (up to 2 flavours) + 4 Fries + 1.5L Bottle Drink</small></span><span class="price">£28.99</span></div>
         </div>
       </div>
 
     </div>
   </section>
 
-</main>
-
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="wrap">
-    <img class="foot-logo" src="hungry-fox-logo-dark.png" alt="">
-    <h3>The Hungry Fox</h3>
-    <p class="meta">Thurrock, Essex · Halal · Open daily 10:00–22:30</p>
-    <div class="footer-order">
-      <a href="#" aria-disabled="true" style="opacity:0.55;">Deliveroo (soon)</a>
-      <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener">Uber Eats</a>
-      <a href="#" aria-disabled="true" style="opacity:0.55;">Just Eat (soon)</a>
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="wrap">
+      <h3>The Hungry Fox</h3>
+      <p class="meta">Thurrock, Essex · Halal · Open daily 10:00–22:30</p>
+      <div class="footer-order">
+        <a href="#" aria-disabled="true" style="opacity:0.55;">Deliveroo (soon)</a>
+        <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener">Uber Eats</a>
+        <a href="#" aria-disabled="true" style="opacity:0.55;">Just Eat (soon)</a>
+      </div>
+      <div class="socials">
+        <a href="#" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+        <a href="#" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+        <a href="#" target="_blank" rel="noopener" aria-label="TikTok">TikTok</a>
+      </div>
+      <p class="fine">© The Hungry Fox — Registered food business, Thurrock Council</p>
     </div>
-    <div class="socials">
-      <a href="#" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
-      <a href="#" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
-      <a href="#" target="_blank" rel="noopener" aria-label="TikTok">TikTok</a>
-    </div>
-    <p class="fine">© The Hungry Fox — Registered food business, Thurrock Council</p>
-  </div>
-</footer>
+  </footer>
 
 </body>
 </html>
