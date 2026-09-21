@@ -79,7 +79,7 @@
     transition:transform .12s ease; position:relative;
   }
   .app-btn:active{transform:translateY(3px); box-shadow:0 1px 0 rgba(0,0,0,0.18);}
-  .app-btn.ubereats{background:#06C167;}
+  .app-btn.ubereats{background:#06C167; flex:1.35 1 auto; font-size:16.5px; padding:17px 12px; box-shadow:0 5px 0 rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.16);}
   .app-btn.deliveroo{background:#00CCBC;}
   .app-btn.justeat{background:#FF8000;}
   .app-btn.soon{opacity:0.6; pointer-events:none; box-shadow:none;}
@@ -202,27 +202,23 @@
         <div class="note-block"><b>Mild</b> — Honeyracha, Spicy Algerian, Smoky Cajun, Buffalo</div>
         <div class="note-block"><b>Hot</b> — Spicy BBQ, Volcano, Naga Sauce, Mango Habanero</div>
         <div class="note-block"><b>Extra Hot</b> — Hot Hot</div>
+        <div class="note-block"><b>Extreme Hot</b> — Seoul Fire</div>
       </div>
 
       <div class="menu-group">
-        <div class="menu-head">Mains</div>
+        <div class="menu-head">Solo Mains</div>
         <div class="inner">
           <div class="item-row"><span class="name">Quarter Baked Chicken</span><span class="price">£5.49</span></div>
           <div class="item-row"><span class="name">Half Baked Chicken</span><span class="price">£8.49</span></div>
           <div class="item-row"><span class="name">Whole Baked Chicken</span><span class="price">£12.49</span></div>
           <div class="item-row"><span class="name">Baked Wings <small>6pc</small></span><span class="price">£6.99</span></div>
           <div class="item-row"><span class="name">Fried Wings <small>6pc</small></span><span class="price">£6.49</span></div>
-          <div class="item-row"><span class="name">Tenders <small>6pc</small></span><span class="price">£7.49</span></div>
-          <div class="item-row"><span class="name">Chilli Cheese Nuggets <small>6pc</small></span><span class="price">£4.99</span></div>
+          <div class="item-row"><span class="name">Tenders <small>6pc</small></span><span class="price">£7.99</span></div>
           <div class="item-row"><span class="name">Buldak Fire Noodles</span><span class="price">£7.49</span></div>
-          <div class="item-row"><span class="name">↳ Add fried egg</span><span class="price">+£0.99</span></div>
+          <div class="item-row"><span class="name">↳ Add fried egg</span><span class="price">+99p</span></div>
           <div class="item-row"><span class="name">↳ Add 3 chicken tenders</span><span class="price">+£3.49</span></div>
-          <div class="item-row"><span class="name">↳ Add a drink</span><span class="price">+£0.99</span></div>
-          <div class="highlight-note">
-            <b>Make it a meal</b> — add seasoned fries + a drink for <b>+£1.99</b> (Quarter/Half Chicken, Baked/Fried Wings, Chilli Cheese Nuggets).<br>
-            <b>Tenders meal upgrade</b> — +£1.50 (fries + drink).
-          </div>
-          <div class="item-row" style="margin-top:10px;"><span class="name">Whole Chicken Meal <small>Whole Chicken + 2 Fries + 1.5L Bottle Drink</small></span><span class="price">£18.99</span></div>
+          <div class="item-row"><span class="name">↳ Add a drink</span><span class="price">+99p</span></div>
+          <div class="highlight-note"><b>Make it a meal</b> on any main above (excl. Buldak Fire Noodles) — add fries + a drink for +£1.99.</div>
         </div>
       </div>
 
@@ -243,13 +239,14 @@
       <div class="menu-group">
         <div class="menu-head">Fried Sides</div>
         <div class="inner">
+          <div class="item-row"><span class="name">Halloumi Fries <small>6pc — with a dip</small></span><span class="price">£4.99</span></div>
           <div class="item-row"><span class="name">Mozzarella Sticks <small>6pc — with a dip</small></span><span class="price">£4.99</span></div>
           <div class="item-row"><span class="name">Onion Rings <small>8pc — with a dip</small></span><span class="price">£3.49</span></div>
-          <div class="item-row"><span class="name">Halloumi Fries <small>6pc — with a dip</small></span><span class="price">£4.99</span></div>
-          <div class="item-row"><span class="name">Veg Samosas <small>4pc — with a dip</small></span><span class="price">£3.49</span></div>
-          <div class="item-row"><span class="name">Veg Spring Roll <small>4pc — with a dip</small></span><span class="price">£3.49</span></div>
-          <div class="item-row"><span class="name">Mini Shingara <small>6pc</small></span><span class="price">£3.49</span></div>
           <div class="item-row"><span class="name">Chilli Cheese Nuggets <small>3pc</small></span><span class="price">£2.79</span></div>
+          <div class="item-row"><span class="name">Chilli Cheese Nuggets <small>6pc</small></span><span class="price">£4.99</span></div>
+          <div class="item-row"><span class="name">Veg Samosas <small>4pc — with a dip</small></span><span class="price">£3.49</span></div>
+          <div class="item-row"><span class="name">Mini Singara <small>Bengali Samosa, 6pc — with a dip</small></span><span class="price">£3.49</span></div>
+          <div class="item-row"><span class="name">Veg Spring Roll <small>4pc — with a dip</small></span><span class="price">£3.49</span></div>
         </div>
       </div>
 
@@ -259,10 +256,8 @@
           <div class="item-row"><span class="name">Naan — Plain</span><span class="price">£1.00</span></div>
           <div class="item-row"><span class="name">Naan — Garlic</span><span class="price">£2.19</span></div>
           <div class="item-row"><span class="name">Garlic Bread <small>4pc</small></span><span class="price">£1.99</span></div>
-          <div class="item-row"><span class="name">Cheesy Garlic Bread <small>4pc</small></span><span class="price">£2.99</span></div>
           <div class="item-row"><span class="name">Plain Pitta Bread</span><span class="price">£0.99</span></div>
           <div class="item-row"><span class="name">Peri Peri Pitta Bread</span><span class="price">£1.29</span></div>
-          <div class="item-row"><span class="name">Cheesy Pitta Bread</span><span class="price">£1.49</span></div>
           <div class="item-row"><span class="name">Beans</span><span class="price">£1.99</span></div>
           <div class="item-row"><span class="name">Coleslaw</span><span class="price">£1.99</span></div>
           <div class="item-row"><span class="name">Dip — Small</span><span class="price">£0.30</span></div>
@@ -271,7 +266,7 @@
       </div>
 
       <div class="menu-group">
-        <div class="menu-head">Kids Menu <small>— Classic or Mild flavour choice on Wings &amp; Tenders only</small></div>
+        <div class="menu-head">Kids Menu <small>— Choose Classic or Mild flavour</small></div>
         <div class="inner">
           <div class="item-row"><span class="name">Kids Chicken Nuggets Meal <small>4pc + Fries + Kids Drink</small></span><span class="price">£4.99</span></div>
           <div class="item-row"><span class="name">Kids Chicken Tenders Meal <small>2pc + Fries + Kids Drink</small></span><span class="price">£4.99</span></div>
@@ -289,7 +284,7 @@
           <div class="item-row"><span class="name">Cans <small>Coke, Diet Coke, Pepsi, Pepsi Max, 7up, Tango Orange, Tango Apple, Dr Pepper</small></span><span class="price">£1.29</span></div>
           <div class="item-row"><span class="name">Fruit Shoot</span><span class="price">£1.00</span></div>
           <div class="item-row"><span class="name">Red Bull</span><span class="price">£2.15</span></div>
-          <div class="item-row"><span class="name">Large Bottles <small>1.5L — Coke, Diet Coke, Pepsi, Pepsi Max, 7up, Tango</small></span><span class="price">£2.99</span></div>
+          <div class="item-row"><span class="name">Large Bottles <small>Coke, Diet Coke, Pepsi, Pepsi Max, 7up, Tango</small></span><span class="price">£2.99</span></div>
         </div>
       </div>
 
@@ -298,13 +293,13 @@
         <div class="inner">
           <div class="item-row"><span class="name">15 Wings Bundle <small>Baked</small></span><span class="price">£18.99</span></div>
           <div class="item-row"><span class="name">15 Wings Bundle <small>Fried</small></span><span class="price">£18.49</span></div>
-          <p style="font-size:12.5px;color:#5A6B78;margin:2px 0 10px;">2 Fries + 1.5L Bottle Drink + 1 Side</p>
+          <p style="font-size:12.5px;color:#5A6B78;margin:2px 0 10px;">2 Fries + Bottle Drink + 1 Side</p>
           <div class="item-row"><span class="name">20 Wing Party Bundle <small>Baked</small></span><span class="price">£23.99</span></div>
           <div class="item-row"><span class="name">20 Wing Party Bundle <small>Fried</small></span><span class="price">£22.99</span></div>
-          <p style="font-size:12.5px;color:#5A6B78;margin:2px 0 0;">4 Fries + 1.5L Bottle Drink + 1 Side</p>
+          <p style="font-size:12.5px;color:#5A6B78;margin:2px 0 0;">4 Fries + Bottle Drink + 1 Side</p>
           <div class="highlight-note">
             <b>Free side:</b> Plain Naan, Beans, Coleslaw, or Plain Pitta Bread.<br>
-            <b>Upgrade for +£0.99:</b> Peri Peri Pitta, Cheesy Pitta, Garlic Naan, Onion Rings (4pc), Mozzarella Sticks (2pc), or Halloumi Fries (2pc).
+            <b>Upgrade for +£1.00:</b> Peri Peri Pitta, Cheesy Pitta, Garlic Naan, Onion Rings (4pc), Mozzarella Sticks (2pc), or Halloumi Fries (2pc).
           </div>
           <div class="item-row" style="margin-top:10px;"><span class="name">25 Wings <small>Baked</small></span><span class="price">£21.99</span></div>
           <div class="item-row"><span class="name">25 Wings <small>Fried</small></span><span class="price">£20.99</span></div>
@@ -315,9 +310,9 @@
       <div class="menu-group">
         <div class="menu-head">Sharer Boxes</div>
         <div class="inner">
-          <div class="item-row"><span class="name">Lone Fox <small>¼ Chicken + 3 Wings + Fries + 330ml Drink</small></span><span class="price">£10.99</span></div>
+          <div class="item-row"><span class="name">Lone Fox <small>¼ Chicken + 2 Wings + Fries + 330ml Drink</small></span><span class="price">£10.99</span></div>
           <div class="item-row"><span class="name">Fox Pack <small>½ Chicken + 4 Wings + 2 Fries + Two 330ml Drinks</small></span><span class="price">£18.99</span></div>
-          <div class="item-row"><span class="name">Fox Feast <small>Full Chicken + 8 Wings (up to 2 flavours) + 4 Fries + 1.5L Bottle Drink</small></span><span class="price">£28.99</span></div>
+          <div class="item-row"><span class="name">Fox Feast <small>Full Chicken + 8 Wings (up to 2 flavours) + 4 Fries + Bottle Drink</small></span><span class="price">£28.99</span></div>
         </div>
       </div>
 
@@ -335,9 +330,10 @@
         <a href="#" aria-disabled="true" style="opacity:0.55;">Just Eat (soon)</a>
       </div>
       <div class="socials">
-        <a href="https://www.instagram.com/thehungryfox2026?stkn=N3M5MGcxMnZ5cXc5" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
-        <a href="https://www.tiktok.com/@thehungryfox2026?_r=1&_t=ZN-99h85Fmnqh4" target="_blank" rel="noopener" aria-label="TikTok">TikTok</a>
-        <a href="https://youtube.com/@thehungry-fox2026?si=p1R-U9y9o1OE9vqD" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
+        <a href="https://www.instagram.com/thehungryfox2026/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=61594740146032" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+        <a href="https://www.youtube.com/@TheHungry-Fox2026" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
+        <a href="https://www.tiktok.com/@thehungryfox2026" target="_blank" rel="noopener" aria-label="TikTok">TikTok</a>
       </div>
       <p class="fine">© The Hungry Fox — Registered food business, Thurrock Council</p>
     </div>
