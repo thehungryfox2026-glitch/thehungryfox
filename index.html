@@ -4,20 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Hungry Fox | Thurrock</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
     <style>
         /* --- BASE STYLES --- */
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #e8eef5; /* Soft light blue background */
             color: #1a1a2e;
             line-height: 1.6;
         }
         
         /* --- HEADER (Dark Blue) --- */
         .header {
-            background-color: #1a2a4a; /* Your brand dark blue */
+            background-color: #1a2a4a;
             text-align: center;
             padding: 40px 20px 30px;
         }
@@ -30,6 +36,8 @@
             font-size: 0.95em;
             color: #e0e0e0;
             margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
         }
         .order-buttons {
             display: flex;
@@ -59,12 +67,11 @@
             pointer-events: none;
         }
         
-        /* --- TRUST & REVIEW SECTION (Cream Background) --- */
+        /* --- TRUST & REVIEW SECTION (Light Blue) --- */
         .trust-section {
-            background-color: #fdf8f0; /* Light cream */
+            background-color: #dce6f0;
             text-align: center;
             padding: 35px 20px;
-            border-bottom: 1px solid #e0dcd3;
         }
         .hygiene-badge {
             display: inline-block;
@@ -83,7 +90,7 @@
             border-radius: 12px;
             margin: 15px auto;
             max-width: 400px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
         .stars { color: #FFD700; font-size: 1.6em; }
         .btn-review {
@@ -98,7 +105,7 @@
         }
         .allergen-notice {
             font-size: 0.85em;
-            color: #555;
+            color: #444;
             background-color: #fff3cd;
             padding: 12px;
             border-radius: 6px;
@@ -108,19 +115,25 @@
         }
         .allergen-link { color: #1a1a2e; font-weight: bold; cursor: pointer; text-decoration: underline; }
         
-        /* --- MENU SECTIONS (White Background) --- */
-        .menu-container {
-            background-color: #ffffff;
-            padding: 20px;
+        /* --- MENU SECTIONS (White Cards on Light Blue) --- */
+        .menu-wrapper {
             max-width: 800px;
             margin: 0 auto;
+            padding: 20px;
         }
-        .menu-section { margin-top: 30px; }
+        .menu-section {
+            background-color: #ffffff;
+            border-radius: 14px;
+            padding: 25px;
+            margin-top: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
         .menu-section h2 {
-            font-size: 1.4em;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6em;
             color: #1a2a4a;
             border-bottom: 2px solid #1a2a4a;
-            padding-bottom: 5px;
+            padding-bottom: 8px;
             margin-bottom: 15px;
         }
         .menu-item {
@@ -129,7 +142,8 @@
             padding: 10px 0;
             border-bottom: 1px dashed #e0e0e0;
         }
-        .item-name { font-weight: 600; }
+        .menu-item:last-child { border-bottom: none; }
+        .item-name { font-weight: 600; font-family: 'Inter', sans-serif; }
         .item-price { font-weight: 700; color: #1a2a4a; }
         .item-desc { font-size: 0.85em; color: #666; display: block; font-weight: 400; }
         
@@ -137,9 +151,8 @@
         .footer {
             text-align: center;
             padding: 40px 20px;
-            background-color: #fdf8f0;
-            color: #888;
-            border-top: 1px solid #e0dcd3;
+            background-color: #dce6f0;
+            color: #555;
             margin-top: 40px;
         }
         .logo-bottom img {
@@ -152,8 +165,9 @@
             color: #1a2a4a;
             margin: 0 10px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
         }
+        .social-links a:hover { color: #06C167; }
         
         /* --- ALLERGEN MODAL --- */
         .modal {
@@ -230,7 +244,7 @@
     </div>
 
     <!-- MENU SECTIONS -->
-    <div class="menu-container">
+    <div class="menu-wrapper">
         <div class="menu-section">
             <h2>1. Crispy Squad</h2>
             <div class="menu-item"><span class="item-name">Quarter Baked Chicken</span><span class="item-price">£5.49</span></div>
@@ -339,77 +353,80 @@
             <img src="hungry-fox-logo-dark.png" alt="The Hungry Fox">
         </div>
         <div class="social-links">
-            <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">YouTube</a> | <a href="#">TikTok</a>
+            <a href="https://www.instagram.com/thehungryfox2026/" target="_blank">Instagram</a> | 
+            <a href="https://www.facebook.com/profile.php?id=61594740146032" target="_blank">Facebook</a> | 
+            <a href="https://www.youtube.com/channel/UC6uMbrnxCjwqm_Ua9-SHubA" target="_blank">YouTube</a> | 
+            <a href="https://www.tiktok.com/@thehungryfox2026" target="_blank">TikTok</a>
         </div>
         <p>Registered food business, Thurrock Council</p>
         <p>© The Hungry Fox</p>
     </div>
 
-<!-- ALLERGEN MODAL -->
-<div id="allergenModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <h2>Allergen Matrix</h2>
-        <p style="font-size:0.9em; margin-bottom:15px;">This matrix is a guide only. Please speak to a member of staff for specific allergen advice.</p>
-        <table class="allergen-table">
-            <thead>
-                <tr>
-                    <th>Menu Item</th>
-                    <th>Gluten</th>
-                    <th>Milk</th>
-                    <th>Egg</th>
-                    <th>Soy</th>
-                    <th>Mustard</th>
-                    <th>Celery</th>
-                    <th>Sesame</th>
-                    <th>Nuts/Peanuts</th>
-                    <th>Sulphites</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Raw Wings / Chicken</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Fried Wings (MFC Breading)</td><td>✓</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Baked Wings (Plain)</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Chicken Nuggets / Tenders</td><td>✓</td><td>X</td><td>X</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Buldak Fire Noodles</td><td>✓</td><td>1</td><td>1</td><td>✓</td><td>1</td><td>✓</td><td>✓</td><td>X</td><td>X</td></tr>
-                <tr><td>Fries (McCain/Aldi)</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Wedges (McCain/Aldi)</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Onion Rings (Iceland)</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Veg Spring Rolls (Iceland)</td><td>✓</td><td>X</td><td>X</td><td>✓</td><td>X</td><td>✓</td><td>✓</td><td>X</td><td>X</td></tr>
-                <tr><td>Veg Samosas (IBCO)</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Mini Shingara (IBCO)</td><td>✓</td><td>X</td><td>X</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Naan (Plain - Santosh)</td><td>✓</td><td>1</td><td>1</td><td>✓</td><td>X</td><td>X</td><td>1</td><td>X</td><td>X</td></tr>
-                <tr><td>Garlic & Coriander Naan</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Pitta Bread (Tasty Bake)</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Garlic Bread (Aldi)</td><td>✓</td><td>✓</td><td>X</td><td>1</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Mozzarella Sticks (Aldi)</td><td>✓</td><td>✓</td><td>1</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Halloumi Fries</td><td>✓</td><td>✓</td><td>1</td><td>1</td><td>1</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Chill Cheese Nuggets</td><td>✓</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Beans (Branston)</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Coleslaw (Standard/Aldi)</td><td>X</td><td>X</td><td>✓</td><td>X</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Mayonnaise (Aldi)</td><td>X</td><td>X</td><td>✓</td><td>X</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Peri Peri Seasoning</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-                <tr><td>Cajun / Chipotle / Spices</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
-            </tbody>
-        </table>
-        <p style="font-size:0.8em; margin-top:15px;"><strong>Key:</strong> ✓ = Contains directly | 1 = May Contain (Cross-contamination risk) | X = Free from</p>
+    <!-- ALLERGEN MODAL -->
+    <div id="allergenModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Allergen Matrix</h2>
+            <p style="font-size:0.9em; margin-bottom:15px;">This matrix is a guide only. Please speak to a member of staff for specific allergen advice.</p>
+            <table class="allergen-table">
+                <thead>
+                    <tr>
+                        <th>Menu Item</th>
+                        <th>Gluten</th>
+                        <th>Milk</th>
+                        <th>Egg</th>
+                        <th>Soy</th>
+                        <th>Mustard</th>
+                        <th>Celery</th>
+                        <th>Sesame</th>
+                        <th>Nuts/Peanuts</th>
+                        <th>Sulphites</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Raw Wings / Chicken</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Fried Wings (MFC Breading)</td><td>✓</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Baked Wings (Plain)</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Chicken Nuggets / Tenders</td><td>✓</td><td>X</td><td>X</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Buldak Fire Noodles</td><td>✓</td><td>1</td><td>1</td><td>✓</td><td>1</td><td>✓</td><td>✓</td><td>X</td><td>X</td></tr>
+                    <tr><td>Fries (McCain/Aldi)</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Wedges (McCain/Aldi)</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Onion Rings (Iceland)</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Veg Spring Rolls (Iceland)</td><td>✓</td><td>X</td><td>X</td><td>✓</td><td>X</td><td>✓</td><td>✓</td><td>X</td><td>X</td></tr>
+                    <tr><td>Veg Samosas (IBCO)</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Mini Shingara (IBCO)</td><td>✓</td><td>X</td><td>X</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Naan (Plain - Santosh)</td><td>✓</td><td>1</td><td>1</td><td>✓</td><td>X</td><td>X</td><td>1</td><td>X</td><td>X</td></tr>
+                    <tr><td>Garlic & Coriander Naan</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Pitta Bread (Tasty Bake)</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Garlic Bread (Aldi)</td><td>✓</td><td>✓</td><td>X</td><td>1</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Mozzarella Sticks (Aldi)</td><td>✓</td><td>✓</td><td>1</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Halloumi Fries</td><td>✓</td><td>✓</td><td>1</td><td>1</td><td>1</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Chill Cheese Nuggets</td><td>✓</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Beans (Branston)</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Coleslaw (Standard/Aldi)</td><td>X</td><td>X</td><td>✓</td><td>X</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Mayonnaise (Aldi)</td><td>X</td><td>X</td><td>✓</td><td>X</td><td>✓</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Peri Peri Seasoning</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>Cajun / Chipotle / Spices</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                </tbody>
+            </table>
+            <p style="font-size:0.8em; margin-top:15px;"><strong>Key:</strong> ✓ = Contains directly | 1 = May Contain (Cross-contamination risk) | X = Free from</p>
+        </div>
     </div>
-</div>
 
-<script>
-    function openModal() {
-        document.getElementById('allergenModal').style.display = 'block';
-    }
-    function closeModal() {
-        document.getElementById('allergenModal').style.display = 'none';
-    }
-    window.onclick = function(event) {
-        var modal = document.getElementById('allergenModal');
-        if (event.target == modal) {
-            modal.style.display = 'none';
+    <script>
+        function openModal() {
+            document.getElementById('allergenModal').style.display = 'block';
         }
-    }
-</script>
+        function closeModal() {
+            document.getElementById('allergenModal').style.display = 'none';
+        }
+        window.onclick = function(event) {
+            var modal = document.getElementById('allergenModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 
 </body>
 </html>
