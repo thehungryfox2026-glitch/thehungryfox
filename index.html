@@ -10,40 +10,31 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #f4f4f4;
             color: #1a1a2e;
             line-height: 1.6;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
         
-        /* --- HEADER --- */
+        /* --- HEADER (Dark Blue) --- */
         .header {
+            background-color: #1a2a4a; /* Your brand dark blue */
             text-align: center;
-            padding: 30px 0 20px;
-            border-bottom: 2px solid #f0f0f0;
+            padding: 40px 20px 30px;
         }
-        .logo {
-            font-size: 2.5em;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: #1a1a2e;
-            margin-bottom: 5px;
+        .logo-top img {
+            max-width: 280px;
+            height: auto;
+            margin-bottom: 15px;
         }
         .tagline {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 20px;
+            font-size: 0.95em;
+            color: #e0e0e0;
+            margin-bottom: 25px;
         }
         .order-buttons {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         .btn {
@@ -68,34 +59,37 @@
             pointer-events: none;
         }
         
-        /* --- TRUST & REVIEW SECTION --- */
+        /* --- TRUST & REVIEW SECTION (Cream Background) --- */
         .trust-section {
+            background-color: #fdf8f0; /* Light cream */
             text-align: center;
-            padding: 25px 0;
-            border-bottom: 2px solid #f0f0f0;
+            padding: 35px 20px;
+            border-bottom: 1px solid #e0dcd3;
         }
         .hygiene-badge {
             display: inline-block;
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 8px;
             font-weight: bold;
             text-decoration: none;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.05em;
         }
         .review-box {
-            background-color: #f5f7fa;
-            padding: 20px;
+            background-color: #ffffff;
+            padding: 25px;
             border-radius: 12px;
             margin: 15px auto;
             max-width: 400px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .stars { color: #FFD700; font-size: 1.5em; }
+        .stars { color: #FFD700; font-size: 1.6em; }
         .btn-review {
             background-color: #4285F4;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
@@ -106,30 +100,60 @@
             font-size: 0.85em;
             color: #555;
             background-color: #fff3cd;
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
-            margin-top: 15px;
+            margin-top: 20px;
             display: inline-block;
+            max-width: 600px;
         }
         .allergen-link { color: #1a1a2e; font-weight: bold; cursor: pointer; text-decoration: underline; }
         
-        /* --- MENU SECTIONS --- */
+        /* --- MENU SECTIONS (White Background) --- */
+        .menu-container {
+            background-color: #ffffff;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
         .menu-section { margin-top: 30px; }
         .menu-section h2 {
             font-size: 1.4em;
-            border-bottom: 2px solid #1a1a2e;
+            color: #1a2a4a;
+            border-bottom: 2px solid #1a2a4a;
             padding-bottom: 5px;
             margin-bottom: 15px;
         }
         .menu-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
+            padding: 10px 0;
             border-bottom: 1px dashed #e0e0e0;
         }
         .item-name { font-weight: 600; }
-        .item-price { font-weight: 700; color: #1a1a2e; }
+        .item-price { font-weight: 700; color: #1a2a4a; }
         .item-desc { font-size: 0.85em; color: #666; display: block; font-weight: 400; }
+        
+        /* --- FOOTER --- */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #fdf8f0;
+            color: #888;
+            border-top: 1px solid #e0dcd3;
+            margin-top: 40px;
+        }
+        .logo-bottom img {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        .social-links a {
+            color: #1a2a4a;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
         
         /* --- ALLERGEN MODAL --- */
         .modal {
@@ -173,31 +197,15 @@
             text-align: left;
         }
         .allergen-table th { background-color: #f2f2f2; }
-
-        /* --- FOOTER --- */
-        .footer {
-            text-align: center;
-            padding: 30px 0;
-            font-size: 0.8em;
-            color: #888;
-            border-top: 2px solid #f0f0f0;
-            margin-top: 40px;
-        }
-        .social-links a {
-            color: #1a1a2e;
-            margin: 0 10px;
-            text-decoration: none;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
 
-<div class="container">
-
     <!-- HEADER -->
     <div class="header">
-        <div class="logo">THE HUNGRY FOX</div>
+        <div class="logo-top">
+            <img src="hungry-fox-logo-cream.png" alt="The Hungry Fox">
+        </div>
         <div class="tagline">Thurrock, Essex · Halal · Open daily 10:00–22:30</div>
         <div class="order-buttons">
             <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" class="btn btn-uber" target="_blank">Order on Uber Eats</a>
@@ -222,117 +230,120 @@
     </div>
 
     <!-- MENU SECTIONS -->
-    <div class="menu-section">
-        <h2>1. Crispy Squad</h2>
-        <div class="menu-item"><span class="item-name">Quarter Baked Chicken</span><span class="item-price">£5.49</span></div>
-        <div class="menu-item"><span class="item-name">Half Baked Chicken</span><span class="item-price">£8.49</span></div>
-        <div class="menu-item"><span class="item-name">Whole Baked Chicken</span><span class="item-price">£12.49</span></div>
-        <div class="menu-item"><span class="item-name">Whole Chicken Meal <span class="item-desc">Whole Chicken + Fries + Drink</span></span><span class="item-price">£18.99</span></div>
-        <div class="menu-item"><span class="item-name">Baked Wings (6 Pcs)</span><span class="item-price">£6.99</span></div>
-        <div class="menu-item"><span class="item-name">Fried Wings (6 Pcs)</span><span class="item-price">£6.49</span></div>
-        <div class="menu-item"><span class="item-name">Tenders (6 Pcs)</span><span class="item-price">£7.99</span></div>
-        <p style="font-size:0.85em; color:#555; margin-top:10px;"><em>Make it a meal on any main above (excl. Whole Chicken Meal) — add fries + a can drink for +£1.99.</em></p>
-    </div>
+    <div class="menu-container">
+        <div class="menu-section">
+            <h2>1. Crispy Squad</h2>
+            <div class="menu-item"><span class="item-name">Quarter Baked Chicken</span><span class="item-price">£5.49</span></div>
+            <div class="menu-item"><span class="item-name">Half Baked Chicken</span><span class="item-price">£8.49</span></div>
+            <div class="menu-item"><span class="item-name">Whole Baked Chicken</span><span class="item-price">£12.49</span></div>
+            <div class="menu-item"><span class="item-name">Whole Chicken Meal <span class="item-desc">Whole Chicken + Fries + Drink</span></span><span class="item-price">£18.99</span></div>
+            <div class="menu-item"><span class="item-name">Baked Wings (6 Pcs)</span><span class="item-price">£6.99</span></div>
+            <div class="menu-item"><span class="item-name">Fried Wings (6 Pcs)</span><span class="item-price">£6.49</span></div>
+            <div class="menu-item"><span class="item-name">Tenders (6 Pcs)</span><span class="item-price">£7.99</span></div>
+            <p style="font-size:0.85em; color:#555; margin-top:10px;"><em>Make it a meal on any main above (excl. Whole Chicken Meal) — add fries + a can drink for +£1.99.</em></p>
+        </div>
 
-    <div class="menu-section">
-        <h2>2. Premium Speciality</h2>
-        <div class="menu-item"><span class="item-name">Chicken Doner</span><span class="item-price">£7.99</span></div>
-        <div class="menu-item"><span class="item-name">Lamb Doner</span><span class="item-price">£8.99</span></div>
-        <div class="menu-item"><span class="item-name">Mixed Doner</span><span class="item-price">£9.99</span></div>
-        <div class="menu-item"><span class="item-name">25 Wings</span><span class="item-price">£21.99</span></div>
-        <div class="menu-item"><span class="item-name">25 Tenders</span><span class="item-price">£26.99</span></div>
-        <div class="menu-item"><span class="item-name">Buldak Fire Noodles</span><span class="item-price">£7.49</span></div>
-        <p style="font-size:0.85em; color:#555; margin-top:10px;"><em>Add fried egg +99p | Add 3 chicken tenders +£3.49 | Add a drink +99p</em></p>
-    </div>
+        <div class="menu-section">
+            <h2>2. Premium Speciality</h2>
+            <div class="menu-item"><span class="item-name">Chicken Doner</span><span class="item-price">£7.99</span></div>
+            <div class="menu-item"><span class="item-name">Lamb Doner</span><span class="item-price">£8.99</span></div>
+            <div class="menu-item"><span class="item-name">Mixed Doner</span><span class="item-price">£9.99</span></div>
+            <div class="menu-item"><span class="item-name">25 Wings</span><span class="item-price">£21.99</span></div>
+            <div class="menu-item"><span class="item-name">25 Tenders</span><span class="item-price">£26.99</span></div>
+            <div class="menu-item"><span class="item-name">Buldak Fire Noodles</span><span class="item-price">£7.49</span></div>
+            <p style="font-size:0.85em; color:#555; margin-top:10px;"><em>Add fried egg +99p | Add 3 chicken tenders +£3.49 | Add a drink +99p</em></p>
+        </div>
 
-    <div class="menu-section">
-        <h2>3. Baked Group (Sharer Boxes)</h2>
-        <div class="menu-item"><span class="item-name">Lone Fox <span class="item-desc">1/4 Chicken + 2 Wings + Fries + 330ml Drink</span></span><span class="item-price">£10.99</span></div>
-        <div class="menu-item"><span class="item-name">Fox Pack <span class="item-desc">1/2 Chicken + 4 Wings + 2 Fries + Two 330ml Drinks</span></span><span class="item-price">£18.99</span></div>
-        <div class="menu-item"><span class="item-name">Fox Feast <span class="item-desc">Full Chicken + 8 Wings + 4 Fries + Bottle Drink</span></span><span class="item-price">£28.99</span></div>
-    </div>
+        <div class="menu-section">
+            <h2>3. Baked Group (Sharer Boxes)</h2>
+            <div class="menu-item"><span class="item-name">Lone Fox <span class="item-desc">1/4 Chicken + 2 Wings + Fries + 330ml Drink</span></span><span class="item-price">£10.99</span></div>
+            <div class="menu-item"><span class="item-name">Fox Pack <span class="item-desc">1/2 Chicken + 4 Wings + 2 Fries + Two 330ml Drinks</span></span><span class="item-price">£18.99</span></div>
+            <div class="menu-item"><span class="item-name">Fox Feast <span class="item-desc">Full Chicken + 8 Wings + 4 Fries + Bottle Drink</span></span><span class="item-price">£28.99</span></div>
+        </div>
 
-    <div class="menu-section">
-        <h2>4. Bundles & Combos</h2>
-        <div class="menu-item"><span class="item-name">Wings and Tenders Mix Box <span class="item-desc">6 Wings + 6 Tenders + 2 Fries + 2 Cans</span></span><span class="item-price">£15.99</span></div>
-        <div class="menu-item"><span class="item-name">15 Wings Bundle (Baked) <span class="item-desc">15 Wings + 2 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£18.99</span></div>
-        <div class="menu-item"><span class="item-name">15 Wings Bundle (Fried) <span class="item-desc">15 Wings + 2 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£18.49</span></div>
-        <div class="menu-item"><span class="item-name">15 Tenders Bundle <span class="item-desc">15 Tenders + 2 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£21.49</span></div>
-        <div class="menu-item"><span class="item-name">20 Wing Party Bundle (Baked) <span class="item-desc">20 Wings + 4 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£23.99</span></div>
-        <div class="menu-item"><span class="item-name">20 Wing Party Bundle (Fried) <span class="item-desc">20 Wings + 4 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£22.99</span></div>
-        <div class="menu-item"><span class="item-name">20 Tender Party Bundle <span class="item-desc">20 Tenders + 4 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£27.99</span></div>
-        <p style="font-size:0.85em; color:#555; margin-top:10px;">
-            <strong>Free Side Choices:</strong> Plain Naan, Beans, Coleslaw, Plain Pitta Bread.<br>
-            <strong>+£1.00 Side Upgrade:</strong> Peri Peri Pitta, Garlic Naan, Onion Rings (4pc), Mozzarella Sticks (2pc), Halloumi Fries (2pc).
-        </p>
-    </div>
+        <div class="menu-section">
+            <h2>4. Bundles & Combos</h2>
+            <div class="menu-item"><span class="item-name">Wings and Tenders Mix Box <span class="item-desc">6 Wings + 6 Tenders + 2 Fries + 2 Cans</span></span><span class="item-price">£15.99</span></div>
+            <div class="menu-item"><span class="item-name">15 Wings Bundle (Baked) <span class="item-desc">15 Wings + 2 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£18.99</span></div>
+            <div class="menu-item"><span class="item-name">15 Wings Bundle (Fried) <span class="item-desc">15 Wings + 2 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£18.49</span></div>
+            <div class="menu-item"><span class="item-name">15 Tenders Bundle <span class="item-desc">15 Tenders + 2 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£21.49</span></div>
+            <div class="menu-item"><span class="item-name">20 Wing Party Bundle (Baked) <span class="item-desc">20 Wings + 4 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£23.99</span></div>
+            <div class="menu-item"><span class="item-name">20 Wing Party Bundle (Fried) <span class="item-desc">20 Wings + 4 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£22.99</span></div>
+            <div class="menu-item"><span class="item-name">20 Tender Party Bundle <span class="item-desc">20 Tenders + 4 Fries + Bottle Drink + 1 Side</span></span><span class="item-price">£27.99</span></div>
+            <p style="font-size:0.85em; color:#555; margin-top:10px;">
+                <strong>Free Side Choices:</strong> Plain Naan, Beans, Coleslaw, Plain Pitta Bread.<br>
+                <strong>+£1.00 Side Upgrade:</strong> Peri Peri Pitta, Garlic Naan, Onion Rings (4pc), Mozzarella Sticks (2pc), Halloumi Fries (2pc).
+            </p>
+        </div>
 
-    <div class="menu-section">
-        <h2>5. Fries & Wedges</h2>
-        <div class="menu-item"><span class="item-name">Fries (Small)</span><span class="item-price">£1.50</span></div>
-        <div class="menu-item"><span class="item-name">Fries (Large)</span><span class="item-price">£2.99</span></div>
-        <div class="menu-item"><span class="item-name">Wedges</span><span class="item-price">£3.49</span></div>
-        <div class="menu-item"><span class="item-name">Chicken Loaded Fries</span><span class="item-price">£4.99</span></div>
-        <div class="menu-item"><span class="item-name">Chicken & Cheese Loaded Fries</span><span class="item-price">£5.49</span></div>
-        <div class="menu-item"><span class="item-name">Chicken Loaded Wedges</span><span class="item-price">£5.49</span></div>
-        <div class="menu-item"><span class="item-name">Chicken & Cheese Loaded Wedges</span><span class="item-price">£5.99</span></div>
-        <p style="font-size:0.85em; color:#555; margin-top:10px;"><em>Seasoning options: No Salt, Regular Salt, Chipotle Chilli Salt, Peri Peri, or Cajun Dust.</em></p>
-    </div>
+        <div class="menu-section">
+            <h2>5. Fries & Wedges</h2>
+            <div class="menu-item"><span class="item-name">Fries (Small)</span><span class="item-price">£1.50</span></div>
+            <div class="menu-item"><span class="item-name">Fries (Large)</span><span class="item-price">£2.99</span></div>
+            <div class="menu-item"><span class="item-name">Wedges</span><span class="item-price">£3.49</span></div>
+            <div class="menu-item"><span class="item-name">Chicken Loaded Fries</span><span class="item-price">£4.99</span></div>
+            <div class="menu-item"><span class="item-name">Chicken & Cheese Loaded Fries</span><span class="item-price">£5.49</span></div>
+            <div class="menu-item"><span class="item-name">Chicken Loaded Wedges</span><span class="item-price">£5.49</span></div>
+            <div class="menu-item"><span class="item-name">Chicken & Cheese Loaded Wedges</span><span class="item-price">£5.99</span></div>
+            <p style="font-size:0.85em; color:#555; margin-top:10px;"><em>Seasoning options: No Salt, Regular Salt, Chipotle Chilli Salt, Peri Peri, or Cajun Dust.</em></p>
+        </div>
 
-    <div class="menu-section">
-        <h2>6. Fried Sides</h2>
-        <div class="menu-item"><span class="item-name">Halloumi Fries (6 Pcs)</span><span class="item-price">£4.99</span></div>
-        <div class="menu-item"><span class="item-name">Mozzarella Sticks (6 Pcs)</span><span class="item-price">£4.99</span></div>
-        <div class="menu-item"><span class="item-name">Onion Rings (8 Pcs)</span><span class="item-price">£3.49</span></div>
-        <div class="menu-item"><span class="item-name">Chilli Cheese Nuggets (3 Pcs)</span><span class="item-price">£2.79</span></div>
-        <div class="menu-item"><span class="item-name">Chilli Cheese Nuggets (6 Pcs)</span><span class="item-price">£4.99</span></div>
-        <div class="menu-item"><span class="item-name">Veg Samosas (4 Pcs)</span><span class="item-price">£3.49</span></div>
-        <div class="menu-item"><span class="item-name">Mini Singara (6 Pcs)</span><span class="item-price">£3.49</span></div>
-        <div class="menu-item"><span class="item-name">Vegetable Spring Roll (4 Pcs)</span><span class="item-price">£3.49</span></div>
-    </div>
+        <div class="menu-section">
+            <h2>6. Fried Sides</h2>
+            <div class="menu-item"><span class="item-name">Halloumi Fries (6 Pcs)</span><span class="item-price">£4.99</span></div>
+            <div class="menu-item"><span class="item-name">Mozzarella Sticks (6 Pcs)</span><span class="item-price">£4.99</span></div>
+            <div class="menu-item"><span class="item-name">Onion Rings (8 Pcs)</span><span class="item-price">£3.49</span></div>
+            <div class="menu-item"><span class="item-name">Chilli Cheese Nuggets (3 Pcs)</span><span class="item-price">£2.79</span></div>
+            <div class="menu-item"><span class="item-name">Chilli Cheese Nuggets (6 Pcs)</span><span class="item-price">£4.99</span></div>
+            <div class="menu-item"><span class="item-name">Veg Samosas (4 Pcs)</span><span class="item-price">£3.49</span></div>
+            <div class="menu-item"><span class="item-name">Mini Singara (6 Pcs)</span><span class="item-price">£3.49</span></div>
+            <div class="menu-item"><span class="item-name">Vegetable Spring Roll (4 Pcs)</span><span class="item-price">£3.49</span></div>
+        </div>
 
-    <div class="menu-section">
-        <h2>7. Breads & Extras</h2>
-        <div class="menu-item"><span class="item-name">Plain Naan</span><span class="item-price">£1.00</span></div>
-        <div class="menu-item"><span class="item-name">Garlic Naan</span><span class="item-price">£2.19</span></div>
-        <div class="menu-item"><span class="item-name">Garlic Bread (4 Pcs)</span><span class="item-price">£1.99</span></div>
-        <div class="menu-item"><span class="item-name">Plain Pitta Bread</span><span class="item-price">£0.99</span></div>
-        <div class="menu-item"><span class="item-name">Peri Peri Pitta Bread</span><span class="item-price">£1.29</span></div>
-        <div class="menu-item"><span class="item-name">Beans</span><span class="item-price">£1.99</span></div>
-        <div class="menu-item"><span class="item-name">Coleslaw</span><span class="item-price">£1.99</span></div>
-        <div class="menu-item"><span class="item-name">Dip (Small)</span><span class="item-price">£0.30</span></div>
-        <div class="menu-item"><span class="item-name">Dip (Large)</span><span class="item-price">£0.50</span></div>
-    </div>
+        <div class="menu-section">
+            <h2>7. Breads & Extras</h2>
+            <div class="menu-item"><span class="item-name">Plain Naan</span><span class="item-price">£1.00</span></div>
+            <div class="menu-item"><span class="item-name">Garlic Naan</span><span class="item-price">£2.19</span></div>
+            <div class="menu-item"><span class="item-name">Garlic Bread (4 Pcs)</span><span class="item-price">£1.99</span></div>
+            <div class="menu-item"><span class="item-name">Plain Pitta Bread</span><span class="item-price">£0.99</span></div>
+            <div class="menu-item"><span class="item-name">Peri Peri Pitta Bread</span><span class="item-price">£1.29</span></div>
+            <div class="menu-item"><span class="item-name">Beans</span><span class="item-price">£1.99</span></div>
+            <div class="menu-item"><span class="item-name">Coleslaw</span><span class="item-price">£1.99</span></div>
+            <div class="menu-item"><span class="item-name">Dip (Small)</span><span class="item-price">£0.30</span></div>
+            <div class="menu-item"><span class="item-name">Dip (Large)</span><span class="item-price">£0.50</span></div>
+        </div>
 
-    <div class="menu-section">
-        <h2>8. Kids Menu</h2>
-        <div class="menu-item"><span class="item-name">Kids Chicken Nuggets Meal</span><span class="item-price">£4.99</span></div>
-        <div class="menu-item"><span class="item-name">Kids Chicken Tenders Meal</span><span class="item-price">£4.99</span></div>
-        <div class="menu-item"><span class="item-name">Kids Wings Meal</span><span class="item-price">£4.99</span></div>
-        <div class="menu-item"><span class="item-name">Kids Mozzarella Sticks Meal</span><span class="item-price">£4.99</span></div>
-        <div class="menu-item"><span class="item-name">Kids Halloumi Fries Meal</span><span class="item-price">£4.99</span></div>
-        <div class="menu-item"><span class="item-name">Kids Onion Rings Meal</span><span class="item-price">£4.99</span></div>
-    </div>
+        <div class="menu-section">
+            <h2>8. Kids Menu</h2>
+            <div class="menu-item"><span class="item-name">Kids Chicken Nuggets Meal</span><span class="item-price">£4.99</span></div>
+            <div class="menu-item"><span class="item-name">Kids Chicken Tenders Meal</span><span class="item-price">£4.99</span></div>
+            <div class="menu-item"><span class="item-name">Kids Wings Meal</span><span class="item-price">£4.99</span></div>
+            <div class="menu-item"><span class="item-name">Kids Mozzarella Sticks Meal</span><span class="item-price">£4.99</span></div>
+            <div class="menu-item"><span class="item-name">Kids Halloumi Fries Meal</span><span class="item-price">£4.99</span></div>
+            <div class="menu-item"><span class="item-name">Kids Onion Rings Meal</span><span class="item-price">£4.99</span></div>
+        </div>
 
-    <div class="menu-section">
-        <h2>9. Drinks</h2>
-        <div class="menu-item"><span class="item-name">Water</span><span class="item-price">£1.00</span></div>
-        <div class="menu-item"><span class="item-name">Cans <span class="item-desc">Coke, Diet Coke, Pepsi, Pepsi Max, Tango Orange, Tango Apple, 7up, Dr Pepper</span></span><span class="item-price">£1.29</span></div>
-        <div class="menu-item"><span class="item-name">Fruit Shoot</span><span class="item-price">£1.00</span></div>
-        <div class="menu-item"><span class="item-name">Red Bull</span><span class="item-price">£2.15</span></div>
-        <div class="menu-item"><span class="item-name">Large Bottles <span class="item-desc">Coke, Diet Coke, Pepsi, Pepsi Max, 7up, Tango</span></span><span class="item-price">£2.99</span></div>
+        <div class="menu-section">
+            <h2>9. Drinks</h2>
+            <div class="menu-item"><span class="item-name">Water</span><span class="item-price">£1.00</span></div>
+            <div class="menu-item"><span class="item-name">Cans <span class="item-desc">Coke, Diet Coke, Pepsi, Pepsi Max, Tango Orange, Tango Apple, 7up, Dr Pepper</span></span><span class="item-price">£1.29</span></div>
+            <div class="menu-item"><span class="item-name">Fruit Shoot</span><span class="item-price">£1.00</span></div>
+            <div class="menu-item"><span class="item-name">Red Bull</span><span class="item-price">£2.15</span></div>
+            <div class="menu-item"><span class="item-name">Large Bottles <span class="item-desc">Coke, Diet Coke, Pepsi, Pepsi Max, 7up, Tango</span></span><span class="item-price">£2.99</span></div>
+        </div>
     </div>
 
     <!-- FOOTER -->
     <div class="footer">
+        <div class="logo-bottom">
+            <img src="hungry-fox-logo-dark.png" alt="The Hungry Fox">
+        </div>
         <div class="social-links">
             <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">YouTube</a> | <a href="#">TikTok</a>
         </div>
         <p>Registered food business, Thurrock Council</p>
         <p>© The Hungry Fox</p>
     </div>
-
-</div>
 
 <!-- ALLERGEN MODAL -->
 <div id="allergenModal" class="modal">
