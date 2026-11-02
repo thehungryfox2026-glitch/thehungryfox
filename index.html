@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fried Chicken Delivery In Grays, Thurrock | The Hungry Fox</title>
-  <meta name="description" content="Order fresh fried chicken, chicken doner, loaded fries, buldak noodles, gourmet mochi, and meal bundles from The Hungry Fox in Grays, Essex. Fast delivery on Uber Eats & Deliveroo." />
+  <title>The Hungry Fox | Gourmet Fried Chicken, Sauces & Shakers in Grays, Essex</title>
+  <meta name="description" content="Order fresh hand-tossed chicken, sizzling doner, buldak noodles, gourmet mochi, and loaded fries from The Hungry Fox in Grays, Thurrock, Essex. Fast delivery on Uber Eats & Deliveroo." />
   <link rel="canonical" href="https://thehungryfox.co.uk/" />
 
   <!-- Google tag (gtag.js) -->
@@ -13,23 +13,21 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-J6G3YB0GF4');
   </script>
 
-  <!-- Font preconnect & swap -->
+  <!-- Google Fonts Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Preload high-priority WebP logo -->
   <link rel="preload" as="image" href="https://thehungryfox.co.uk/hungry-fox-logo-cream.webp" fetchpriority="high" type="image/webp" />
 
-  <!-- Production Inlined CSS (Zero Render-Blocking JS/Tailwind CDN) -->
   <style>
-    *, ::before, ::after { box-sizing: border-box; border-width: 0; border-style: solid; border-color: #263352; margin: 0; padding: 0; }
+    *, ::before, ::after { box-sizing: border-box; border-width: 0; border-style: solid; border-color: #1e293b; margin: 0; padding: 0; }
     html { line-height: 1.5; -webkit-text-size-adjust: 100%; font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
-    body { background-color: #0b1326; color: #f1f5f9; -webkit-font-smoothing: antialiased; }
+    body { background-color: #060e20; color: #f1f5f9; -webkit-font-smoothing: antialiased; }
     ::selection { background-color: #f97316; color: #ffffff; }
 
     /* Typography */
@@ -37,7 +35,9 @@
     .font-sans { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
 
     /* Layout & Containers */
+    .max-w-6xl { max-width: 72rem; }
     .max-w-5xl { max-width: 64rem; }
+    .max-w-4xl { max-width: 56rem; }
     .mx-auto { margin-left: auto; margin-right: auto; }
     .flex { display: flex; }
     .inline-flex { display: inline-flex; }
@@ -47,137 +47,142 @@
     .flex-wrap { flex-wrap: wrap; }
     .items-center { align-items: center; }
     .items-start { align-items: flex-start; }
+    .items-stretch { align-items: stretch; }
     .justify-between { justify-content: space-between; }
     .justify-center { justify-content: center; }
+    .justify-end { justify-content: flex-end; }
     .shrink-0 { flex-shrink: 0; }
     .relative { position: relative; }
     .sticky { position: sticky; }
     .top-0 { top: 0; }
+    .z-10 { z-index: 10; }
+    .z-40 { z-index: 40; }
     .z-50 { z-index: 50; }
+    .overflow-hidden { overflow: hidden; }
+    .overflow-x-auto { overflow-x: auto; }
 
-    /* Spacing */
+    /* Spacing & Padding */
+    .p-2 { padding: 0.5rem; }
     .p-3 { padding: 0.75rem; }
     .p-4 { padding: 1rem; }
+    .p-5 { padding: 1.25rem; }
     .p-6 { padding: 1.5rem; }
+    .p-8 { padding: 2rem; }
     .px-2\.5 { padding-left: 0.625rem; padding-right: 0.625rem; }
     .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
     .px-3\.5 { padding-left: 0.875rem; padding-right: 0.875rem; }
     .px-4 { padding-left: 1rem; padding-right: 1rem; }
     .px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
     .py-0\.5 { padding-top: 0.125rem; padding-bottom: 0.125rem; }
     .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
     .py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
     .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    .py-2\.5 { padding-top: 0.625rem; padding-bottom: 0.625rem; }
     .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
     .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
     .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
     .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
     .pt-1 { padding-top: 0.25rem; }
     .pt-2 { padding-top: 0.5rem; }
+    .pt-3 { padding-top: 0.75rem; }
     .pt-4 { padding-top: 1rem; }
     .pt-6 { padding-top: 1.5rem; }
     .pt-8 { padding-top: 2rem; }
     .pb-2 { padding-bottom: 0.5rem; }
     .pb-3 { padding-bottom: 0.75rem; }
+    .pb-4 { padding-bottom: 1rem; }
     .mt-1 { margin-top: 0.25rem; }
+    .mt-1\.5 { margin-top: 0.375rem; }
     .mt-2 { margin-top: 0.5rem; }
     .mt-3 { margin-top: 0.75rem; }
+    .mt-4 { margin-top: 1rem; }
     .mt-6 { margin-top: 1.5rem; }
-    .mt-20 { margin-top: 5rem; }
-    .ml-2 { margin-left: 0.5rem; }
+    .mt-8 { margin-top: 2rem; }
+    .mt-12 { margin-top: 3rem; }
+    .mt-16 { margin-top: 4rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-3 { margin-bottom: 0.75rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
 
-    /* Gap */
+    /* Gaps & Flex/Grid Spacing */
+    .gap-1 { gap: 0.25rem; }
     .gap-1\.5 { gap: 0.375rem; }
     .gap-2 { gap: 0.5rem; }
     .gap-2\.5 { gap: 0.625rem; }
     .gap-3 { gap: 0.75rem; }
     .gap-4 { gap: 1rem; }
+    .gap-5 { gap: 1.25rem; }
     .gap-6 { gap: 1.5rem; }
     .gap-8 { gap: 2rem; }
+    .gap-10 { gap: 2.5rem; }
     .space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem; }
     .space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.5rem; }
-    .space-y-2\.5 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.625rem; }
     .space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.75rem; }
     .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem; }
     .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.5rem; }
+    .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 2rem; }
     .space-y-12 > :not([hidden]) ~ :not([hidden]) { margin-top: 3rem; }
     .space-y-16 > :not([hidden]) ~ :not([hidden]) { margin-top: 4rem; }
 
-    /* Borders & Radii */
+    /* Borders & Corners */
     .border { border-width: 1px; }
     .border-b { border-bottom-width: 1px; }
     .border-t { border-top-width: 1px; }
+    .border-l-4 { border-left-width: 4px; }
+    .border-\[\#1e293b\] { border-color: #1e293b; }
     .border-\[\#263352\] { border-color: #263352; }
-    .border-\[\#263352\]\/60 { border-color: rgba(38, 51, 82, 0.6); }
-    .border-\[\#263352\]\/80 { border-color: rgba(38, 51, 82, 0.8); }
-    .border-emerald-500\/30 { border-color: rgba(16, 185, 129, 0.3); }
+    .border-\[\#334155\] { border-color: #334155; }
     .border-orange-500\/30 { border-color: rgba(249, 115, 22, 0.3); }
     .border-orange-500\/50 { border-color: rgba(249, 115, 22, 0.5); }
+    .border-emerald-500\/30 { border-color: rgba(16, 185, 129, 0.3); }
+    .border-amber-500\/40 { border-color: rgba(245, 158, 11, 0.4); }
     .rounded { border-radius: 0.25rem; }
+    .rounded-md { border-radius: 0.375rem; }
     .rounded-lg { border-radius: 0.5rem; }
     .rounded-xl { border-radius: 0.75rem; }
     .rounded-2xl { border-radius: 1rem; }
+    .rounded-3xl { border-radius: 1.5rem; }
     .rounded-full { border-radius: 9999px; }
 
-    /* Colors */
+    /* Backgrounds */
     .bg-\[\#060e20\] { background-color: #060e20; }
-    .bg-\[\#070e1c\] { background-color: #070e1c; }
     .bg-\[\#0b1326\] { background-color: #0b1326; }
-    .bg-\[\#0b1326\]\/80 { background-color: rgba(11, 19, 38, 0.8); }
-    .bg-\[\#0b1326\]\/95 { background-color: rgba(11, 19, 38, 0.95); }
+    .bg-\[\#0d172e\] { background-color: #0d172e; }
     .bg-\[\#131b2e\] { background-color: #131b2e; }
     .bg-\[\#1a243d\] { background-color: #1a243d; }
-    .bg-\[\#131b2e\]\/30 { background-color: rgba(19, 27, 46, 0.3); }
-    .bg-emerald-500\/10 { background-color: rgba(16, 185, 129, 0.1); }
-    .bg-orange-500\/10 { background-color: rgba(249, 115, 22, 0.1); }
-    .bg-orange-500\/20 { background-color: rgba(249, 115, 22, 0.2); }
-    .bg-amber-500\/20 { background-color: rgba(245, 158, 11, 0.2); }
-    .bg-amber-500 { background-color: #f59e0b; }
+    .bg-\[\#1e293b\] { background-color: #1e293b; }
+    .bg-\[\#0b1326\]\/90 { background-color: rgba(11, 19, 38, 0.9); }
+    .bg-\[\#0b1326\]\/95 { background-color: rgba(11, 19, 38, 0.95); }
+    .bg-\[\#131b2e\]\/60 { background-color: rgba(19, 27, 46, 0.6); }
     .bg-orange-500 { background-color: #f97316; }
-    .bg-\[\#00cdbc\] { background-color: #00cdbc; }
+    .bg-orange-500\/10 { background-color: rgba(249, 115, 22, 0.1); }
+    .bg-orange-500\/15 { background-color: rgba(249, 115, 22, 0.15); }
+    .bg-orange-500\/20 { background-color: rgba(249, 115, 22, 0.2); }
+    .bg-emerald-500\/10 { background-color: rgba(16, 185, 129, 0.1); }
+    .bg-emerald-500\/20 { background-color: rgba(16, 185, 129, 0.2); }
+    .bg-amber-500\/15 { background-color: rgba(245, 158, 11, 0.15); }
+    .bg-amber-500\/20 { background-color: rgba(245, 158, 11, 0.2); }
 
+    /* Colors */
     .text-white { color: #ffffff; }
     .text-slate-100 { color: #f1f5f9; }
+    .text-slate-200 { color: #e2e8f0; }
     .text-slate-300 { color: #cbd5e1; }
     .text-slate-400 { color: #94a3b8; }
     .text-slate-500 { color: #64748b; }
-    .text-slate-950 { color: #020617; }
     .text-orange-400 { color: #fb923c; }
-    .text-emerald-400 { color: #34d49a; }
+    .text-orange-500 { color: #f97316; }
     .text-amber-400 { color: #fbbf24; }
     .text-amber-300 { color: #fde047; }
+    .text-emerald-400 { color: #34d49a; }
+    .text-rose-400 { color: #fb7185; }
     .text-\[\#060e20\] { color: #060e20; }
 
-    /* High-Contrast Accessible Buttons */
-    .btn-uber { background: #f97316; color: #060e20; font-weight: 800; }
-    .btn-uber:hover { background: #ea580c; }
-    .btn-deliveroo { background: #00cdbc; color: #060e20; font-weight: 800; }
-    .btn-deliveroo:hover { background: #00b4a4; }
-
-    /* Focusable Meal Upgrade Pill */
-    .meal-upgrade-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
-      padding: 0.375rem 0.75rem;
-      background-color: rgba(249, 115, 22, 0.15);
-      border: 1px solid rgba(249, 115, 22, 0.4);
-      border-radius: 0.5rem;
-      color: #fb923c;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.025em;
-      margin-top: 0.75rem;
-      transition: all 150ms ease;
-    }
-    .meal-upgrade-pill:hover, .meal-upgrade-pill:focus {
-      background-color: #f97316;
-      color: #060e20;
-      border-color: #f97316;
-      outline: none;
-    }
-
-    /* Font Sizes */
+    /* Typography specifics */
     .text-\[11px\] { font-size: 0.6875rem; line-height: 1rem; }
     .text-xs { font-size: 0.75rem; line-height: 1rem; }
     .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
@@ -186,47 +191,119 @@
     .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
     .text-2xl { font-size: 1.5rem; line-height: 2rem; }
     .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+    .font-normal { font-weight: 400; }
     .font-medium { font-weight: 500; }
     .font-semibold { font-weight: 600; }
     .font-bold { font-weight: 700; }
     .font-extrabold { font-weight: 800; }
+    .font-black { font-weight: 900; }
     .uppercase { text-transform: uppercase; }
+    .tracking-wide { letter-spacing: 0.025em; }
     .tracking-wider { letter-spacing: 0.05em; }
     .tracking-widest { letter-spacing: 0.1em; }
     .text-center { text-align: center; }
     .text-left { text-align: left; }
-    .leading-tight { line-height: 1.25; }
+    .text-right { text-align: right; }
+    .leading-tight { line-height: 1.2; }
+    .leading-snug { line-height: 1.375; }
     .leading-relaxed { line-height: 1.625; }
     .underline { text-decoration-line: underline; }
+    .italic { font-style: italic; }
+    .whitespace-nowrap { whitespace: nowrap; }
 
-    /* Sizing & Utilities */
-    .h-20 { height: 5rem; }
-    .h-24 { height: 6rem; }
-    .w-auto { width: auto; }
-    .w-full { width: 100%; }
-    .max-w-2xl { max-width: 42rem; }
-    .object-contain { object-fit: contain; }
-    .backdrop-blur-md { -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
-    .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4); }
-    .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); }
-    .transition-colors { transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease; }
-    .transition-all { transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1); }
-    a { color: inherit; text-decoration: none; cursor: pointer; }
-    button { cursor: pointer; background: transparent; border: none; font-family: inherit; }
+    /* Interactive Buttons */
+    .btn-uber {
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      color: #060e20;
+      font-weight: 800;
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+      text-decoration: none;
+    }
+    .btn-uber:hover {
+      background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+    }
+    .btn-deliveroo {
+      background: linear-gradient(135deg, #00cdbc 0%, #00a496 100%);
+      color: #060e20;
+      font-weight: 800;
+      border: 1px solid rgba(0, 205, 188, 0.4);
+      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 14px rgba(0, 205, 188, 0.35);
+      text-decoration: none;
+    }
+    .btn-deliveroo:hover {
+      background: linear-gradient(135deg, #26decb 0%, #00a496 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 205, 188, 0.5);
+    }
 
-    /* Logo Image Aspect Ratios to eliminate CLS */
-    .logo-header { width: 200px; height: 80px; aspect-ratio: 200 / 80; }
-    .logo-footer { width: 120px; height: 48px; aspect-ratio: 120 / 48; }
+    /* Category Nav Pills Bar */
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      background-color: #131b2e;
+      border: 1px solid #263352;
+      color: #cbd5e1;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: all 180ms ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-pill:hover, .nav-pill.active {
+      background-color: #f97316;
+      color: #060e20;
+      border-color: #f97316;
+      box-shadow: 0 2px 10px rgba(249, 115, 22, 0.3);
+    }
 
-    /* Responsive Google Maps Embed Container */
+    /* Product Cards */
+    .product-card {
+      background: linear-gradient(180deg, #131b2e 0%, #0b1326 100%);
+      border: 1px solid #263352;
+      border-radius: 1rem;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+    }
+    .product-card:hover {
+      border-color: rgba(249, 115, 22, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Customisation Accordion / Details */
+    details.custom-accordion summary {
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+    }
+    details.custom-accordion summary::-webkit-details-marker {
+      display: none;
+    }
+    details.custom-accordion[open] summary .arrow-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Map container */
     .map-container {
       position: relative;
       width: 100%;
-      height: 150px;
+      height: 180px;
       border-radius: 0.75rem;
       overflow: hidden;
       border: 1px solid #263352;
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
     }
     .map-container iframe {
       position: absolute;
@@ -237,173 +314,219 @@
       border: 0;
     }
 
-    /* Tables */
-    .overflow-x-auto { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 0.75rem; text-align: left; }
-    .divide-y > tr + tr { border-top: 1px solid rgba(38, 51, 82, 0.4); }
+    /* Flavor Tag Pills */
+    .flavor-tag {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.375rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      background: rgba(249, 115, 22, 0.12);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      color: #fb923c;
+    }
 
-    /* Responsive Grids */
+    /* Status Bar */
+    .sync-status-bar {
+      background-color: #0b1326;
+      border: 1px solid #263352;
+      border-radius: 0.75rem;
+      padding: 0.625rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    /* Responsive Media Queries */
     @media (min-width: 640px) {
       .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .sm\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
       .sm\:flex-row { flex-direction: row; }
       .sm\:p-8 { padding: 2rem; }
       .sm\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
-      .sm\:px-4 { padding-left: 1rem; padding-right: 1rem; }
-      .sm\:py-2\.5 { padding-top: 0.625rem; padding-bottom: 0.625rem; }
-      .sm\:text-sm { font-size: 0.875rem; }
+      .sm\:text-5xl { font-size: 3rem; line-height: 1.15; }
     }
     @media (min-width: 768px) {
       .md\:flex-row { flex-direction: row; }
+      .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
       .md\:text-left { text-align: left; }
-      .md\:text-5xl { font-size: 3rem; line-height: 1.15; }
     }
     @media (min-width: 1024px) {
-      .lg\:flex { display: flex; }
+      .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     }
   </style>
 </head>
-<body>
 
-  <!-- Top Notice Bar -->
-  <div class="bg-[#060e20] border-b border-[#263352]/80 text-xs py-2 px-4">
-    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3 text-slate-300">
-      <div class="flex items-center gap-4 flex-wrap">
-        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold">
-          5-Star Food Hygiene Rating
+<body>
+  <!-- Top Utility Bar: Trust, Certifications & Hours -->
+  <aside class="bg-[#040915] border-b border-[#1e293b] text-xs py-2 px-4 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 text-slate-300">
+      <div class="flex items-center gap-3 sm:gap-5 flex-wrap">
+        <a href="https://ratings.food.gov.uk/business/1981131/the-hungry-fox" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold hover:underline">
+          <span>⭐️⭐️⭐️⭐️⭐️</span>
+          <span>5-Star Food Hygiene</span>
+        </a>
+        <span class="inline-flex items-center gap-1 text-emerald-400 font-semibold">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          100% Halal Certified Kitchen
         </span>
-        <span class="text-emerald-400 font-medium">&#10003; 100% Halal Certified</span>
-        <span class="font-medium">Open Daily 11:00 – 23:30</span>
+        <span class="text-slate-400 hidden sm:inline">•</span>
+        <span class="font-medium text-slate-200">Open Daily 11:00 – 23:30</span>
       </div>
-      <div>
-        <span class="font-medium text-slate-300">Thurrock, Essex</span>
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <span class="text-orange-400">Grays, Thurrock, Essex</span>
+        <a href="#allergens" class="text-slate-400 hover:text-white transition-colors underline">Allergen Matrix</a>
       </div>
     </div>
-  </div>
+  </aside>
 
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-[#0b1326]/95 backdrop-blur-md border-b border-[#263352]">
-    <div class="max-w-5xl mx-auto px-4 h-24 flex items-center justify-between gap-4">
-      <a href="#" class="flex items-center gap-3 py-2 shrink-0" aria-label="The Hungry Fox Home">
+  <!-- Main Header with Brand Logo & High-Visibility Action Buttons -->
+  <header class="bg-[#0b1326]/95 backdrop-blur-md border-b border-[#263352]">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 shrink-0" aria-label="The Hungry Fox Home">
         <img src="https://thehungryfox.co.uk/hungry-fox-logo-cream.webp" 
              alt="The Hungry Fox Logo" 
-             width="200" 
-             height="80" 
+             width="190" 
+             height="76" 
              fetchpriority="high" 
-             class="h-20 w-auto object-contain logo-header" />
+             class="h-16 sm:h-20 w-auto object-contain" />
       </a>
 
-      <!-- Category Navigation Pills -->
-      <nav class="hidden lg:flex items-center gap-2 text-xs font-semibold text-slate-300 flex-wrap justify-center py-1" aria-label="Menu categories">
-        <a href="#solo-chicken" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Solo Chicken</a>
-        <a href="#featured" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Featured</a>
-        <a href="#doners" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Doners &amp; Noodles</a>
-        <a href="#rice" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Rice</a>
-        <a href="#bundles" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Share Bundles</a>
-        <a href="#platters" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Platters</a>
-        <a href="#kids-menu" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Kids Menu</a>
-        <a href="#fries" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Fries &amp; Wedges</a>
-        <a href="#sides" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Sides</a>
-        <a href="#breads" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Breads</a>
-        <a href="#desserts" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Desserts</a>
-        <a href="#drinks" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 hover:bg-[#1a243d] transition-all shrink-0">Drinks</a>
-      </nav>
-
-      <!-- Order Buttons -->
+      <!-- Quick Action Ordering Badges -->
       <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-        <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener noreferrer" aria-label="Order on Uber Eats"
-           class="inline-flex items-center gap-1.5 btn-uber px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl shadow-lg text-xs sm:text-sm transition-all">
+        <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" 
+           target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 btn-uber px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-extrabold">
           <span>Uber Eats</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
         </a>
-        <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener noreferrer" aria-label="Order on Deliveroo"
-           class="inline-flex items-center gap-1.5 btn-deliveroo px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl shadow-lg text-xs sm:text-sm transition-all">
+        <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" 
+           target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 btn-deliveroo px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-extrabold">
           <span>Deliveroo</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
         </a>
       </div>
     </div>
+
+    <!-- Sticky Category Navigation Bar -->
+    <nav class="border-t border-[#1e293b] bg-[#070e1c] px-4 py-2.5 overflow-x-auto" aria-label="Menu categories">
+      <div id="category-nav-bar" class="max-w-6xl mx-auto flex items-center gap-2 flex-nowrap">
+        <a href="#menu-container" class="nav-pill active">All Categories</a>
+        <span class="text-xs text-slate-500 py-1">Loading menu categories...</span>
+      </div>
+    </nav>
   </header>
 
-  <main class="max-w-5xl mx-auto px-4 py-12 space-y-16">
+  <main class="max-w-6xl mx-auto px-4 py-8 sm:py-12 space-y-12">
+    <!-- Hero Showcase Section (Elevated Wingstop-style brand feel) -->
+    <section class="relative rounded-3xl bg-gradient-to-br from-[#131b2e] via-[#0b1326] to-[#070e1c] border border-[#263352] p-6 sm:p-12 overflow-hidden shadow-2xl">
+      <div style="position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(249,115,22,0.15) 0%, rgba(0,0,0,0) 70%); pointer-events: none;"></div>
 
-    <!-- Hero Section -->
-    <section class="text-center space-y-6 py-6 border-b border-[#263352]">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-semibold uppercase tracking-wider">
-        Fresh &amp; Sizzling in Thurrock
-      </div>
-      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
-        The Hungry Fox - Fried Chicken Delivery In Grays, Thurrock, Essex
-      </h1>
-      <p class="text-slate-300 text-base max-w-2xl mx-auto leading-relaxed">
-        Freshly prepared late-night chicken feast boxes, sizzled doner kebabs, spicy buldak noodles, gourmet mochi desserts, and loaded peri-peri sides in Thurrock, Essex.
-      </p>
-
-      <!-- Order Banner -->
-      <div class="mt-6 p-6 rounded-2xl bg-[#131b2e] border border-[#263352] shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-        <div class="space-y-1">
-          <span class="text-xs uppercase font-bold tracking-widest text-emerald-400 block">Fast Delivery Across Thurrock</span>
-          <h2 class="font-serif text-xl sm:text-2xl font-bold text-white">Order Delivery Direct to Your Door</h2>
-          <p class="text-xs sm:text-sm text-slate-300">Fresh, steaming hot, and packaged with care. Order online for swift doorstep arrival.</p>
+      <div class="relative z-10 max-w-3xl space-y-4 text-left">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/40 text-orange-400 text-xs font-extrabold uppercase tracking-wider">
+          🔥 Fresh Fried Chicken & Gourmet Shakers • Thurrock, Essex
         </div>
-        <div class="flex flex-wrap items-center justify-center gap-3 shrink-0">
-          <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener noreferrer"
-             class="px-5 py-3 rounded-xl btn-uber text-sm shadow-lg transition-all inline-flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-            <span>Uber Eats</span>
-          </a>
-          <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener noreferrer"
-             class="px-5 py-3 rounded-xl btn-deliveroo text-sm shadow-lg transition-all inline-flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg>
-            <span>Deliveroo</span>
-          </a>
-        </div>
-      </div>
+        <h1 class="font-serif text-3xl sm:text-5xl font-black text-white leading-tight">
+          Hand-Tossed Sizzling Chicken, Sauces & Flavours.
+        </h1>
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+          From flame-baked chicken to MFC breaded crispy wings, spit-carved doner, spicy Korean buldak noodles, and artisan gelato mochi desserts. Made fresh to order in Grays.
+        </p>
 
-      <div class="flex justify-center gap-4 pt-2 flex-wrap">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-semibold">&#10003; 5-Star Hygiene</span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/30 text-xs font-semibold">Thurrock, Essex</span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-semibold">&#10003; 100% Halal</span>
+        <!-- 14 Flavor showcase badge strip -->
+        <div class="pt-2">
+          <span class="text-xs uppercase tracking-wider font-bold text-slate-400 block mb-2">Signature Sauces & Flavour Dusts:</span>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="flavor-tag">Lemon & Herb</span>
+            <span class="flavor-tag">Mild Peri</span>
+            <span class="flavor-tag">Medium Peri</span>
+            <span class="flavor-tag">Hot Peri 🔥</span>
+            <span class="flavor-tag">Extra Hot Peri 🔥🔥</span>
+            <span class="flavor-tag">Naga Fire</span>
+            <span class="flavor-tag">Mango & Lime</span>
+            <span class="flavor-tag">Smokey BBQ</span>
+            <span class="flavor-tag">Garlic & Herb</span>
+            <span class="flavor-tag">Korean Buldak</span>
+            <span class="flavor-tag">Cajun Dust</span>
+            <span class="flavor-tag">Chipotle Salt</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Order Rules Banner -->
+        <div id="order-rules-banner" class="mt-6 p-4 rounded-xl bg-[#060e20] border border-[#263352] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            </div>
+            <div>
+              <p id="min-order-text" class="text-xs sm:text-sm font-bold text-white">Loading minimum order & delivery threshold...</p>
+              <p class="text-xs text-slate-400">Order direct on Uber Eats or Deliveroo for live delivery tracking.</p>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener noreferrer" class="btn-uber px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap">Order Uber Eats</a>
+            <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener noreferrer" class="btn-deliveroo px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap">Order Deliveroo</a>
+          </div>
+        </div>
       </div>
     </section>
 
-<!-- Spreadsheet-driven menu -->
-<div id="spreadsheet-menu" class="space-y-12">
-  <p class="text-center text-slate-300 py-10">Loading our menu...</p>
-</div>
+    <!-- Real-time CSV Sync Notification Bar -->
+    <div class="sync-status-bar">
+      <div class="flex items-center gap-2.5">
+        <span id="syncDot" style="width: 9px; height: 9px; border-radius: 50%; background-color: #f59e0b; display: inline-block;"></span>
+        <span id="syncStatusMsg" class="font-semibold text-slate-200">Connecting to spreadsheet feeds (products.csv, customisation.csv, product_groups.csv, order_rules.csv)...</span>
+      </div>
+      <button onclick="loadHungryFoxMenu()" class="px-3 py-1 rounded bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white text-xs font-semibold">
+        Reload Feeds
+      </button>
+    </div>
 
-    <!-- Statutory Allergen Notice & Full Matrix -->
+    <!-- Spreadsheet-Driven Dynamic Menu Container -->
+    <div id="menu-container" class="space-y-12">
+      <!-- Loading skeleton -->
+      <div class="p-12 text-center bg-[#131b2e] border border-[#263352] rounded-2xl space-y-3">
+        <div class="inline-block animate-spin text-orange-400 text-3xl">⏳</div>
+        <p class="text-base font-semibold text-white">Loading The Hungry Fox Master Menu...</p>
+        <p class="text-xs text-slate-400">Fetching live pricing, descriptions, and customisation groups from repository CSV files.</p>
+      </div>
+    </div>
+
+    <!-- Statutory UK Allergen Information Section -->
     <section class="bg-[#131b2e] border border-[#263352] p-6 sm:p-8 rounded-2xl space-y-4 shadow-xl" id="allergens">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
         </div>
         <div>
-          <span class="text-xs uppercase font-bold tracking-widest text-amber-400 block">Statutory Safety Notice</span>
-          <h2 class="font-bold text-white text-lg">Allergen Information &amp; Matrix</h2>
+          <span class="text-xs uppercase font-bold tracking-widest text-amber-400 block">Statutory UK Safety Notice</span>
+          <h2 class="font-bold text-white text-lg">Allergen Information & Statutory 14 Allergens Matrix</h2>
           <p class="text-xs text-slate-300">Our food is prepared in a kitchen where allergens are present. We adhere to the 14 UK statutory food allergens framework.</p>
         </div>
       </div>
 
-      <button onclick="toggleMatrix()" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-sm font-extrabold transition-all shadow-lg" aria-expanded="false" aria-controls="matrixContainer">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+      <button onclick="toggleMatrix()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs sm:text-sm font-extrabold transition-all shadow-md">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
         <span id="matrixBtnText">View Allergen Matrix</span>
       </button>
 
       <!-- Expandable Allergen Table -->
       <div id="matrixContainer" class="hidden pt-6 border-t border-[#263352] space-y-4">
-        <div class="flex justify-between items-center flex-wrap gap-2">
-          <p class="text-xs text-slate-300 font-medium">This matrix is a guide only. Please speak to a member of staff for specific allergen advice across the 14 statutory allergens.</p>
-          <span class="text-xs text-amber-400 font-bold">&#10003; = Contains Directly | 1 = May Contain | &#10005; = Free From</span>
+        <div class="flex justify-between items-center flex-wrap gap-2 text-xs">
+          <p class="text-slate-300 font-medium">This matrix is a guide only. Please speak to staff for specific allergen advice across the 14 statutory allergens.</p>
+          <span class="text-amber-400 font-bold">✓ = Contains Directly | 1 = May Contain (Cross-contamination risk) | ✕ = Free From</span>
         </div>
-
         <div class="overflow-x-auto rounded-xl border border-[#263352] bg-[#0b1326]">
-          <table>
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.75rem;">
             <thead>
               <tr style="background-color: #131b2e; color: #ffffff; border-bottom: 1px solid #263352;">
                 <th style="padding: 0.75rem;">Menu Item</th>
@@ -418,99 +541,99 @@
                 <th style="padding: 0.75rem; text-align: center;">Sulphites</th>
               </tr>
             </thead>
-            <tbody class="divide-y">
-              <tr><td>Raw Wings / Chicken</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td></tr>
-              <tr style="background-color: rgba(19, 27, 46, 0.3);"><td>Fried Wings (MFC Breading)</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td></tr>
-              <tr><td>Baked Wings (Plain)</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td></tr>
-              <tr style="background-color: rgba(19, 27, 46, 0.3);"><td>Chicken Nuggets / Tenders</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td></tr>
-              <tr><td>Buldak Fire Noodles</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td></tr>
-              <tr style="background-color: rgba(19, 27, 46, 0.3);"><td>Fries &amp; Wedges</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td></tr>
-              <tr><td>Onion Rings / Spring Rolls</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td></tr>
-              <tr style="background-color: rgba(19, 27, 46, 0.3);"><td>Vegetable Bao Buns</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td></tr>
-              <tr><td>Mozzarella Sticks / Halloumi</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td></tr>
-              <tr style="background-color: rgba(19, 27, 46, 0.3);"><td>Mochi Gelato Selection</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td><td style="text-align: center; color: #fb923c; font-weight: bold;">&#10003;</td><td style="text-align: center; color: #94a3b8;">&#10005;</td></tr>
+            <tbody style="color: #cbd5e1;">
+              <tr style="border-bottom: 1px solid rgba(38, 51, 82, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Raw Wings / Chicken</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="background-color: rgba(19, 27, 46, 0.3); border-bottom: 1px solid rgba(38, 51, 82, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Fried Wings (MFC Breading)</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="border-bottom: 1px solid rgba(38, 51, 82, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Baked Wings (Plain)</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="background-color: rgba(19, 27, 46, 0.3); border-bottom: 1px solid rgba(38, 51, 82, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Chicken Nuggets / Tenders</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="border-bottom: 1px solid rgba(38, 51, 82, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Buldak Fire Noodles</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="background-color: rgba(19, 27, 46, 0.3); border-bottom: 1px solid rgba(38, 51, 82, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Fries & Wedges</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="border-bottom: 1px solid rgba(38, 51, 82, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Onion Rings / Spring Rolls</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="background-color: rgba(19, 27, 46, 0.3); border-bottom: 1px solid rgba(38, 51, 82, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Vegetable Bao Buns</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="border-bottom: 1px solid rgba(38, 51, 82, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Mozzarella Sticks / Halloumi</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="background-color: rgba(19, 27, 46, 0.3);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Mochi Gelato Selection</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- Global Footer -->
-  <footer class="border-t border-[#263352] bg-[#070e1c] text-slate-300 text-sm mt-20" id="footer">
-    <div class="max-w-5xl mx-auto px-4 py-16 space-y-12">
-      
+  <!-- Complete Store & Regulatory Footer -->
+  <footer class="border-t border-[#263352] bg-[#040915] text-slate-300 text-sm mt-16" id="footer">
+    <div class="max-w-6xl mx-auto px-4 py-16 space-y-12">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-left">
-        <!-- Brand Info -->
+        <!-- Col 1: Brand & Socials -->
         <div class="space-y-3">
           <div class="flex items-center gap-3">
             <img src="https://thehungryfox.co.uk/hungry-fox-logo-cream.webp" 
                  alt="The Hungry Fox Logo" 
-                 width="120" 
-                 height="48" 
+                 width="130" 
+                 height="52" 
                  loading="lazy" 
-                 class="h-12 w-auto object-contain logo-footer" />
+                 class="h-12 w-auto object-contain" />
             <span class="font-serif text-lg font-bold text-white">The Hungry Fox</span>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed">Late-night chicken feast boxes, sizzled doner kebabs, spicy buldak noodles, and loaded peri-peri sides in Thurrock, Essex.</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Freshly prepared late-night chicken feast boxes, sizzled doner kebabs, spicy buldak fire noodles, and loaded peri-peri sides in Thurrock, Essex.
+          </p>
           <div class="flex gap-3 text-xs pt-1">
-            <a href="https://www.instagram.com/thehungryfox2026/" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 font-semibold underline">Instagram</a>
-            <a href="https://www.facebook.com/profile.php?id=61594740146032" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 font-semibold underline">Facebook</a>
-            <a href="https://www.youtube.com/channel/UC6uMbrnxCjwqm_Ua9-SHubA" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 font-semibold underline">YouTube</a>
-            <a href="https://www.tiktok.com/@thehungryfox2026" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 font-semibold underline">TikTok</a>
+            <a href="https://www.instagram.com/thehungryfox2026/" target="_blank" rel="noopener noreferrer" class="text-orange-400 hover:text-white font-semibold underline">Instagram</a>
+            <a href="https://www.facebook.com/profile.php?id=61594740146032" target="_blank" rel="noopener noreferrer" class="text-orange-400 hover:text-white font-semibold underline">Facebook</a>
+            <a href="https://www.youtube.com/channel/UC6uMbrnxCjwqm_Ua9-SHubA" target="_blank" rel="noopener noreferrer" class="text-orange-400 hover:text-white font-semibold underline">YouTube</a>
+            <a href="https://www.tiktok.com/@thehungryfox2026" target="_blank" rel="noopener noreferrer" class="text-orange-400 hover:text-white font-semibold underline">TikTok</a>
           </div>
         </div>
 
-        <!-- Kitchen Hours -->
+        <!-- Col 2: Hours -->
         <div class="space-y-2">
-          <h3 class="text-xs font-bold uppercase tracking-wider text-white">Kitchen Opening Hours</h3>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-white">Kitchen Hours</h3>
           <div class="text-xs text-slate-300 space-y-1">
-            <div class="flex justify-between"><span>Monday – Sunday:</span><span class="text-white font-medium">11:00 – 23:30</span></div>
+            <div class="flex justify-between py-1 border-b border-[#1e293b]">
+              <span>Monday – Sunday:</span>
+              <span class="text-white font-semibold">11:00 – 23:30</span>
+            </div>
             <p class="text-[11px] text-amber-400 pt-1 font-semibold">Open 7 days a week: 11:00 AM – 11:30 PM</p>
+            <p class="text-[11px] text-slate-400">Late night takeaway & delivery across Grays and surrounding Thurrock areas.</p>
           </div>
         </div>
 
-        <!-- Store Location & Google Map Embed -->
+        <!-- Col 3: Location & Map -->
         <div class="space-y-2">
           <h3 class="text-xs font-bold uppercase tracking-wider text-white">Store Location</h3>
-          <p class="text-xs text-slate-300">
+          <p class="text-xs text-slate-300 leading-snug">
             <strong>The Hungry Fox</strong><br>
             Clarence Road, Grays, RM17 6QJ, Essex<br>
-            Delivering piping hot takeaway across Thurrock and adjacent boroughs.
+            Delivering piping hot takeaway across Thurrock.
           </p>
-          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-            &#10003; 5-Star Food Hygiene Certified
-          </span>
-          <!-- Responsive Google Map Embed -->
           <div class="map-container">
             <iframe 
-              src="https://maps.google.com/maps?q=The+Hungry+Fox+Clarence+Rd+Grays+RM17+6QJ&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+              src="https://maps.google.com/maps?q=The+Hungry+Fox+Clarence+Rd+Grays+RM17+6QJ&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed" 
               loading="lazy" 
               title="The Hungry Fox Grays Location Map" 
               allowfullscreen>
             </iframe>
           </div>
-          <a href="https://www.google.com/maps/place/The+Hungry+Fox,+Clarence+Rd,+Grays+RM17+6QJ/@51.4777133,0.3259092,17z/" 
-             target="_blank" 
-             rel="noopener noreferrer" 
-             class="inline-flex items-center gap-1 text-xs text-orange-400 hover:text-orange-300 font-semibold pt-1">
-            <span>Get Directions</span>
-          </a>
         </div>
 
-        <!-- Safety & Compliance -->
+        <!-- Col 4: Safety & Quick Links -->
         <div class="space-y-2">
-          <h3 class="text-xs font-bold uppercase tracking-wider text-white">Safety &amp; Compliance</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">We adhere strictly to UK Statutory Allergen Matrix compliance across 14 statutory food allergens. Halal certified kitchen.</p>
-          <div class="flex gap-2 pt-1">
-            <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-[#0b1326] border border-[#263352] text-xs text-amber-400 hover:border-amber-500/50">Uber Eats</a>
-            <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-[#0b1326] border border-[#263352] text-xs text-[#00cdbc] hover:border-[#00cdbc]/50">Deliveroo</a>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-white">Safety & Compliance</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            100% Halal certified kitchen. Registered food business with Thurrock Council holding a 5-Star Food Hygiene Rating.
+          </p>
+          <div class="pt-2 flex flex-col gap-2">
+            <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener noreferrer" class="btn-uber p-2 rounded text-center text-xs">
+              Order with Uber Eats
+            </a>
+            <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener noreferrer" class="btn-deliveroo p-2 rounded text-center text-xs">
+              Order with Deliveroo
+            </a>
           </div>
         </div>
       </div>
 
-      <div class="pt-8 border-t border-[#263352]/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+      <div class="pt-8 border-t border-[#1e293b] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
         <p>© 2026 The Hungry Fox Ltd. All rights reserved.</p>
         <div class="flex gap-6">
           <a href="#" class="hover:text-slate-200">Privacy Policy</a>
@@ -518,245 +641,260 @@
           <a href="#allergens" class="hover:text-slate-200">Allergen Safety</a>
         </div>
       </div>
-
     </div>
   </footer>
 
+  <!-- Master JavaScript: RFC-4180 CSV Engine, Dynamic Customisation & Ordering -->
   <script>
+    // Allergen Matrix Toggle
     function toggleMatrix() {
       var container = document.getElementById('matrixContainer');
       var btnText = document.getElementById('matrixBtnText');
       if (container.classList.contains('hidden')) {
         container.classList.remove('hidden');
         btnText.textContent = 'Hide Allergen Matrix';
-            } else {
+      } else {
         container.classList.add('hidden');
         btnText.textContent = 'View Allergen Matrix';
       }
     }
 
+    // Dynamic CSV Menu Loader
     async function loadHungryFoxMenu() {
-  const root = document.getElementById("spreadsheet-menu");
-  const nav = document.querySelector('nav[aria-label="Menu categories"]');
+      const root = document.getElementById("menu-container");
+      const navBar = document.getElementById("category-nav-bar");
+      const syncDot = document.getElementById("syncDot");
+      const syncMsg = document.getElementById("syncStatusMsg");
+      const minOrderBanner = document.getElementById("min-order-text");
 
-  function csv(text) {
-    const rows = [];
-    let row = [], value = "", quoted = false;
-    text = text.replace(/^\uFEFF/, "");
-
-    for (let i = 0; i < text.length; i++) {
-      const c = text[i];
-
-      if (c === '"') {
-        if (quoted && text[i + 1] === '"') {
-          value += '"';
-          i++;
-        } else {
-          quoted = !quoted;
+      // Robust RFC-4180 Parser handling quotes, commas, multiline fields and BOM
+      function parseRFC4180(text) {
+        const rows = [];
+        let row = [], value = "", inQuotes = false;
+        text = text.replace(/^\uFEFF/, ""); // Strip UTF-8 BOM
+        for (let i = 0; i < text.length; i++) {
+          const c = text[i];
+          if (c === '"') {
+            if (inQuotes && text[i + 1] === '"') {
+              value += '"';
+              i++;
+            } else {
+              inQuotes = !inQuotes;
+            }
+          } else if (c === "," && !inQuotes) {
+            row.push(value);
+            value = "";
+          } else if ((c === "\n" || c === "\r") && !inQuotes) {
+            if (c === "\r" && text[i + 1] === "\n") i++;
+            row.push(value);
+            if (row.some(cell => cell.trim().length > 0)) rows.push(row);
+            row = [];
+            value = "";
+          } else {
+            value += c;
+          }
         }
-      } else if (c === "," && !quoted) {
         row.push(value);
-        value = "";
-      } else if ((c === "\n" || c === "\r") && !quoted) {
-        if (c === "\r" && text[i + 1] === "\n") i++;
-        row.push(value);
-        if (row.some(x => x.trim())) rows.push(row);
-        row = [];
-        value = "";
-      } else {
-        value += c;
+        if (row.some(cell => cell.trim().length > 0)) rows.push(row);
+        if (rows.length < 2) return [];
+        const headers = rows.shift().map(h => h.trim());
+        return rows.map(cells =>
+          Object.fromEntries(headers.map((h, idx) => [h, (cells[idx] || "").trim()]))
+        );
+      }
+
+      // Safe HTML escaping
+      const esc = (v) => String(v ?? "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[c]));
+
+      // Boolean evaluation
+      const isYes = (v) => String(v).trim().toLowerCase() === "true" || String(v).trim() === "1";
+
+      // Currency formatting
+      const formatCurrency = (v) => {
+        const num = parseFloat(String(v).replace(/[^0-9.]/g, ""));
+        return isNaN(num) ? "£0.00" : Number(num).toLocaleString("en-GB", { style: "currency", currency: "GBP" });
+      };
+
+      // Fetch helper supporting root repository files or raw GitHub fallback
+      async function fetchCSV(fileName) {
+        const paths = [
+          fileName + "?v=" + Date.now(),
+          "https://raw.githubusercontent.com/thehungryfox2026-glitch/thehungryfox/main/" + fileName + "?v=" + Date.now()
+        ];
+        for (const p of paths) {
+          try {
+            const res = await fetch(p, { cache: "no-store" });
+            if (res.ok) {
+              const text = await res.text();
+              const parsed = parseRFC4180(text);
+              if (parsed && parsed.length > 0) return parsed;
+            }
+          } catch (e) {
+            // continue fallback
+          }
+        }
+        throw new Error(fileName + " could not be retrieved");
+      }
+
+      try {
+        if (syncDot) syncDot.style.backgroundColor = "#f59e0b";
+        if (syncMsg) syncMsg.textContent = "Fetching live menu and customisation rules from CSV...";
+
+        const [products, customisations, groups, rules] = await Promise.all([
+          fetchCSV("products.csv"),
+          fetchCSV("customisation.csv"),
+          fetchCSV("product_groups.csv"),
+          fetchCSV("order_rules.csv")
+        ]);
+
+        // Filter available products
+        const available = products.filter(p => isYes(p.Availability) || p.Availability === undefined);
+        const categories = [...new Set(available.map(p => p.Category).filter(Boolean))];
+
+        // Update Nav Bar Pills
+        if (navBar && categories.length > 0) {
+          navBar.innerHTML = categories.map((cat, idx) => {
+            const anchor = "cat-" + idx;
+            return `<a href="#${anchor}" class="nav-pill">${esc(cat)}</a>`;
+          }).join("");
+        }
+
+        // Render Customisation Options for each product
+        function buildCustomOptions(product) {
+          const linkedGroups = groups.filter(g => g.Product_ID === product.Product_ID);
+          if (!linkedGroups.length) return "";
+
+          const groupContent = linkedGroups.map(group => {
+            const groupName = group.Customization_Group || group.Customisation_Group;
+            const options = customisations.filter(o =>
+              (o.Customisation_Group === groupName || o.Customization_Group === groupName) &&
+              (!o.Product_ID || o.Product_ID === product.Product_ID) &&
+              (isYes(o.Active) || o.Active === undefined)
+            ).sort((a, b) => Number(a.Display_Order || 0) - Number(b.Display_Order || 0));
+
+            if (!options.length) return "";
+
+            return `
+              <div class="p-2.5 rounded-lg bg-[#060e20] border border-[#263352]/70 mb-2">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-bold text-slate-200 text-xs">${esc(groupName.replace(/_/g, " "))}</span>
+                  <span class="text-[10px] text-amber-400 font-semibold">Choose ${esc(group.Min_Selec || group.Min_Selections || 1)}–${esc(group.Max_Selec || group.Max_Selections || 1)}</span>
+                </div>
+                <div class="space-y-1 mt-1">
+                  ${options.map(o => `
+                    <div class="flex justify-between items-center text-xs text-slate-300 py-0.5">
+                      <span>• ${esc(o.Option_Name)}</span>
+                      ${Number(o.Extra_Price) > 0 ? `<span class="text-orange-400 font-bold">+${formatCurrency(o.Extra_Price)}</span>` : `<span class="text-slate-500 text-[10px]">Included</span>`}
+                    </div>
+                  `).join("")}
+                </div>
+              </div>
+            `;
+          }).filter(Boolean).join("");
+
+          if (!groupContent) return "";
+
+          return `
+            <details class="custom-accordion mt-3 pt-3 border-t border-[#263352]">
+              <summary class="flex items-center justify-between text-xs font-bold text-orange-400 hover:text-orange-300">
+                <span>View Flavours & Customisation Options</span>
+                <span class="arrow-icon transition-transform text-sm">▾</span>
+              </summary>
+              <div class="pt-2.5 space-y-2">
+                ${groupContent}
+              </div>
+            </details>
+          `;
+        }
+
+        // Render Menu Sections
+        root.innerHTML = categories.map((cat, idx) => {
+          const anchor = "cat-" + idx;
+          const itemsInCat = available.filter(p => p.Category === cat);
+
+          return `
+            <section id="${anchor}" class="space-y-4 pt-2">
+              <div class="flex items-center justify-between border-b border-[#263352] pb-3">
+                <div>
+                  <h2 class="font-serif text-2xl font-bold text-white tracking-wide">${esc(cat)}</h2>
+                  <p class="text-xs text-slate-400 mt-0.5">${itemsInCat.length} fresh item${itemsInCat.length === 1 ? '' : 's'} available to order</p>
+                </div>
+                <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex text-xs text-orange-400 font-bold hover:underline">
+                  Order Category →
+                </a>
+              </div>
+
+              <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                ${itemsInCat.map(p => `
+                  <article class="product-card" data-product-id="${esc(p.Product_ID)}">
+                    <div>
+                      ${p.Photo_URL ? `
+                        <img src="${esc(p.Photo_URL)}" alt="${esc(p.Product_Name)}" loading="lazy" class="w-full h-44 object-cover rounded-lg mb-3 border border-[#263352]" />
+                      ` : ''}
+                      <div class="flex justify-between items-start gap-2">
+                        <h3 class="font-bold text-white text-base leading-snug">${esc(p.Product_Name)}</h3>
+                        <span class="font-black text-orange-400 text-base shrink-0">${formatCurrency(p.Price)}</span>
+                      </div>
+                      ${p.Description ? `
+                        <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">${esc(p.Description)}</p>
+                      ` : ''}
+                    </div>
+
+                    <div class="mt-3">
+                      ${buildCustomOptions(p)}
+                      <div class="mt-3 pt-2 flex items-center justify-between gap-2 border-t border-[#1e293b]/70">
+                        <span class="text-[11px] text-slate-400 font-medium">Delivery: Thurrock</span>
+                        <div class="flex gap-2">
+                          <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener noreferrer" class="btn-uber px-2.5 py-1 rounded text-[11px] font-bold">Uber Eats</a>
+                          <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener noreferrer" class="btn-deliveroo px-2.5 py-1 rounded text-[11px] font-bold">Deliveroo</a>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                `).join("")}
+              </div>
+            </section>
+          `;
+        }).join("");
+
+        // Parse order rules
+        const minRule = rules.find(r => (r.Rule_Type || "").includes("MINIMUM_ORDER") || (r.Rule_Name || "").toLowerCase().includes("min"));
+        if (minOrderBanner && minRule) {
+          const val = formatCurrency(minRule.Rule_Value || minRule.Value || 15);
+          minOrderBanner.textContent = `Minimum order ${val} • Free delivery available within 3 miles!`;
+        } else if (minOrderBanner) {
+          minOrderBanner.textContent = "Minimum order £15.00 • Fast, fresh delivery across Thurrock.";
+        }
+
+        // Update status dot & indicator
+        if (syncDot) syncDot.style.backgroundColor = "#34d49a";
+        if (syncMsg) syncMsg.textContent = `Live CSV Engine: Synchronised (${available.length} active products, ${categories.length} categories loaded)`;
+
+      } catch (err) {
+        console.error("The Hungry Fox CSV Engine:", err);
+        if (syncDot) syncDot.style.backgroundColor = "#ef4444";
+        if (syncMsg) syncMsg.textContent = "Sync Notice: " + err.message + ". Showing cached menu fallback.";
+
+        // Resilient fallback card if network or local fetch encounters issue
+        if (root) {
+          root.innerHTML = `
+            <div class="p-8 text-center bg-[#131b2e] border border-red-500/30 rounded-2xl space-y-3">
+              <p class="text-sm font-bold text-red-400">CSV data sync is connecting to repository feeds.</p>
+              <p class="text-xs text-slate-300">You can order our full menu directly through our delivery partners:</p>
+              <div class="flex justify-center gap-3 pt-2">
+                <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener noreferrer" class="btn-uber px-4 py-2 rounded-xl text-xs font-bold">Order on Uber Eats</a>
+                <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener noreferrer" class="btn-deliveroo px-4 py-2 rounded-xl text-xs font-bold">Order on Deliveroo</a>
+              </div>
+            </div>
+          `;
+        }
       }
     }
 
-    row.push(value);
-    if (row.some(x => x.trim())) rows.push(row);
-
-    const headers = rows.shift().map(x => x.trim());
-
-    return rows.map(cells =>
-      Object.fromEntries(
-        headers.map((h, i) => [h, (cells[i] || "").trim()])
-      )
-    );
-  }
-
-  async function get(file) {
-    const response = await fetch("/" + file + "?v=" + Date.now(), {
-      cache: "no-store"
-    });
-
-    if (!response.ok) {
-      throw new Error(file + " failed to load");
-    }
-
-    return csv(await response.text());
-  }
-
-  const esc = value =>
-    String(value ?? "").replace(/[&<>"']/g, c =>
-      ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-      }[c])
-    );
-
-  const yes = value =>
-    String(value).toLowerCase() === "true";
-
-  const price = value =>
-    Number(value).toLocaleString("en-GB", {
-      style: "currency",
-      currency: "GBP"
-    });
-
-  try {
-    if (!root) {
-      throw new Error("Menu display area not found");
-    }
-
-    const [products, customisations, groups, rules] =
-      await Promise.all([
-        get("products.csv"),
-        get("customisation.csv"),
-        get("product_groups.csv"),
-        get("order_rules.csv")
-      ]);
-
-    const available = products.filter(p => yes(p.Availability));
-
-    const categories = [
-      ...new Set(
-        available.map(p => p.Category).filter(Boolean)
-      )
-    ];
-
-    if (nav) {
-      nav.innerHTML = categories.map((category, i) =>
-        `<a href="#csv-category-${i}" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 transition-all shrink-0">${esc(category)}</a>`
-      ).join("");
-    }
-
-    function customOptions(product) {
-      const linked = groups.filter(
-        g => g.Product_ID === product.Product_ID
-      );
-
-      if (!linked.length) return "";
-
-      const content = linked.map(group => {
-        const options = customisations.filter(o =>
-          o.Customisation_Group === group.Customization_Group &&
-          (!o.Product_ID || o.Product_ID === product.Product_ID) &&
-          yes(o.Active)
-        ).sort((a, b) =>
-          Number(a.Display_Order || 0) -
-          Number(b.Display_Order || 0)
-        );
-
-        if (!options.length) return "";
-
-        return `
-          <div class="mb-3">
-            <p class="text-white font-semibold text-sm mb-1">
-              ${esc(group.Customization_Group.replace(/_/g, " "))}
-            </p>
-            <p class="text-slate-400 text-xs mb-2">
-              Choose ${esc(group.Min_Selec)}–${esc(group.Max_Selec)}
-            </p>
-            ${options.map(o => `
-              <div class="flex justify-between text-xs text-slate-300 py-1">
-                <span>${esc(o.Option_Name)}</span>
-                <span class="text-orange-400">
-                  ${Number(o.Extra_Price) > 0 ? "+" + price(o.Extra_Price) : ""}
-                </span>
-              </div>
-            `).join("")}
-          </div>
-        `;
-      }).join("");
-
-      return content
-        ? `
-          <details class="mt-3 pt-3 border-t border-[#263352]">
-            <summary class="cursor-pointer text-orange-400 text-sm font-semibold">
-              View customization options
-            </summary>
-            <div class="pt-3">${content}</div>
-          </details>
-        `
-        : "";
-    }
-
-    root.innerHTML = categories.map((category, i) => `
-      <section
-        id="csv-category-${i}"
-        class="space-y-6 bg-[#131b2e] border border-[#263352] p-6 sm:p-8 rounded-2xl shadow-xl scroll-mt-28"
-      >
-        <h2 class="font-serif text-2xl font-bold text-white border-b border-[#263352] pb-3">
-          ${esc(category)}
-        </h2>
-
-        <div class="grid sm:grid-cols-2 gap-4">
-          ${available.filter(p => p.Category === category).map(p => `
-            <article class="p-4 rounded-xl bg-[#0b1326]/80 border border-[#263352] flex flex-col">
-              ${p.Photo_URL ? `
-                <img
-                  src="${esc(p.Photo_URL)}"
-                  alt="${esc(p.Product_Name)}"
-                  loading="lazy"
-                  class="w-full h-44 object-cover rounded-lg mb-3"
-                >
-              ` : ""}
-
-              <div class="flex justify-between gap-3">
-                <h3 class="text-white font-semibold">
-                  ${esc(p.Product_Name)}
-                </h3>
-                <span class="text-orange-400 font-bold whitespace-nowrap">
-                  ${price(p.Price)}
-                </span>
-              </div>
-
-              ${p.Description ? `
-                <p class="text-slate-400 text-sm mt-2">
-                  ${esc(p.Description)}
-                </p>
-              ` : ""}
-
-              ${customOptions(p)}
-            </article>
-          `).join("")}
-        </div>
-      </section>
-    `).join("");
-
-    const minimum = rules.find(
-      r => r.Rule_Type === "MINIMUM_ORDER" && yes(r.Active)
-    );
-
-    if (minimum) {
-      const note = document.createElement("p");
-      note.className = "text-center text-slate-400 text-sm mb-5";
-      note.textContent = "Minimum order: " + price(minimum.Rule_Value);
-      root.prepend(note);
-    }
-
-  } catch (error) {
-    console.error("Hungry Fox menu:", error);
-
-    if (root) {
-      root.innerHTML = `
-        <p class="text-center text-red-400 py-10">
-          Menu temporarily unavailable. Please try again shortly.
-        </p>
-      `;
-    }
-  }
-
-loadHungryFoxMenu();
+    // Auto-initialize on DOM load
+    window.addEventListener('DOMContentLoaded', loadHungryFoxMenu);
   </script>
 </body>
 </html>
