@@ -529,11 +529,13 @@
       if (container.classList.contains('hidden')) {
         container.classList.remove('hidden');
         btnText.textContent = 'Hide Allergen Matrix';
-      } else {
+            } else {
         container.classList.add('hidden');
         btnText.textContent = 'View Allergen Matrix';
       }
-      async function loadHungryFoxMenu() {
+    }
+
+    async function loadHungryFoxMenu() {
   const root = document.getElementById("spreadsheet-menu");
   const nav = document.querySelector('nav[aria-label="Menu categories"]');
 
@@ -753,7 +755,6 @@
       `;
     }
   }
-}
 
 loadHungryFoxMenu();
   </script>
