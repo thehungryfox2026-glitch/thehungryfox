@@ -1,38 +1,187 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Hungry Fox – Menu CSV Test</title>
+<title>The Hungry Fox – Menu Test</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b1326;color:#f1f5f9;font-family:'Plus Jakarta Sans',sans-serif}
-header{background:#060e20;border-bottom:1px solid #263352;padding:22px 16px;text-align:center}
-header img{width:170px;max-height:75px;object-fit:contain}
-h1{font:800 32px 'Playfair Display',serif;margin:12px 0 5px}
-header p{color:#94a3b8;font-size:13px;margin:0}
-main{max-width:1100px;margin:auto;padding:24px 16px}
-.notice{background:#131b2e;border:1px solid #263352;border-radius:12px;padding:14px;margin-bottom:20px;color:#cbd5e1;font-size:13px}
-#status{color:#fbbf24;margin:12px 0;font-size:13px}
-#categories{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
-#categories button{background:#131b2e;color:#cbd5e1;border:1px solid #263352;border-radius:30px;padding:9px 13px;cursor:pointer;font-weight:700;font-size:12px}
-#categories button.active{background:#f97316;color:#07101f;border-color:#f97316}
-#products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
-.card{background:#131b2e;border:1px solid #263352;border-radius:14px;padding:17px;display:flex;flex-direction:column;gap:9px}
-.card h3{font-size:16px;margin:0;color:#fff}
-.card .description{font-size:13px;line-height:1.5;color:#94a3b8;flex:1}
-.price{font-size:18px;font-weight:800;color:#fb923c}
-.category{font-size:10px;color:#34d49a;font-weight:800;letter-spacing:1px}
-.options{border-top:1px solid #263352;padding-top:10px;margin-top:4px}
-.options strong{font-size:12px;color:#fb923c}
-.options ul{padding-left:18px;margin:7px 0;color:#cbd5e1;font-size:12px;line-height:1.8}
-.photo{width:100%;height:150px;object-fit:cover;border-radius:9px;background:#0b1326}
-.empty{color:#94a3b8;padding:25px;text-align:center;grid-column:1/-1}
-footer{text-align:center;padding:30px;color:#64748b;font-size:11px}
+body{
+  margin:0;
+  background:#0b1326;
+  color:#f1f5f9;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+header{
+  background:#060e20;
+  border-bottom:1px solid #263352;
+  padding:20px 16px;
+  text-align:center;
+}
+header img{
+  width:170px;
+  max-height:75px;
+  object-fit:contain;
+}
+h1{
+  font:800 32px 'Playfair Display',serif;
+  margin:10px 0 4px;
+}
+header p{
+  color:#94a3b8;
+  font-size:12px;
+  margin:0;
+}
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:22px 16px;
+}
+.notice{
+  background:#131b2e;
+  border:1px solid #263352;
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:16px;
+  color:#cbd5e1;
+  font-size:12px;
+  line-height:1.5;
+}
+#status{
+  color:#fbbf24;
+  margin:12px 0;
+  font-size:12px;
+}
+#categories{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:16px 0;
+}
+#categories button{
+  background:#131b2e;
+  color:#cbd5e1;
+  border:1px solid #263352;
+  border-radius:30px;
+  padding:8px 12px;
+  cursor:pointer;
+  font-weight:700;
+  font-size:11px;
+}
+#categories button.active{
+  background:#f97316;
+  color:#07101f;
+  border-color:#f97316;
+}
+#products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  align-items:start;
+  gap:12px;
+}
+.card{
+  background:#131b2e;
+  border:1px solid #263352;
+  border-radius:12px;
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  min-width:0;
+  align-self:start;
+  height:auto;
+}
+.card h3{
+  font-size:15px;
+  line-height:1.3;
+  margin:0;
+  color:#fff;
+}
+.card .description{
+  font-size:12px;
+  line-height:1.4;
+  color:#aab6c8;
+  margin:0;
+}
+.price{
+  font-size:17px;
+  line-height:1.2;
+  font-weight:800;
+  color:#fb923c;
+  margin-top:2px;
+}
+.category{
+  font-size:9px;
+  color:#34d49a;
+  font-weight:800;
+  letter-spacing:1px;
+  line-height:1.2;
+}
+.options{
+  border-top:1px solid #263352;
+  padding-top:7px;
+  margin-top:4px;
+}
+.options strong{
+  font-size:11px;
+  color:#fb923c;
+}
+.options .choose{
+  font-size:10px;
+  color:#94a3b8;
+  margin-top:3px;
+}
+.options ul{
+  padding-left:16px;
+  margin:4px 0 0;
+  color:#cbd5e1;
+  font-size:11px;
+  line-height:1.55;
+}
+.photo{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  height:auto;
+  max-height:132px;
+  object-fit:cover;
+  border-radius:8px;
+  background:#0b1326;
+  margin-bottom:2px;
+}
+.empty{
+  color:#94a3b8;
+  padding:25px;
+  text-align:center;
+  grid-column:1/-1;
+}
+footer{
+  text-align:center;
+  padding:24px;
+  color:#64748b;
+  font-size:11px;
+}
+@media(max-width:520px){
+  main{padding:16px 12px}
+  #products{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+  }
+  .card{padding:9px;gap:4px}
+  .card h3{font-size:13px}
+  .card .description{font-size:11px}
+  .price{font-size:15px}
+  .photo{max-height:105px}
+  .options ul{font-size:10px}
+}
 </style>
 </head>
+
 <body>
 <header>
   <img src="https://thehungryfox.co.uk/hungry-fox-logo-cream.webp" alt="The Hungry Fox">
@@ -43,8 +192,10 @@ footer{text-align:center;padding:30px;color:#64748b;font-size:11px}
 <main>
   <div class="notice">
     <strong>TEST PAGE ONLY</strong><br>
-    This page reads menu information from the GitHub CSV files. It does not take orders or change the live website.
+    This page reads menu information from the GitHub CSV files.
+    It does not take orders or change the live website.
   </div>
+
   <div id="status">Loading menu data…</div>
   <nav id="categories" aria-label="Menu categories"></nav>
   <section id="products"></section>
@@ -64,34 +215,45 @@ function parseCSV(text) {
     const c = text[i], next = text[i + 1];
 
     if (c === '"' && quoted && next === '"') {
-      cell += '"'; i++;
+      cell += '"';
+      i++;
     } else if (c === '"') {
       quoted = !quoted;
     } else if (c === "," && !quoted) {
-      row.push(cell); cell = "";
+      row.push(cell);
+      cell = "";
     } else if ((c === "\n" || c === "\r") && !quoted) {
       if (c === "\r" && next === "\n") i++;
-      row.push(cell); cell = "";
+      row.push(cell);
+      cell = "";
       if (row.some(v => v.trim() !== "")) rows.push(row);
       row = [];
     } else {
       cell += c;
     }
   }
+
   row.push(cell);
   if (row.some(v => v.trim() !== "")) rows.push(row);
 
   const headers = rows.shift().map(h => h.trim());
+
   return rows.map(values => {
     const item = {};
-    headers.forEach((h, i) => item[h] = (values[i] || "").trim());
+    headers.forEach((h, i) => {
+      item[h] = (values[i] || "").trim();
+    });
     return item;
   });
 }
 
 async function loadCSV(filename) {
   const response = await fetch(BASE + filename + "?v=" + Date.now());
-  if (!response.ok) throw new Error(filename + " could not be loaded (" + response.status + ")");
+
+  if (!response.ok) {
+    throw new Error(filename + " could not be loaded (" + response.status + ")");
+  }
+
   return parseCSV(await response.text());
 }
 
@@ -102,17 +264,26 @@ let selectedCategory = "ALL";
 
 function safe(value) {
   return String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
   }[c]));
 }
 
 function renderCategories() {
-  const categories = [...new Set(products.map(p => p.Category).filter(Boolean))];
+  const categories = [
+    ...new Set(products.map(p => p.Category).filter(Boolean))
+  ];
+
   const all = ["ALL", ...categories];
 
   document.getElementById("categories").innerHTML = all.map(category =>
     `<button class="${category === selectedCategory ? "active" : ""}"
-      data-category="${safe(category)}">${category === "ALL" ? "All products" : safe(category)}</button>`
+      data-category="${safe(category)}">
+      ${category === "ALL" ? "All products" : safe(category)}
+    </button>`
   ).join("");
 
   document.querySelectorAll("#categories button").forEach(button => {
@@ -125,7 +296,10 @@ function renderCategories() {
 }
 
 function optionsFor(product) {
-  const productGroups = groups.filter(g => g.Product_ID === product.Product_ID);
+  const productGroups = groups.filter(
+    g => g.Product_ID === product.Product_ID
+  );
+
   if (!productGroups.length) return "";
 
   return productGroups.map(group => {
@@ -135,19 +309,29 @@ function optionsFor(product) {
         option.Customisation_Group === group.Customization_Group &&
         (!option.Product_ID || option.Product_ID === product.Product_ID)
       )
-      .sort((a,b) => Number(a.Display_Order || 0) - Number(b.Display_Order || 0));
+      .sort((a, b) =>
+        Number(a.Display_Order || 0) - Number(b.Display_Order || 0)
+      );
 
     if (!options.length) return "";
 
-    return `<div class="options">
-      <strong>${safe(group.Customization_Group.replaceAll("_"," "))}</strong>
-      <div style="font-size:11px;color:#94a3b8;margin-top:3px">
-        Choose ${safe(group.Min_Selec)}–${safe(group.Max_Selec)}
+    return `
+      <div class="options">
+        <strong>${safe(group.Customization_Group.replaceAll("_"," "))}</strong>
+        <div class="choose">
+          Choose ${safe(group.Min_Selec)}–${safe(group.Max_Selec)}
+        </div>
+        <ul>
+          ${options.map(o =>
+            `<li>${safe(o.Option_Name)}${
+              Number(o.Extra_Price) > 0
+                ? " (+£" + Number(o.Extra_Price).toFixed(2) + ")"
+                : ""
+            }</li>`
+          ).join("")}
+        </ul>
       </div>
-      <ul>${options.map(o =>
-        `<li>${safe(o.Option_Name)}${Number(o.Extra_Price) > 0 ? " (+£" + Number(o.Extra_Price).toFixed(2) + ")" : ""}</li>`
-      ).join("")}</ul>
-    </div>`;
+    `;
   }).join("");
 }
 
@@ -159,10 +343,19 @@ function renderProducts() {
   document.getElementById("products").innerHTML = visible.length
     ? visible.map(p => `
       <article class="card">
-        ${p.Photo_URL ? `<img class="photo" src="${safe(p.Photo_URL)}" alt="${safe(p.Product_Name)}" loading="lazy">` : ""}
+        ${p.Photo_URL
+          ? `<img class="photo"
+              src="${safe(p.Photo_URL)}"
+              alt="${safe(p.Product_Name)}"
+              loading="lazy">`
+          : ""
+        }
         <div class="category">${safe(p.Category)}</div>
         <h3>${safe(p.Product_Name)}</h3>
-        <div class="description">${safe(p.Description)}</div>
+        ${p.Description
+          ? `<div class="description">${safe(p.Description)}</div>`
+          : ""
+        }
         <div class="price">£${Number(p.Price).toFixed(2)}</div>
         ${optionsFor(p)}
       </article>
@@ -181,6 +374,7 @@ async function start() {
     products = p.filter(item =>
       item.Availability.toUpperCase() === "TRUE"
     );
+
     customisations = c;
     groups = g;
 
@@ -188,7 +382,10 @@ async function start() {
     renderProducts();
 
     document.getElementById("status").textContent =
-      `Loaded ${products.length} available products, ${customisations.length} customization options and ${groups.length} product groups.`;
+      `Loaded ${products.length} available products, ` +
+      `${customisations.length} customization options and ` +
+      `${groups.length} product groups.`;
+
   } catch (error) {
     document.getElementById("status").textContent =
       "Menu loading error: " + error.message;
