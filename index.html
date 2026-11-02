@@ -520,7 +520,7 @@
       </div>
     </section>
 
-    <!-- Spreadsheet-Driven Dynamic Menu Container -->
+    <!-- Dynamic Menu Container -->
     <div id="menu-container" class="space-y-12">
       <div class="p-12 text-center bg-[#172649] border border-[#2a3859] rounded-2xl space-y-3">
         <div class="inline-block animate-spin text-orange-400 text-3xl">⏳</div>
@@ -832,8 +832,8 @@
 
     // Desired Menu Category Presentation Ordering
     const CATEGORY_ORDER = [
-      'SOLO CHICKEN OR UPGRADE TO MEAL',
       'SPECIAL FEATURED',
+      'SOLO CHICKEN OR UPGRADE TO MEAL',
       'SIGNATURE DONERS & NOODLES',
       'SIGNATURE RICE',
       'SHARING PLATTERS',
@@ -1069,13 +1069,13 @@
 
         const rawCategories = [...new Set(state.products.map(p => p.Category).filter(Boolean))];
 
-        // Sort categories by predefined presentation order
+        // Sort categories by exact predefined presentation order
         state.categories = rawCategories.sort((a, b) => {
-          const idxA = CATEGORY_ORDER.indexOf(a.toUpperCase());
-          const idxB = CATEGORY_ORDER.indexOf(b.toUpperCase());
-          if (idxA !== -1 && idxB !== -1) return idxA - idxB;
-          if (idxA !== -1) return -1;
-          if (idxB !== -1) return 1;
+          const matchA = CATEGORY_ORDER.findIndex(o => a.toUpperCase().includes(o) || o.includes(a.toUpperCase()));
+          const matchB = CATEGORY_ORDER.findIndex(o => b.toUpperCase().includes(o) || o.includes(b.toUpperCase()));
+          if (matchA !== -1 && matchB !== -1) return matchA - matchB;
+          if (matchA !== -1) return -1;
+          if (matchB !== -1) return 1;
           return a.localeCompare(b);
         });
 
