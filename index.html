@@ -396,6 +396,7 @@
     /* Responsive */
     @media (min-width: 640px) {
       .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .sm\:flex-row { flex-direction: row; }
       .sm\:p-8 { padding: 2rem; }
       .sm\:p-12 { padding: 3rem; }
@@ -432,7 +433,7 @@
         <span class="font-medium text-slate-200">Open Daily 11:00 – 23:30</span>
       </div>
       <div class="flex items-center gap-4 text-xs font-semibold">
-        <span class="text-orange-400 font-bold uppercase tracking-wider">🚀 Delivery Only • Thurrock</span>
+        <span class="text-emerald-400 font-bold uppercase tracking-wider">🚀 FREE Delivery Up to 5 Miles!</span>
         <a href="#allergens" class="text-slate-400 hover:text-white transition-colors underline">Allergen Matrix</a>
       </div>
     </div>
@@ -485,32 +486,32 @@
       <div style="position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(249,115,22,0.18) 0%, rgba(0,0,0,0) 70%); pointer-events: none;"></div>
 
       <div class="relative z-10 max-w-3xl space-y-4 text-left">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/40 text-orange-400 text-xs font-extrabold uppercase tracking-wider">
-          🔥 Strictly Delivery Only • Hand-Tossed in Thurrock, Essex
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 text-xs font-extrabold uppercase tracking-wider">
+          🔥 FREE DELIVERY UP TO 5 MILES • Grays, Tilbury, Ship Lane & Orsett
         </div>
         <h1 class="font-serif text-3xl sm:text-5xl font-black text-white leading-tight">
           Hand-Tossed Sizzling Chicken, Sauces & Flavours.
         </h1>
         <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-          From flame-baked quarter chickens to MFC crispy wings, spit-carved doner, spicy Korean buldak fire noodles, and artisan mochi gelato desserts. Delivered piping hot to your door across Grays and Thurrock.
+          From flame-baked quarter chickens to MFC crispy wings, spit-carved doner, spicy Korean buldak fire noodles, and artisan mochi gelato desserts. Delivered piping hot to your door across Thurrock.
         </p>
 
-        <!-- Delivery Fee Rules Notice -->
+        <!-- Delivery Fee Rules Notice (Up to 5 Miles Free!) -->
         <div class="grid sm:grid-cols-3 gap-2.5 pt-2">
-          <div class="p-3 rounded-xl bg-[#080e1f] border border-[#2a3859] text-left">
-            <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider block">Within 3 Miles</span>
-            <span class="text-white text-sm font-extrabold">FREE Delivery</span>
-            <p class="text-[11px] text-slate-400">Grays & immediate area</p>
+          <div class="p-3.5 rounded-xl bg-[#080e1f] border border-emerald-500/40 text-left">
+            <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider block">Under 5.0 Miles</span>
+            <span class="text-white text-base font-extrabold">FREE Delivery</span>
+            <p class="text-[11px] text-slate-300">Grays, Tilbury, West Tilbury, Ship Lane (Aveley) & Orsett to Brentwood Rd</p>
           </div>
-          <div class="p-3 rounded-xl bg-[#080e1f] border border-[#2a3859] text-left">
-            <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">3.1 to 5.0 Miles</span>
-            <span class="text-white text-sm font-extrabold">£1.99 Delivery</span>
-            <p class="text-[11px] text-slate-400">Chafford Hundred / Tilbury</p>
+          <div class="p-3.5 rounded-xl bg-[#080e1f] border border-[#2a3859] text-left">
+            <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">5.1 to 8.0 Miles</span>
+            <span class="text-white text-base font-extrabold">£1.99 Delivery</span>
+            <p class="text-[11px] text-slate-400">Purfleet, Caspian Way, Stanford-le-Hope, Corringham & Ockendon</p>
           </div>
-          <div class="p-3 rounded-xl bg-[#080e1f] border border-[#2a3859] text-left">
-            <span class="text-[10px] text-orange-400 font-bold uppercase tracking-wider block">5.1 to 10.0 Miles</span>
-            <span class="text-white text-sm font-extrabold">£3.99 Delivery</span>
-            <p class="text-[11px] text-slate-400">Up to 10 mile radius</p>
+          <div class="p-3.5 rounded-xl bg-[#080e1f] border border-[#2a3859] text-left">
+            <span class="text-[10px] text-orange-400 font-bold uppercase tracking-wider block">8.1 to 10.0 Miles</span>
+            <span class="text-white text-base font-extrabold">£3.99 Delivery</span>
+            <p class="text-[11px] text-slate-400">Outer Thurrock radius (Up to 10.0 miles max)</p>
           </div>
         </div>
 
@@ -524,10 +525,13 @@
             <input type="text" id="quickPostcode" placeholder="e.g. RM17 6QJ" class="px-3 py-2 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white text-xs uppercase font-bold focus:outline-none focus:border-orange-500 w-36" />
             <button onclick="checkQuickPostcode()" class="btn-orange px-4 py-2 rounded-lg text-xs font-bold">Check</button>
             <div class="flex items-center gap-1.5 flex-wrap text-[11px]">
-              <button onclick="setTestPostcode('RM17 6QJ')" class="text-slate-400 hover:text-white underline">RM17 (Free)</button>
-              <button onclick="setTestPostcode('RM16 2AB')" class="text-slate-400 hover:text-white underline">RM16 (£1.99)</button>
-              <button onclick="setTestPostcode('RM15 5TT')" class="text-slate-400 hover:text-white underline">RM15 (£3.99)</button>
-              <button onclick="setTestPostcode('SW1A 1AA')" class="text-slate-400 hover:text-white underline">London (Blocked)</button>
+              <button onclick="setTestPostcode('RM17 6QJ')" class="text-emerald-400 hover:text-white underline">Grays (Free)</button>
+              <button onclick="setTestPostcode('RM18 7AN')" class="text-emerald-400 hover:text-white underline">Tilbury (Free)</button>
+              <button onclick="setTestPostcode('RM15 4HA')" class="text-emerald-400 hover:text-white underline">Ship Lane Aveley (Free)</button>
+              <button onclick="setTestPostcode('RM16 3DJ')" class="text-emerald-400 hover:text-white underline">Orsett (Free)</button>
+              <button onclick="setTestPostcode('RM19 1PZ')" class="text-slate-400 hover:text-white underline">Purfleet (£1.99)</button>
+              <button onclick="setTestPostcode('SS17 0NA')" class="text-slate-400 hover:text-white underline">Stanford (£1.99)</button>
+              <button onclick="setTestPostcode('SW1A 1AA')" class="text-red-400 hover:text-white underline">London (Blocked)</button>
             </div>
           </div>
           <div id="quickCheckResult" class="text-xs font-semibold pt-1 hidden"></div>
@@ -535,7 +539,7 @@
       </div>
     </section>
 
-    <!-- Spreadsheet-Driven Dynamic Menu Container -->
+    <!-- Dynamic CSV Menu Container -->
     <div id="menu-container" class="space-y-12">
       <div class="p-12 text-center bg-[#172649] border border-[#2a3859] rounded-2xl space-y-3">
         <div class="inline-block animate-spin text-orange-400 text-3xl">⏳</div>
@@ -634,7 +638,7 @@
               <span class="text-white font-semibold">11:00 – 23:30</span>
             </div>
             <p class="text-[11px] text-amber-400 pt-1 font-semibold">Open 7 days a week: 11:00 AM – 11:30 PM</p>
-            <p class="text-[11px] text-slate-400">Strictly doorstep delivery across Grays and surrounding Thurrock areas.</p>
+            <p class="text-[11px] text-slate-400">Doorstep delivery across Grays and surrounding Thurrock areas.</p>
           </div>
         </div>
 
@@ -704,7 +708,6 @@
 
     <!-- Basket Items List -->
     <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 space-y-3">
-      <!-- Items dynamically populated -->
       <div class="text-center py-16 text-slate-400 space-y-2">
         <p class="text-3xl">🦊</p>
         <p class="font-semibold text-white">Your basket is empty</p>
@@ -721,7 +724,7 @@
         </div>
         <div class="flex justify-between text-slate-300">
           <span id="cartDeliveryTierLabel">Estimated Delivery Fee:</span>
-          <span id="cartDeliveryFeeText" class="font-bold text-emerald-400">FREE (Under 3 mi)</span>
+          <span id="cartDeliveryFeeText" class="font-bold text-emerald-400">FREE (Under 5.0 mi)</span>
         </div>
         <div id="cartSmallOrderRow" class="flex justify-between text-amber-400 hidden">
           <span>Small Order Charge (Under £15):</span>
@@ -736,7 +739,7 @@
       <button id="btnProceedToCheckout" onclick="startDeliveryCheckout()" class="btn-orange w-full py-3 rounded-xl text-sm font-extrabold shadow-lg">
         Proceed to Delivery Checkout
       </button>
-      <p class="text-[10px] text-center text-slate-400">100% Delivery Only • Fast doorstep dispatch across Thurrock</p>
+      <p class="text-[10px] text-center text-slate-400">100% Delivery Only • Free delivery up to 5 miles</p>
     </div>
   </aside>
 
@@ -755,9 +758,7 @@
         ⚠️ Please make your required flavour selection before adding to basket.
       </div>
 
-      <div id="modalBody" class="p-4 overflow-y-auto flex-1 space-y-4">
-        <!-- Injected Customisation Groups -->
-      </div>
+      <div id="modalBody" class="p-4 overflow-y-auto flex-1 space-y-4"></div>
 
       <div class="p-4 border-t border-[#2a3859] bg-[#0a1124] flex items-center justify-between gap-3">
         <div>
@@ -838,7 +839,6 @@
 
   <!-- Master JavaScript Engine -->
   <script>
-    // State management
     let state = {
       products: [],
       customisations: [],
@@ -848,12 +848,11 @@
       cart: [],
       activeModalProduct: null,
       activeModalSelections: {},
-      deliveryDistanceMiles: 0.4,
+      deliveryDistanceMiles: 0.8,
       deliveryFee: 0.00,
       isOutsideRadius: false
     };
 
-    // Toggle Allergen Matrix
     function toggleMatrix() {
       const container = document.getElementById('matrixContainer');
       const btnText = document.getElementById('matrixBtnText');
@@ -866,18 +865,15 @@
       }
     }
 
-    // Currency Formatter
     const formatGBP = (num) => {
       const val = parseFloat(num) || 0;
       return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(val);
     };
 
-    // Safe HTML
     const esc = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
     }[c]));
 
-    // RFC-4180 CSV Parser
     function parseRFC4180(text) {
       const rows = [];
       let row = [], value = '', inQuotes = false;
@@ -913,7 +909,6 @@
       );
     }
 
-    // Dynamic CSV Fetcher with GitHub Raw Fallback
     async function fetchCSV(fileName) {
       const paths = [
         fileName + '?v=' + Date.now(),
@@ -932,33 +927,33 @@
       throw new Error(fileName + ' unavailable');
     }
 
-    // Delivery Fee Calculator by Mile Tiers
+    // UPDATED DELIVERY FEE CALCULATOR: Up to 5.0 Miles is FREE!
     function calculateDistanceFee(miles) {
       if (miles > 10.0) {
         return { fee: null, blocked: true, label: 'Delivery Unavailable (Beyond 10.0 miles)' };
+      } else if (miles > 8.0) {
+        return { fee: 3.99, blocked: false, label: '£3.99 (8.1 – 10.0 miles)' };
       } else if (miles > 5.0) {
-        return { fee: 3.99, blocked: false, label: '£3.99 (5.1 – 10.0 miles)' };
-      } else if (miles > 3.0) {
-        return { fee: 1.99, blocked: false, label: '£1.99 (3.1 – 5.0 miles)' };
+        return { fee: 1.99, blocked: false, label: '£1.99 (5.1 – 8.0 miles)' };
       } else {
-        return { fee: 0.00, blocked: false, label: 'FREE Delivery (Under 3.0 miles)' };
+        return { fee: 0.00, blocked: false, label: 'FREE Delivery (Under 5.0 miles)' };
       }
     }
 
     // Postcode Distance Lookup
     function estimatePostcodeMiles(postcode) {
       const clean = (postcode || '').trim().toUpperCase();
-      if (!clean) return 0.4;
-      if (clean.startsWith('RM17')) return 0.8;
-      if (clean.startsWith('RM16')) return 3.8;
-      if (clean.startsWith('RM18')) return 4.2;
-      if (clean.startsWith('RM15')) return 6.4;
-      if (clean.startsWith('RM19') || clean.startsWith('RM20')) return 7.1;
-      if (clean.startsWith('SS17') || clean.startsWith('RM14')) return 8.9;
+      if (!clean) return 0.8;
+      if (clean.startsWith('RM17')) return 0.8; // Grays central
+      if (clean.startsWith('RM18')) return 3.2; // Tilbury / Chadwell
+      if (clean.startsWith('RM16')) return 4.2; // Orsett / Chafford
+      if (clean.startsWith('RM15 4') || clean.startsWith('RM15 5') || clean.startsWith('RM19 1') || clean.includes('SHIP')) return 4.5; // Ship Lane Aveley / Purfleet border
+      if (clean.startsWith('RM19')) return 5.8; // Purfleet Caspian Way
+      if (clean.startsWith('SS17') || clean.startsWith('RM15')) return 6.8; // Stanford / Ockendon
+      if (clean.startsWith('RM14') || clean.startsWith('RM20')) return 8.5; // Outer boundary
       return 22.5; // Out of area default
     }
 
-    // Quick Postcode Distance Widget
     function checkQuickPostcode() {
       const pc = document.getElementById('quickPostcode').value;
       const resEl = document.getElementById('quickCheckResult');
@@ -980,7 +975,6 @@
       checkQuickPostcode();
     }
 
-    // Load CSV Menu Data
     async function loadHungryFoxMenu() {
       const root = document.getElementById('menu-container');
       const navBar = document.getElementById('category-nav-bar');
@@ -1000,7 +994,6 @@
 
         state.categories = [...new Set(state.products.map(p => p.Category).filter(Boolean))];
 
-        // Nav Bar Pills
         if (navBar && state.categories.length > 0) {
           navBar.innerHTML = state.categories.map((cat, idx) => {
             const anchor = 'cat-' + idx;
@@ -1008,7 +1001,6 @@
           }).join('');
         }
 
-        // Render Menu Sections
         root.innerHTML = state.categories.map((cat, idx) => {
           const anchor = 'cat-' + idx;
           const items = state.products.filter(p => p.Category === cat);
@@ -1051,14 +1043,13 @@
         console.error('Menu load error:', err);
         root.innerHTML = `
           <div class="p-8 text-center bg-[#172649] border border-red-500/30 rounded-2xl space-y-3">
-            <p class="text-sm font-bold text-red-400">Dynamic CSV menu connection initialized.</p>
+            <p class="text-sm font-bold text-red-400">Dynamic CSV menu connection active.</p>
             <p class="text-xs text-slate-300">You can also order through our partner badges in the header.</p>
           </div>
         `;
       }
     }
 
-    // Open Customisation Modal
     function openCustomModal(productId) {
       const product = state.products.find(p => p.Product_ID === productId);
       if (!product) return;
@@ -1154,12 +1145,10 @@
       state.activeModalSelections = {};
     }
 
-    // Confirm Add to Basket with Minimum Rule Enforcement
     function confirmAddToBasket() {
       const p = state.activeModalProduct;
       if (!p) return;
 
-      // Check required minimum selections
       const groupCards = Array.from(document.querySelectorAll('#modalBody > div[data-group-name]'));
       for (const card of groupCards) {
         const groupName = card.dataset.groupName;
@@ -1175,7 +1164,6 @@
         }
       }
 
-      // Calculate line price
       let unitPrice = parseFloat(p.Price) || 0;
       const customSummary = [];
       Object.entries(state.activeModalSelections).forEach(([grp, items]) => {
@@ -1185,7 +1173,6 @@
         });
       });
 
-      // Add to Basket
       state.cart.push({
         id: 'cart_' + Date.now(),
         productId: p.Product_ID,
@@ -1201,7 +1188,6 @@
       openCartDrawer();
     }
 
-    // Cart Management
     function openCartDrawer() {
       document.getElementById('cartDrawer').classList.add('open');
       document.getElementById('drawerOverlay').classList.add('open');
@@ -1249,12 +1235,10 @@
       headerTotal.textContent = formatGBP(subtotal);
       subtotalEl.textContent = formatGBP(subtotal);
 
-      // Delivery calculation
       const distInfo = calculateDistanceFee(state.deliveryDistanceMiles);
       state.deliveryFee = distInfo.fee || 0;
       deliveryEl.textContent = distInfo.fee === 0 ? 'FREE' : formatGBP(distInfo.fee);
 
-      // Small Order Fee logic: £4 charge if subtotal < £15
       const smallOrderFee = (subtotal > 0 && subtotal < 15.00) ? 4.00 : 0.00;
       if (smallOrderFee > 0) {
         smallOrderRow.classList.remove('hidden');
@@ -1262,7 +1246,6 @@
         smallOrderRow.classList.add('hidden');
       }
 
-      // Small order progress bar
       const bar = document.getElementById('smallOrderBar');
       const remainingLabel = document.getElementById('smallOrderRemaining');
       if (subtotal >= 15.00) {
@@ -1282,7 +1265,6 @@
       const grandTotal = subtotal + state.deliveryFee + smallOrderFee;
       totalEl.textContent = formatGBP(grandTotal);
 
-      // Render cart items
       if (state.cart.length === 0) {
         listEl.innerHTML = `
           <div class="text-center py-16 text-slate-400 space-y-2">
@@ -1312,7 +1294,6 @@
       }
     }
 
-    // Checkout Flow
     function startDeliveryCheckout() {
       if (state.cart.length === 0) return;
       closeCartDrawer();
@@ -1365,7 +1346,6 @@
       }
     }
 
-    // Payment Handler
     function proceedToPayment() {
       const name = document.getElementById('custName').value.trim();
       const phone = document.getElementById('custPhone').value.trim();
@@ -1384,7 +1364,6 @@
         return;
       }
 
-      // Payload prepared for Cloudflare Worker / Serverless backend
       const payload = {
         customer: { name, phone, email },
         deliveryAddress: { house, street, postcode, instructions: document.getElementById('custInstructions').value },
@@ -1396,7 +1375,6 @@
       alert(`Connecting to secure Stripe Checkout...\n\nDeliver to: ${house} ${street}, ${postcode}\nTotal Payable: ${document.getElementById('chkTotal').textContent}`);
     }
 
-    // Initialize Menu on Load
     window.addEventListener('DOMContentLoaded', () => {
       loadHungryFoxMenu();
       renderCart();
