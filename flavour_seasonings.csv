@@ -1,0 +1,15 @@
+﻿Flavour_ID,Flavour_Name,Flavour_Type,Heat_Level,Customer_Description,Availability
+F001,Plain (No Heat),Classic,No Heat,Enjoy the natural taste of our freshly cooked chicken.,TRUE
+F002,Garlic Parmesan,Cheesy & Garlic,Mild,Rich garlic butter flavour finished with Italian hard cheese.,TRUE
+F003,Sticky BBQ,BBQ,Sweet & Mild,"Sweet, smoky BBQ flavour with a delicious sticky finish.",TRUE
+F004,Peri Peri,Spicy,Medium,A lively peri peri flavour with a tangy chilli kick.,TRUE
+F005,Buffalo,Hot & Tangy,Medium,"Classic buffalo-style flavour with a tangy, spicy kick.",TRUE
+F006,Honey Sriracha,Sweet & Spicy,Mild–Medium,A sweet honey flavour balanced with a spicy sriracha kick.,TRUE
+F007,Smoky Cajun,Smoky & Spiced,Mild–Medium,"A bold Cajun-inspired blend with smoky, savoury spices.",TRUE
+F008,Spicy Algerian,Spicy & Savoury,Medium,"A rich, savoury Algerian-inspired sauce with a spicy kick.",TRUE
+F009,Mango Habanero,Sweet & Hot,Hot,Sweet tropical mango meets the fiery kick of habanero chilli.,TRUE
+F010,Naga Sauce,Very Spicy,Very Hot,"A bold, intense chilli flavour for serious heat lovers.",TRUE
+F011,Volcano,Extra Spicy,Very Hot,"A fiery, intense flavour made for those who love serious heat.",TRUE
+F012,Spicy BBQ,BBQ & Spicy,Hot,A smoky BBQ flavour with an extra chilli kick.,TRUE
+F013,Hot Hot,Extreme Heat,Hot,A seriously fiery flavour for customers who want maximum heat.,TRUE
+F014,Seoul Fire,Korean-Inspired,Extreme,A bold Korean-inspired spicy flavour with a fiery finish.,TRUE

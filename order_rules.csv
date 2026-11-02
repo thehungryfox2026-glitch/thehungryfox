@@ -1,0 +1,8 @@
+﻿Rule_ID,Rule_Type,Min_Value,Max_Value,Min_Inclusive,Max_Inclusive,Rule_Value,Unit,Active,Notes
+OR001,MINIMUM_ORDER,0,0,TRUE,TRUE,15,GBP,TRUE,Minimum order value
+OR002,DELIVERY_ENABLED,0,0,TRUE,TRUE,TRUE,BOOLEAN,TRUE,Website delivery is enabled
+OR003,COLLECTION_ENABLED,0,0,TRUE,TRUE,FALSE,BOOLEAN,TRUE,Collection is not available
+OR004,DELIVERY_CHARGE,0,3,TRUE,TRUE,0,GBP,TRUE,Free delivery up to and including 3 miles
+OR005,DELIVERY_CHARGE,3,5,FALSE,TRUE,1.99,GBP,TRUE,Over 3 miles and up to 5 miles
+OR006,DELIVERY_CHARGE,5,10,FALSE,TRUE,3.99,GBP,TRUE,Over 5 miles and up to 10 miles
+OR007,MAX_DELIVERY_DISTANCE,0,0,TRUE,TRUE,10,MILES,TRUE,No delivery beyond 10 miles
