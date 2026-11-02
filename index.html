@@ -533,6 +533,229 @@
         container.classList.add('hidden');
         btnText.textContent = 'View Allergen Matrix';
       }
+      async function loadHungryFoxMenu() {
+  const root = document.getElementById("spreadsheet-menu");
+  const nav = document.querySelector('nav[aria-label="Menu categories"]');
+
+  function csv(text) {
+    const rows = [];
+    let row = [], value = "", quoted = false;
+    text = text.replace(/^\uFEFF/, "");
+
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+
+      if (c === '"') {
+        if (quoted && text[i + 1] === '"') {
+          value += '"';
+          i++;
+        } else {
+          quoted = !quoted;
+        }
+      } else if (c === "," && !quoted) {
+        row.push(value);
+        value = "";
+      } else if ((c === "\n" || c === "\r") && !quoted) {
+        if (c === "\r" && text[i + 1] === "\n") i++;
+        row.push(value);
+        if (row.some(x => x.trim())) rows.push(row);
+        row = [];
+        value = "";
+      } else {
+        value += c;
+      }
+    }
+
+    row.push(value);
+    if (row.some(x => x.trim())) rows.push(row);
+
+    const headers = rows.shift().map(x => x.trim());
+
+    return rows.map(cells =>
+      Object.fromEntries(
+        headers.map((h, i) => [h, (cells[i] || "").trim()])
+      )
+    );
+  }
+
+  async function get(file) {
+    const response = await fetch("/" + file + "?v=" + Date.now(), {
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      throw new Error(file + " failed to load");
+    }
+
+    return csv(await response.text());
+  }
+
+  const esc = value =>
+    String(value ?? "").replace(/[&<>"']/g, c =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[c])
+    );
+
+  const yes = value =>
+    String(value).toLowerCase() === "true";
+
+  const price = value =>
+    Number(value).toLocaleString("en-GB", {
+      style: "currency",
+      currency: "GBP"
+    });
+
+  try {
+    if (!root) {
+      throw new Error("Menu display area not found");
+    }
+
+    const [products, customisations, groups, rules] =
+      await Promise.all([
+        get("products.csv"),
+        get("customisation.csv"),
+        get("product_groups.csv"),
+        get("order_rules.csv")
+      ]);
+
+    const available = products.filter(p => yes(p.Availability));
+
+    const categories = [
+      ...new Set(
+        available.map(p => p.Category).filter(Boolean)
+      )
+    ];
+
+    if (nav) {
+      nav.innerHTML = categories.map((category, i) =>
+        `<a href="#csv-category-${i}" class="px-3 py-1.5 rounded-full bg-[#131b2e] border border-[#263352] text-slate-300 hover:text-white hover:border-orange-500/50 transition-all shrink-0">${esc(category)}</a>`
+      ).join("");
+    }
+
+    function customOptions(product) {
+      const linked = groups.filter(
+        g => g.Product_ID === product.Product_ID
+      );
+
+      if (!linked.length) return "";
+
+      const content = linked.map(group => {
+        const options = customisations.filter(o =>
+          o.Customisation_Group === group.Customization_Group &&
+          (!o.Product_ID || o.Product_ID === product.Product_ID) &&
+          yes(o.Active)
+        ).sort((a, b) =>
+          Number(a.Display_Order || 0) -
+          Number(b.Display_Order || 0)
+        );
+
+        if (!options.length) return "";
+
+        return `
+          <div class="mb-3">
+            <p class="text-white font-semibold text-sm mb-1">
+              ${esc(group.Customization_Group.replace(/_/g, " "))}
+            </p>
+            <p class="text-slate-400 text-xs mb-2">
+              Choose ${esc(group.Min_Selec)}–${esc(group.Max_Selec)}
+            </p>
+            ${options.map(o => `
+              <div class="flex justify-between text-xs text-slate-300 py-1">
+                <span>${esc(o.Option_Name)}</span>
+                <span class="text-orange-400">
+                  ${Number(o.Extra_Price) > 0 ? "+" + price(o.Extra_Price) : ""}
+                </span>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }).join("");
+
+      return content
+        ? `
+          <details class="mt-3 pt-3 border-t border-[#263352]">
+            <summary class="cursor-pointer text-orange-400 text-sm font-semibold">
+              View customization options
+            </summary>
+            <div class="pt-3">${content}</div>
+          </details>
+        `
+        : "";
+    }
+
+    root.innerHTML = categories.map((category, i) => `
+      <section
+        id="csv-category-${i}"
+        class="space-y-6 bg-[#131b2e] border border-[#263352] p-6 sm:p-8 rounded-2xl shadow-xl scroll-mt-28"
+      >
+        <h2 class="font-serif text-2xl font-bold text-white border-b border-[#263352] pb-3">
+          ${esc(category)}
+        </h2>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          ${available.filter(p => p.Category === category).map(p => `
+            <article class="p-4 rounded-xl bg-[#0b1326]/80 border border-[#263352] flex flex-col">
+              ${p.Photo_URL ? `
+                <img
+                  src="${esc(p.Photo_URL)}"
+                  alt="${esc(p.Product_Name)}"
+                  loading="lazy"
+                  class="w-full h-44 object-cover rounded-lg mb-3"
+                >
+              ` : ""}
+
+              <div class="flex justify-between gap-3">
+                <h3 class="text-white font-semibold">
+                  ${esc(p.Product_Name)}
+                </h3>
+                <span class="text-orange-400 font-bold whitespace-nowrap">
+                  ${price(p.Price)}
+                </span>
+              </div>
+
+              ${p.Description ? `
+                <p class="text-slate-400 text-sm mt-2">
+                  ${esc(p.Description)}
+                </p>
+              ` : ""}
+
+              ${customOptions(p)}
+            </article>
+          `).join("")}
+        </div>
+      </section>
+    `).join("");
+
+    const minimum = rules.find(
+      r => r.Rule_Type === "MINIMUM_ORDER" && yes(r.Active)
+    );
+
+    if (minimum) {
+      const note = document.createElement("p");
+      note.className = "text-center text-slate-400 text-sm mb-5";
+      note.textContent = "Minimum order: " + price(minimum.Rule_Value);
+      root.prepend(note);
+    }
+
+  } catch (error) {
+    console.error("Hungry Fox menu:", error);
+
+    if (root) {
+      root.innerHTML = `
+        <p class="text-center text-red-400 py-10">
+          Menu temporarily unavailable. Please try again shortly.
+        </p>
+      `;
+    }
+  }
+}
+
+loadHungryFoxMenu();
     }
   </script>
 </body>
