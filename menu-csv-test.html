@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hungry Fox – Menu CSV Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1326;color:#f1f5f9;font-family:'Plus Jakarta Sans',sans-serif}
+header{background:#060e20;border-bottom:1px solid #263352;padding:22px 16px;text-align:center}
+header img{width:170px;max-height:75px;object-fit:contain}
+h1{font:800 32px 'Playfair Display',serif;margin:12px 0 5px}
+header p{color:#94a3b8;font-size:13px;margin:0}
+main{max-width:1100px;margin:auto;padding:24px 16px}
+.notice{background:#131b2e;border:1px solid #263352;border-radius:12px;padding:14px;margin-bottom:20px;color:#cbd5e1;font-size:13px}
+#status{color:#fbbf24;margin:12px 0;font-size:13px}
+#categories{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+#categories button{background:#131b2e;color:#cbd5e1;border:1px solid #263352;border-radius:30px;padding:9px 13px;cursor:pointer;font-weight:700;font-size:12px}
+#categories button.active{background:#f97316;color:#07101f;border-color:#f97316}
+#products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
+.card{background:#131b2e;border:1px solid #263352;border-radius:14px;padding:17px;display:flex;flex-direction:column;gap:9px}
+.card h3{font-size:16px;margin:0;color:#fff}
+.card .description{font-size:13px;line-height:1.5;color:#94a3b8;flex:1}
+.price{font-size:18px;font-weight:800;color:#fb923c}
+.category{font-size:10px;color:#34d49a;font-weight:800;letter-spacing:1px}
+.options{border-top:1px solid #263352;padding-top:10px;margin-top:4px}
+.options strong{font-size:12px;color:#fb923c}
+.options ul{padding-left:18px;margin:7px 0;color:#cbd5e1;font-size:12px;line-height:1.8}
+.photo{width:100%;height:150px;object-fit:cover;border-radius:9px;background:#0b1326}
+.empty{color:#94a3b8;padding:25px;text-align:center;grid-column:1/-1}
+footer{text-align:center;padding:30px;color:#64748b;font-size:11px}
+</style>
+</head>
+<body>
+<header>
+  <img src="https://thehungryfox.co.uk/hungry-fox-logo-cream.webp" alt="The Hungry Fox">
+  <h1>Our Menu</h1>
+  <p>Menu data test · Powered by the master spreadsheet</p>
+</header>
+
+<main>
+  <div class="notice">
+    <strong>TEST PAGE ONLY</strong><br>
+    This page reads menu information from the GitHub CSV files. It does not take orders or change the live website.
+  </div>
+  <div id="status">Loading menu data…</div>
+  <nav id="categories" aria-label="Menu categories"></nav>
+  <section id="products"></section>
+</main>
+
+<footer>The Hungry Fox · Grays, Thurrock</footer>
+
+<script>
+const BASE = "https://raw.githubusercontent.com/thehungryfox2026-glitch/thehungryfox/main/";
+
+function parseCSV(text) {
+  text = text.replace(/^\uFEFF/, "");
+  const rows = [];
+  let row = [], cell = "", quoted = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i], next = text[i + 1];
+
+    if (c === '"' && quoted && next === '"') {
+      cell += '"'; i++;
+    } else if (c === '"') {
+      quoted = !quoted;
+    } else if (c === "," && !quoted) {
+      row.push(cell); cell = "";
+    } else if ((c === "\n" || c === "\r") && !quoted) {
+      if (c === "\r" && next === "\n") i++;
+      row.push(cell); cell = "";
+      if (row.some(v => v.trim() !== "")) rows.push(row);
+      row = [];
+    } else {
+      cell += c;
+    }
+  }
+  row.push(cell);
+  if (row.some(v => v.trim() !== "")) rows.push(row);
+
+  const headers = rows.shift().map(h => h.trim());
+  return rows.map(values => {
+    const item = {};
+    headers.forEach((h, i) => item[h] = (values[i] || "").trim());
+    return item;
+  });
+}
+
+async function loadCSV(filename) {
+  const response = await fetch(BASE + filename + "?v=" + Date.now());
+  if (!response.ok) throw new Error(filename + " could not be loaded (" + response.status + ")");
+  return parseCSV(await response.text());
+}
+
+let products = [];
+let customisations = [];
+let groups = [];
+let selectedCategory = "ALL";
+
+function safe(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[c]));
+}
+
+function renderCategories() {
+  const categories = [...new Set(products.map(p => p.Category).filter(Boolean))];
+  const all = ["ALL", ...categories];
+
+  document.getElementById("categories").innerHTML = all.map(category =>
+    `<button class="${category === selectedCategory ? "active" : ""}"
+      data-category="${safe(category)}">${category === "ALL" ? "All products" : safe(category)}</button>`
+  ).join("");
+
+  document.querySelectorAll("#categories button").forEach(button => {
+    button.addEventListener("click", () => {
+      selectedCategory = button.dataset.category;
+      renderCategories();
+      renderProducts();
+    });
+  });
+}
+
+function optionsFor(product) {
+  const productGroups = groups.filter(g => g.Product_ID === product.Product_ID);
+  if (!productGroups.length) return "";
+
+  return productGroups.map(group => {
+    const options = customisations
+      .filter(option =>
+        option.Active.toUpperCase() === "TRUE" &&
+        option.Customisation_Group === group.Customization_Group &&
+        (!option.Product_ID || option.Product_ID === product.Product_ID)
+      )
+      .sort((a,b) => Number(a.Display_Order || 0) - Number(b.Display_Order || 0));
+
+    if (!options.length) return "";
+
+    return `<div class="options">
+      <strong>${safe(group.Customization_Group.replaceAll("_"," "))}</strong>
+      <div style="font-size:11px;color:#94a3b8;margin-top:3px">
+        Choose ${safe(group.Min_Selec)}–${safe(group.Max_Selec)}
+      </div>
+      <ul>${options.map(o =>
+        `<li>${safe(o.Option_Name)}${Number(o.Extra_Price) > 0 ? " (+£" + Number(o.Extra_Price).toFixed(2) + ")" : ""}</li>`
+      ).join("")}</ul>
+    </div>`;
+  }).join("");
+}
+
+function renderProducts() {
+  const visible = products.filter(p =>
+    selectedCategory === "ALL" || p.Category === selectedCategory
+  );
+
+  document.getElementById("products").innerHTML = visible.length
+    ? visible.map(p => `
+      <article class="card">
+        ${p.Photo_URL ? `<img class="photo" src="${safe(p.Photo_URL)}" alt="${safe(p.Product_Name)}" loading="lazy">` : ""}
+        <div class="category">${safe(p.Category)}</div>
+        <h3>${safe(p.Product_Name)}</h3>
+        <div class="description">${safe(p.Description)}</div>
+        <div class="price">£${Number(p.Price).toFixed(2)}</div>
+        ${optionsFor(p)}
+      </article>
+    `).join("")
+    : `<div class="empty">No available products in this category.</div>`;
+}
+
+async function start() {
+  try {
+    const [p, c, g] = await Promise.all([
+      loadCSV("products.csv"),
+      loadCSV("customisation.csv"),
+      loadCSV("product_groups.csv")
+    ]);
+
+    products = p.filter(item =>
+      item.Availability.toUpperCase() === "TRUE"
+    );
+    customisations = c;
+    groups = g;
+
+    renderCategories();
+    renderProducts();
+
+    document.getElementById("status").textContent =
+      `Loaded ${products.length} available products, ${customisations.length} customization options and ${groups.length} product groups.`;
+  } catch (error) {
+    document.getElementById("status").textContent =
+      "Menu loading error: " + error.message;
+  }
+}
+
+start();
+</script>
+</body>
+</html>
