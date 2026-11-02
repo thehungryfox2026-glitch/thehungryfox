@@ -28,6 +28,7 @@
     *, ::before, ::after { box-sizing: border-box; border-width: 0; border-style: solid; border-color: #2a3859; margin: 0; padding: 0; }
     html { line-height: 1.5; -webkit-text-size-adjust: 100%; font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
     body { background-color: #0d172e; color: #f8fafc; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body.modal-open { overflow: hidden !important; touch-action: none; }
     ::selection { background-color: #f97316; color: #ffffff; }
 
     .font-serif { font-family: 'Playfair Display', Georgia, serif; }
@@ -64,6 +65,7 @@
     .z-40 { z-index: 40; }
     .z-50 { z-index: 50; }
     .z-60 { z-index: 60; }
+    .z-70 { z-index: 70; }
     .overflow-hidden { overflow: hidden; }
     .overflow-y-auto { overflow-y: auto; }
 
@@ -156,6 +158,7 @@
 
     .bg-\[\#080e1f\] { background-color: #080e1f; }
     .bg-\[\#0a1124\] { background-color: #0a1124; }
+    .bg-\[\#0b1326\] { background-color: #0b1326; }
     .bg-\[\#0d172e\] { background-color: #0d172e; }
     .bg-\[\#131b2e\] { background-color: #131b2e; }
     .bg-\[\#131f3b\] { background-color: #131f3b; }
@@ -163,9 +166,11 @@
     .bg-\[\#1c2d54\] { background-color: #1c2d54; }
     .bg-orange-500 { background-color: #f97316; }
     .bg-orange-500\/10 { background-color: rgba(249, 115, 22, 0.1); }
+    .bg-orange-500\/15 { background-color: rgba(249, 115, 22, 0.15); }
     .bg-orange-500\/20 { background-color: rgba(249, 115, 22, 0.2); }
     .bg-emerald-500 { background-color: #10b981; }
     .bg-emerald-500\/10 { background-color: rgba(16, 185, 129, 0.1); }
+    .bg-emerald-500\/15 { background-color: rgba(16, 185, 129, 0.15); }
     .bg-emerald-500\/20 { background-color: rgba(16, 185, 129, 0.2); }
     .bg-amber-500\/10 { background-color: rgba(245, 158, 11, 0.1); }
     .bg-amber-500\/20 { background-color: rgba(245, 158, 11, 0.2); }
@@ -333,16 +338,46 @@
       pointer-events: auto;
     }
 
+    /* Modal Backdrop & Architecture */
     .custom-modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(4, 9, 21, 0.8);
-      backdrop-filter: blur(5px);
+      background: rgba(4, 9, 21, 0.85);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1rem;
+      padding: 0.75rem;
       z-index: 70;
+      overscroll-behavior: contain;
+    }
+
+    .modal-dialog-panel {
+      background-color: #0d172e;
+      border: 1px solid #2a3859;
+      border-radius: 1.25rem;
+      width: 100%;
+      max-width: 32rem;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+      position: relative;
+    }
+    @media (min-width: 640px) {
+      .modal-dialog-panel {
+        max-height: 90vh;
+      }
+    }
+
+    .modal-scrollable-body {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      padding: 1rem;
     }
 
     .nav-pill {
@@ -759,29 +794,40 @@
     </div>
   </aside>
 
-  <!-- Interactive Product Customisation Modal Dialog -->
-  <div id="customModal" class="custom-modal-backdrop hidden">
-    <div class="bg-[#0d172e] border border-[#2a3859] rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-      <div class="p-4 border-b border-[#2a3859] flex items-center justify-between bg-[#131f3b]">
-        <div>
-          <h3 id="modalProductName" class="font-serif text-lg font-bold text-white">Customise Item</h3>
-          <span id="modalProductBasePrice" class="text-xs font-bold text-orange-400">£0.00</span>
+  <!-- Interactive Product Customisation Modal Dialog (Completely Fixed & Scrollable) -->
+  <div id="customModal" class="custom-modal-backdrop hidden" onclick="handleModalBackdropClick(event)">
+    <div class="modal-dialog-panel" onclick="event.stopPropagation()">
+      
+      <!-- Sticky Header -->
+      <div class="sticky top-0 z-10 p-4 border-b border-[#2a3859] bg-[#131f3b] flex items-center justify-between gap-3 shadow-md">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <button onclick="closeCustomModal()" class="px-2.5 py-1 rounded-lg bg-[#080e1f] hover:bg-[#1c2d54] text-slate-300 hover:text-white border border-[#2a3859] text-xs font-bold inline-flex items-center gap-1 shrink-0 transition-colors">
+            <span>←</span>
+            <span>Back to Menu</span>
+          </button>
+          <div class="truncate">
+            <h3 id="modalProductName" class="font-serif text-base sm:text-lg font-bold text-white truncate">Customise Item</h3>
+            <span id="modalProductBasePrice" class="text-xs font-bold text-orange-400 block">£0.00</span>
+          </div>
         </div>
-        <button onclick="closeCustomModal()" class="text-slate-400 hover:text-white p-1 text-lg">✕</button>
+        <button onclick="closeCustomModal()" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#1c2d54] text-lg font-bold shrink-0 transition-colors" aria-label="Close modal">✕</button>
       </div>
 
-      <div id="modalAlertBox" class="p-3 bg-red-500/15 border-b border-red-500/30 text-xs text-red-300 font-semibold hidden">
+      <!-- Alert Notification Banner -->
+      <div id="modalAlertBox" class="p-3 bg-red-500/15 border-b border-red-500/30 text-xs text-red-300 font-semibold hidden shrink-0">
         ⚠️ Please make your required selection before adding to basket.
       </div>
 
-      <div id="modalBody" class="p-4 overflow-y-auto flex-1 space-y-4"></div>
+      <!-- Independently Scrollable Customisation Options Container -->
+      <div id="modalBody" class="modal-scrollable-body space-y-4"></div>
 
-      <div class="p-4 border-t border-[#2a3859] bg-[#0a1124] flex items-center justify-between gap-3">
+      <!-- Sticky Action Footer with Running Item Total -->
+      <div class="sticky bottom-0 z-10 p-4 border-t border-[#2a3859] bg-[#0a1124] flex items-center justify-between gap-3 shadow-lg">
         <div>
           <span class="text-[10px] text-slate-400 block uppercase font-bold">Item Total:</span>
           <span id="modalRunningTotal" class="text-base font-black text-orange-400">£0.00</span>
         </div>
-        <button onclick="confirmAddToBasket()" class="btn-orange px-6 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold">
+        <button onclick="confirmAddToBasket()" class="btn-orange px-6 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold shadow-md">
           + Add to Basket
         </button>
       </div>
@@ -789,14 +835,14 @@
   </div>
 
   <!-- Delivery Checkout Modal -->
-  <div id="checkoutModal" class="custom-modal-backdrop hidden">
-    <div class="bg-[#0d172e] border border-[#2a3859] rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-      <div class="p-4 border-b border-[#2a3859] flex items-center justify-between bg-[#131f3b]">
+  <div id="checkoutModal" class="custom-modal-backdrop hidden" onclick="handleCheckoutBackdropClick(event)">
+    <div class="modal-dialog-panel" onclick="event.stopPropagation()">
+      <div class="sticky top-0 z-10 p-4 border-b border-[#2a3859] flex items-center justify-between bg-[#131f3b] shadow-md">
         <h3 class="font-serif text-lg font-bold text-white">Delivery Checkout (No Collection)</h3>
         <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-1 text-lg">✕</button>
       </div>
 
-      <div class="p-4 overflow-y-auto flex-1 space-y-4 text-xs">
+      <div class="modal-scrollable-body space-y-4 text-xs">
         <div class="space-y-2">
           <span class="font-bold text-white uppercase tracking-wider block">1. Contact Information</span>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -841,7 +887,7 @@
         </div>
       </div>
 
-      <div class="p-4 border-t border-[#2a3859] bg-[#0a1124] space-y-2">
+      <div class="sticky bottom-0 z-10 p-4 border-t border-[#2a3859] bg-[#0a1124] space-y-2 shadow-lg">
         <button id="btnFinalPay" disabled class="btn-orange w-full py-3 rounded-xl text-sm font-extrabold shadow-lg opacity-60 cursor-not-allowed">
           Online Card Checkout Coming Soon
         </button>
@@ -881,6 +927,8 @@
       cart: [],
       activeModalProduct: null,
       activeModalSelections: {},
+      savedProductSelections: {}, // Preserves selections per productId
+      modalPrevScrollY: 0,
       verifiedPostcode: null,
       verifiedQuote: null,
       isQuoteLoading: false
@@ -1095,7 +1143,7 @@
 
         const rawCategories = [...new Set(state.products.map(p => p.Category).filter(Boolean))];
 
-        // Sort categories by exact hierarchical rank
+        // Sort categories by exact predefined hierarchical rank
         state.categories = rawCategories.sort((a, b) => getCategoryRank(a) - getCategoryRank(b));
 
         if (navBar && state.categories.length > 0) {
@@ -1153,12 +1201,38 @@
       }
     }
 
+    // Modal Background Scroll-Lock Management
+    function lockPageScroll() {
+      state.modalPrevScrollY = window.scrollY || window.pageYOffset;
+      document.body.classList.add('modal-open');
+    }
+
+    function unlockPageScroll() {
+      document.body.classList.remove('modal-open');
+      window.scrollTo(0, state.modalPrevScrollY);
+    }
+
+    function handleModalBackdropClick(e) {
+      if (e.target === document.getElementById('customModal')) {
+        closeCustomModal();
+      }
+    }
+
+    function handleCheckoutBackdropClick(e) {
+      if (e.target === document.getElementById('checkoutModal')) {
+        closeCheckoutModal();
+      }
+    }
+
     function openCustomModal(productId) {
       const product = state.products.find(p => p.Product_ID === productId);
       if (!product) return;
 
+      lockPageScroll();
+
       state.activeModalProduct = product;
-      state.activeModalSelections = {};
+      // Restore previous selections for this product if already made, otherwise initialize fresh
+      state.activeModalSelections = state.savedProductSelections[productId] ? JSON.parse(JSON.stringify(state.savedProductSelections[productId])) : {};
 
       document.getElementById('modalProductName').textContent = product.Product_Name;
       document.getElementById('modalProductBasePrice').textContent = 'Base Price: ' + formatGBP(product.Price);
@@ -1169,7 +1243,7 @@
 
       if (!linkedGroups.length) {
         modalBody.innerHTML = `
-          <div class="p-4 rounded-xl bg-[#080e1f] text-center text-xs text-slate-300">
+          <div class="p-6 rounded-xl bg-[#080e1f] border border-[#2a3859] text-center text-xs text-slate-300">
             No additional flavour customisations required. Ready to add to your delivery basket!
           </div>
         `;
@@ -1187,25 +1261,29 @@
 
           if (!options.length) return '';
 
+          const currentSelected = state.activeModalSelections[groupName] || [];
+
           return `
-            <div class="p-3 rounded-xl bg-[#080e1f] border border-[#2a3859] space-y-2" data-group-name="${esc(groupName)}" data-min="${minSel}" data-max="${maxSel}">
+            <div class="p-3.5 rounded-xl bg-[#080e1f] border border-[#2a3859] space-y-2" data-group-name="${esc(groupName)}" data-min="${minSel}" data-max="${maxSel}">
               <div class="flex justify-between items-center">
                 <span class="font-bold text-white text-xs">${esc(groupName.replace(/_/g, ' '))} ${minSel > 0 ? '<span class="text-orange-400">*Required</span>' : ''}</span>
                 <span class="text-[10px] text-amber-400 font-semibold">Choose ${minSel === maxSel ? minSel : minSel + '–' + maxSel}</span>
               </div>
-              <div class="space-y-1 pt-1">
+              <div class="space-y-1.5 pt-1">
                 ${options.map(opt => {
                   const extra = parseFloat(opt.Extra_Price) || 0;
+                  const isChecked = currentSelected.some(s => s.name === opt.Option_Name);
                   return `
-                    <label class="flex items-center justify-between p-2 rounded-lg bg-[#131f3b] hover:bg-[#1c2d54] cursor-pointer text-xs text-slate-200">
-                      <div class="flex items-center gap-2">
+                    <label class="flex items-center justify-between p-2.5 rounded-lg bg-[#131f3b] hover:bg-[#1c2d54] cursor-pointer text-xs text-slate-200 transition-colors">
+                      <div class="flex items-center gap-2.5">
                         <input type="${maxSel === 1 ? 'radio' : 'checkbox'}" 
                                name="grp_${esc(groupName)}" 
                                value="${esc(opt.Option_Name)}" 
                                data-extra="${extra}" 
+                               ${isChecked ? 'checked' : ''}
                                onchange="handleOptionChange('${esc(groupName)}', ${maxSel})"
-                               class="accent-orange-500" />
-                        <span>${esc(opt.Option_Name)}</span>
+                               class="accent-orange-500 w-4 h-4 cursor-pointer" />
+                        <span class="font-medium">${esc(opt.Option_Name)}</span>
                       </div>
                       <span class="text-[11px] font-bold ${extra > 0 ? 'text-orange-400' : 'text-slate-400'}">
                         ${extra > 0 ? '+' + formatGBP(extra) : 'Included'}
@@ -1221,6 +1299,7 @@
 
       updateModalTotal();
       document.getElementById('customModal').classList.remove('hidden');
+      modalBody.scrollTop = 0; // Reset internal modal scroll to top
     }
 
     function handleOptionChange(groupName, maxSel) {
@@ -1230,6 +1309,12 @@
         name: i.value,
         extra: parseFloat(i.dataset.extra) || 0
       }));
+
+      // Cache current selections for this product
+      if (state.activeModalProduct) {
+        state.savedProductSelections[state.activeModalProduct.Product_ID] = JSON.parse(JSON.stringify(state.activeModalSelections));
+      }
+
       updateModalTotal();
     }
 
@@ -1246,6 +1331,7 @@
       document.getElementById('customModal').classList.add('hidden');
       state.activeModalProduct = null;
       state.activeModalSelections = {};
+      unlockPageScroll();
     }
 
     function confirmAddToBasket() {
@@ -1262,7 +1348,7 @@
           const alertBox = document.getElementById('modalAlertBox');
           alertBox.textContent = `⚠️ Please select at least ${minSel} option for "${groupName.replace(/_/g, ' ')}" before adding to basket.`;
           alertBox.classList.remove('hidden');
-          card.scrollIntoView({ behavior: 'smooth' });
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
           return;
         }
       }
@@ -1285,6 +1371,9 @@
         customSummary: customSummary.join(', '),
         quantity: 1
       });
+
+      // Clear saved selection for this product once committed
+      delete state.savedProductSelections[p.Product_ID];
 
       closeCustomModal();
       invalidateDeliveryQuote();
@@ -1394,6 +1483,7 @@
     function startDeliveryCheckout() {
       if (state.cart.length === 0) return;
       closeCartDrawer();
+      lockPageScroll();
       document.getElementById('checkoutModal').classList.remove('hidden');
 
       const postcodeField = document.getElementById('custPostcode');
@@ -1405,6 +1495,7 @@
 
     function closeCheckoutModal() {
       document.getElementById('checkoutModal').classList.add('hidden');
+      unlockPageScroll();
     }
 
     let checkoutDebounceTimer = null;
