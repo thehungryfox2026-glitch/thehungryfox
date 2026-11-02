@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hungry Fox | Menu Test</title>
+<style>
+:root {
+  --bg:#0b1326;
+  --panel:#121e35;
+  --panel2:#182640;
+  --orange:#f97316;
+  --cream:#fff7ed;
+  --muted:#aab6c9;
+  --line:#2a3a55;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--cream);
+  font-family:Arial,Helvetica,sans-serif;
+}
+header{
+  text-align:center;padding:38px 18px 28px;
+  background:linear-gradient(145deg,#101d35,#080f20);
+  border-bottom:1px solid var(--line);
+}
+.logo{max-width:180px;max-height:105px;object-fit:contain}
+h1{font-size:clamp(28px,5vw,44px);margin:15px 0 8px}
+h1 span{color:var(--orange)}
+header p{color:var(--muted);margin:0}
+.notice{
+  max-width:1100px;margin:18px auto 0;padding:12px 16px;
+  border:1px solid #75401e;border-radius:10px;
+  color:#ffd2ad;background:#281b19;font-size:14px;
+}
+main{max-width:1200px;margin:auto;padding:22px 16px 60px}
+#rules{
+  text-align:center;color:var(--muted);font-size:14px;
+  margin:0 auto 22px;
+}
+#categories{
+  display:flex;gap:9px;overflow-x:auto;padding:5px 0 16px;
+  position:sticky;top:0;background:var(--bg);z-index:5;
+}
+#categories a{
+  flex:0 0 auto;text-decoration:none;color:var(--cream);
+  border:1px solid var(--line);border-radius:30px;
+  padding:9px 14px;font-size:13px;
+}
+#categories a:hover{background:var(--orange);color:#160d08}
+.category{margin:30px 0 42px;scroll-margin-top:75px}
+.category h2{
+  font-size:24px;margin:0 0 16px;padding-bottom:10px;
+  border-bottom:2px solid var(--orange);
+}
+.products{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;
+}
+.product{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
+}
+.photo{
+  width:100%;height:175px;object-fit:cover;background:var(--panel2);
+}
+.no-photo{
+  height:90px;display:grid;place-items:center;
+  color:#75849b;background:var(--panel2);font-size:13px;
+}
+.product-content{padding:14px;display:flex;flex-direction:column;flex:1}
+.product-heading{
+  display:flex;justify-content:space-between;gap:10px;align-items:flex-start;
+}
+.product h3{font-size:17px;line-height:1.3;margin:0}
+.price{color:var(--orange);font-weight:bold;white-space:nowrap}
+.description{
+  color:var(--muted);font-size:13px;line-height:1.5;margin:9px 0 12px;
+}
+.custom{
+  margin-top:auto;border-top:1px solid var(--line);padding-top:10px;
+}
+.custom summary{
+  cursor:pointer;color:#ffb27c;font-size:13px;font-weight:bold;
+}
+.options{padding:9px 0 0}
+.group{margin:0 0 12px}
+.group-title{font-size:13px;font-weight:bold;margin-bottom:5px}
+.group-meta{font-size:11px;color:var(--muted);margin-bottom:6px}
+.option{
+  display:flex;justify-content:space-between;gap:10px;
+  font-size:12px;color:#d8e0ec;padding:4px 0;
+}
+.option span:last-child{white-space:nowrap;color:#ffb27c}
+.loading,.error{
+  text-align:center;padding:40px 15px;color:var(--muted);
+}
+.error{color:#ff9b8d}
+footer{
+  text-align:center;padding:25px;color:var(--muted);
+  border-top:1px solid var(--line);font-size:12px;
+}
+@media(max-width:850px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){
+  main{padding-left:12px;padding-right:12px}
+  .products{grid-template-columns:1fr}
+  .photo{height:190px}
+  .product-content{padding:13px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <img class="logo" src="hungry-fox-logo-cream.webp" alt="The Hungry Fox"
+       onerror="this.style.display='none'">
+  <h1>THE <span>HUNGRY FOX</span></h1>
+  <p>Cracking Chicken. Insane Flavours.</p>
+  <div class="notice">MENU TEST PAGE — prices and products are being loaded from the master menu spreadsheets.</div>
+</header>
+
+<main>
+  <div id="rules">Loading menu information…</div>
+  <nav id="categories" aria-label="Menu categories"></nav>
+  <div id="menu" class="loading">Loading the Hungry Fox menu…</div>
+</main>
+
+<footer>
+  The Hungry Fox · 100% Halal Certified
+</footer>
+
+<script>
+const FILES = {
+  products: "products.csv",
+  customisations: "customisation.csv",
+  groups: "product_groups.csv",
+  rules: "order_rules.csv"
+};
+
+function parseCSV(text) {
+  text = text.replace(/^\uFEFF/, "");
+  const rows = [];
+  let row = [], value = "", quoted = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    if (char === '"') {
+      if (quoted && text[i + 1] === '"') {
+        value += '"';
+        i++;
+      } else {
+        quoted = !quoted;
+      }
+    } else if (char === "," && !quoted) {
+      row.push(value);
+      value = "";
+    } else if ((char === "\n" || char === "\r") && !quoted) {
+      if (char === "\r" && text[i + 1] === "\n") i++;
+      row.push(value);
+      if (row.some(cell => cell.trim() !== "")) rows.push(row);
+      row = [];
+      value = "";
+    } else {
+      value += char;
+    }
+  }
+
+  row.push(value);
+  if (row.some(cell => cell.trim() !== "")) rows.push(row);
+
+  if (!rows.length) return [];
+  const headers = rows.shift().map(h => h.trim());
+
+  return rows.map(cells => {
+    const item = {};
+    headers.forEach((header, index) => {
+      item[header] = (cells[index] || "").trim();
+    });
+    return item;
+  });
+}
+
+async function loadCSV(file) {
+  const response = await fetch(file + "?v=" + Date.now(), {cache:"no-store"});
+  if (!response.ok) throw new Error(file + " could not be loaded (" + response.status + ")");
+  return parseCSV(await response.text());
+}
+
+function money(value) {
+  const number = Number(value);
+  return Number.isFinite(number)
+    ? number.toLocaleString("en-GB",{style:"currency",currency:"GBP"})
+    : value;
+}
+
+function active(value) {
+  return String(value || "").trim().toLowerCase() === "true";
+}
+
+function safe(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[char]));
+}
+
+function getRule(rules, type) {
+  return rules.find(rule =>
+    String(rule.Rule_Type || "").trim().toUpperCase() === type &&
+    active(rule.Active)
+  );
+}
+
+function renderRules(rules) {
+  const minimum = getRule(rules, "MINIMUM_ORDER");
+  const delivery = getRule(rules, "DELIVERY_ENABLED");
+  const collection = getRule(rules, "COLLECTION_ENABLED");
+
+  const messages = [];
+  if (minimum) messages.push("Minimum order: " + money(minimum.Rule_Value));
+  if (delivery) messages.push("Website delivery enabled");
+  if (collection) {
+    messages.push(active(collection.Rule_Value) ? "Collection available" : "Delivery only");
+  }
+
+  document.getElementById("rules").textContent =
+    messages.join(" · ") || "Menu and ordering information";
+}
+
+function renderCustomisations(product, groups, customisations) {
+  const productGroups = groups.filter(group =>
+    group.Product_ID === product.Product_ID
+  );
+
+  if (!productGroups.length) return "";
+
+  const blocks = productGroups.map(group => {
+    const options = customisations
+      .filter(option =>
+        option.Customisation_Group === group.Customization_Group &&
+        (!option.Product_ID || option.Product_ID === product.Product_ID) &&
+        active(option.Active)
+      )
+      .sort((a,b) => Number(a.Display_Order || 0) - Number(b.Display_Order || 0));
+
+    if (!options.length) return "";
+
+    const min = group.Min_Selec;
+    const max = group.Max_Selec;
+    const title = group.Customization_Group.replace(/_/g," ").toLowerCase()
+      .replace(/\b\w/g, letter => letter.toUpperCase());
+
+    return `
+      <div class="group">
+        <div class="group-title">${safe(title)}</div>
+        <div class="group-meta">Choose ${safe(min)}–${safe(max)} option(s)</div>
+        ${options.map(option => `
+          <div class="option">
+            <span>${safe(option.Option_Name)}</span>
+            <span>${Number(option.Extra_Price) > 0 ? "+" + money(option.Extra_Price) : ""}</span>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }).join("");
+
+  return blocks.trim()
+    ? `<details class="custom"><summary>View customization options</summary><div class="options">${blocks}</div></details>`
+    : "";
+}
+
+function renderProduct(product, groups, customisations) {
+  const photo = product.Photo_URL
+    ? `<img class="photo" src="${safe(product.Photo_URL)}" alt="${safe(product.Product_Name)}" loading="lazy" onerror="this.style.display='none'">`
+    : `<div class="no-photo">Photo coming soon</div>`;
+
+  return `
+    <article class="product">
+      ${photo}
+      <div class="product-content">
+        <div class="product-heading">
+          <h3>${safe(product.Product_Name)}</h3>
+          <span class="price">${money(product.Price)}</span>
+        </div>
+        ${product.Description ? `<p class="description">${safe(product.Description)}</p>` : ""}
+        ${renderCustomisations(product, groups, customisations)}
+      </div>
+    </article>
+  `;
+}
+
+function renderMenu(products, groups, customisations) {
+  const menu = document.getElementById("menu");
+  const available = products.filter(product => active(product.Availability));
+
+  if (!available.length) {
+    menu.innerHTML = '<div class="error">No available products were found in products.csv.</div>';
+    return;
+  }
+
+  const categories = [...new Set(available.map(p => p.Category).filter(Boolean))];
+
+  document.getElementById("categories").innerHTML = categories.map((category,index) =>
+    `<a href="#category-${index}">${safe(category)}</a>`
+  ).join("");
+
+  menu.innerHTML = categories.map((category,index) => {
+    const categoryProducts = available.filter(p => p.Category === category);
+    return `
+      <section class="category" id="category-${index}">
+        <h2>${safe(category)}</h2>
+        <div class="products">
+          ${categoryProducts.map(product =>
+            renderProduct(product,groups,customisations)
+          ).join("")}
+        </div>
+      </section>
+    `;
+  }).join("");
+}
+
+async function startMenu() {
+  try {
+    const [products, customisations, groups, rules] = await Promise.all([
+      loadCSV(FILES.products),
+      loadCSV(FILES.customisations),
+      loadCSV(FILES.groups),
+      loadCSV(FILES.rules)
+    ]);
+
+    renderRules(rules);
+    renderMenu(products, groups, customisations);
+
+    console.info("Hungry Fox CSV menu loaded:", {
+      products: products.length,
+      customisations: customisations.length,
+      productGroups: groups.length,
+      orderRules: rules.length
+    });
+  } catch (error) {
+    console.error(error);
+    document.getElementById("menu").innerHTML =
+      '<div class="error">The menu could not load. Please check that all four CSV files are in the repository root and that their filenames match the spreadsheet export.</div>';
+    document.getElementById("rules").textContent = error.message;
+  }
+}
+
+startMenu();
+</script>
+</body>
+</html>
