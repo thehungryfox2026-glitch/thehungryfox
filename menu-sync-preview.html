@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Hungry Fox | Menu Sync Preview</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1326;--panel:#131b2e;--line:#263352;--orange:#f97316;--muted:#aab5c8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f1f5f9;font:15px system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1100px;margin:auto;padding:28px 18px 60px}h1{font-size:clamp(25px,4vw,38px);margin:0 0 6px}h2{font-size:20px;margin:28px 0 12px}
+p{color:var(--muted);line-height:1.5}.notice{border:1px solid #80521e;background:#2b2115;padding:14px 16px;border-radius:12px;margin:18px 0}
+.status{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:12px 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.stat{background:var(--panel);border:1px solid var(--line);padding:14px;border-radius:12px}.stat b{display:block;font-size:26px;color:var(--orange)}
+table{width:100%;border-collapse:collapse;background:var(--panel);font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:#fdba74;position:sticky;top:0;background:#18233b}
+.tablewrap{overflow:auto;max-height:480px;border:1px solid var(--line);border-radius:10px}code{color:#fdba74}.ok{color:#86efac}.warn{color:#fbbf24}.bad{color:#fca5a5}
+small{color:var(--muted)}button{background:var(--orange);color:#fff;border:0;border-radius:8px;padding:10px 14px;font-weight:700}
+</style>
+</head>
+<body><main>
+<h1>THE HUNGRY FOX — MENU SYNC PREVIEW</h1>
+<p>Read-only test page. It loads the four customer-facing CSV files from this GitHub repository so you can check the Excel data is reaching the website host.</p>
+<div class="notice"><b>Important:</b> This page does not change your live menu, prices, allergen information, cart, or ordering links. It is a separate preview only.</div>
+<div id="status" class="status">Connecting to the menu CSV files…</div>
+<div class="stats">
+ <div class="stat"><b id="productsCount">—</b><span>Products</span></div>
+ <div class="stat"><b id="customCount">—</b><span>Customization options</span></div>
+ <div class="stat"><b id="groupsCount">—</b><span>Product-group links</span></div>
+ <div class="stat"><b id="rulesCount">—</b><span>Order rules</span></div>
+</div>
+<h2>Products from Excel</h2><div id="products" class="tablewrap"></div>
+<h2>Customization groups</h2><div id="custom" class="tablewrap"></div>
+<h2>Product-to-customization links</h2><div id="groups" class="tablewrap"></div>
+<h2>Delivery and order rules</h2><div id="rules" class="tablewrap"></div>
+<p><small>CSV source: <code>thehungryfox2026-glitch/thehungryfox</code> · branch <code>main</code>. Internal kitchen sheet is intentionally excluded.</small></p>
+</main>
+<script>
+const BASE='https://raw.githubusercontent.com/thehungryfox2026-glitch/thehungryfox/main/';
+const FILES={products:'products.csv',custom:'customisation.csv',groups:'product_groups.csv',rules:'order_rules.csv'};
+function parseCSV(text){
+ text=text.replace(/^\uFEFF/,'').replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+ const rows=[];let row=[],cell='',quoted=false;
+ for(let i=0;i<text.length;i++){
+  const c=text[i],n=text[i+1];
+  if(quoted){if(c==='"'&&n==='"'){cell+='"';i++;}else if(c==='"')quoted=false;else cell+=c;}
+  else if(c==='"')quoted=true;
+  else if(c===','){row.push(cell);cell='';}
+  else if(c==='\n'){row.push(cell);if(row.some(x=>x!==''))rows.push(row);row=[];cell='';}
+  else cell+=c;
+ }
+ row.push(cell);if(row.some(x=>x!==''))rows.push(row);
+ if(!rows.length)return [];
+ const headers=rows.shift().map(x=>x.trim());
+ return rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??'').trim()])));
+}
+function table(target,rows,cols){
+ const el=document.getElementById(target);
+ if(!rows.length){el.textContent='No rows found.';return;}
+ el.innerHTML='<table><thead><tr>'+cols.map(c=>'<th>'+esc(c)+'</th>').join('')+'</tr></thead><tbody>'+
+ rows.map(r=>'<tr>'+cols.map(c=>'<td>'+esc(r[c]??'')+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
+}
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+async function load(key){
+ const response=await fetch(BASE+FILES[key],{cache:'no-store'});
+ if(!response.ok)throw new Error(FILES[key]+' returned HTTP '+response.status);
+ return parseCSV(await response.text());
+}
+(async()=>{
+ try{
+  const [p,c,g,r]=await Promise.all([load('products'),load('custom'),load('groups'),load('rules')]);
+  document.getElementById('productsCount').textContent=p.length;
+  document.getElementById('customCount').textContent=c.length;
+  document.getElementById('groupsCount').textContent=g.length;
+  document.getElementById('rulesCount').textContent=r.length;
+  table('products',p,['Product_ID','Category','Product_Name','Description','Price','Availability','Photo_URL']);
+  table('custom',c,['Customisation_ID','Customisation_Group','Option_Name','Selection_Mode','Min_Selection','Max_Selection','Extra_Price','Active','Heat_Level']);
+  table('groups',g,['Product_ID','Customization_Group','Minimum_Selec','Maximum_Selec']);
+  table('rules',r,['Rule_ID','Rule_Type','Min_Value','Max_Value','Rule_Value','Unit','Active','Notes']);
+  document.getElementById('status').innerHTML='<span class="ok"><b>Connected successfully.</b></span> All four CSV files loaded. This is a data check only; the existing website menu has not been altered.';
+ }catch(e){
+  document.getElementById('status').innerHTML='<span class="bad"><b>Connection failed:</b></span> '+esc(e.message)+'<br><small>Check that the four CSV filenames are exactly correct and committed to the main branch.</small>';
+ }
+})();
+</script></body></html>
