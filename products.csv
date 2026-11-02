@@ -1,4 +1,4 @@
-﻿Product_ID,Category,Product_Name,Description,Price,Availibility,Photo_URL
+﻿Product_ID,Category,Product_Name,Description,Price,Availability,Photo_URL
 CHK001,SOLO OR OR UPGRADE TO MEAL,Quarter Baked Chicken,"Enjoy a quarter of our oven-baked chicken, coated in your choice of our signature flavors.",£5.49,TRUE,
 CHK002,SOLO OR OR UPGRADE TO MEAL,Half Baked Chicken,"A generous half chicken, oven-baked and coated in your choice of our signature flavors.",£8.49,TRUE,
 WNG001,SOLO OR OR UPGRADE TO MEAL,Baked Wings (6 Pcs),"Six delicious oven-baked chicken wings, finished in your choice of our signature flavors.",£6.99,TRUE,
