@@ -30,11 +30,9 @@
     body { background-color: #0d172e; color: #f8fafc; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     ::selection { background-color: #f97316; color: #ffffff; }
 
-    /* Typography */
     .font-serif { font-family: 'Playfair Display', Georgia, serif; }
     .font-sans { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
 
-    /* Containers */
     .max-w-6xl { max-width: 72rem; }
     .max-w-5xl { max-width: 64rem; }
     .max-w-4xl { max-width: 56rem; }
@@ -68,7 +66,6 @@
     .overflow-hidden { overflow: hidden; }
     .overflow-y-auto { overflow-y: auto; }
 
-    /* Smooth Touch Scrollbar */
     .no-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
@@ -77,18 +74,21 @@
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
 
-    /* Spacing */
     .p-2 { padding: 0.5rem; }
+    .p-2\.5 { padding: 0.625rem; }
     .p-3 { padding: 0.75rem; }
+    .p-3\.5 { padding: 0.875rem; }
     .p-4 { padding: 1rem; }
     .p-5 { padding: 1.25rem; }
     .p-6 { padding: 1.5rem; }
     .p-8 { padding: 2rem; }
+    .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
     .px-2\.5 { padding-left: 0.625rem; padding-right: 0.625rem; }
     .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
     .px-4 { padding-left: 1rem; padding-right: 1rem; }
     .px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
     .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .py-0\.5 { padding-top: 0.125rem; padding-bottom: 0.125rem; }
     .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
     .py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
     .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
@@ -135,14 +135,17 @@
     .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.5rem; }
     .space-y-12 > :not([hidden]) ~ :not([hidden]) { margin-top: 3rem; }
 
-    /* Borders & Corners */
     .border { border-width: 1px; }
     .border-b { border-bottom-width: 1px; }
     .border-t { border-top-width: 1px; }
+    .border-l { border-left-width: 1px; }
+    .border-\[\#202e4d\] { border-color: #202e4d; }
     .border-\[\#2a3859\] { border-color: #2a3859; }
     .border-\[\#324368\] { border-color: #324368; }
     .border-orange-500\/40 { border-color: rgba(249, 115, 22, 0.4); }
     .border-emerald-500\/30 { border-color: rgba(16, 185, 129, 0.3); }
+    .border-emerald-500\/40 { border-color: rgba(16, 185, 129, 0.4); }
+    .border-red-500\/30 { border-color: rgba(239, 68, 68, 0.3); }
     .rounded-md { border-radius: 0.375rem; }
     .rounded-lg { border-radius: 0.5rem; }
     .rounded-xl { border-radius: 0.75rem; }
@@ -150,7 +153,6 @@
     .rounded-3xl { border-radius: 1.5rem; }
     .rounded-full { border-radius: 9999px; }
 
-    /* Theme Palette */
     .bg-\[\#080e1f\] { background-color: #080e1f; }
     .bg-\[\#0a1124\] { background-color: #0a1124; }
     .bg-\[\#0d172e\] { background-color: #0d172e; }
@@ -160,10 +162,13 @@
     .bg-orange-500 { background-color: #f97316; }
     .bg-orange-500\/10 { background-color: rgba(249, 115, 22, 0.1); }
     .bg-orange-500\/20 { background-color: rgba(249, 115, 22, 0.2); }
+    .bg-emerald-500 { background-color: #10b981; }
     .bg-emerald-500\/10 { background-color: rgba(16, 185, 129, 0.1); }
     .bg-emerald-500\/20 { background-color: rgba(16, 185, 129, 0.2); }
+    .bg-amber-500\/10 { background-color: rgba(245, 158, 11, 0.1); }
     .bg-amber-500\/20 { background-color: rgba(245, 158, 11, 0.2); }
     .bg-red-500\/10 { background-color: rgba(239, 68, 68, 0.1); }
+    .bg-red-500\/15 { background-color: rgba(239, 68, 68, 0.15); }
 
     .text-white { color: #ffffff; }
     .text-slate-100 { color: #f1f5f9; }
@@ -175,6 +180,7 @@
     .text-orange-500 { color: #f97316; }
     .text-amber-400 { color: #fbbf24; }
     .text-emerald-400 { color: #34d49a; }
+    .text-red-300 { color: #fca5a5; }
     .text-red-400 { color: #f87171; }
     .text-\[\#060e20\] { color: #060e20; }
 
@@ -187,7 +193,8 @@
     .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
     .text-2xl { font-size: 1.5rem; line-height: 2rem; }
     .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
-    .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+    .text-5xl { font-size: 3rem; line-height: 1.15; }
+    .font-medium { font-weight: 500; }
     .font-semibold { font-weight: 600; }
     .font-bold { font-weight: 700; }
     .font-extrabold { font-weight: 800; }
@@ -198,15 +205,21 @@
     .tracking-widest { letter-spacing: 0.1em; }
     .text-center { text-align: center; }
     .text-left { text-align: left; }
-    .text-right { text-align: right; }
     .leading-tight { line-height: 1.2; }
     .leading-snug { line-height: 1.375; }
     .leading-relaxed { line-height: 1.625; }
     .underline { text-decoration-line: underline; }
     .whitespace-nowrap { whitespace: nowrap; }
     .w-full { width: 100%; }
+    .w-40 { width: 10rem; }
+    .h-2 { height: 0.5rem; }
+    .h-6 { height: 1.5rem; }
+    .w-6 { width: 1.5rem; }
+    .w-12 { width: 3rem; }
+    .h-12 { height: 3rem; }
+    .h-44 { height: 11rem; }
+    .object-cover { object-fit: cover; }
 
-    /* Logo Natural Ratio */
     .brand-logo {
       height: 48px;
       width: auto;
@@ -217,8 +230,8 @@
     }
     @media (min-width: 640px) {
       .brand-logo {
-        height: 64px;
-        max-width: 210px;
+        height: 56px;
+        max-width: 200px;
       }
     }
     .brand-logo-footer {
@@ -230,7 +243,6 @@
       flex-shrink: 0;
     }
 
-    /* Primary CTAs */
     .btn-orange {
       background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
       color: #060e20;
@@ -256,13 +268,12 @@
       box-shadow: none;
     }
 
-    /* Partner header badges */
     .btn-uber {
       background: #000000;
       color: #06c167;
       font-weight: 800;
       border: 1px solid #2a3859;
-      padding: 0.5rem 0.85rem;
+      padding: 0.45rem 0.75rem;
       border-radius: 0.75rem;
       text-decoration: none;
       font-size: 0.75rem;
@@ -275,7 +286,7 @@
       color: #060e20;
       font-weight: 800;
       border: 1px solid rgba(0,205,188,0.5);
-      padding: 0.5rem 0.85rem;
+      padding: 0.45rem 0.75rem;
       border-radius: 0.75rem;
       text-decoration: none;
       font-size: 0.75rem;
@@ -284,7 +295,6 @@
       gap: 0.35rem;
     }
 
-    /* Basket Drawer */
     .cart-drawer {
       position: fixed;
       top: 0;
@@ -319,7 +329,6 @@
       pointer-events: auto;
     }
 
-    /* Modal */
     .custom-modal-backdrop {
       position: fixed;
       inset: 0;
@@ -332,7 +341,6 @@
       z-index: 70;
     }
 
-    /* Category Nav Pills */
     .nav-pill {
       display: inline-flex;
       align-items: center;
@@ -356,7 +364,6 @@
       box-shadow: 0 2px 10px rgba(249, 115, 22, 0.35);
     }
 
-    /* Product Cards */
     .product-card {
       background: linear-gradient(180deg, #172649 0%, #111d38 100%);
       border: 1px solid #2a3859;
@@ -374,7 +381,6 @@
       box-shadow: 0 12px 26px -8px rgba(0, 0, 0, 0.5);
     }
 
-    /* Map container */
     .map-container {
       position: relative;
       width: 100%;
@@ -393,18 +399,18 @@
       border: 0;
     }
 
-    /* Responsive */
     @media (min-width: 640px) {
       .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .sm\:flex-row { flex-direction: row; }
       .sm\:p-8 { padding: 2rem; }
-      .sm\:p-12 { padding: 3rem; }
+      .sm\:p-10 { padding: 2.5rem; }
       .sm\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+      .sm\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
       .sm\:text-5xl { font-size: 3rem; line-height: 1.15; }
     }
     @media (min-width: 768px) {
       .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .md\:flex { display: flex; }
     }
     @media (min-width: 1024px) {
       .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -416,33 +422,11 @@
   <!-- Overlay Backdrop for Drawer & Modals -->
   <div id="drawerOverlay" class="drawer-overlay" onclick="closeCartDrawer()"></div>
 
-  <!-- Top Notice Bar: Trust & Certified Info -->
-  <aside class="bg-[#080e1f] border-b border-[#202e4d] text-xs py-2 px-4 sticky top-0 z-40">
-    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 text-slate-300">
-      <div class="flex items-center gap-3 sm:gap-5 flex-wrap">
-        <a href="https://ratings.food.gov.uk/business/1981131/the-hungry-fox" target="_blank" rel="noopener noreferrer" 
-           class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold hover:underline">
-          <span>⭐️⭐️⭐️⭐️⭐️</span>
-          <span>5-Star Food Hygiene</span>
-        </a>
-        <span class="inline-flex items-center gap-1 text-emerald-400 font-semibold">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          100% Halal Certified Kitchen
-        </span>
-        <span class="text-slate-400 hidden sm:inline">•</span>
-        <span class="font-medium text-slate-200">Open Daily 11:00 – 23:30</span>
-      </div>
-      <div class="flex items-center gap-4 text-xs font-semibold">
-        <span class="text-emerald-400 font-bold uppercase tracking-wider">🚀 FREE Delivery Up to 5 Miles!</span>
-        <a href="#allergens" class="text-slate-400 hover:text-white transition-colors underline">Allergen Matrix</a>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Main Header with Logo & Cart Action -->
-  <header class="bg-[#131f3b]/95 backdrop-blur-md border-b border-[#2a3859] sticky top-8 z-30">
-    <div class="max-w-6xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between gap-3">
-      <!-- Fixed Proportion Brand Logo -->
+  <!-- Unified Top Header -->
+  <header class="bg-[#131f3b]/95 backdrop-blur-md border-b border-[#2a3859] sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
       <a href="#" class="flex items-center shrink-0" aria-label="The Hungry Fox Home">
         <img src="https://thehungryfox.co.uk/hungry-fox-logo-cream.webp" 
              alt="The Hungry Fox Logo" 
@@ -450,22 +434,37 @@
              class="brand-logo" />
       </a>
 
-      <!-- Header Right: Cart Button & Quick Partner Links -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Live Online Cart CTA Button -->
-        <button onclick="openCartDrawer()" class="btn-orange px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold gap-2">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-          <span>Basket</span>
-          <span id="headerCartCount" class="bg-[#060e20] text-orange-400 px-2 py-0.5 rounded-full text-xs font-black">0</span>
+      <!-- Center Trust & Info Bar -->
+      <div class="hidden md:flex items-center gap-3 lg:gap-4 text-xs text-slate-300 font-medium">
+        <a href="https://ratings.food.gov.uk/business/1981131/the-hungry-fox" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold hover:underline">
+          <span>⭐️⭐️⭐️⭐️⭐️</span>
+          <span>5-Star Hygiene</span>
+        </a>
+        <span class="inline-flex items-center gap-1 text-emerald-400 font-semibold">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          100% Halal Certified Kitchen
+        </span>
+        <span class="text-slate-500">•</span>
+        <span class="text-slate-200">Open Daily 11:00 – 23:30</span>
+        <span class="text-slate-500">•</span>
+        <a href="#allergens" class="text-slate-400 hover:text-white transition-colors underline">Allergen Matrix</a>
+      </div>
+
+      <!-- Header Right: Prominent Basket & Partners -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <button onclick="openCartDrawer()" class="btn-orange px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-black gap-2.5 shadow-lg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span>Delivery Basket</span>
+          <span id="headerCartCount" class="bg-[#060e20] text-orange-400 px-2 py-0.5 rounded-full text-xs font-black min-w-[20px] text-center">0</span>
           <span id="headerCartTotal" class="hidden sm:inline text-xs font-black border-l border-[#060e20]/40 pl-2">£0.00</span>
         </button>
 
-        <!-- Delivery Partners -->
-        <div class="hidden md:flex items-center gap-2">
-          <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener noreferrer" class="btn-uber">
+        <div class="hidden sm:flex items-center gap-2">
+          <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener noreferrer" class="btn-uber" title="Order on Uber Eats">
             <span>Uber Eats</span>
           </a>
-          <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener noreferrer" class="btn-deliveroo">
+          <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener noreferrer" class="btn-deliveroo" title="Order on Deliveroo">
             <span>Deliveroo</span>
           </a>
         </div>
@@ -481,65 +480,47 @@
   </header>
 
   <main class="max-w-6xl mx-auto px-4 py-8 sm:py-12 space-y-12">
-    <!-- Hero Showcase Section -->
-    <section class="relative rounded-3xl bg-gradient-to-br from-[#172649] via-[#131f3b] to-[#0d172e] border border-[#2a3859] p-6 sm:p-12 overflow-hidden shadow-2xl">
+    <!-- Clean, Wide Hero Showcase Section -->
+    <section class="relative rounded-3xl bg-gradient-to-br from-[#172649] via-[#131f3b] to-[#0d172e] border border-[#2a3859] p-6 sm:p-10 overflow-hidden shadow-2xl">
       <div style="position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(249,115,22,0.18) 0%, rgba(0,0,0,0) 70%); pointer-events: none;"></div>
 
-      <div class="relative z-10 max-w-3xl space-y-4 text-left">
+      <div class="relative z-10 max-w-4xl space-y-4 text-left">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 text-xs font-extrabold uppercase tracking-wider">
-          🔥 FREE DELIVERY UP TO 5 MILES • Grays, Tilbury, Ship Lane & Orsett
+          🔥 FREE DELIVERY AVAILABLE IN ZONE • 100% Halal Certified Kitchen
         </div>
+        
         <h1 class="font-serif text-3xl sm:text-5xl font-black text-white leading-tight">
-          Hand-Tossed Sizzling Chicken, Sauces & Flavours.
+          Hand-Tossed Sizzle. Deep Fox Crunch.
         </h1>
-        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-          From flame-baked quarter chickens to MFC crispy wings, spit-carved doner, spicy Korean buldak fire noodles, and artisan mochi gelato desserts. Delivered piping hot to your door across Thurrock.
+        
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl">
+          Piping hot fried chicken feast boxes, spicy buldak noodles, and sizzled doner dispatched directly from us straight to your door across Grays and Thurrock.
         </p>
 
-        <!-- Delivery Fee Rules Notice (Up to 5 Miles Free!) -->
-        <div class="grid sm:grid-cols-3 gap-2.5 pt-2">
-          <div class="p-3.5 rounded-xl bg-[#080e1f] border border-emerald-500/40 text-left">
-            <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider block">Under 5.0 Miles</span>
-            <span class="text-white text-base font-extrabold">FREE Delivery</span>
-            <p class="text-[11px] text-slate-300">Grays, Tilbury, West Tilbury, Ship Lane (Aveley) & Orsett to Brentwood Rd</p>
-          </div>
-          <div class="p-3.5 rounded-xl bg-[#080e1f] border border-[#2a3859] text-left">
-            <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">5.1 to 8.0 Miles</span>
-            <span class="text-white text-base font-extrabold">£1.99 Delivery</span>
-            <p class="text-[11px] text-slate-400">Purfleet, Caspian Way, Stanford-le-Hope, Corringham & Ockendon</p>
-          </div>
-          <div class="p-3.5 rounded-xl bg-[#080e1f] border border-[#2a3859] text-left">
-            <span class="text-[10px] text-orange-400 font-bold uppercase tracking-wider block">8.1 to 10.0 Miles</span>
-            <span class="text-white text-base font-extrabold">£3.99 Delivery</span>
-            <p class="text-[11px] text-slate-400">Outer Thurrock radius (Up to 10.0 miles max)</p>
-          </div>
+        <div class="pt-1">
+          <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-orange-500/10 border border-orange-500/40 text-orange-400 text-xs font-bold">
+            ⚡ Orders £15 or over: FREE delivery
+          </span>
         </div>
 
-        <!-- Postcode Distance Quick Checker -->
-        <div class="mt-4 p-4 rounded-xl bg-[#080e1f] border border-[#2a3859] space-y-2">
+        <!-- Clean Postcode Delivery Checker -->
+        <div class="mt-4 p-4 rounded-xl bg-[#080e1f] border border-[#2a3859] space-y-2 max-w-2xl">
           <div class="flex items-center justify-between flex-wrap gap-2">
-            <span class="text-xs font-bold text-slate-200">🔍 Check Your Delivery Postcode & Distance Fee:</span>
-            <span class="text-[11px] text-slate-400">Orders under £15 have a £4 small order fee</span>
+            <span class="text-xs font-bold text-slate-200">🔍 Check Delivery to Your Area:</span>
+            <span class="text-[11px] text-slate-400">Enter your full postcode to check live delivery eligibility & pricing</span>
           </div>
-          <div class="flex items-center gap-2">
-            <input type="text" id="quickPostcode" placeholder="e.g. RM17 6QJ" class="px-3 py-2 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white text-xs uppercase font-bold focus:outline-none focus:border-orange-500 w-36" />
-            <button onclick="checkQuickPostcode()" class="btn-orange px-4 py-2 rounded-lg text-xs font-bold">Check</button>
-            <div class="flex items-center gap-1.5 flex-wrap text-[11px]">
-              <button onclick="setTestPostcode('RM17 6QJ')" class="text-emerald-400 hover:text-white underline">Grays (Free)</button>
-              <button onclick="setTestPostcode('RM18 7AN')" class="text-emerald-400 hover:text-white underline">Tilbury (Free)</button>
-              <button onclick="setTestPostcode('RM15 4HA')" class="text-emerald-400 hover:text-white underline">Ship Lane Aveley (Free)</button>
-              <button onclick="setTestPostcode('RM16 3DJ')" class="text-emerald-400 hover:text-white underline">Orsett (Free)</button>
-              <button onclick="setTestPostcode('RM19 1PZ')" class="text-slate-400 hover:text-white underline">Purfleet (£1.99)</button>
-              <button onclick="setTestPostcode('SS17 0NA')" class="text-slate-400 hover:text-white underline">Stanford (£1.99)</button>
-              <button onclick="setTestPostcode('SW1A 1AA')" class="text-red-400 hover:text-white underline">London (Blocked)</button>
-            </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <input type="text" id="quickPostcode" placeholder="e.g. RM17 6QJ" class="px-3 py-2 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white text-xs uppercase font-bold focus:outline-none focus:border-orange-500 w-40" />
+            <button id="btnQuickCheck" onclick="checkQuickPostcode()" class="btn-orange px-5 py-2 rounded-lg text-xs font-bold">
+              <span>Verify Postcode</span>
+            </button>
           </div>
           <div id="quickCheckResult" class="text-xs font-semibold pt-1 hidden"></div>
         </div>
       </div>
     </section>
 
-    <!-- Dynamic CSV Menu Container -->
+    <!-- Spreadsheet-Driven Dynamic Menu Container -->
     <div id="menu-container" class="space-y-12">
       <div class="p-12 text-center bg-[#172649] border border-[#2a3859] rounded-2xl space-y-3">
         <div class="inline-block animate-spin text-orange-400 text-3xl">⏳</div>
@@ -548,56 +529,63 @@
       </div>
     </div>
 
-    <!-- Statutory UK Allergen Information Section -->
+    <!-- Statutory UK 14 Allergen Matrix Section -->
     <section class="bg-[#172649] border border-[#2a3859] p-6 sm:p-8 rounded-2xl space-y-4 shadow-xl" id="allergens">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
         </div>
         <div>
-          <span class="text-xs uppercase font-bold tracking-widest text-amber-400 block">Statutory UK Safety Notice</span>
-          <h2 class="font-bold text-white text-lg">Allergen Information & Statutory 14 Allergens Matrix</h2>
-          <p class="text-xs text-slate-300">Our food is prepared in a kitchen where allergens are present. We adhere to the 14 UK statutory food allergens framework.</p>
+          <span class="text-xs uppercase font-bold tracking-widest text-amber-400 block">Food Standards Agency Compliance</span>
+          <h2 class="font-bold text-white text-lg">Statutory 14 Allergen Matrix</h2>
+          <p class="text-xs text-slate-300">Piping hot fried chicken feast boxes, spicy buldak noodles, and sizzled doner dispatched directly from us straight to your door across Grays and Thurrock.</p>
         </div>
       </div>
 
       <button onclick="toggleMatrix()" class="btn-orange px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold">
-        <span id="matrixBtnText">View Allergen Matrix</span>
+        <span id="matrixBtnText">View Complete Table</span>
       </button>
 
-      <!-- Allergen Table -->
+      <!-- Complete 14 Statutory UK Allergens Table -->
       <div id="matrixContainer" class="hidden pt-6 border-t border-[#2a3859] space-y-4">
         <div class="flex justify-between items-center flex-wrap gap-2 text-xs">
-          <p class="text-slate-300 font-medium">This matrix is a guide only. Please call store staff for specific allergen advice across the 14 statutory allergens.</p>
-          <span class="text-amber-400 font-bold">✓ = Contains Directly | 1 = May Contain | ✕ = Free From</span>
+          <p class="text-slate-300 font-medium">All 14 statutory allergens declared in accordance with Regulation (EU) No 1169/2011.</p>
+          <span class="text-amber-400 font-bold">✓ = Contains Directly | 1 = May Contain Traces | ✕ = Free From</span>
         </div>
         <div class="overflow-x-auto rounded-xl border border-[#2a3859] bg-[#0d172e]">
-          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.75rem;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.72rem;">
             <thead>
               <tr style="background-color: #172649; color: #ffffff; border-bottom: 1px solid #2a3859;">
-                <th style="padding: 0.75rem;">Menu Item</th>
-                <th style="padding: 0.75rem; text-align: center;">Gluten</th>
-                <th style="padding: 0.75rem; text-align: center;">Milk</th>
-                <th style="padding: 0.75rem; text-align: center;">Egg</th>
-                <th style="padding: 0.75rem; text-align: center;">Soy</th>
-                <th style="padding: 0.75rem; text-align: center;">Mustard</th>
-                <th style="padding: 0.75rem; text-align: center;">Celery</th>
-                <th style="padding: 0.75rem; text-align: center;">Sesame</th>
-                <th style="padding: 0.75rem; text-align: center;">Nuts</th>
-                <th style="padding: 0.75rem; text-align: center;">Sulphites</th>
+                <th style="padding: 0.65rem 0.75rem;">Menu Item</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Celery</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Gluten</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Crustaceans</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Eggs</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Fish</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Lupin</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Milk</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Molluscs</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Mustard</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Peanuts</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Sesame</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Soybeans</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Sulphites</th>
+                <th style="padding: 0.65rem 0.5rem; text-align: center;">Tree Nuts</th>
               </tr>
             </thead>
             <tbody style="color: #cbd5e1;">
-              <tr style="border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Raw Wings / Chicken</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
-              <tr style="background-color: rgba(23, 38, 73, 0.4); border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Fried Wings (MFC Breading)</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
-              <tr style="border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Baked Wings (Plain)</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
-              <tr style="background-color: rgba(23, 38, 73, 0.4); border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Chicken Nuggets / Tenders</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
-              <tr style="border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Buldak Fire Noodles</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
-              <tr style="background-color: rgba(23, 38, 73, 0.4); border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Fries & Wedges</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
-              <tr style="border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Onion Rings / Spring Rolls</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
-              <tr style="background-color: rgba(23, 38, 73, 0.4); border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Vegetable Bao Buns</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
-              <tr style="border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Mozzarella Sticks / Halloumi</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
-              <tr style="background-color: rgba(23, 38, 73, 0.4);"><td style="padding: 0.75rem; color: #ffffff; font-weight: 600;">Mochi Gelato Selection</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Raw Wings / Plain Baked Chicken</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="background-color: rgba(23, 38, 73, 0.4); border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Fried Wings (MFC Breading)</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Chicken Nuggets & Tenders</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="background-color: rgba(23, 38, 73, 0.4); border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Buldak Fire Noodles</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Doner Meat (Chicken & Lamb)</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="background-color: rgba(23, 38, 73, 0.4); border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Fries & Potato Wedges</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Onion Rings & Spring Rolls</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="background-color: rgba(23, 38, 73, 0.4); border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Vegetable Bao Buns</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Mozzarella & Halloumi Fries</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="background-color: rgba(23, 38, 73, 0.4); border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Naan & Pitta Breads</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="border-bottom: 1px solid rgba(42, 56, 89, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Prawn Spring Rolls / Gyoza</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td></tr>
+              <tr style="background-color: rgba(23, 38, 73, 0.4);"><td style="padding: 0.65rem 0.75rem; color: #ffffff; font-weight: 600;">Artisan Mochi Gelato Desserts</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fde047;">1</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td><td style="text-align: center; color: #94a3b8;">✕</td><td style="text-align: center; color: #fb923c; font-weight: bold;">✓</td></tr>
             </tbody>
           </table>
         </div>
@@ -723,8 +711,8 @@
           <span id="cartSubtotalText" class="font-bold text-white">£0.00</span>
         </div>
         <div class="flex justify-between text-slate-300">
-          <span id="cartDeliveryTierLabel">Estimated Delivery Fee:</span>
-          <span id="cartDeliveryFeeText" class="font-bold text-emerald-400">FREE (Under 5.0 mi)</span>
+          <span>Delivery Fee:</span>
+          <span id="cartDeliveryFeeText" class="font-bold text-slate-400">Enter postcode at checkout</span>
         </div>
         <div id="cartSmallOrderRow" class="flex justify-between text-amber-400 hidden">
           <span>Small Order Charge (Under £15):</span>
@@ -739,7 +727,7 @@
       <button id="btnProceedToCheckout" onclick="startDeliveryCheckout()" class="btn-orange w-full py-3 rounded-xl text-sm font-extrabold shadow-lg">
         Proceed to Delivery Checkout
       </button>
-      <p class="text-[10px] text-center text-slate-400">100% Delivery Only • Free delivery up to 5 miles</p>
+      <p class="text-[10px] text-center text-slate-400">100% Delivery Only • Live verified delivery fee from Cloudflare Worker</p>
     </div>
   </aside>
 
@@ -755,7 +743,7 @@
       </div>
 
       <div id="modalAlertBox" class="p-3 bg-red-500/15 border-b border-red-500/30 text-xs text-red-300 font-semibold hidden">
-        ⚠️ Please make your required flavour selection before adding to basket.
+        ⚠️ Please make your required selection before adding to basket.
       </div>
 
       <div id="modalBody" class="p-4 overflow-y-auto flex-1 space-y-4"></div>
@@ -796,19 +784,19 @@
           <span class="font-bold text-white uppercase tracking-wider block">2. Delivery Address (Thurrock)</span>
           <div class="grid grid-cols-2 gap-2">
             <input type="text" id="custHouse" placeholder="House No. / Flat *" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white" />
-            <input type="text" id="custPostcode" onchange="validateCheckoutDistance()" placeholder="Postcode (e.g. RM17 6QJ) *" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white uppercase font-bold" />
+            <input type="text" id="custPostcode" oninput="handleCheckoutPostcodeChange()" onblur="handleCheckoutPostcodeChange()" placeholder="Enter Postcode *" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white uppercase font-bold" />
           </div>
           <input type="text" id="custStreet" placeholder="Street Name *" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white w-full" />
           <input type="text" id="custInstructions" placeholder="Driver delivery notes (optional)" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white w-full" />
         </div>
 
-        <!-- Step 3: Verified Tier & Radius Message -->
+        <!-- Step 3: Verified Status from Cloudflare Worker -->
         <div id="checkoutRadiusNotice" class="p-3 rounded-lg bg-[#131f3b] border border-[#2a3859] text-slate-200">
           <span class="font-bold text-white block mb-0.5">Delivery Status:</span>
-          <span id="checkoutDistanceText">Enter your postcode to verify delivery eligibility.</span>
+          <span id="checkoutDistanceText">Please enter your postcode above to calculate live delivery fee.</span>
         </div>
 
-        <!-- Step 4: Final Summary -->
+        <!-- Step 4: Final Confirmed Financial Breakdown from Cloudflare Worker -->
         <div class="p-3 rounded-lg bg-[#080e1f] border border-[#2a3859] space-y-1">
           <div class="flex justify-between text-slate-300">
             <span>Subtotal:</span>
@@ -816,29 +804,48 @@
           </div>
           <div class="flex justify-between text-slate-300">
             <span>Delivery Fee:</span>
-            <span id="chkDelivery" class="font-bold text-emerald-400">£0.00</span>
+            <span id="chkDelivery" class="font-bold text-slate-400">Awaiting Postcode</span>
           </div>
           <div id="chkSmallOrderRow" class="flex justify-between text-amber-400 hidden">
             <span>Small Order Charge (&lt; £15):</span>
-            <span class="font-bold">+£4.00</span>
+            <span id="chkSmallOrderVal" class="font-bold">+£4.00</span>
           </div>
           <div class="flex justify-between text-sm font-extrabold text-white pt-1 border-t border-[#2a3859]">
-            <span>Amount Payable:</span>
+            <span>Total Payable:</span>
             <span id="chkTotal" class="text-orange-400 text-base">£0.00</span>
           </div>
         </div>
       </div>
 
-      <div class="p-4 border-t border-[#2a3859] bg-[#0a1124]">
-        <button id="btnFinalPay" onclick="proceedToPayment()" class="btn-orange w-full py-3 rounded-xl text-sm font-extrabold shadow-lg">
-          Pay Securely with Card (Stripe)
+      <div class="p-4 border-t border-[#2a3859] bg-[#0a1124] space-y-2">
+        <button id="btnFinalPay" disabled class="btn-orange w-full py-3 rounded-xl text-sm font-extrabold shadow-lg opacity-60 cursor-not-allowed">
+          Online Card Checkout Coming Soon
         </button>
+        <p class="text-[10px] text-center text-slate-400">Online payment integration is currently undergoing setup. Please phone store for phone card orders or use our partner links above.</p>
       </div>
     </div>
   </div>
 
   <!-- Master JavaScript Engine -->
   <script>
+    const API_BASE_URL = 'https://hungryfox-api.thehungryfox2026.workers.dev';
+
+    // Desired Menu Category Presentation Ordering
+    const CATEGORY_ORDER = [
+      'SOLO CHICKEN OR UPGRADE TO MEAL',
+      'SPECIAL FEATURED',
+      'SIGNATURE DONERS & NOODLES',
+      'SIGNATURE RICE',
+      'SHARING PLATTERS',
+      'ULTIMATE SHARE BUNDLES',
+      'KIDS MENU',
+      'FRIES & WEDGES',
+      'PREMIUM SIDES',
+      'BREADS & SIDES',
+      'DESSERTS',
+      'DRINKS'
+    ];
+
     let state = {
       products: [],
       customisations: [],
@@ -848,9 +855,9 @@
       cart: [],
       activeModalProduct: null,
       activeModalSelections: {},
-      deliveryDistanceMiles: 0.8,
-      deliveryFee: 0.00,
-      isOutsideRadius: false
+      verifiedPostcode: null,
+      verifiedQuote: null,
+      isQuoteLoading: false
     };
 
     function toggleMatrix() {
@@ -861,7 +868,7 @@
         btnText.textContent = 'Hide Allergen Matrix';
       } else {
         container.classList.add('hidden');
-        btnText.textContent = 'View Allergen Matrix';
+        btnText.textContent = 'View Complete Table';
       }
     }
 
@@ -927,52 +934,120 @@
       throw new Error(fileName + ' unavailable');
     }
 
-    // UPDATED DELIVERY FEE CALCULATOR: Up to 5.0 Miles is FREE!
-    function calculateDistanceFee(miles) {
-      if (miles > 10.0) {
-        return { fee: null, blocked: true, label: 'Delivery Unavailable (Beyond 10.0 miles)' };
-      } else if (miles > 8.0) {
-        return { fee: 3.99, blocked: false, label: '£3.99 (8.1 – 10.0 miles)' };
-      } else if (miles > 5.0) {
-        return { fee: 1.99, blocked: false, label: '£1.99 (5.1 – 8.0 miles)' };
-      } else {
-        return { fee: 0.00, blocked: false, label: 'FREE Delivery (Under 5.0 miles)' };
+    // CLOUDFLARE WORKER DELIVERY QUOTE API CALL
+    async function requestWorkerDeliveryQuote(postcode, subtotal) {
+      const cleanPostcode = (postcode || '').trim();
+      if (!cleanPostcode) {
+        throw new Error('Please enter a UK postcode.');
       }
+      const response = await fetch(`${API_BASE_URL}/delivery-quote`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          postcode: cleanPostcode,
+          basketSubtotal: Math.max(0, parseFloat(subtotal) || 0)
+        })
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`API error (${response.status}): ${errText || 'Unable to quote'}`);
+      }
+      return await response.json();
     }
 
-    // Postcode Distance Lookup
-    function estimatePostcodeMiles(postcode) {
-      const clean = (postcode || '').trim().toUpperCase();
-      if (!clean) return 0.8;
-      if (clean.startsWith('RM17')) return 0.8; // Grays central
-      if (clean.startsWith('RM18')) return 3.2; // Tilbury / Chadwell
-      if (clean.startsWith('RM16')) return 4.2; // Orsett / Chafford
-      if (clean.startsWith('RM15 4') || clean.startsWith('RM15 5') || clean.startsWith('RM19 1') || clean.includes('SHIP')) return 4.5; // Ship Lane Aveley / Purfleet border
-      if (clean.startsWith('RM19')) return 5.8; // Purfleet Caspian Way
-      if (clean.startsWith('SS17') || clean.startsWith('RM15')) return 6.8; // Stanford / Ockendon
-      if (clean.startsWith('RM14') || clean.startsWith('RM20')) return 8.5; // Outer boundary
-      return 22.5; // Out of area default
-    }
-
-    function checkQuickPostcode() {
-      const pc = document.getElementById('quickPostcode').value;
+    // Homepage Postcode Checker
+    async function checkQuickPostcode() {
+      const input = document.getElementById('quickPostcode');
       const resEl = document.getElementById('quickCheckResult');
-      resEl.classList.remove('hidden');
-      const miles = estimatePostcodeMiles(pc);
-      const tier = calculateDistanceFee(miles);
+      const btn = document.getElementById('btnQuickCheck');
+      const pc = (input.value || '').trim();
 
-      if (tier.blocked) {
+      if (!pc) {
+        resEl.classList.remove('hidden');
+        resEl.className = 'text-xs font-bold pt-1 text-amber-400';
+        resEl.textContent = '⚠️ Please enter a UK postcode to check.';
+        return;
+      }
+
+      resEl.classList.remove('hidden');
+      resEl.className = 'text-xs font-semibold pt-1 text-slate-300';
+      resEl.innerHTML = '<span class="inline-block animate-spin mr-1">⏳</span> Checking with Cloudflare Worker...';
+      btn.disabled = true;
+
+      try {
+        const subtotal = calculateCartSubtotal();
+        const data = await requestWorkerDeliveryQuote(pc, subtotal > 0 ? subtotal : 20.00);
+
+        if (!data.available) {
+          resEl.className = 'text-xs font-bold pt-1 text-red-400';
+          resEl.innerHTML = `❌ <strong>${esc(data.postcode || pc)}</strong>: ${esc(data.message || 'Delivery unavailable beyond 10 miles')}`;
+        } else {
+          resEl.className = 'text-xs font-bold pt-1 text-emerald-400';
+          const distStr = data.approximateDistanceMiles != null ? ` (~${data.approximateDistanceMiles} miles)` : '';
+          const feeStr = data.deliveryFee === 0 ? 'FREE DELIVERY' : formatGBP(data.deliveryFee);
+          const zoneStr = data.freeDeliveryZone ? ' [Inside Free Zone]' : '';
+          resEl.innerHTML = `✅ <strong>${esc(data.postcode)}</strong>${distStr}: Delivery Fee is <strong>${feeStr}</strong>${zoneStr}.`;
+          
+          state.verifiedPostcode = data.postcode;
+          state.verifiedQuote = data;
+          updateBasketWithQuote();
+        }
+      } catch (err) {
         resEl.className = 'text-xs font-bold pt-1 text-red-400';
-        resEl.innerHTML = `❌ ${pc.toUpperCase()} is approx ${miles.toFixed(1)} miles away — Delivery is unavailable beyond our 10-mile delivery zone.`;
-      } else {
-        resEl.className = 'text-xs font-bold pt-1 text-emerald-400';
-        resEl.innerHTML = `✅ ${pc.toUpperCase()} is approx ${miles.toFixed(1)} miles away. Delivery Fee: <strong>${tier.fee === 0 ? 'FREE' : formatGBP(tier.fee)}</strong>.`;
+        resEl.textContent = `❌ ${err.message || 'Unable to contact delivery service.'}`;
+      } finally {
+        btn.disabled = false;
       }
     }
 
-    function setTestPostcode(code) {
-      document.getElementById('quickPostcode').value = code;
-      checkQuickPostcode();
+    function calculateCartSubtotal() {
+      return state.cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
+    }
+
+    function invalidateDeliveryQuote() {
+      state.verifiedQuote = null;
+      const deliveryEl = document.getElementById('cartDeliveryFeeText');
+      if (state.verifiedPostcode) {
+        revalidateCartQuote();
+      } else {
+        if (deliveryEl) deliveryEl.textContent = 'Enter postcode at checkout';
+      }
+    }
+
+    async function revalidateCartQuote() {
+      if (!state.verifiedPostcode) return;
+      try {
+        const subtotal = calculateCartSubtotal();
+        state.verifiedQuote = await requestWorkerDeliveryQuote(state.verifiedPostcode, subtotal);
+        updateBasketWithQuote();
+      } catch (e) {
+        state.verifiedQuote = null;
+      }
+    }
+
+    function updateBasketWithQuote() {
+      const deliveryEl = document.getElementById('cartDeliveryFeeText');
+      const totalEl = document.getElementById('cartTotalText');
+      const subtotal = calculateCartSubtotal();
+
+      if (!state.verifiedQuote) {
+        deliveryEl.textContent = 'Enter postcode at checkout';
+        deliveryEl.className = 'font-bold text-slate-400';
+        totalEl.textContent = formatGBP(subtotal);
+        return;
+      }
+
+      const q = state.verifiedQuote;
+      if (!q.available) {
+        deliveryEl.textContent = 'Delivery Unavailable';
+        deliveryEl.className = 'font-bold text-red-400';
+        totalEl.textContent = 'Blocked';
+      } else {
+        deliveryEl.textContent = q.deliveryFee === 0 ? 'FREE' : formatGBP(q.deliveryFee);
+        deliveryEl.className = 'font-bold text-emerald-400';
+        totalEl.textContent = formatGBP(q.total);
+      }
     }
 
     async function loadHungryFoxMenu() {
@@ -992,7 +1067,17 @@
         state.productGroups = groups;
         state.orderRules = rules;
 
-        state.categories = [...new Set(state.products.map(p => p.Category).filter(Boolean))];
+        const rawCategories = [...new Set(state.products.map(p => p.Category).filter(Boolean))];
+
+        // Sort categories by predefined presentation order
+        state.categories = rawCategories.sort((a, b) => {
+          const idxA = CATEGORY_ORDER.indexOf(a.toUpperCase());
+          const idxB = CATEGORY_ORDER.indexOf(b.toUpperCase());
+          if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+          if (idxA !== -1) return -1;
+          if (idxB !== -1) return 1;
+          return a.localeCompare(b);
+        });
 
         if (navBar && state.categories.length > 0) {
           navBar.innerHTML = state.categories.map((cat, idx) => {
@@ -1026,8 +1111,7 @@
                       ${p.Description ? `<p class="text-xs text-slate-300 mt-1.5 leading-relaxed">${esc(p.Description)}</p>` : ''}
                     </div>
 
-                    <div class="mt-4 pt-3 flex items-center justify-between border-t border-[#2a3859]">
-                      <span class="text-[11px] text-emerald-400 font-semibold">&#10003; 100% Halal</span>
+                    <div class="mt-4 pt-3 flex items-center justify-end border-t border-[#2a3859]">
                       <button onclick="openCustomModal('${esc(p.Product_ID)}')" class="btn-orange px-4 py-2 rounded-lg text-xs font-bold shadow-md">
                         + Add to Order
                       </button>
@@ -1043,8 +1127,8 @@
         console.error('Menu load error:', err);
         root.innerHTML = `
           <div class="p-8 text-center bg-[#172649] border border-red-500/30 rounded-2xl space-y-3">
-            <p class="text-sm font-bold text-red-400">Dynamic CSV menu connection active.</p>
-            <p class="text-xs text-slate-300">You can also order through our partner badges in the header.</p>
+            <p class="text-sm font-bold text-red-400">Dynamic CSV menu connection initialized.</p>
+            <p class="text-xs text-slate-300">You can order through our partner badges in the header.</p>
           </div>
         `;
       }
@@ -1184,6 +1268,7 @@
       });
 
       closeCustomModal();
+      invalidateDeliveryQuote();
       renderCart();
       openCartDrawer();
     }
@@ -1205,11 +1290,13 @@
       if (item.quantity <= 0) {
         state.cart = state.cart.filter(c => c.id !== cartId);
       }
+      invalidateDeliveryQuote();
       renderCart();
     }
 
     function removeCartItem(cartId) {
       state.cart = state.cart.filter(c => c.id !== cartId);
+      invalidateDeliveryQuote();
       renderCart();
     }
 
@@ -1219,7 +1306,6 @@
       const drawerBadge = document.getElementById('drawerBadgeCount');
       const headerTotal = document.getElementById('headerCartTotal');
       const subtotalEl = document.getElementById('cartSubtotalText');
-      const deliveryEl = document.getElementById('cartDeliveryFeeText');
       const smallOrderRow = document.getElementById('cartSmallOrderRow');
       const totalEl = document.getElementById('cartTotalText');
 
@@ -1227,18 +1313,11 @@
       countEl.textContent = totalItems;
       drawerBadge.textContent = totalItems;
 
-      let subtotal = 0;
-      state.cart.forEach(i => {
-        subtotal += (i.unitPrice * i.quantity);
-      });
-
+      const subtotal = calculateCartSubtotal();
       headerTotal.textContent = formatGBP(subtotal);
       subtotalEl.textContent = formatGBP(subtotal);
 
-      const distInfo = calculateDistanceFee(state.deliveryDistanceMiles);
-      state.deliveryFee = distInfo.fee || 0;
-      deliveryEl.textContent = distInfo.fee === 0 ? 'FREE' : formatGBP(distInfo.fee);
-
+      // Surcharge display
       const smallOrderFee = (subtotal > 0 && subtotal < 15.00) ? 4.00 : 0.00;
       if (smallOrderFee > 0) {
         smallOrderRow.classList.remove('hidden');
@@ -1246,24 +1325,24 @@
         smallOrderRow.classList.add('hidden');
       }
 
+      // Small order progress bar
       const bar = document.getElementById('smallOrderBar');
       const remainingLabel = document.getElementById('smallOrderRemaining');
       if (subtotal >= 15.00) {
         bar.style.width = '100%';
         bar.className = 'bg-emerald-500 h-full transition-all duration-300';
-        remainingLabel.textContent = '✅ £4.00 fee waived!';
+        remainingLabel.textContent = '✅ £4.00 surcharge waived!';
         remainingLabel.className = 'text-emerald-400 font-bold';
       } else {
         const pct = Math.min(100, Math.round((subtotal / 15.00) * 100));
         bar.style.width = pct + '%';
         bar.className = 'bg-orange-500 h-full transition-all duration-300';
         const rem = 15.00 - subtotal;
-        remainingLabel.textContent = `Add ${formatGBP(rem)} for £0 fee`;
+        remainingLabel.textContent = `Add ${formatGBP(rem)} to waive £4 surcharge`;
         remainingLabel.className = 'text-amber-400 font-bold';
       }
 
-      const grandTotal = subtotal + state.deliveryFee + smallOrderFee;
-      totalEl.textContent = formatGBP(grandTotal);
+      updateBasketWithQuote();
 
       if (state.cart.length === 0) {
         listEl.innerHTML = `
@@ -1294,85 +1373,93 @@
       }
     }
 
+    // Checkout Flow
     function startDeliveryCheckout() {
       if (state.cart.length === 0) return;
       closeCartDrawer();
       document.getElementById('checkoutModal').classList.remove('hidden');
-      validateCheckoutDistance();
+
+      const postcodeField = document.getElementById('custPostcode');
+      if (state.verifiedPostcode && !postcodeField.value) {
+        postcodeField.value = state.verifiedPostcode;
+      }
+      handleCheckoutPostcodeChange();
     }
 
     function closeCheckoutModal() {
       document.getElementById('checkoutModal').classList.add('hidden');
     }
 
-    function validateCheckoutDistance() {
-      const pc = document.getElementById('custPostcode').value || 'RM17 6QJ';
-      const miles = estimatePostcodeMiles(pc);
-      state.deliveryDistanceMiles = miles;
-      const tier = calculateDistanceFee(miles);
-
-      const noticeEl = document.getElementById('checkoutDistanceText');
-      const payBtn = document.getElementById('btnFinalPay');
-
-      let subtotal = 0;
-      state.cart.forEach(i => subtotal += (i.unitPrice * i.quantity));
-      const smallOrderFee = (subtotal < 15.00) ? 4.00 : 0.00;
-
-      document.getElementById('chkSubtotal').textContent = formatGBP(subtotal);
-
-      if (smallOrderFee > 0) {
-        document.getElementById('chkSmallOrderRow').classList.remove('hidden');
-      } else {
-        document.getElementById('chkSmallOrderRow').classList.add('hidden');
-      }
-
-      if (tier.blocked) {
-        state.isOutsideRadius = true;
-        noticeEl.innerHTML = `<span class="text-red-400 font-bold">❌ Address is ~${miles.toFixed(1)} miles away:</span> Outside our 10-mile delivery zone. Delivery is unavailable.`;
-        document.getElementById('chkDelivery').textContent = 'Unavailable';
-        document.getElementById('chkTotal').textContent = 'Blocked';
-        payBtn.disabled = true;
-        payBtn.textContent = 'Delivery Unavailable (Beyond 10 Miles)';
-      } else {
-        state.isOutsideRadius = false;
-        state.deliveryFee = tier.fee;
-        noticeEl.innerHTML = `<span class="text-emerald-400 font-bold">✅ ~${miles.toFixed(1)} miles away:</span> ${tier.label}`;
-        document.getElementById('chkDelivery').textContent = tier.fee === 0 ? 'FREE' : formatGBP(tier.fee);
-
-        const total = subtotal + tier.fee + smallOrderFee;
-        document.getElementById('chkTotal').textContent = formatGBP(total);
-        payBtn.disabled = false;
-        payBtn.textContent = 'Pay Securely with Card (Stripe)';
-      }
+    let checkoutDebounceTimer = null;
+    function handleCheckoutPostcodeChange() {
+      clearTimeout(checkoutDebounceTimer);
+      checkoutDebounceTimer = setTimeout(() => {
+        validateCheckoutPostcodeWithWorker();
+      }, 400);
     }
 
-    function proceedToPayment() {
-      const name = document.getElementById('custName').value.trim();
-      const phone = document.getElementById('custPhone').value.trim();
-      const email = document.getElementById('custEmail').value.trim();
-      const house = document.getElementById('custHouse').value.trim();
-      const street = document.getElementById('custStreet').value.trim();
-      const postcode = document.getElementById('custPostcode').value.trim();
+    async function validateCheckoutPostcodeWithWorker() {
+      const pc = (document.getElementById('custPostcode').value || '').trim();
+      const noticeEl = document.getElementById('checkoutDistanceText');
+      const payBtn = document.getElementById('btnFinalPay');
+      const subtotalEl = document.getElementById('chkSubtotal');
+      const delEl = document.getElementById('chkDelivery');
+      const totalEl = document.getElementById('chkTotal');
+      const surchargeRow = document.getElementById('chkSmallOrderRow');
+      const surchargeVal = document.getElementById('chkSmallOrderVal');
 
-      if (!name || !phone || !email || !house || !street || !postcode) {
-        alert('Please complete all contact and delivery address fields.');
+      const subtotal = calculateCartSubtotal();
+      subtotalEl.textContent = formatGBP(subtotal);
+
+      if (!pc) {
+        noticeEl.innerHTML = 'Please enter your delivery postcode above.';
+        noticeEl.className = 'text-slate-300';
+        delEl.textContent = 'Awaiting Postcode';
+        delEl.className = 'font-bold text-slate-400';
+        totalEl.textContent = formatGBP(subtotal);
+        payBtn.disabled = true;
         return;
       }
 
-      if (state.isOutsideRadius) {
-        alert('We cannot deliver to this address as it is beyond our 10-mile delivery zone.');
-        return;
+      noticeEl.innerHTML = '<span class="inline-block animate-spin mr-1">⏳</span> Requesting delivery quote from Cloudflare Worker...';
+      noticeEl.className = 'text-slate-300';
+
+      try {
+        const quote = await requestWorkerDeliveryQuote(pc, subtotal);
+        state.verifiedPostcode = quote.postcode;
+        state.verifiedQuote = quote;
+
+        if (!quote.available) {
+          noticeEl.innerHTML = `<span class="text-red-400 font-bold">❌ Delivery Unavailable:</span> ${esc(quote.message || 'Outside 10-mile radius')}`;
+          delEl.textContent = 'Unavailable';
+          delEl.className = 'font-bold text-red-400';
+          totalEl.textContent = 'Blocked';
+          payBtn.disabled = true;
+        } else {
+          const distStr = quote.approximateDistanceMiles != null ? ` (~${quote.approximateDistanceMiles} miles)` : '';
+          const feeStr = quote.deliveryFee === 0 ? 'FREE' : formatGBP(quote.deliveryFee);
+          noticeEl.innerHTML = `<span class="text-emerald-400 font-bold">✅ Confirmed${distStr}:</span> Delivery Fee is ${feeStr}. ${quote.freeDeliveryZone ? 'Inside Free Polygon.' : ''}`;
+
+          delEl.textContent = feeStr;
+          delEl.className = 'font-bold text-emerald-400';
+
+          if (quote.smallOrderSurcharge > 0) {
+            surchargeRow.classList.remove('hidden');
+            surchargeVal.textContent = '+' + formatGBP(quote.smallOrderSurcharge);
+          } else {
+            surchargeRow.classList.add('hidden');
+          }
+
+          totalEl.textContent = formatGBP(quote.total);
+          payBtn.disabled = true;
+        }
+      } catch (err) {
+        noticeEl.innerHTML = `<span class="text-red-400 font-bold">❌ Error:</span> ${esc(err.message || 'Could not reach delivery API')}`;
+        delEl.textContent = 'Error';
+        delEl.className = 'font-bold text-red-400';
+        totalEl.textContent = '—';
+        payBtn.disabled = true;
       }
-
-      const payload = {
-        customer: { name, phone, email },
-        deliveryAddress: { house, street, postcode, instructions: document.getElementById('custInstructions').value },
-        distanceMiles: state.deliveryDistanceMiles,
-        items: state.cart
-      };
-
-      console.log('Order submission payload:', payload);
-      alert(`Connecting to secure Stripe Checkout...\n\nDeliver to: ${house} ${street}, ${postcode}\nTotal Payable: ${document.getElementById('chkTotal').textContent}`);
     }
 
     window.addEventListener('DOMContentLoaded', () => {
