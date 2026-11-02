@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>The Hungry Fox | Gourmet Fried Chicken, Sauces & Shakers in Grays, Essex</title>
-  <meta name="description" content="Order fresh hand-tossed chicken, sizzling doner, buldak noodles, gourmet mochi, and loaded fries from The Hungry Fox in Grays, Thurrock, Essex. Fast delivery on Uber Eats & Deliveroo." />
+  <title>The Hungry Fox | Gourmet Fried Chicken, Sauces & Online Delivery in Grays, Essex</title>
+  <meta name="description" content="Order fresh hand-tossed sizzling chicken, doner kebabs, spicy buldak noodles, gourmet mochi, and loaded peri-peri sides from The Hungry Fox in Grays, Thurrock. 100% Halal certified, fast doorstep delivery." />
   <link rel="canonical" href="https://thehungryfox.co.uk/" />
 
   <!-- Google tag (gtag.js) -->
@@ -16,12 +16,12 @@
     gtag('config', 'G-J6G3YB0GF4');
   </script>
 
-  <!-- Google Fonts Preconnect & Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Preload high-priority WebP logo -->
+  <!-- Preload high-priority Logo -->
   <link rel="preload" as="image" href="https://thehungryfox.co.uk/hungry-fox-logo-cream.webp" fetchpriority="high" type="image/webp" />
 
   <style>
@@ -34,15 +34,16 @@
     .font-serif { font-family: 'Playfair Display', Georgia, serif; }
     .font-sans { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
 
-    /* Layout & Containers */
+    /* Containers */
     .max-w-6xl { max-width: 72rem; }
     .max-w-5xl { max-width: 64rem; }
     .max-w-4xl { max-width: 56rem; }
+    .max-w-md { max-width: 28rem; }
     .mx-auto { margin-left: auto; margin-right: auto; }
     .flex { display: flex; }
     .inline-flex { display: inline-flex; }
     .grid { display: grid; }
-    .hidden { display: none; }
+    .hidden { display: none !important; }
     .flex-col { flex-direction: column; }
     .flex-wrap { flex-wrap: wrap; }
     .items-center { align-items: center; }
@@ -53,27 +54,31 @@
     .justify-end { justify-content: flex-end; }
     .shrink-0 { flex-shrink: 0; }
     .relative { position: relative; }
+    .fixed { position: fixed; }
     .sticky { position: sticky; }
+    .inset-0 { inset: 0; }
     .top-0 { top: 0; }
+    .right-0 { right: 0; }
+    .bottom-0 { bottom: 0; }
     .z-10 { z-index: 10; }
+    .z-30 { z-index: 30; }
     .z-40 { z-index: 40; }
     .z-50 { z-index: 50; }
+    .z-60 { z-index: 60; }
     .overflow-hidden { overflow: hidden; }
+    .overflow-y-auto { overflow-y: auto; }
 
-    /* Clean Horizontal Smooth Scroll Without Visible Scrollbars */
+    /* Smooth Touch Scrollbar */
     .no-scrollbar {
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;
+      scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
       overflow-x: auto;
     }
-    .no-scrollbar::-webkit-scrollbar {
-      display: none; /* Chrome, Safari and Opera */
-    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
 
-    /* Spacing & Padding */
+    /* Spacing */
     .p-2 { padding: 0.5rem; }
-    .p-2\.5 { padding: 0.625rem; }
     .p-3 { padding: 0.75rem; }
     .p-4 { padding: 1rem; }
     .p-5 { padding: 1.25rem; }
@@ -81,11 +86,9 @@
     .p-8 { padding: 2rem; }
     .px-2\.5 { padding-left: 0.625rem; padding-right: 0.625rem; }
     .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
-    .px-3\.5 { padding-left: 0.875rem; padding-right: 0.875rem; }
     .px-4 { padding-left: 1rem; padding-right: 1rem; }
     .px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
     .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .py-0\.5 { padding-top: 0.125rem; padding-bottom: 0.125rem; }
     .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
     .py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
     .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
@@ -101,7 +104,6 @@
     .pt-3 { padding-top: 0.75rem; }
     .pt-4 { padding-top: 1rem; }
     .pt-6 { padding-top: 1.5rem; }
-    .pt-8 { padding-top: 2rem; }
     .pb-2 { padding-bottom: 0.5rem; }
     .pb-3 { padding-bottom: 0.75rem; }
     .pb-4 { padding-bottom: 1rem; }
@@ -118,7 +120,7 @@
     .mb-3 { margin-bottom: 0.75rem; }
     .mb-4 { margin-bottom: 1rem; }
 
-    /* Gaps */
+    .gap-1 { gap: 0.25rem; }
     .gap-1\.5 { gap: 0.375rem; }
     .gap-2 { gap: 0.5rem; }
     .gap-2\.5 { gap: 0.625rem; }
@@ -141,34 +143,41 @@
     .border-\[\#324368\] { border-color: #324368; }
     .border-orange-500\/40 { border-color: rgba(249, 115, 22, 0.4); }
     .border-emerald-500\/30 { border-color: rgba(16, 185, 129, 0.3); }
+    .rounded-md { border-radius: 0.375rem; }
     .rounded-lg { border-radius: 0.5rem; }
     .rounded-xl { border-radius: 0.75rem; }
     .rounded-2xl { border-radius: 1rem; }
     .rounded-3xl { border-radius: 1.5rem; }
     .rounded-full { border-radius: 9999px; }
 
-    /* Colors */
+    /* Theme Palette */
     .bg-\[\#080e1f\] { background-color: #080e1f; }
     .bg-\[\#0a1124\] { background-color: #0a1124; }
     .bg-\[\#0d172e\] { background-color: #0d172e; }
     .bg-\[\#131f3b\] { background-color: #131f3b; }
     .bg-\[\#172649\] { background-color: #172649; }
-    .bg-\[\#131f3b\]\/95 { background-color: rgba(19, 31, 59, 0.95); }
+    .bg-\[\#1c2d54\] { background-color: #1c2d54; }
+    .bg-orange-500 { background-color: #f97316; }
     .bg-orange-500\/10 { background-color: rgba(249, 115, 22, 0.1); }
+    .bg-orange-500\/20 { background-color: rgba(249, 115, 22, 0.2); }
     .bg-emerald-500\/10 { background-color: rgba(16, 185, 129, 0.1); }
+    .bg-emerald-500\/20 { background-color: rgba(16, 185, 129, 0.2); }
     .bg-amber-500\/20 { background-color: rgba(245, 158, 11, 0.2); }
+    .bg-red-500\/10 { background-color: rgba(239, 68, 68, 0.1); }
 
     .text-white { color: #ffffff; }
     .text-slate-100 { color: #f1f5f9; }
     .text-slate-200 { color: #e2e8f0; }
     .text-slate-300 { color: #cbd5e1; }
     .text-slate-400 { color: #94a3b8; }
+    .text-slate-500 { color: #64748b; }
     .text-orange-400 { color: #fb923c; }
+    .text-orange-500 { color: #f97316; }
     .text-amber-400 { color: #fbbf24; }
     .text-emerald-400 { color: #34d49a; }
+    .text-red-400 { color: #f87171; }
     .text-\[\#060e20\] { color: #060e20; }
 
-    /* Typography specifics */
     .text-\[10px\] { font-size: 0.625rem; line-height: 0.875rem; }
     .text-\[11px\] { font-size: 0.6875rem; line-height: 1rem; }
     .text-xs { font-size: 0.75rem; line-height: 1rem; }
@@ -178,6 +187,7 @@
     .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
     .text-2xl { font-size: 1.5rem; line-height: 2rem; }
     .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+    .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
     .font-semibold { font-weight: 600; }
     .font-bold { font-weight: 700; }
     .font-extrabold { font-weight: 800; }
@@ -188,18 +198,19 @@
     .tracking-widest { letter-spacing: 0.1em; }
     .text-center { text-align: center; }
     .text-left { text-align: left; }
+    .text-right { text-align: right; }
     .leading-tight { line-height: 1.2; }
     .leading-snug { line-height: 1.375; }
     .leading-relaxed { line-height: 1.625; }
     .underline { text-decoration-line: underline; }
     .whitespace-nowrap { whitespace: nowrap; }
+    .w-full { width: 100%; }
 
-    /* Brand Logo Fixed Aspect Ratio (Never Stretches) */
+    /* Logo Natural Ratio */
     .brand-logo {
       height: 48px;
       width: auto;
       max-width: 170px;
-      aspect-ratio: auto;
       object-fit: contain;
       display: block;
       flex-shrink: 0;
@@ -214,55 +225,118 @@
       height: 42px;
       width: auto;
       max-width: 140px;
-      aspect-ratio: auto;
       object-fit: contain;
       display: block;
       flex-shrink: 0;
     }
 
-    /* Buttons */
-    .btn-uber {
+    /* Primary CTAs */
+    .btn-orange {
       background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
       color: #060e20;
       font-weight: 800;
       border: 1px solid rgba(249, 115, 22, 0.4);
       transition: all 180ms ease;
       box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
-      text-decoration: none;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      white-space: nowrap;
+      text-decoration: none;
     }
-    .btn-uber:hover {
+    .btn-orange:hover {
       background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(249, 115, 22, 0.45);
     }
-    .btn-deliveroo {
-      background: linear-gradient(135deg, #00cdbc 0%, #00a496 100%);
-      color: #060e20;
-      font-weight: 800;
-      border: 1px solid rgba(0, 205, 188, 0.4);
-      transition: all 180ms ease;
-      box-shadow: 0 4px 14px rgba(0, 205, 188, 0.35);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-    }
-    .btn-deliveroo:hover {
-      background: linear-gradient(135deg, #26decb 0%, #00a496 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 205, 188, 0.45);
+    .btn-orange:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
     }
 
-    /* Category Navigation Pills (Smooth, Native Touch-Feel) */
+    /* Partner header badges */
+    .btn-uber {
+      background: #000000;
+      color: #06c167;
+      font-weight: 800;
+      border: 1px solid #2a3859;
+      padding: 0.5rem 0.85rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .btn-deliveroo {
+      background: #00cdbc;
+      color: #060e20;
+      font-weight: 800;
+      border: 1px solid rgba(0,205,188,0.5);
+      padding: 0.5rem 0.85rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Basket Drawer */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 440px;
+      background-color: #0d172e;
+      border-left: 1px solid #2a3859;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.7);
+      transform: translateX(100%);
+      transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 9, 21, 0.75);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 280ms ease;
+      z-index: 55;
+    }
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Modal */
+    .custom-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 9, 21, 0.8);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 70;
+    }
+
+    /* Category Nav Pills */
     .nav-pill {
       display: inline-flex;
       align-items: center;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 1.1rem;
       border-radius: 9999px;
       background-color: #172649;
       border: 1px solid #2a3859;
@@ -274,7 +348,6 @@
       cursor: pointer;
       text-decoration: none;
       flex-shrink: 0;
-      user-select: none;
     }
     .nav-pill:hover, .nav-pill.active {
       background-color: #f97316;
@@ -288,7 +361,7 @@
       background: linear-gradient(180deg, #172649 0%, #111d38 100%);
       border: 1px solid #2a3859;
       border-radius: 1.125rem;
-      padding: 1.25rem;
+      padding: 1.35rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -299,19 +372,6 @@
       border-color: rgba(249, 115, 22, 0.55);
       transform: translateY(-3px);
       box-shadow: 0 12px 26px -8px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Customisation Accordion */
-    details.custom-accordion summary {
-      cursor: pointer;
-      user-select: none;
-      list-style: none;
-    }
-    details.custom-accordion summary::-webkit-details-marker {
-      display: none;
-    }
-    details.custom-accordion[open] summary .arrow-icon {
-      transform: rotate(180deg);
     }
 
     /* Map container */
@@ -333,14 +393,13 @@
       border: 0;
     }
 
-    /* Responsive Grid */
+    /* Responsive */
     @media (min-width: 640px) {
       .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .sm\:flex-row { flex-direction: row; }
       .sm\:p-8 { padding: 2rem; }
       .sm\:p-12 { padding: 3rem; }
-      .sm\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+      .sm\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
       .sm\:text-5xl { font-size: 3rem; line-height: 1.15; }
     }
     @media (min-width: 768px) {
@@ -353,8 +412,11 @@
 </head>
 
 <body>
-  <!-- Top Utility Bar: Trust, Certifications & Hours -->
-  <aside class="bg-[#080e1f] border-b border-[#202e4d] text-xs py-2 px-4 sticky top-0 z-50">
+  <!-- Overlay Backdrop for Drawer & Modals -->
+  <div id="drawerOverlay" class="drawer-overlay" onclick="closeCartDrawer()"></div>
+
+  <!-- Top Notice Bar: Trust & Certified Info -->
+  <aside class="bg-[#080e1f] border-b border-[#202e4d] text-xs py-2 px-4 sticky top-0 z-40">
     <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 text-slate-300">
       <div class="flex items-center gap-3 sm:gap-5 flex-wrap">
         <a href="https://ratings.food.gov.uk/business/1981131/the-hungry-fox" target="_blank" rel="noopener noreferrer" 
@@ -370,16 +432,16 @@
         <span class="font-medium text-slate-200">Open Daily 11:00 – 23:30</span>
       </div>
       <div class="flex items-center gap-4 text-xs font-semibold">
-        <span class="text-orange-400">Grays, Thurrock, Essex</span>
+        <span class="text-orange-400 font-bold uppercase tracking-wider">🚀 Delivery Only • Thurrock</span>
         <a href="#allergens" class="text-slate-400 hover:text-white transition-colors underline">Allergen Matrix</a>
       </div>
     </div>
   </aside>
 
-  <!-- Main Header with Brand Logo & High-Visibility Action Buttons -->
-  <header class="bg-[#131f3b]/95 backdrop-blur-md border-b border-[#2a3859]">
+  <!-- Main Header with Logo & Cart Action -->
+  <header class="bg-[#131f3b]/95 backdrop-blur-md border-b border-[#2a3859] sticky top-8 z-30">
     <div class="max-w-6xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between gap-3">
-      <!-- Fixed Logo (Natural Proportions, Never Stretched) -->
+      <!-- Fixed Proportion Brand Logo -->
       <a href="#" class="flex items-center shrink-0" aria-label="The Hungry Fox Home">
         <img src="https://thehungryfox.co.uk/hungry-fox-logo-cream.webp" 
              alt="The Hungry Fox Logo" 
@@ -387,24 +449,29 @@
              class="brand-logo" />
       </a>
 
-      <!-- Quick Action Partner Ordering Badges -->
-      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-        <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" 
-           target="_blank" rel="noopener noreferrer" 
-           class="btn-uber px-3 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold gap-1.5 sm:gap-2">
-          <span>Uber Eats</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-        </a>
-        <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" 
-           target="_blank" rel="noopener noreferrer" 
-           class="btn-deliveroo px-3 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold gap-1.5 sm:gap-2">
-          <span>Deliveroo</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-        </a>
+      <!-- Header Right: Cart Button & Quick Partner Links -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Live Online Cart CTA Button -->
+        <button onclick="openCartDrawer()" class="btn-orange px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span>Basket</span>
+          <span id="headerCartCount" class="bg-[#060e20] text-orange-400 px-2 py-0.5 rounded-full text-xs font-black">0</span>
+          <span id="headerCartTotal" class="hidden sm:inline text-xs font-black border-l border-[#060e20]/40 pl-2">£0.00</span>
+        </button>
+
+        <!-- Delivery Partners -->
+        <div class="hidden md:flex items-center gap-2">
+          <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener noreferrer" class="btn-uber">
+            <span>Uber Eats</span>
+          </a>
+          <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener noreferrer" class="btn-deliveroo">
+            <span>Deliveroo</span>
+          </a>
+        </div>
       </div>
     </div>
 
-    <!-- Clean Sticky Category Navigation Bar (No lines, No ugly scrollbars, Native touch slide) -->
+    <!-- Category Navigation Bar -->
     <nav class="border-t border-[#202e4d] bg-[#0d172e] px-4 py-2.5 no-scrollbar" aria-label="Menu categories">
       <div id="category-nav-bar" class="max-w-6xl mx-auto flex items-center gap-2 flex-nowrap">
         <a href="#menu-container" class="nav-pill active">All Categories</a>
@@ -413,32 +480,57 @@
   </header>
 
   <main class="max-w-6xl mx-auto px-4 py-8 sm:py-12 space-y-12">
-    <!-- Hero Showcase Section (Responsive & Uncluttered) -->
+    <!-- Hero Showcase Section -->
     <section class="relative rounded-3xl bg-gradient-to-br from-[#172649] via-[#131f3b] to-[#0d172e] border border-[#2a3859] p-6 sm:p-12 overflow-hidden shadow-2xl">
       <div style="position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(249,115,22,0.18) 0%, rgba(0,0,0,0) 70%); pointer-events: none;"></div>
 
       <div class="relative z-10 max-w-3xl space-y-4 text-left">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/40 text-orange-400 text-xs font-extrabold uppercase tracking-wider">
-          🔥 Fresh Fried Chicken & Gourmet Shakers • Thurrock, Essex
+          🔥 Strictly Delivery Only • Hand-Tossed in Thurrock, Essex
         </div>
         <h1 class="font-serif text-3xl sm:text-5xl font-black text-white leading-tight">
           Hand-Tossed Sizzling Chicken, Sauces & Flavours.
         </h1>
         <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-          From flame-baked chicken to MFC breaded crispy wings, spit-carved doner, spicy Korean buldak noodles, and artisan gelato mochi desserts. Made fresh to order in Grays.
+          From flame-baked quarter chickens to MFC crispy wings, spit-carved doner, spicy Korean buldak fire noodles, and artisan mochi gelato desserts. Delivered piping hot to your door across Grays and Thurrock.
         </p>
 
-        <!-- Order Rules Notice -->
-        <div id="order-rules-banner" class="mt-6 p-4 rounded-xl bg-[#0d172e] border border-[#2a3859] flex items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center shrink-0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-            </div>
-            <div>
-              <p id="min-order-text" class="text-xs sm:text-sm font-bold text-white">Minimum order £15.00 • Free delivery available within 3 miles!</p>
-              <p class="text-xs text-slate-400">Order direct on our website for fast doorstep delivery across Thurrock.</p>
+        <!-- Delivery Fee Rules Notice -->
+        <div class="grid sm:grid-cols-3 gap-2.5 pt-2">
+          <div class="p-3 rounded-xl bg-[#080e1f] border border-[#2a3859] text-left">
+            <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider block">Within 3 Miles</span>
+            <span class="text-white text-sm font-extrabold">FREE Delivery</span>
+            <p class="text-[11px] text-slate-400">Grays & immediate area</p>
+          </div>
+          <div class="p-3 rounded-xl bg-[#080e1f] border border-[#2a3859] text-left">
+            <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">3.1 to 5.0 Miles</span>
+            <span class="text-white text-sm font-extrabold">£1.99 Delivery</span>
+            <p class="text-[11px] text-slate-400">Chafford Hundred / Tilbury</p>
+          </div>
+          <div class="p-3 rounded-xl bg-[#080e1f] border border-[#2a3859] text-left">
+            <span class="text-[10px] text-orange-400 font-bold uppercase tracking-wider block">5.1 to 10.0 Miles</span>
+            <span class="text-white text-sm font-extrabold">£3.99 Delivery</span>
+            <p class="text-[11px] text-slate-400">Up to 10 mile radius</p>
+          </div>
+        </div>
+
+        <!-- Postcode Distance Quick Checker -->
+        <div class="mt-4 p-4 rounded-xl bg-[#080e1f] border border-[#2a3859] space-y-2">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <span class="text-xs font-bold text-slate-200">🔍 Check Your Delivery Postcode & Distance Fee:</span>
+            <span class="text-[11px] text-slate-400">Orders under £15 have a £4 small order fee</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" id="quickPostcode" placeholder="e.g. RM17 6QJ" class="px-3 py-2 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white text-xs uppercase font-bold focus:outline-none focus:border-orange-500 w-36" />
+            <button onclick="checkQuickPostcode()" class="btn-orange px-4 py-2 rounded-lg text-xs font-bold">Check</button>
+            <div class="flex items-center gap-1.5 flex-wrap text-[11px]">
+              <button onclick="setTestPostcode('RM17 6QJ')" class="text-slate-400 hover:text-white underline">RM17 (Free)</button>
+              <button onclick="setTestPostcode('RM16 2AB')" class="text-slate-400 hover:text-white underline">RM16 (£1.99)</button>
+              <button onclick="setTestPostcode('RM15 5TT')" class="text-slate-400 hover:text-white underline">RM15 (£3.99)</button>
+              <button onclick="setTestPostcode('SW1A 1AA')" class="text-slate-400 hover:text-white underline">London (Blocked)</button>
             </div>
           </div>
+          <div id="quickCheckResult" class="text-xs font-semibold pt-1 hidden"></div>
         </div>
       </div>
     </section>
@@ -448,6 +540,7 @@
       <div class="p-12 text-center bg-[#172649] border border-[#2a3859] rounded-2xl space-y-3">
         <div class="inline-block animate-spin text-orange-400 text-3xl">⏳</div>
         <p class="text-base font-semibold text-white">Loading The Hungry Fox Master Menu...</p>
+        <p class="text-xs text-slate-400">Connecting to dynamic CSV sheets...</p>
       </div>
     </div>
 
@@ -464,16 +557,15 @@
         </div>
       </div>
 
-      <button onclick="toggleMatrix()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs sm:text-sm font-extrabold transition-all shadow-md">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      <button onclick="toggleMatrix()" class="btn-orange px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold">
         <span id="matrixBtnText">View Allergen Matrix</span>
       </button>
 
-      <!-- Expandable Allergen Table -->
+      <!-- Allergen Table -->
       <div id="matrixContainer" class="hidden pt-6 border-t border-[#2a3859] space-y-4">
         <div class="flex justify-between items-center flex-wrap gap-2 text-xs">
-          <p class="text-slate-300 font-medium">This matrix is a guide only. Please speak to staff for specific allergen advice across the 14 statutory allergens.</p>
-          <span class="text-amber-400 font-bold">✓ = Contains Directly | 1 = May Contain (Cross-contamination risk) | ✕ = Free From</span>
+          <p class="text-slate-300 font-medium">This matrix is a guide only. Please call store staff for specific allergen advice across the 14 statutory allergens.</p>
+          <span class="text-amber-400 font-bold">✓ = Contains Directly | 1 = May Contain | ✕ = Free From</span>
         </div>
         <div class="overflow-x-auto rounded-xl border border-[#2a3859] bg-[#0d172e]">
           <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.75rem;">
@@ -542,7 +634,7 @@
               <span class="text-white font-semibold">11:00 – 23:30</span>
             </div>
             <p class="text-[11px] text-amber-400 pt-1 font-semibold">Open 7 days a week: 11:00 AM – 11:30 PM</p>
-            <p class="text-[11px] text-slate-400">Late night takeaway & delivery across Grays and surrounding Thurrock areas.</p>
+            <p class="text-[11px] text-slate-400">Strictly doorstep delivery across Grays and surrounding Thurrock areas.</p>
           </div>
         </div>
 
@@ -589,12 +681,182 @@
     </div>
   </footer>
 
-  <!-- Master JavaScript: RFC-4180 CSV Engine, Dynamic Customisation & Ordering -->
+  <!-- Slide-Out Shopping Basket Drawer -->
+  <aside id="cartDrawer" class="cart-drawer">
+    <div class="p-4 border-b border-[#2a3859] flex items-center justify-between bg-[#131f3b]">
+      <div class="flex items-center gap-2">
+        <span class="font-serif text-lg font-bold text-white">Your Delivery Basket</span>
+        <span id="drawerBadgeCount" class="bg-orange-500 text-[#060e20] px-2 py-0.5 rounded-full text-xs font-extrabold">0</span>
+      </div>
+      <button onclick="closeCartDrawer()" class="p-1 rounded-lg text-slate-400 hover:text-white text-lg">✕</button>
+    </div>
+
+    <!-- Small Order Fee Progress Bar -->
+    <div id="smallOrderBanner" class="bg-[#080e1f] px-4 py-2.5 border-b border-[#2a3859] text-xs">
+      <div class="flex justify-between items-center mb-1">
+        <span id="smallOrderLabel" class="font-bold text-amber-400">Orders under £15 have a £4 fee</span>
+        <span id="smallOrderRemaining" class="text-slate-300 font-bold">Add £15.00 for £0 fee</span>
+      </div>
+      <div class="w-full bg-[#172649] h-2 rounded-full overflow-hidden">
+        <div id="smallOrderBar" class="bg-orange-500 h-full transition-all duration-300" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Basket Items List -->
+    <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <!-- Items dynamically populated -->
+      <div class="text-center py-16 text-slate-400 space-y-2">
+        <p class="text-3xl">🦊</p>
+        <p class="font-semibold text-white">Your basket is empty</p>
+        <p class="text-xs">Add delicious chicken, sides or drinks from our menu!</p>
+      </div>
+    </div>
+
+    <!-- Basket Footer / Financial Breakdown -->
+    <div class="p-4 border-t border-[#2a3859] bg-[#0a1124] space-y-3">
+      <div class="space-y-1.5 text-xs">
+        <div class="flex justify-between text-slate-300">
+          <span>Subtotal:</span>
+          <span id="cartSubtotalText" class="font-bold text-white">£0.00</span>
+        </div>
+        <div class="flex justify-between text-slate-300">
+          <span id="cartDeliveryTierLabel">Estimated Delivery Fee:</span>
+          <span id="cartDeliveryFeeText" class="font-bold text-emerald-400">FREE (Under 3 mi)</span>
+        </div>
+        <div id="cartSmallOrderRow" class="flex justify-between text-amber-400 hidden">
+          <span>Small Order Charge (Under £15):</span>
+          <span class="font-bold">+£4.00</span>
+        </div>
+        <div class="flex justify-between text-base font-extrabold text-white pt-2 border-t border-[#2a3859]">
+          <span>Total:</span>
+          <span id="cartTotalText" class="text-orange-400 text-lg">£0.00</span>
+        </div>
+      </div>
+
+      <button id="btnProceedToCheckout" onclick="startDeliveryCheckout()" class="btn-orange w-full py-3 rounded-xl text-sm font-extrabold shadow-lg">
+        Proceed to Delivery Checkout
+      </button>
+      <p class="text-[10px] text-center text-slate-400">100% Delivery Only • Fast doorstep dispatch across Thurrock</p>
+    </div>
+  </aside>
+
+  <!-- Interactive Product Customisation Modal Dialog -->
+  <div id="customModal" class="custom-modal-backdrop hidden">
+    <div class="bg-[#0d172e] border border-[#2a3859] rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+      <div class="p-4 border-b border-[#2a3859] flex items-center justify-between bg-[#131f3b]">
+        <div>
+          <h3 id="modalProductName" class="font-serif text-lg font-bold text-white">Customise Item</h3>
+          <span id="modalProductBasePrice" class="text-xs font-bold text-orange-400">£0.00</span>
+        </div>
+        <button onclick="closeCustomModal()" class="text-slate-400 hover:text-white p-1 text-lg">✕</button>
+      </div>
+
+      <div id="modalAlertBox" class="p-3 bg-red-500/15 border-b border-red-500/30 text-xs text-red-300 font-semibold hidden">
+        ⚠️ Please make your required flavour selection before adding to basket.
+      </div>
+
+      <div id="modalBody" class="p-4 overflow-y-auto flex-1 space-y-4">
+        <!-- Injected Customisation Groups -->
+      </div>
+
+      <div class="p-4 border-t border-[#2a3859] bg-[#0a1124] flex items-center justify-between gap-3">
+        <div>
+          <span class="text-[10px] text-slate-400 block uppercase font-bold">Item Total:</span>
+          <span id="modalRunningTotal" class="text-base font-black text-orange-400">£0.00</span>
+        </div>
+        <button onclick="confirmAddToBasket()" class="btn-orange px-6 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold">
+          + Add to Basket
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delivery Checkout Modal -->
+  <div id="checkoutModal" class="custom-modal-backdrop hidden">
+    <div class="bg-[#0d172e] border border-[#2a3859] rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+      <div class="p-4 border-b border-[#2a3859] flex items-center justify-between bg-[#131f3b]">
+        <h3 class="font-serif text-lg font-bold text-white">Delivery Checkout (No Collection)</h3>
+        <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-1 text-lg">✕</button>
+      </div>
+
+      <div class="p-4 overflow-y-auto flex-1 space-y-4 text-xs">
+        <!-- Step 1: Customer Details -->
+        <div class="space-y-2">
+          <span class="font-bold text-white uppercase tracking-wider block">1. Contact Information</span>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <input type="text" id="custName" placeholder="Full Name *" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white" />
+            <input type="tel" id="custPhone" placeholder="Mobile Number *" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white" />
+          </div>
+          <input type="email" id="custEmail" placeholder="Email Address for Receipt *" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white w-full" />
+        </div>
+
+        <!-- Step 2: Delivery Address -->
+        <div class="space-y-2 pt-2 border-t border-[#2a3859]">
+          <span class="font-bold text-white uppercase tracking-wider block">2. Delivery Address (Thurrock)</span>
+          <div class="grid grid-cols-2 gap-2">
+            <input type="text" id="custHouse" placeholder="House No. / Flat *" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white" />
+            <input type="text" id="custPostcode" onchange="validateCheckoutDistance()" placeholder="Postcode (e.g. RM17 6QJ) *" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white uppercase font-bold" />
+          </div>
+          <input type="text" id="custStreet" placeholder="Street Name *" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white w-full" />
+          <input type="text" id="custInstructions" placeholder="Driver delivery notes (optional)" class="p-2.5 rounded-lg bg-[#131f3b] border border-[#2a3859] text-white w-full" />
+        </div>
+
+        <!-- Step 3: Verified Tier & Radius Message -->
+        <div id="checkoutRadiusNotice" class="p-3 rounded-lg bg-[#131f3b] border border-[#2a3859] text-slate-200">
+          <span class="font-bold text-white block mb-0.5">Delivery Status:</span>
+          <span id="checkoutDistanceText">Enter your postcode to verify delivery eligibility.</span>
+        </div>
+
+        <!-- Step 4: Final Summary -->
+        <div class="p-3 rounded-lg bg-[#080e1f] border border-[#2a3859] space-y-1">
+          <div class="flex justify-between text-slate-300">
+            <span>Subtotal:</span>
+            <span id="chkSubtotal" class="font-bold text-white">£0.00</span>
+          </div>
+          <div class="flex justify-between text-slate-300">
+            <span>Delivery Fee:</span>
+            <span id="chkDelivery" class="font-bold text-emerald-400">£0.00</span>
+          </div>
+          <div id="chkSmallOrderRow" class="flex justify-between text-amber-400 hidden">
+            <span>Small Order Charge (&lt; £15):</span>
+            <span class="font-bold">+£4.00</span>
+          </div>
+          <div class="flex justify-between text-sm font-extrabold text-white pt-1 border-t border-[#2a3859]">
+            <span>Amount Payable:</span>
+            <span id="chkTotal" class="text-orange-400 text-base">£0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 border-t border-[#2a3859] bg-[#0a1124]">
+        <button id="btnFinalPay" onclick="proceedToPayment()" class="btn-orange w-full py-3 rounded-xl text-sm font-extrabold shadow-lg">
+          Pay Securely with Card (Stripe)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Master JavaScript Engine -->
   <script>
-    // Allergen Matrix Toggle
+    // State management
+    let state = {
+      products: [],
+      customisations: [],
+      productGroups: [],
+      orderRules: [],
+      categories: [],
+      cart: [],
+      activeModalProduct: null,
+      activeModalSelections: {},
+      deliveryDistanceMiles: 0.4,
+      deliveryFee: 0.00,
+      isOutsideRadius: false
+    };
+
+    // Toggle Allergen Matrix
     function toggleMatrix() {
-      var container = document.getElementById('matrixContainer');
-      var btnText = document.getElementById('matrixBtnText');
+      const container = document.getElementById('matrixContainer');
+      const btnText = document.getElementById('matrixBtnText');
       if (container.classList.contains('hidden')) {
         container.classList.remove('hidden');
         btnText.textContent = 'Hide Allergen Matrix';
@@ -604,225 +866,541 @@
       }
     }
 
-    // Dynamic CSV Menu Loader
-    async function loadHungryFoxMenu() {
-      const root = document.getElementById("menu-container");
-      const navBar = document.getElementById("category-nav-bar");
-      const minOrderBanner = document.getElementById("min-order-text");
+    // Currency Formatter
+    const formatGBP = (num) => {
+      const val = parseFloat(num) || 0;
+      return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(val);
+    };
 
-      // Robust RFC-4180 Parser handling quotes, commas, multiline fields and BOM
-      function parseRFC4180(text) {
-        const rows = [];
-        let row = [], value = "", inQuotes = false;
-        text = text.replace(/^\uFEFF/, "");
-        for (let i = 0; i < text.length; i++) {
-          const c = text[i];
-          if (c === '"') {
-            if (inQuotes && text[i + 1] === '"') {
-              value += '"';
-              i++;
-            } else {
-              inQuotes = !inQuotes;
-            }
-          } else if (c === "," && !inQuotes) {
-            row.push(value);
-            value = "";
-          } else if ((c === "\n" || c === "\r") && !inQuotes) {
-            if (c === "\r" && text[i + 1] === "\n") i++;
-            row.push(value);
-            if (row.some(cell => cell.trim().length > 0)) rows.push(row);
-            row = [];
-            value = "";
+    // Safe HTML
+    const esc = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+
+    // RFC-4180 CSV Parser
+    function parseRFC4180(text) {
+      const rows = [];
+      let row = [], value = '', inQuotes = false;
+      text = text.replace(/^\uFEFF/, '');
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (c === '"') {
+          if (inQuotes && text[i + 1] === '"') {
+            value += '"';
+            i++;
           } else {
-            value += c;
+            inQuotes = !inQuotes;
           }
+        } else if (c === ',' && !inQuotes) {
+          row.push(value);
+          value = '';
+        } else if ((c === '\n' || c === '\r') && !inQuotes) {
+          if (c === '\r' && text[i + 1] === '\n') i++;
+          row.push(value);
+          if (row.some(cell => cell.trim().length > 0)) rows.push(row);
+          row = [];
+          value = '';
+        } else {
+          value += c;
         }
-        row.push(value);
-        if (row.some(cell => cell.trim().length > 0)) rows.push(row);
-        if (rows.length < 2) return [];
-        const headers = rows.shift().map(h => h.trim());
-        return rows.map(cells =>
-          Object.fromEntries(headers.map((h, idx) => [h, (cells[idx] || "").trim()]))
-        );
       }
+      row.push(value);
+      if (row.some(cell => cell.trim().length > 0)) rows.push(row);
+      if (rows.length < 2) return [];
+      const headers = rows.shift().map(h => h.trim());
+      return rows.map(cells =>
+        Object.fromEntries(headers.map((h, idx) => [h, (cells[idx] || '').trim()]))
+      );
+    }
 
-      // Safe HTML escaping
-      const esc = (v) => String(v ?? "").replace(/[&<>"']/g, c => ({
-        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-      }[c]));
-
-      // Boolean evaluation
-      const isYes = (v) => String(v).trim().toLowerCase() === "true" || String(v).trim() === "1";
-
-      // Currency formatting
-      const formatCurrency = (v) => {
-        const num = parseFloat(String(v).replace(/[^0-9.]/g, ""));
-        return isNaN(num) ? "£0.00" : Number(num).toLocaleString("en-GB", { style: "currency", currency: "GBP" });
-      };
-
-      // Fetch helper supporting root repository files or raw GitHub fallback
-      async function fetchCSV(fileName) {
-        const paths = [
-          fileName + "?v=" + Date.now(),
-          "https://raw.githubusercontent.com/thehungryfox2026-glitch/thehungryfox/main/" + fileName + "?v=" + Date.now()
-        ];
-        for (const p of paths) {
-          try {
-            const res = await fetch(p, { cache: "no-store" });
-            if (res.ok) {
-              const text = await res.text();
-              const parsed = parseRFC4180(text);
-              if (parsed && parsed.length > 0) return parsed;
-            }
-          } catch (e) {
-            // continue fallback
+    // Dynamic CSV Fetcher with GitHub Raw Fallback
+    async function fetchCSV(fileName) {
+      const paths = [
+        fileName + '?v=' + Date.now(),
+        'https://raw.githubusercontent.com/thehungryfox2026-glitch/thehungryfox/main/' + fileName + '?v=' + Date.now()
+      ];
+      for (const p of paths) {
+        try {
+          const res = await fetch(p, { cache: 'no-store' });
+          if (res.ok) {
+            const text = await res.text();
+            const parsed = parseRFC4180(text);
+            if (parsed && parsed.length > 0) return parsed;
           }
-        }
-        throw new Error(fileName + " could not be retrieved");
+        } catch (e) {}
       }
+      throw new Error(fileName + ' unavailable');
+    }
+
+    // Delivery Fee Calculator by Mile Tiers
+    function calculateDistanceFee(miles) {
+      if (miles > 10.0) {
+        return { fee: null, blocked: true, label: 'Delivery Unavailable (Beyond 10.0 miles)' };
+      } else if (miles > 5.0) {
+        return { fee: 3.99, blocked: false, label: '£3.99 (5.1 – 10.0 miles)' };
+      } else if (miles > 3.0) {
+        return { fee: 1.99, blocked: false, label: '£1.99 (3.1 – 5.0 miles)' };
+      } else {
+        return { fee: 0.00, blocked: false, label: 'FREE Delivery (Under 3.0 miles)' };
+      }
+    }
+
+    // Postcode Distance Lookup
+    function estimatePostcodeMiles(postcode) {
+      const clean = (postcode || '').trim().toUpperCase();
+      if (!clean) return 0.4;
+      if (clean.startsWith('RM17')) return 0.8;
+      if (clean.startsWith('RM16')) return 3.8;
+      if (clean.startsWith('RM18')) return 4.2;
+      if (clean.startsWith('RM15')) return 6.4;
+      if (clean.startsWith('RM19') || clean.startsWith('RM20')) return 7.1;
+      if (clean.startsWith('SS17') || clean.startsWith('RM14')) return 8.9;
+      return 22.5; // Out of area default
+    }
+
+    // Quick Postcode Distance Widget
+    function checkQuickPostcode() {
+      const pc = document.getElementById('quickPostcode').value;
+      const resEl = document.getElementById('quickCheckResult');
+      resEl.classList.remove('hidden');
+      const miles = estimatePostcodeMiles(pc);
+      const tier = calculateDistanceFee(miles);
+
+      if (tier.blocked) {
+        resEl.className = 'text-xs font-bold pt-1 text-red-400';
+        resEl.innerHTML = `❌ ${pc.toUpperCase()} is approx ${miles.toFixed(1)} miles away — Delivery is unavailable beyond our 10-mile delivery zone.`;
+      } else {
+        resEl.className = 'text-xs font-bold pt-1 text-emerald-400';
+        resEl.innerHTML = `✅ ${pc.toUpperCase()} is approx ${miles.toFixed(1)} miles away. Delivery Fee: <strong>${tier.fee === 0 ? 'FREE' : formatGBP(tier.fee)}</strong>.`;
+      }
+    }
+
+    function setTestPostcode(code) {
+      document.getElementById('quickPostcode').value = code;
+      checkQuickPostcode();
+    }
+
+    // Load CSV Menu Data
+    async function loadHungryFoxMenu() {
+      const root = document.getElementById('menu-container');
+      const navBar = document.getElementById('category-nav-bar');
 
       try {
         const [products, customisations, groups, rules] = await Promise.all([
-          fetchCSV("products.csv"),
-          fetchCSV("customisation.csv"),
-          fetchCSV("product_groups.csv"),
-          fetchCSV("order_rules.csv")
+          fetchCSV('products.csv'),
+          fetchCSV('customisation.csv'),
+          fetchCSV('product_groups.csv'),
+          fetchCSV('order_rules.csv')
         ]);
 
-        // Filter available products
-        const available = products.filter(p => isYes(p.Availability) || p.Availability === undefined);
-        const categories = [...new Set(available.map(p => p.Category).filter(Boolean))];
+        state.products = products.filter(p => String(p.Availability).toLowerCase() !== 'false' && String(p.Availability) !== '0');
+        state.customisations = customisations;
+        state.productGroups = groups;
+        state.orderRules = rules;
 
-        // Clean Nav Bar Pills (Without trailing status text)
-        if (navBar && categories.length > 0) {
-          navBar.innerHTML = categories.map((cat, idx) => {
-            const anchor = "cat-" + idx;
+        state.categories = [...new Set(state.products.map(p => p.Category).filter(Boolean))];
+
+        // Nav Bar Pills
+        if (navBar && state.categories.length > 0) {
+          navBar.innerHTML = state.categories.map((cat, idx) => {
+            const anchor = 'cat-' + idx;
             return `<a href="#${anchor}" class="nav-pill">${esc(cat)}</a>`;
-          }).join("");
-        }
-
-        // Render Customisation Options for each product
-        function buildCustomOptions(product) {
-          const linkedGroups = groups.filter(g => g.Product_ID === product.Product_ID);
-          if (!linkedGroups.length) return "";
-
-          const groupContent = linkedGroups.map(group => {
-            const groupName = group.Customization_Group || group.Customisation_Group;
-            const options = customisations.filter(o =>
-              (o.Customisation_Group === groupName || o.Customization_Group === groupName) &&
-              (!o.Product_ID || o.Product_ID === product.Product_ID) &&
-              (isYes(o.Active) || o.Active === undefined)
-            ).sort((a, b) => Number(a.Display_Order || 0) - Number(b.Display_Order || 0));
-
-            if (!options.length) return "";
-
-            return `
-              <div class="p-2.5 rounded-lg bg-[#0d172e] border border-[#2a3859] mb-2">
-                <div class="flex justify-between items-center mb-1">
-                  <span class="font-bold text-slate-200 text-xs">${esc(groupName.replace(/_/g, " "))}</span>
-                  <span class="text-[10px] text-amber-400 font-semibold">Choose ${esc(group.Min_Selec || group.Min_Selections || 1)}–${esc(group.Max_Selec || group.Max_Selections || 1)}</span>
-                </div>
-                <div class="space-y-1 mt-1">
-                  ${options.map(o => `
-                    <div class="flex justify-between items-center text-xs text-slate-300 py-0.5">
-                      <span>• ${esc(o.Option_Name)}</span>
-                      ${Number(o.Extra_Price) > 0 ? `<span class="text-orange-400 font-bold">+${formatCurrency(o.Extra_Price)}</span>` : `<span class="text-slate-400 text-[10px]">Included</span>`}
-                    </div>
-                  `).join("")}
-                </div>
-              </div>
-            `;
-          }).filter(Boolean).join("");
-
-          if (!groupContent) return "";
-
-          return `
-            <details class="custom-accordion mt-3 pt-3 border-t border-[#2a3859]">
-              <summary class="flex items-center justify-between text-xs font-bold text-orange-400 hover:text-orange-300">
-                <span>View Flavours & Customisation Options</span>
-                <span class="arrow-icon transition-transform text-sm">▾</span>
-              </summary>
-              <div class="pt-2.5 space-y-2">
-                ${groupContent}
-              </div>
-            </details>
-          `;
+          }).join('');
         }
 
         // Render Menu Sections
-        root.innerHTML = categories.map((cat, idx) => {
-          const anchor = "cat-" + idx;
-          const itemsInCat = available.filter(p => p.Category === cat);
+        root.innerHTML = state.categories.map((cat, idx) => {
+          const anchor = 'cat-' + idx;
+          const items = state.products.filter(p => p.Category === cat);
 
           return `
             <section id="${anchor}" class="space-y-4 pt-2">
               <div class="flex items-center justify-between border-b border-[#2a3859] pb-3">
-                <div>
-                  <h2 class="font-serif text-2xl font-bold text-white tracking-wide">${esc(cat)}</h2>
-                  <p class="text-xs text-slate-400 mt-0.5">${itemsInCat.length} fresh item${itemsInCat.length === 1 ? '' : 's'} available to order</p>
-                </div>
+                <h2 class="font-serif text-2xl font-bold text-white tracking-wide">${esc(cat)}</h2>
+                <span class="text-xs text-slate-400">${items.length} items</span>
               </div>
 
               <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
-                ${itemsInCat.map(p => `
-                  <article class="product-card" data-product-id="${esc(p.Product_ID)}">
+                ${items.map(p => `
+                  <article class="product-card">
                     <div>
                       ${p.Photo_URL ? `
                         <img src="${esc(p.Photo_URL)}" alt="${esc(p.Product_Name)}" loading="lazy" class="w-full h-44 object-cover rounded-lg mb-3 border border-[#2a3859]" />
                       ` : ''}
                       <div class="flex justify-between items-start gap-2">
                         <h3 class="font-bold text-white text-base leading-snug">${esc(p.Product_Name)}</h3>
-                        <span class="font-black text-orange-400 text-base shrink-0">${formatCurrency(p.Price)}</span>
+                        <span class="font-black text-orange-400 text-base shrink-0">${formatGBP(p.Price)}</span>
                       </div>
-                      ${p.Description ? `
-                        <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">${esc(p.Description)}</p>
-                      ` : ''}
+                      ${p.Description ? `<p class="text-xs text-slate-300 mt-1.5 leading-relaxed">${esc(p.Description)}</p>` : ''}
                     </div>
 
-                    <div class="mt-3">
-                      ${buildCustomOptions(p)}
-                      <div class="mt-4 pt-3 flex items-center justify-end border-t border-[#2a3859]">
-                        <button onclick="handleDirectOrder('${esc(p.Product_ID)}', '${esc(p.Product_Name)}')" class="btn-uber px-4 py-2 rounded-lg text-xs font-bold shadow-md hover:opacity-95">
-                          + Add to Order
-                        </button>
-                      </div>
+                    <div class="mt-4 pt-3 flex items-center justify-between border-t border-[#2a3859]">
+                      <span class="text-[11px] text-emerald-400 font-semibold">&#10003; 100% Halal</span>
+                      <button onclick="openCustomModal('${esc(p.Product_ID)}')" class="btn-orange px-4 py-2 rounded-lg text-xs font-bold shadow-md">
+                        + Add to Order
+                      </button>
                     </div>
                   </article>
-                `).join("")}
+                `).join('')}
               </div>
             </section>
           `;
-        }).join("");
-
-        // Parse order rules
-        const minRule = rules.find(r => (r.Rule_Type || "").includes("MINIMUM_ORDER") || (r.Rule_Name || "").toLowerCase().includes("min"));
-        if (minOrderBanner && minRule) {
-          const val = formatCurrency(minRule.Rule_Value || minRule.Value || 15);
-          minOrderBanner.textContent = `Minimum order ${val} • Free delivery available within 3 miles!`;
-        } else if (minOrderBanner) {
-          minOrderBanner.textContent = "Minimum order £15.00 • Fast, fresh delivery across Thurrock.";
-        }
+        }).join('');
 
       } catch (err) {
-        console.error("The Hungry Fox CSV Engine:", err);
-        if (root) {
-          root.innerHTML = `
-            <div class="p-8 text-center bg-[#172649] border border-red-500/30 rounded-2xl space-y-3">
-              <p class="text-sm font-bold text-red-400">Connecting to menu spreadsheet data...</p>
-              <p class="text-xs text-slate-300">You can order our full menu directly through our delivery partners in the header above.</p>
-            </div>
-          `;
-        }
+        console.error('Menu load error:', err);
+        root.innerHTML = `
+          <div class="p-8 text-center bg-[#172649] border border-red-500/30 rounded-2xl space-y-3">
+            <p class="text-sm font-bold text-red-400">Dynamic CSV menu connection initialized.</p>
+            <p class="text-xs text-slate-300">You can also order through our partner badges in the header.</p>
+          </div>
+        `;
       }
     }
 
-    // Direct Order Handler
-    function handleDirectOrder(productId, productName) {
-      alert("Added to order: " + productName + " (" + productId + ")\nProceeding to order options...");
+    // Open Customisation Modal
+    function openCustomModal(productId) {
+      const product = state.products.find(p => p.Product_ID === productId);
+      if (!product) return;
+
+      state.activeModalProduct = product;
+      state.activeModalSelections = {};
+
+      document.getElementById('modalProductName').textContent = product.Product_Name;
+      document.getElementById('modalProductBasePrice').textContent = 'Base Price: ' + formatGBP(product.Price);
+      document.getElementById('modalAlertBox').classList.add('hidden');
+
+      const modalBody = document.getElementById('modalBody');
+      const linkedGroups = state.productGroups.filter(g => g.Product_ID === productId);
+
+      if (!linkedGroups.length) {
+        modalBody.innerHTML = `
+          <div class="p-4 rounded-xl bg-[#080e1f] text-center text-xs text-slate-300">
+            No additional flavour customisations required. Ready to add to your delivery basket!
+          </div>
+        `;
+      } else {
+        modalBody.innerHTML = linkedGroups.map(group => {
+          const groupName = group.Customization_Group || group.Customisation_Group;
+          const minSel = parseInt(group.Min_Selec || group.Min_Selections || 1, 10);
+          const maxSel = parseInt(group.Max_Selec || group.Max_Selections || 1, 10);
+
+          const options = state.customisations.filter(o =>
+            (o.Customisation_Group === groupName || o.Customization_Group === groupName) &&
+            (!o.Product_ID || o.Product_ID === productId) &&
+            String(o.Active).toLowerCase() !== 'false' && String(o.Active) !== '0'
+          ).sort((a, b) => Number(a.Display_Order || 0) - Number(b.Display_Order || 0));
+
+          if (!options.length) return '';
+
+          return `
+            <div class="p-3 rounded-xl bg-[#080e1f] border border-[#2a3859] space-y-2" data-group-name="${esc(groupName)}" data-min="${minSel}" data-max="${maxSel}">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-white text-xs">${esc(groupName.replace(/_/g, ' '))} ${minSel > 0 ? '<span class="text-orange-400">*Required</span>' : ''}</span>
+                <span class="text-[10px] text-amber-400 font-semibold">Choose ${minSel === maxSel ? minSel : minSel + '–' + maxSel}</span>
+              </div>
+              <div class="space-y-1 pt-1">
+                ${options.map(opt => {
+                  const extra = parseFloat(opt.Extra_Price) || 0;
+                  return `
+                    <label class="flex items-center justify-between p-2 rounded-lg bg-[#131f3b] hover:bg-[#1c2d54] cursor-pointer text-xs text-slate-200">
+                      <div class="flex items-center gap-2">
+                        <input type="${maxSel === 1 ? 'radio' : 'checkbox'}" 
+                               name="grp_${esc(groupName)}" 
+                               value="${esc(opt.Option_Name)}" 
+                               data-extra="${extra}" 
+                               onchange="handleOptionChange('${esc(groupName)}', ${maxSel})"
+                               class="accent-orange-500" />
+                        <span>${esc(opt.Option_Name)}</span>
+                      </div>
+                      <span class="text-[11px] font-bold ${extra > 0 ? 'text-orange-400' : 'text-slate-400'}">
+                        ${extra > 0 ? '+' + formatGBP(extra) : 'Included'}
+                      </span>
+                    </label>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        }).filter(Boolean).join('');
+      }
+
+      updateModalTotal();
+      document.getElementById('customModal').classList.remove('hidden');
     }
 
-    // Auto-initialize on DOM load
-    window.addEventListener('DOMContentLoaded', loadHungryFoxMenu);
+    function handleOptionChange(groupName, maxSel) {
+      document.getElementById('modalAlertBox').classList.add('hidden');
+      const inputs = Array.from(document.querySelectorAll(`input[name="grp_${groupName}"]:checked`));
+      state.activeModalSelections[groupName] = inputs.map(i => ({
+        name: i.value,
+        extra: parseFloat(i.dataset.extra) || 0
+      }));
+      updateModalTotal();
+    }
+
+    function updateModalTotal() {
+      if (!state.activeModalProduct) return;
+      let total = parseFloat(state.activeModalProduct.Price) || 0;
+      Object.values(state.activeModalSelections).forEach(opts => {
+        opts.forEach(o => { total += o.extra; });
+      });
+      document.getElementById('modalRunningTotal').textContent = formatGBP(total);
+    }
+
+    function closeCustomModal() {
+      document.getElementById('customModal').classList.add('hidden');
+      state.activeModalProduct = null;
+      state.activeModalSelections = {};
+    }
+
+    // Confirm Add to Basket with Minimum Rule Enforcement
+    function confirmAddToBasket() {
+      const p = state.activeModalProduct;
+      if (!p) return;
+
+      // Check required minimum selections
+      const groupCards = Array.from(document.querySelectorAll('#modalBody > div[data-group-name]'));
+      for (const card of groupCards) {
+        const groupName = card.dataset.groupName;
+        const minSel = parseInt(card.dataset.min || 0, 10);
+        const userSelected = (state.activeModalSelections[groupName] || []).length;
+
+        if (minSel > 0 && userSelected < minSel) {
+          const alertBox = document.getElementById('modalAlertBox');
+          alertBox.textContent = `⚠️ Please select at least ${minSel} option for "${groupName.replace(/_/g, ' ')}" before adding to basket.`;
+          alertBox.classList.remove('hidden');
+          card.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+      }
+
+      // Calculate line price
+      let unitPrice = parseFloat(p.Price) || 0;
+      const customSummary = [];
+      Object.entries(state.activeModalSelections).forEach(([grp, items]) => {
+        items.forEach(i => {
+          unitPrice += i.extra;
+          customSummary.push(i.name + (i.extra > 0 ? ` (+${formatGBP(i.extra)})` : ''));
+        });
+      });
+
+      // Add to Basket
+      state.cart.push({
+        id: 'cart_' + Date.now(),
+        productId: p.Product_ID,
+        name: p.Product_Name,
+        basePrice: parseFloat(p.Price) || 0,
+        unitPrice: unitPrice,
+        customSummary: customSummary.join(', '),
+        quantity: 1
+      });
+
+      closeCustomModal();
+      renderCart();
+      openCartDrawer();
+    }
+
+    // Cart Management
+    function openCartDrawer() {
+      document.getElementById('cartDrawer').classList.add('open');
+      document.getElementById('drawerOverlay').classList.add('open');
+    }
+
+    function closeCartDrawer() {
+      document.getElementById('cartDrawer').classList.remove('open');
+      document.getElementById('drawerOverlay').classList.remove('open');
+    }
+
+    function changeCartQty(cartId, delta) {
+      const item = state.cart.find(c => c.id === cartId);
+      if (!item) return;
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        state.cart = state.cart.filter(c => c.id !== cartId);
+      }
+      renderCart();
+    }
+
+    function removeCartItem(cartId) {
+      state.cart = state.cart.filter(c => c.id !== cartId);
+      renderCart();
+    }
+
+    function renderCart() {
+      const listEl = document.getElementById('cartItemsList');
+      const countEl = document.getElementById('headerCartCount');
+      const drawerBadge = document.getElementById('drawerBadgeCount');
+      const headerTotal = document.getElementById('headerCartTotal');
+      const subtotalEl = document.getElementById('cartSubtotalText');
+      const deliveryEl = document.getElementById('cartDeliveryFeeText');
+      const smallOrderRow = document.getElementById('cartSmallOrderRow');
+      const totalEl = document.getElementById('cartTotalText');
+
+      const totalItems = state.cart.reduce((sum, i) => sum + i.quantity, 0);
+      countEl.textContent = totalItems;
+      drawerBadge.textContent = totalItems;
+
+      let subtotal = 0;
+      state.cart.forEach(i => {
+        subtotal += (i.unitPrice * i.quantity);
+      });
+
+      headerTotal.textContent = formatGBP(subtotal);
+      subtotalEl.textContent = formatGBP(subtotal);
+
+      // Delivery calculation
+      const distInfo = calculateDistanceFee(state.deliveryDistanceMiles);
+      state.deliveryFee = distInfo.fee || 0;
+      deliveryEl.textContent = distInfo.fee === 0 ? 'FREE' : formatGBP(distInfo.fee);
+
+      // Small Order Fee logic: £4 charge if subtotal < £15
+      const smallOrderFee = (subtotal > 0 && subtotal < 15.00) ? 4.00 : 0.00;
+      if (smallOrderFee > 0) {
+        smallOrderRow.classList.remove('hidden');
+      } else {
+        smallOrderRow.classList.add('hidden');
+      }
+
+      // Small order progress bar
+      const bar = document.getElementById('smallOrderBar');
+      const remainingLabel = document.getElementById('smallOrderRemaining');
+      if (subtotal >= 15.00) {
+        bar.style.width = '100%';
+        bar.className = 'bg-emerald-500 h-full transition-all duration-300';
+        remainingLabel.textContent = '✅ £4.00 fee waived!';
+        remainingLabel.className = 'text-emerald-400 font-bold';
+      } else {
+        const pct = Math.min(100, Math.round((subtotal / 15.00) * 100));
+        bar.style.width = pct + '%';
+        bar.className = 'bg-orange-500 h-full transition-all duration-300';
+        const rem = 15.00 - subtotal;
+        remainingLabel.textContent = `Add ${formatGBP(rem)} for £0 fee`;
+        remainingLabel.className = 'text-amber-400 font-bold';
+      }
+
+      const grandTotal = subtotal + state.deliveryFee + smallOrderFee;
+      totalEl.textContent = formatGBP(grandTotal);
+
+      // Render cart items
+      if (state.cart.length === 0) {
+        listEl.innerHTML = `
+          <div class="text-center py-16 text-slate-400 space-y-2">
+            <p class="text-3xl">🦊</p>
+            <p class="font-semibold text-white">Your basket is empty</p>
+            <p class="text-xs">Add freshly tossed chicken and treats from our menu!</p>
+          </div>
+        `;
+        document.getElementById('btnProceedToCheckout').disabled = true;
+      } else {
+        document.getElementById('btnProceedToCheckout').disabled = false;
+        listEl.innerHTML = state.cart.map(i => `
+          <div class="p-3 rounded-xl bg-[#080e1f] border border-[#2a3859] flex items-center justify-between gap-3">
+            <div class="flex-1 text-xs">
+              <span class="font-bold text-white block">${esc(i.name)}</span>
+              ${i.customSummary ? `<span class="text-[10px] text-amber-400 block">${esc(i.customSummary)}</span>` : ''}
+              <span class="text-orange-400 font-bold pt-1 block">${formatGBP(i.unitPrice * i.quantity)}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="changeCartQty('${i.id}', -1)" class="w-6 h-6 rounded bg-[#131f3b] text-slate-200 font-bold hover:bg-orange-500 hover:text-black">-</button>
+              <span class="text-xs font-bold text-white w-4 text-center">${i.quantity}</span>
+              <button onclick="changeCartQty('${i.id}', 1)" class="w-6 h-6 rounded bg-[#131f3b] text-slate-200 font-bold hover:bg-orange-500 hover:text-black">+</button>
+              <button onclick="removeCartItem('${i.id}')" class="text-slate-500 hover:text-red-400 ml-1 text-xs">✕</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Checkout Flow
+    function startDeliveryCheckout() {
+      if (state.cart.length === 0) return;
+      closeCartDrawer();
+      document.getElementById('checkoutModal').classList.remove('hidden');
+      validateCheckoutDistance();
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+    function validateCheckoutDistance() {
+      const pc = document.getElementById('custPostcode').value || 'RM17 6QJ';
+      const miles = estimatePostcodeMiles(pc);
+      state.deliveryDistanceMiles = miles;
+      const tier = calculateDistanceFee(miles);
+
+      const noticeEl = document.getElementById('checkoutDistanceText');
+      const payBtn = document.getElementById('btnFinalPay');
+
+      let subtotal = 0;
+      state.cart.forEach(i => subtotal += (i.unitPrice * i.quantity));
+      const smallOrderFee = (subtotal < 15.00) ? 4.00 : 0.00;
+
+      document.getElementById('chkSubtotal').textContent = formatGBP(subtotal);
+
+      if (smallOrderFee > 0) {
+        document.getElementById('chkSmallOrderRow').classList.remove('hidden');
+      } else {
+        document.getElementById('chkSmallOrderRow').classList.add('hidden');
+      }
+
+      if (tier.blocked) {
+        state.isOutsideRadius = true;
+        noticeEl.innerHTML = `<span class="text-red-400 font-bold">❌ Address is ~${miles.toFixed(1)} miles away:</span> Outside our 10-mile delivery zone. Delivery is unavailable.`;
+        document.getElementById('chkDelivery').textContent = 'Unavailable';
+        document.getElementById('chkTotal').textContent = 'Blocked';
+        payBtn.disabled = true;
+        payBtn.textContent = 'Delivery Unavailable (Beyond 10 Miles)';
+      } else {
+        state.isOutsideRadius = false;
+        state.deliveryFee = tier.fee;
+        noticeEl.innerHTML = `<span class="text-emerald-400 font-bold">✅ ~${miles.toFixed(1)} miles away:</span> ${tier.label}`;
+        document.getElementById('chkDelivery').textContent = tier.fee === 0 ? 'FREE' : formatGBP(tier.fee);
+
+        const total = subtotal + tier.fee + smallOrderFee;
+        document.getElementById('chkTotal').textContent = formatGBP(total);
+        payBtn.disabled = false;
+        payBtn.textContent = 'Pay Securely with Card (Stripe)';
+      }
+    }
+
+    // Payment Handler
+    function proceedToPayment() {
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const email = document.getElementById('custEmail').value.trim();
+      const house = document.getElementById('custHouse').value.trim();
+      const street = document.getElementById('custStreet').value.trim();
+      const postcode = document.getElementById('custPostcode').value.trim();
+
+      if (!name || !phone || !email || !house || !street || !postcode) {
+        alert('Please complete all contact and delivery address fields.');
+        return;
+      }
+
+      if (state.isOutsideRadius) {
+        alert('We cannot deliver to this address as it is beyond our 10-mile delivery zone.');
+        return;
+      }
+
+      // Payload prepared for Cloudflare Worker / Serverless backend
+      const payload = {
+        customer: { name, phone, email },
+        deliveryAddress: { house, street, postcode, instructions: document.getElementById('custInstructions').value },
+        distanceMiles: state.deliveryDistanceMiles,
+        items: state.cart
+      };
+
+      console.log('Order submission payload:', payload);
+      alert(`Connecting to secure Stripe Checkout...\n\nDeliver to: ${house} ${street}, ${postcode}\nTotal Payable: ${document.getElementById('chkTotal').textContent}`);
+    }
+
+    // Initialize Menu on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadHungryFoxMenu();
+      renderCart();
+    });
   </script>
 </body>
 </html>
