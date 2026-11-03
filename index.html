@@ -338,7 +338,7 @@
       pointer-events: auto;
     }
 
-    /* Modal Backdrop & Architecture */
+    /* Modal Backdrop & Dialog Panel */
     .custom-modal-backdrop {
       position: fixed;
       inset: 0;
@@ -438,6 +438,22 @@
       border: 0;
     }
 
+    .custom-select {
+      background-color: #131f3b;
+      border: 1px solid #2a3859;
+      color: #ffffff;
+      padding: 0.6rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.8125rem;
+      width: 100%;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 150ms ease;
+    }
+    .custom-select:focus {
+      border-color: #f97316;
+    }
+
     @media (min-width: 640px) {
       .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -526,7 +542,7 @@
 
       <div class="relative z-10 max-w-4xl space-y-4 text-left">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 text-xs font-extrabold uppercase tracking-wider">
-          🔥 FREE DELIVERY AVAILABLE IN ZONE • 100% Halal Certified Kitchen
+          🔥 FREE DELIVERY UP TO 5 MILES • £15 MINIMUM ORDER • 100% Halal
         </div>
         
         <h1 class="font-serif text-3xl sm:text-5xl font-black text-white leading-tight">
@@ -539,7 +555,7 @@
 
         <!-- 3 Clear Delivery Distance & Fee Badges -->
         <div class="pt-2">
-          <span class="text-xs uppercase font-bold tracking-wider text-slate-400 block mb-2">Delivery Pricing by Distance:</span>
+          <span class="text-xs uppercase font-bold tracking-wider text-slate-400 block mb-2">Delivery Pricing by Distance (Delivery Only):</span>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-2xl">
             <div class="p-3 rounded-2xl bg-[#131b2e] border border-emerald-500/40 flex items-center justify-between gap-3 shadow-md">
               <div class="flex flex-col">
@@ -746,14 +762,14 @@
       <button onclick="closeCartDrawer()" class="p-1 rounded-lg text-slate-400 hover:text-white text-lg">✕</button>
     </div>
 
-    <!-- Small Order Fee Progress Bar -->
-    <div id="smallOrderBanner" class="bg-[#080e1f] px-4 py-2.5 border-b border-[#2a3859] text-xs">
+    <!-- Strict £15 Minimum Order Progress Bar -->
+    <div id="minOrderBanner" class="bg-[#080e1f] px-4 py-2.5 border-b border-[#2a3859] text-xs">
       <div class="flex justify-between items-center mb-1">
-        <span id="smallOrderLabel" class="font-bold text-amber-400">Orders under £15 have a £4 fee</span>
-        <span id="smallOrderRemaining" class="text-slate-300 font-bold">Add £15.00 for £0 fee</span>
+        <span id="minOrderLabel" class="font-bold text-amber-400">Minimum Order: £15.00</span>
+        <span id="minOrderRemaining" class="text-slate-300 font-bold">Add £15.00 to checkout</span>
       </div>
       <div class="w-full bg-[#172649] h-2 rounded-full overflow-hidden">
-        <div id="smallOrderBar" class="bg-orange-500 h-full transition-all duration-300" style="width: 0%;"></div>
+        <div id="minOrderBar" class="bg-orange-500 h-full transition-all duration-300" style="width: 0%;"></div>
       </div>
     </div>
 
@@ -777,24 +793,20 @@
           <span>Delivery Fee:</span>
           <span id="cartDeliveryFeeText" class="font-bold text-slate-400">Enter postcode at checkout</span>
         </div>
-        <div id="cartSmallOrderRow" class="flex justify-between text-amber-400 hidden">
-          <span>Small Order Charge (Under £15):</span>
-          <span class="font-bold">+£4.00</span>
-        </div>
         <div class="flex justify-between text-base font-extrabold text-white pt-2 border-t border-[#2a3859]">
           <span>Total:</span>
           <span id="cartTotalText" class="text-orange-400 text-lg">£0.00</span>
         </div>
       </div>
 
-      <button id="btnProceedToCheckout" onclick="startDeliveryCheckout()" class="btn-orange w-full py-3 rounded-xl text-sm font-extrabold shadow-lg">
-        Proceed to Delivery Checkout
+      <button id="btnProceedToCheckout" disabled onclick="startDeliveryCheckout()" class="btn-orange w-full py-3 rounded-xl text-sm font-extrabold shadow-lg opacity-50 cursor-not-allowed">
+        Proceed to Delivery Checkout (Min £15.00)
       </button>
       <p class="text-[10px] text-center text-slate-400">100% Delivery Only • Live verified delivery fee from Cloudflare Worker</p>
     </div>
   </aside>
 
-  <!-- Interactive Product Customisation Modal Dialog (Completely Fixed & Scrollable) -->
+  <!-- Interactive Product Customisation Modal Dialog -->
   <div id="customModal" class="custom-modal-backdrop hidden" onclick="handleModalBackdropClick(event)">
     <div class="modal-dialog-panel" onclick="event.stopPropagation()">
       
@@ -815,7 +827,7 @@
 
       <!-- Alert Notification Banner -->
       <div id="modalAlertBox" class="p-3 bg-red-500/15 border-b border-red-500/30 text-xs text-red-300 font-semibold hidden shrink-0">
-        ⚠️ Please make your required selection before adding to basket.
+        ⚠️ Please make your required selections before adding to basket.
       </div>
 
       <!-- Independently Scrollable Customisation Options Container -->
@@ -876,10 +888,6 @@
             <span>Delivery Fee:</span>
             <span id="chkDelivery" class="font-bold text-slate-400">Awaiting Postcode</span>
           </div>
-          <div id="chkSmallOrderRow" class="flex justify-between text-amber-400 hidden">
-            <span>Small Order Charge (&lt; £15):</span>
-            <span id="chkSmallOrderVal" class="font-bold">+£4.00</span>
-          </div>
           <div class="flex justify-between text-sm font-extrabold text-white pt-1 border-t border-[#2a3859]">
             <span>Total Payable:</span>
             <span id="chkTotal" class="text-orange-400 text-base">£0.00</span>
@@ -899,6 +907,7 @@
   <!-- Master JavaScript Engine -->
   <script>
     const API_BASE_URL = 'https://hungryfox-api.thehungryfox2026.workers.dev';
+    const MIN_ORDER_AMOUNT = 15.00;
 
     // Permanent Category Sequence Ranking
     function getCategoryRank(catName) {
@@ -1120,7 +1129,7 @@
       } else {
         deliveryEl.textContent = q.deliveryFee === 0 ? 'FREE' : formatGBP(q.deliveryFee);
         deliveryEl.className = 'font-bold text-emerald-400';
-        totalEl.textContent = formatGBP(q.total);
+        totalEl.textContent = formatGBP(subtotal + (q.deliveryFee || 0));
       }
     }
 
@@ -1261,10 +1270,64 @@
 
           if (!options.length) return '';
 
+          const groupUpper = groupName.toUpperCase();
+          const isFlavorGroup = groupUpper.includes('FLAVOUR') || groupUpper.includes('FLAVOR');
+
+          // Case 1: Two-Flavor Dropdown UI
+          if (maxSel === 2 && isFlavorGroup) {
+            const savedSlots = state.activeModalSelections[groupName] || [];
+            const flavor1 = savedSlots[0]?.name || '';
+            const flavor2 = savedSlots[1]?.name || '';
+
+            return `
+              <div class="p-3.5 rounded-xl bg-[#080e1f] border border-[#2a3859] space-y-3" data-group-name="${esc(groupName)}" data-type="two_flavor" data-min="${minSel}" data-max="${maxSel}">
+                <div class="flex justify-between items-center">
+                  <span class="font-bold text-white text-xs">${esc(groupName.replace(/_/g, ' '))} <span class="text-orange-400">*Required</span></span>
+                  <span class="text-[10px] text-amber-400 font-semibold">Select 2 Flavours</span>
+                </div>
+                
+                <div class="space-y-2 pt-1">
+                  <!-- Slot 1 -->
+                  <div class="space-y-1">
+                    <label class="text-[11px] font-bold text-slate-300 flex items-center gap-1.5">
+                      <span class="w-4 h-4 rounded-full bg-orange-500/20 text-orange-400 text-[10px] flex items-center justify-center font-black">1</span>
+                      <span>Flavour 1</span>
+                    </label>
+                    <select class="custom-select" onchange="handleDropdownFlavorChange('${esc(groupName)}')" data-slot="1">
+                      <option value="">-- Choose First Flavour --</option>
+                      ${options.map(opt => `
+                        <option value="${esc(opt.Option_Name)}" data-extra="${parseFloat(opt.Extra_Price)||0}" ${flavor1 === opt.Option_Name ? 'selected' : ''}>
+                          ${esc(opt.Option_Name)} ${(parseFloat(opt.Extra_Price)||0) > 0 ? '(+' + formatGBP(opt.Extra_Price) + ')' : ''}
+                        </option>
+                      `).join('')}
+                    </select>
+                  </div>
+
+                  <!-- Slot 2 -->
+                  <div class="space-y-1">
+                    <label class="text-[11px] font-bold text-slate-300 flex items-center gap-1.5">
+                      <span class="w-4 h-4 rounded-full bg-orange-500/20 text-orange-400 text-[10px] flex items-center justify-center font-black">2</span>
+                      <span>Flavour 2 (Same or Different)</span>
+                    </label>
+                    <select class="custom-select" onchange="handleDropdownFlavorChange('${esc(groupName)}')" data-slot="2">
+                      <option value="">-- Choose Second Flavour --</option>
+                      ${options.map(opt => `
+                        <option value="${esc(opt.Option_Name)}" data-extra="${parseFloat(opt.Extra_Price)||0}" ${flavor2 === opt.Option_Name ? 'selected' : ''}>
+                          ${esc(opt.Option_Name)} ${(parseFloat(opt.Extra_Price)||0) > 0 ? '(+' + formatGBP(opt.Extra_Price) + ')' : ''}
+                        </option>
+                      `).join('')}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+
+          // Case 2: Standard Single-Choice or Multi-Check Selector
           const currentSelected = state.activeModalSelections[groupName] || [];
 
           return `
-            <div class="p-3.5 rounded-xl bg-[#080e1f] border border-[#2a3859] space-y-2" data-group-name="${esc(groupName)}" data-min="${minSel}" data-max="${maxSel}">
+            <div class="p-3.5 rounded-xl bg-[#080e1f] border border-[#2a3859] space-y-2" data-group-name="${esc(groupName)}" data-type="standard" data-min="${minSel}" data-max="${maxSel}">
               <div class="flex justify-between items-center">
                 <span class="font-bold text-white text-xs">${esc(groupName.replace(/_/g, ' '))} ${minSel > 0 ? '<span class="text-orange-400">*Required</span>' : ''}</span>
                 <span class="text-[10px] text-amber-400 font-semibold">Choose ${minSel === maxSel ? minSel : minSel + '–' + maxSel}</span>
@@ -1281,7 +1344,7 @@
                                value="${esc(opt.Option_Name)}" 
                                data-extra="${extra}" 
                                ${isChecked ? 'checked' : ''}
-                               onchange="handleOptionChange('${esc(groupName)}', ${maxSel})"
+                               onchange="handleStandardOptionChange('${esc(groupName)}', ${maxSel})"
                                class="accent-orange-500 w-4 h-4 cursor-pointer" />
                         <span class="font-medium">${esc(opt.Option_Name)}</span>
                       </div>
@@ -1302,7 +1365,40 @@
       modalBody.scrollTop = 0; // Reset internal modal scroll to top
     }
 
-    function handleOptionChange(groupName, maxSel) {
+    function handleDropdownFlavorChange(groupName) {
+      document.getElementById('modalAlertBox').classList.add('hidden');
+      const container = document.querySelector(`div[data-group-name="${groupName}"]`);
+      if (!container) return;
+
+      const sel1 = container.querySelector('select[data-slot="1"]');
+      const sel2 = container.querySelector('select[data-slot="2"]');
+
+      const selections = [];
+      if (sel1 && sel1.value) {
+        const opt = sel1.options[sel1.selectedIndex];
+        selections.push({
+          name: sel1.value + ' (Flavour 1)',
+          extra: parseFloat(opt.dataset.extra) || 0
+        });
+      }
+      if (sel2 && sel2.value) {
+        const opt = sel2.options[sel2.selectedIndex];
+        selections.push({
+          name: sel2.value + ' (Flavour 2)',
+          extra: parseFloat(opt.dataset.extra) || 0
+        });
+      }
+
+      state.activeModalSelections[groupName] = selections;
+
+      if (state.activeModalProduct) {
+        state.savedProductSelections[state.activeModalProduct.Product_ID] = JSON.parse(JSON.stringify(state.activeModalSelections));
+      }
+
+      updateModalTotal();
+    }
+
+    function handleStandardOptionChange(groupName, maxSel) {
       document.getElementById('modalAlertBox').classList.add('hidden');
       const inputs = Array.from(document.querySelectorAll(`input[name="grp_${groupName}"]:checked`));
       state.activeModalSelections[groupName] = inputs.map(i => ({
@@ -1341,15 +1437,26 @@
       const groupCards = Array.from(document.querySelectorAll('#modalBody > div[data-group-name]'));
       for (const card of groupCards) {
         const groupName = card.dataset.groupName;
+        const groupType = card.dataset.type;
         const minSel = parseInt(card.dataset.min || 0, 10);
         const userSelected = (state.activeModalSelections[groupName] || []).length;
 
-        if (minSel > 0 && userSelected < minSel) {
-          const alertBox = document.getElementById('modalAlertBox');
-          alertBox.textContent = `⚠️ Please select at least ${minSel} option for "${groupName.replace(/_/g, ' ')}" before adding to basket.`;
-          alertBox.classList.remove('hidden');
-          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          return;
+        if (groupType === 'two_flavor') {
+          if (userSelected < 2) {
+            const alertBox = document.getElementById('modalAlertBox');
+            alertBox.textContent = `⚠️ Please select both Flavour 1 and Flavour 2 for "${groupName.replace(/_/g, ' ')}" before adding to basket.`;
+            alertBox.classList.remove('hidden');
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+          }
+        } else {
+          if (minSel > 0 && userSelected < minSel) {
+            const alertBox = document.getElementById('modalAlertBox');
+            alertBox.textContent = `⚠️ Please select at least ${minSel} option for "${groupName.replace(/_/g, ' ')}" before adding to basket.`;
+            alertBox.classList.remove('hidden');
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+          }
         }
       }
 
@@ -1414,8 +1521,7 @@
       const drawerBadge = document.getElementById('drawerBadgeCount');
       const headerTotal = document.getElementById('headerCartTotal');
       const subtotalEl = document.getElementById('cartSubtotalText');
-      const smallOrderRow = document.getElementById('cartSmallOrderRow');
-      const totalEl = document.getElementById('cartTotalText');
+      const checkoutBtn = document.getElementById('btnProceedToCheckout');
 
       const totalItems = state.cart.reduce((sum, i) => sum + i.quantity, 0);
       countEl.textContent = totalItems;
@@ -1425,27 +1531,30 @@
       headerTotal.textContent = formatGBP(subtotal);
       subtotalEl.textContent = formatGBP(subtotal);
 
-      const smallOrderFee = (subtotal > 0 && subtotal < 15.00) ? 4.00 : 0.00;
-      if (smallOrderFee > 0) {
-        smallOrderRow.classList.remove('hidden');
-      } else {
-        smallOrderRow.classList.add('hidden');
-      }
+      // Strict £15 Minimum Order Logic
+      const bar = document.getElementById('minOrderBar');
+      const remainingLabel = document.getElementById('minOrderRemaining');
 
-      const bar = document.getElementById('smallOrderBar');
-      const remainingLabel = document.getElementById('smallOrderRemaining');
-      if (subtotal >= 15.00) {
+      if (subtotal >= MIN_ORDER_AMOUNT) {
         bar.style.width = '100%';
         bar.className = 'bg-emerald-500 h-full transition-all duration-300';
-        remainingLabel.textContent = '✅ £4.00 surcharge waived!';
+        remainingLabel.textContent = '✅ Minimum order reached!';
         remainingLabel.className = 'text-emerald-400 font-bold';
+
+        checkoutBtn.disabled = false;
+        checkoutBtn.className = 'btn-orange w-full py-3 rounded-xl text-sm font-extrabold shadow-lg';
+        checkoutBtn.textContent = 'Proceed to Delivery Checkout';
       } else {
-        const pct = Math.min(100, Math.round((subtotal / 15.00) * 100));
+        const pct = Math.min(100, Math.round((subtotal / MIN_ORDER_AMOUNT) * 100));
         bar.style.width = pct + '%';
         bar.className = 'bg-orange-500 h-full transition-all duration-300';
-        const rem = 15.00 - subtotal;
-        remainingLabel.textContent = `Add ${formatGBP(rem)} to waive £4 surcharge`;
+        const rem = MIN_ORDER_AMOUNT - subtotal;
+        remainingLabel.textContent = `Add ${formatGBP(rem)} more to checkout`;
         remainingLabel.className = 'text-amber-400 font-bold';
+
+        checkoutBtn.disabled = true;
+        checkoutBtn.className = 'btn-orange w-full py-3 rounded-xl text-sm font-extrabold shadow-lg opacity-50 cursor-not-allowed';
+        checkoutBtn.textContent = `Add ${formatGBP(rem)} more (Min £15.00)`;
       }
 
       updateBasketWithQuote();
@@ -1458,9 +1567,7 @@
             <p class="text-xs">Add freshly tossed chicken and treats from our menu!</p>
           </div>
         `;
-        document.getElementById('btnProceedToCheckout').disabled = true;
       } else {
-        document.getElementById('btnProceedToCheckout').disabled = false;
         listEl.innerHTML = state.cart.map(i => `
           <div class="p-3 rounded-xl bg-[#080e1f] border border-[#2a3859] flex items-center justify-between gap-3">
             <div class="flex-1 text-xs">
@@ -1481,7 +1588,7 @@
 
     // Checkout Flow
     function startDeliveryCheckout() {
-      if (state.cart.length === 0) return;
+      if (calculateCartSubtotal() < MIN_ORDER_AMOUNT) return;
       closeCartDrawer();
       lockPageScroll();
       document.getElementById('checkoutModal').classList.remove('hidden');
@@ -1513,8 +1620,6 @@
       const subtotalEl = document.getElementById('chkSubtotal');
       const delEl = document.getElementById('chkDelivery');
       const totalEl = document.getElementById('chkTotal');
-      const surchargeRow = document.getElementById('chkSmallOrderRow');
-      const surchargeVal = document.getElementById('chkSmallOrderVal');
 
       const subtotal = calculateCartSubtotal();
       subtotalEl.textContent = formatGBP(subtotal);
@@ -1550,15 +1655,7 @@
 
           delEl.textContent = feeStr;
           delEl.className = 'font-bold text-emerald-400';
-
-          if (quote.smallOrderSurcharge > 0) {
-            surchargeRow.classList.remove('hidden');
-            surchargeVal.textContent = '+' + formatGBP(quote.smallOrderSurcharge);
-          } else {
-            surchargeRow.classList.add('hidden');
-          }
-
-          totalEl.textContent = formatGBP(quote.total);
+          totalEl.textContent = formatGBP(subtotal + (quote.deliveryFee || 0));
           payBtn.disabled = true;
         }
       } catch (err) {
