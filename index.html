@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-
-<html class="scroll-smooth" lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>The Hungry Fox | Sizzling Doner, Chicken &amp; Buldak Noodles | Thurrock, Essex</title>
-<!-- Google Analytics (gtag.js) -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-J6G3YB0GF4"></script>
-<script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Hungry Fox | Sizzling Doner, Chicken & Buldak Noodles | Thurrock, Essex</title>
+  
+  <!-- Google Analytics (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6G3YB0GF4"></script>
+  <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-J6G3YB0GF4');
   </script>
-<!-- Tailwind CSS & Fonts -->
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<style>
+
+  <!-- Tailwind CSS & Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
     :root {
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -55,7 +57,7 @@
     .product-card:hover {
       border-color: #f97316;
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.1);
+      box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.12);
     }
     .nav-pill {
       white-space: nowrap;
@@ -82,333 +84,360 @@
       background: #ea580c;
     }
     .btn-orange:disabled {
-      background: #475569;
+      background: #334155;
       cursor: not-allowed;
       opacity: 0.6;
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white">
-<!-- Top Announcement Bar -->
-<div class="bg-[#060e20] border-b border-slate-800 text-xs py-2 px-4">
-<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-<div class="flex items-center gap-3">
-<span class="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
-<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Halal Certified Kitchen
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-[#060e20] border-b border-slate-800 text-xs py-2 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Halal Certified Kitchen
         </span>
-<span class="text-slate-500">|</span>
-<span class="text-slate-300">Open Daily: 11:00 – 23:30</span>
-</div>
-<div class="flex items-center gap-4 text-slate-300">
-<a class="text-amber-400 hover:underline font-bold" href="https://ratings.food.gov.uk/business/1981131/the-hungry-fox" rel="noopener" target="_blank">
+        <span class="text-slate-500">|</span>
+        <span class="text-slate-300">Open Daily: 11:00 – 23:30</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-300">
+        <a href="https://ratings.food.gov.uk/business/1981131/the-hungry-fox" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">
           ★ 5-Star Food Hygiene Rating
         </a>
-</div>
-</div>
-</div>
-<!-- Header -->
-<header class="sticky top-0 z-40 bg-[#0b1326]/95 backdrop-blur-md border-b border-[#1e293b]">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-<a class="flex items-center gap-3 shrink-0" href="#">
-<img alt="The Hungry Fox Logo" class="h-12 w-auto object-contain" onerror="this.onerror=null; this.src='https://thehungryfox.co.uk/hungry-fox-logo-cream.png';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
-<div class="hidden sm:block">
-<span class="font-serif text-2xl font-bold tracking-tight text-white block leading-none">THE HUNGRY FOX</span>
-<span class="text-[10px] tracking-widest uppercase text-orange-400 font-bold">Thurrock · Clarence Road</span>
-</div>
-</a>
-<!-- Quick Delivery & Order Pill Info -->
-<div class="flex items-center gap-3">
-<div class="hidden md:flex items-center gap-2 text-xs">
-<span class="bg-emerald-950/80 text-emerald-300 border border-emerald-800/80 px-3 py-1.5 rounded-full font-bold">
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-40 bg-[#0b1326]/95 backdrop-blur-md border-b border-[#1e293b]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <a href="#" class="flex items-center gap-3 shrink-0">
+        <img src="hungry-fox-logo-cream.png" onerror="this.onerror=null; this.src='https://thehungryfox.co.uk/hungry-fox-logo-cream.png';" alt="The Hungry Fox Logo" class="h-12 w-auto object-contain">
+        <div class="hidden sm:block">
+          <span class="font-serif text-2xl font-bold tracking-tight text-white block leading-none">THE HUNGRY FOX</span>
+          <span class="text-[10px] tracking-widest uppercase text-orange-400 font-bold">Thurrock · Clarence Road</span>
+        </div>
+      </a>
+
+      <!-- Quick Delivery Tier Badges -->
+      <div class="flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-2 text-xs">
+          <span class="bg-emerald-950/80 text-emerald-300 border border-emerald-800/80 px-3 py-1.5 rounded-full font-bold">
             0–5 mi: FREE DELIVERY
           </span>
-<span class="bg-blue-950/80 text-blue-300 border border-blue-800/80 px-3 py-1.5 rounded-full font-bold">
-            &gt;5–8 mi: £1.99
+          <span class="bg-blue-950/80 text-blue-300 border border-blue-800/80 px-3 py-1.5 rounded-full font-bold">
+            >5–8 mi: £1.99
           </span>
-<span class="bg-purple-950/80 text-purple-300 border border-purple-800/80 px-3 py-1.5 rounded-full font-bold">
-            &gt;8–10 mi: £3.99
+          <span class="bg-purple-950/80 text-purple-300 border border-purple-800/80 px-3 py-1.5 rounded-full font-bold">
+            >8–10 mi: £3.99
           </span>
-</div>
-<!-- Basket Trigger Button -->
-<button class="relative flex items-center gap-2.5 bg-orange-600 hover:bg-orange-500 text-white px-4 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-orange-950/50 transition" onclick="toggleCartDrawer(true)">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-<path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="hidden sm:inline">Basket</span>
-<span class="font-black" id="header-basket-total">£0.00</span>
-<span class="bg-white text-orange-600 text-xs px-2 py-0.5 rounded-full font-black ml-1" id="header-basket-count">0</span>
-</button>
-</div>
-</div>
-<!-- Category Pills Navigation (Horizontal Sticky Bar) -->
-<div class="border-t border-[#1e293b]/70 bg-[#060e20]">
-<div class="max-w-7xl mx-auto px-4 py-2.5 overflow-x-auto custom-scrollbar flex items-center gap-2" id="category-nav-bar">
-<!-- Rendered dynamically via JavaScript in exact verified sequence -->
-</div>
-</div>
-</header>
-<!-- Hero Banner -->
-<section class="relative bg-gradient-to-b from-[#0e172e] to-[#0b1326] border-b border-[#1e293b] py-10 px-4 sm:px-6">
-<div class="max-w-4xl mx-auto text-center space-y-4">
-<span class="inline-block bg-orange-500/10 border border-orange-500/30 text-orange-400 font-bold text-xs uppercase tracking-widest px-3.5 py-1 rounded-full">
+        </div>
+
+        <!-- Basket Trigger Button -->
+        <button onclick="toggleCartDrawer(true)" class="relative flex items-center gap-2.5 bg-orange-600 hover:bg-orange-500 text-white px-4 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-orange-950/50 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span class="hidden sm:inline">Basket</span>
+          <span id="header-basket-total" class="font-black">£0.00</span>
+          <span id="header-basket-count" class="bg-white text-orange-600 text-xs px-2 py-0.5 rounded-full font-black ml-1">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Category Horizontal Sticky Bar -->
+    <div class="border-t border-[#1e293b]/70 bg-[#060e20]">
+      <div class="max-w-7xl mx-auto px-4 py-2.5 overflow-x-auto custom-scrollbar flex items-center gap-2" id="category-nav-bar">
+        <!-- Rendered in verified order -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="relative bg-gradient-to-b from-[#0e172e] to-[#0b1326] border-b border-[#1e293b] py-10 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto text-center space-y-4">
+      <span class="inline-block bg-orange-500/10 border border-orange-500/30 text-orange-400 font-bold text-xs uppercase tracking-widest px-3.5 py-1 rounded-full">
         Strictly Delivery Only Kitchen · Min Order £15
       </span>
-<h1 class="font-serif text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+      <h1 class="font-serif text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
         Hand-Tossed Sizzle. Deep Fox Crunch.
       </h1>
-<p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-        Piping hot baked &amp; fried chicken feast boxes, fiery buldak noodles, and freshly sizzled doner dispatched directly from us straight to your door across Grays and Thurrock.
+      <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Piping hot baked & fried chicken feast boxes, fiery buldak noodles, and freshly sizzled doner dispatched directly from us straight to your door across Grays and Thurrock.
       </p>
-<!-- Postcode Radius Verification Tool -->
-<div class="pt-4 max-w-md mx-auto">
-<form class="flex gap-2" onsubmit="handlePostcodeCheck(event)">
-<input class="flex-1 bg-[#131b2e] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 uppercase font-mono" id="check-postcode-input" placeholder="Enter full postcode (e.g. RM17 6QJ)" required="" type="text"/>
-<button class="btn-orange px-5 py-2.5 rounded-xl text-xs font-bold shrink-0" id="check-postcode-btn" type="submit">
+
+      <!-- Postcode Radius Verification Tool -->
+      <div class="pt-4 max-w-md mx-auto">
+        <form onsubmit="handlePostcodeCheck(event)" class="flex gap-2">
+          <input type="text" id="check-postcode-input" placeholder="Enter full postcode (e.g. RM17 6QJ)" class="flex-1 bg-[#131b2e] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 uppercase font-mono" required />
+          <button type="submit" id="check-postcode-btn" class="btn-orange px-5 py-2.5 rounded-xl text-xs font-bold shrink-0">
             Check Radius
           </button>
-</form>
-<div class="text-xs mt-2.5 hidden" id="check-postcode-result"></div>
-</div>
-</div>
-</section>
-<!-- Main Menu Container -->
-<main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-<div class="space-y-12" id="menu-container">
-<!-- Rendered dynamically from self-contained catalog -->
-</div>
-<!-- Statutory 14 Allergen Matrix Section -->
-<section class="mt-16 pt-10 border-t border-[#1e293b]" id="allergen-section">
-<div class="bg-[#131b2e] border border-slate-800 rounded-2xl p-6 sm:p-8">
-<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
-<div>
-<span class="text-amber-400 text-xs uppercase tracking-wider font-extrabold block">Food Standards Agency Compliance</span>
-<h2 class="font-serif text-2xl font-bold text-white mt-1">Statutory 14 Allergen Matrix</h2>
-<p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl">
+        </form>
+        <div id="check-postcode-result" class="text-xs mt-2.5 hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Menu Grid -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div id="menu-container" class="space-y-12">
+      <!-- Generated dynamically from self-contained catalog -->
+    </div>
+
+    <!-- Statutory 14 Allergen Matrix -->
+    <section id="allergen-section" class="mt-16 pt-10 border-t border-[#1e293b]">
+      <div class="bg-[#131b2e] border border-slate-800 rounded-2xl p-6 sm:p-8">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+          <div>
+            <span class="text-amber-400 text-xs uppercase tracking-wider font-extrabold block">Food Standards Agency Compliance</span>
+            <h2 class="font-serif text-2xl font-bold text-white mt-1">Statutory 14 Allergen Matrix</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl">
               Prepared in a kitchen where allergens are handled. Please review below or inform our staff if you have severe dietary allergies before ordering.
             </p>
-</div>
-<button class="bg-[#1e293b] hover:bg-slate-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-slate-700 transition" id="allergen-toggle-btn" onclick="toggleAllergenTable()">
+          </div>
+          <button onclick="toggleAllergenTable()" id="allergen-toggle-btn" class="bg-[#1e293b] hover:bg-slate-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-slate-700 transition">
             Hide Allergen Matrix
           </button>
-</div>
-<div class="overflow-x-auto custom-scrollbar" id="allergen-table-wrap">
-<table class="w-full text-left text-xs border-collapse">
-<thead>
-<tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider bg-[#0a101d]">
-<th class="py-3 px-3 font-bold text-white">Menu Item</th>
-<th class="py-3 px-2">Gluten</th>
-<th class="py-3 px-2">Milk</th>
-<th class="py-3 px-2">Egg</th>
-<th class="py-3 px-2">Soy</th>
-<th class="py-3 px-2">Mustard</th>
-<th class="py-3 px-2">Celery</th>
-<th class="py-3 px-2">Sesame</th>
-<th class="py-3 px-2">Nuts</th>
-<th class="py-3 px-2">Sulphites</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-slate-800 text-slate-300">
-<tr><td class="py-2.5 px-3 font-semibold text-white">Baked Wings / Plain Chicken</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-<tr><td class="py-2.5 px-3 font-semibold text-white">Fried Wings &amp; Tenders</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-<tr><td class="py-2.5 px-3 font-semibold text-white">Buldak Fire Noodles</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-<tr><td class="py-2.5 px-3 font-semibold text-white">Doner Meat (Chicken / Lamb)</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-<tr><td class="py-2.5 px-3 font-semibold text-white">Skin-on Fries &amp; Wedges</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-<tr><td class="py-2.5 px-3 font-semibold text-white">Mozzarella &amp; Halloumi Bites</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-<tr><td class="py-2.5 px-3 font-semibold text-white">Mochi Artisan Gelato</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td></tr>
-</tbody>
-</table>
-<p class="text-[11px] text-slate-400 mt-3 italic">
+        </div>
+
+        <div id="allergen-table-wrap" class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider bg-[#0a101d]">
+                <th class="py-3 px-3 font-bold text-white">Menu Item</th>
+                <th class="py-3 px-2">Gluten</th>
+                <th class="py-3 px-2">Milk</th>
+                <th class="py-3 px-2">Egg</th>
+                <th class="py-3 px-2">Soy</th>
+                <th class="py-3 px-2">Mustard</th>
+                <th class="py-3 px-2">Celery</th>
+                <th class="py-3 px-2">Sesame</th>
+                <th class="py-3 px-2">Nuts</th>
+                <th class="py-3 px-2">Sulphites</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800 text-slate-300">
+              <tr><td class="py-2.5 px-3 font-semibold text-white">Baked Wings / Plain Chicken</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
+              <tr><td class="py-2.5 px-3 font-semibold text-white">Fried Wings & Tenders</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
+              <tr><td class="py-2.5 px-3 font-semibold text-white">Buldak Fire Noodles</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
+              <tr><td class="py-2.5 px-3 font-semibold text-white">Doner Meat (Chicken / Lamb)</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
+              <tr><td class="py-2.5 px-3 font-semibold text-white">Skin-on Fries & Wedges</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
+              <tr><td class="py-2.5 px-3 font-semibold text-white">Mozzarella & Halloumi Bites</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
+              <tr><td class="py-2.5 px-3 font-semibold text-white">Mochi Artisan Gelato</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td></tr>
+            </tbody>
+          </table>
+          <p class="text-[11px] text-slate-400 mt-3 italic">
             Key: <strong class="text-amber-400">✓</strong> = Contains directly | <strong class="text-slate-500">1</strong> = May Contain (Cross-contamination risk) | <strong>X</strong> = Free from
           </p>
-</div>
-</div>
-</section>
-</main>
-<!-- Product Customization Modal -->
-<div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4" id="custom-modal">
-<div class="bg-[#131b2e] border border-slate-700 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-<div class="p-5 border-b border-slate-800 flex justify-between items-start">
-<div>
-<h3 class="font-serif text-xl font-bold text-white" id="modal-product-title">Customize Dish</h3>
-<span class="text-orange-400 text-sm font-black block mt-0.5" id="modal-product-base-price">£0.00</span>
-</div>
-<button class="text-slate-400 hover:text-white p-1 rounded-lg" onclick="closeCustomModal()">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-</div>
-<div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-5" id="modal-options-container">
-<!-- Rendered based on product rules -->
-</div>
-<div class="p-5 border-t border-slate-800 bg-[#0a101d] flex items-center justify-between gap-4">
-<div>
-<span class="text-[11px] text-slate-400 uppercase font-bold block">Item Total</span>
-<span class="text-xl font-black text-white" id="modal-total-price">£0.00</span>
-</div>
-<button class="btn-orange px-6 py-2.5 rounded-xl font-bold text-sm shadow-md" onclick="confirmAddToCart()">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Complete Product Customisation Modal -->
+  <div id="custom-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-[#131b2e] border border-slate-700 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="p-5 border-b border-slate-800 flex justify-between items-start">
+        <div>
+          <h3 id="modal-product-title" class="font-serif text-xl font-bold text-white">Customise Dish</h3>
+          <span id="modal-product-base-price" class="text-orange-400 text-sm font-black block mt-0.5">£0.00</span>
+        </div>
+        <button onclick="closeCustomModal()" class="text-slate-400 hover:text-white p-1 rounded-lg">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-4" id="modal-options-container">
+        <!-- Rendered dynamically according to product specific customization rules -->
+      </div>
+
+      <div class="p-5 border-t border-slate-800 bg-[#0a101d] flex items-center justify-between gap-4">
+        <div>
+          <span class="text-[11px] text-slate-400 uppercase font-bold block">Item Total</span>
+          <span id="modal-total-price" class="text-xl font-black text-white">£0.00</span>
+        </div>
+        <button onclick="confirmAddToCart()" class="btn-orange px-6 py-2.5 rounded-xl font-bold text-sm shadow-md">
           Add to Basket
         </button>
-</div>
-</div>
-</div>
-<!-- Shopping Cart Slide-over Drawer -->
-<div class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden" id="cart-drawer-overlay" onclick="toggleCartDrawer(false)"></div>
-<aside class="fixed top-0 right-0 z-50 w-full max-w-md h-full bg-[#0e172e] border-l border-slate-800 shadow-2xl flex flex-col translate-x-full transition-transform duration-300 ease-in-out" id="cart-drawer">
-<div class="p-5 border-b border-slate-800 flex items-center justify-between">
-<div class="flex items-center gap-2">
-<h2 class="font-serif text-xl font-bold text-white">Your Basket</h2>
-<span class="bg-orange-600 text-white text-xs px-2 py-0.5 rounded-full font-bold" id="cart-drawer-count">0</span>
-</div>
-<button class="text-slate-400 hover:text-white p-1.5 rounded-lg" onclick="toggleCartDrawer(false)">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-</div>
-<!-- Free Delivery / Min Order Tracker -->
-<div class="bg-[#060e20] p-4 border-b border-slate-800 text-xs">
-<div class="flex justify-between items-center mb-1.5 font-bold">
-<span class="text-slate-300">Minimum Order (£15.00)</span>
-<span class="text-amber-400" id="cart-min-status">£15.00 away</span>
-</div>
-<div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-<div class="bg-orange-500 h-full transition-all duration-300" id="cart-min-bar" style="width: 0%;"></div>
-</div>
-<p class="text-[11px] text-slate-400 mt-2" id="cart-min-hint">
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Slide-over Drawer -->
+  <div id="cart-drawer-overlay" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden" onclick="toggleCartDrawer(false)"></div>
+  <aside id="cart-drawer" class="fixed top-0 right-0 z-50 w-full max-w-md h-full bg-[#0e172e] border-l border-slate-800 shadow-2xl flex flex-col translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <h2 class="font-serif text-xl font-bold text-white">Your Basket</h2>
+        <span id="cart-drawer-count" class="bg-orange-600 text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+      </div>
+      <button onclick="toggleCartDrawer(false)" class="text-slate-400 hover:text-white p-1.5 rounded-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Minimum £15 Order Status Bar -->
+    <div class="bg-[#060e20] p-4 border-b border-slate-800 text-xs">
+      <div class="flex justify-between items-center mb-1.5 font-bold">
+        <span class="text-slate-300">Minimum Order (£15.00)</span>
+        <span id="cart-min-status" class="text-amber-400">£15.00 away</span>
+      </div>
+      <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+        <div id="cart-min-bar" class="bg-orange-500 h-full transition-all duration-300" style="width: 0%;"></div>
+      </div>
+      <p id="cart-min-hint" class="text-[11px] text-slate-400 mt-2">
         Strictly delivery only kitchen. Add £15.00 or more to enable checkout.
       </p>
-</div>
-<div class="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar" id="cart-items-container">
-<!-- Items dynamically populated -->
-</div>
-<!-- Cart Footer & Checkout Breakdown -->
-<div class="p-5 border-t border-slate-800 bg-[#060e20] space-y-3">
-<div class="space-y-1.5 text-xs text-slate-300">
-<div class="flex justify-between">
-<span>Subtotal</span>
-<span class="font-bold text-white" id="cart-subtotal-val">£0.00</span>
-</div>
-<div class="flex justify-between items-center">
-<span>Estimated Delivery (API)</span>
-<span class="font-bold text-emerald-400" id="cart-delivery-val">Calculated at checkout</span>
-</div>
-<div class="flex justify-between text-sm font-black text-white pt-2 border-t border-slate-800">
-<span>Total</span>
-<span class="text-orange-400 text-lg" id="cart-total-val">£0.00</span>
-</div>
-</div>
-<button class="w-full btn-orange py-3.5 rounded-xl font-bold text-sm shadow-lg flex items-center justify-center gap-2" disabled="" id="checkout-btn" onclick="initiateCheckout()">
-<span>Proceed to Checkout</span>
-</button>
-<!-- External Partner Fallbacks -->
-<div class="pt-2 text-center">
-<span class="text-[11px] text-slate-400 block mb-1.5">Or order immediately on our apps:</span>
-<div class="flex gap-2">
-<a class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 rounded-lg text-center transition" href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" rel="noopener" target="_blank">
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar" id="cart-items-container">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <!-- Cart Footer & Checkout Breakdown -->
+    <div class="p-5 border-t border-slate-800 bg-[#060e20] space-y-3">
+      <div class="space-y-1.5 text-xs text-slate-300">
+        <div class="flex justify-between">
+          <span>Subtotal</span>
+          <span id="cart-subtotal-val" class="font-bold text-white">£0.00</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span>Estimated Delivery</span>
+          <span id="cart-delivery-val" class="font-bold text-emerald-400">Calculated at checkout</span>
+        </div>
+        <div class="flex justify-between text-sm font-black text-white pt-2 border-t border-slate-800">
+          <span>Total</span>
+          <span id="cart-total-val" class="text-orange-400 text-lg">£0.00</span>
+        </div>
+      </div>
+
+      <button id="checkout-btn" onclick="initiateCheckout()" disabled class="w-full btn-orange py-3.5 rounded-xl font-bold text-sm shadow-lg flex items-center justify-center gap-2">
+        <span>Proceed to Checkout</span>
+      </button>
+
+      <!-- External Partner Fallbacks -->
+      <div class="pt-2 text-center">
+        <span class="text-[11px] text-slate-400 block mb-1.5">Or order directly via partner apps:</span>
+        <div class="flex gap-2">
+          <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 rounded-lg text-center transition">
             Uber Eats
           </a>
-<a class="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold py-2 rounded-lg text-center transition" href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" rel="noopener" target="_blank">
+          <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener" class="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold py-2 rounded-lg text-center transition">
             Deliveroo
           </a>
-</div>
-</div>
-</div>
-</aside>
-<!-- Checkout Modal Step -->
-<div class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4" id="checkout-modal">
-<div class="bg-[#131b2e] border border-slate-700 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-<div class="p-5 border-b border-slate-800 flex justify-between items-center">
-<h3 class="font-serif text-xl font-bold text-white">Delivery Dispatch Details</h3>
-<button class="text-slate-400 hover:text-white p-1" onclick="closeCheckoutModal()">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</button>
-</div>
-<div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-4">
-<div>
-<label class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Name *</label>
-<input class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" id="cust-name" placeholder="Recipient Name" required="" type="text"/>
-</div>
-<div class="grid grid-cols-2 gap-3">
-<div>
-<label class="block text-xs font-bold text-slate-300 uppercase mb-1">Phone Number *</label>
-<input class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" id="cust-phone" placeholder="07123 456789" required="" type="tel"/>
-</div>
-<div>
-<label class="block text-xs font-bold text-slate-300 uppercase mb-1">Email Address *</label>
-<input class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" id="cust-email" placeholder="name@domain.com" required="" type="email"/>
-</div>
-</div>
-<div>
-<label class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Delivery Postcode *</label>
-<div class="flex gap-2">
-<input class="flex-1 bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white uppercase font-mono" id="cust-postcode" placeholder="e.g. RM17 6QJ" required="" type="text"/>
-<button class="btn-orange px-4 py-2 rounded-lg text-xs font-bold" onclick="calculateCheckoutDeliveryFee()" type="button">Query Quote</button>
-</div>
-<div class="text-xs mt-1.5 font-bold" id="checkout-quote-status"></div>
-</div>
-<div>
-<label class="block text-xs font-bold text-slate-300 uppercase mb-1">House / Flat &amp; Street Address *</label>
-<input class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" id="cust-address" placeholder="Flat 4B, Clarence Road" required="" type="text"/>
-</div>
-<div>
-<label class="block text-xs font-bold text-slate-300 uppercase mb-1">Drop-off Instructions (Optional)</label>
-<input class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" id="cust-notes" placeholder="Leave at door / ring buzzer" type="text"/>
-</div>
-</div>
-<div class="p-5 border-t border-slate-800 bg-[#0a101d] flex flex-col gap-2">
-<div class="flex justify-between items-center text-sm font-bold text-white">
-<span>Total Payable:</span>
-<span class="text-orange-400 text-lg" id="checkout-final-payable">£0.00</span>
-</div>
-<p class="text-[11px] text-amber-300/80 bg-amber-950/30 p-2.5 rounded-lg border border-amber-800/40">
-          Stripe card processing is undergoing live verification. You may also complete your instant online delivery order directly via our official Uber Eats or Deliveroo links.
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Delivery Details Checkout Modal -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-[#131b2e] border border-slate-700 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="p-5 border-b border-slate-800 flex justify-between items-center">
+        <h3 class="font-serif text-xl font-bold text-white">Delivery Dispatch Details</h3>
+        <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-1">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+
+      <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Name *</label>
+          <input type="text" id="cust-name" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" placeholder="Recipient Name" required />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Phone Number *</label>
+            <input type="tel" id="cust-phone" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" placeholder="07123 456789" required />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Email Address *</label>
+            <input type="email" id="cust-email" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" placeholder="name@domain.com" required />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Delivery Postcode *</label>
+          <div class="flex gap-2">
+            <input type="text" id="cust-postcode" class="flex-1 bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white uppercase font-mono" placeholder="e.g. RM17 6QJ" required />
+            <button type="button" onclick="calculateCheckoutDeliveryFee()" class="btn-orange px-4 py-2 rounded-lg text-xs font-bold">Query Quote</button>
+          </div>
+          <div id="checkout-quote-status" class="text-xs mt-1.5 font-bold"></div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 uppercase mb-1">House / Flat & Street Address *</label>
+          <input type="text" id="cust-address" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" placeholder="Flat 4B, Clarence Road" required />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Drop-off Instructions (Optional)</label>
+          <input type="text" id="cust-notes" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" placeholder="Leave at door / ring buzzer" />
+        </div>
+      </div>
+
+      <div class="p-5 border-t border-slate-800 bg-[#0a101d] flex flex-col gap-2">
+        <div class="flex justify-between items-center text-sm font-bold text-white">
+          <span>Total Payable:</span>
+          <span id="checkout-final-payable" class="text-orange-400 text-lg">£0.00</span>
+        </div>
+        <p class="text-[11px] text-amber-300/80 bg-amber-950/30 p-2.5 rounded-lg border border-amber-800/40">
+          Direct online orders are received and printed immediately in our kitchen. You may also complete your order via our official Uber Eats or Deliveroo store links.
         </p>
-</div>
-</div>
-</div>
-<!-- Footer -->
-<footer class="bg-[#060e20] border-t border-slate-800 py-10 px-4 sm:px-6 mt-12">
-<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-<div class="md:col-span-2 space-y-3">
-<div class="flex items-center gap-3">
-<img alt="The Hungry Fox" class="h-10 w-auto" onerror="this.onerror=null; this.src='https://thehungryfox.co.uk/hungry-fox-logo-cream.png';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
-<span class="font-serif text-xl font-bold text-white tracking-wider">THE HUNGRY FOX</span>
-</div>
-<p class="text-slate-400 text-xs leading-relaxed max-w-sm">
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#060e20] border-t border-slate-800 py-10 px-4 sm:px-6 mt-12">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="md:col-span-2 space-y-3">
+        <div class="flex items-center gap-3">
+          <img src="hungry-fox-logo-cream.png" onerror="this.onerror=null; this.src='https://thehungryfox.co.uk/hungry-fox-logo-cream.png';" alt="The Hungry Fox" class="h-10 w-auto">
+          <span class="font-serif text-xl font-bold text-white tracking-wider">THE HUNGRY FOX</span>
+        </div>
+        <p class="text-slate-400 text-xs leading-relaxed max-w-sm">
           Freshly prepared late-night chicken feast boxes, sizzled doner kebabs, spicy buldak fire noodles, and loaded peri-peri sides in Thurrock, Essex.
         </p>
-<div class="flex items-center gap-4 text-xs font-bold text-orange-400 pt-2">
-<a class="hover:underline" href="https://www.instagram.com/thehungryfox2026/" rel="noopener" target="_blank">Instagram</a>
-<a class="hover:underline" href="https://www.facebook.com/profile.php?id=61594740146032" rel="noopener" target="_blank">Facebook</a>
-<a class="hover:underline" href="https://www.youtube.com/channel/UC6uMbrnxCjwqm_Ua9-SHubA" rel="noopener" target="_blank">YouTube</a>
-<a class="hover:underline" href="https://www.tiktok.com/@thehungryfox2026" rel="noopener" target="_blank">TikTok</a>
-</div>
-</div>
-<div>
-<h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Kitchen Hours</h4>
-<p class="text-xs text-slate-300">Monday – Sunday</p>
-<p class="text-xs font-bold text-orange-400 mt-0.5">11:00 AM – 11:30 PM</p>
-<p class="text-[11px] text-slate-400 mt-2">Open 7 days a week for delivery across Grays and Thurrock.</p>
-</div>
-<div>
-<h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Compliance &amp; Location</h4>
-<p class="text-xs text-slate-300">Clarence Road, Grays, RM17 6QJ</p>
-<p class="text-xs text-emerald-400 font-bold mt-1">100% Halal Certified</p>
-<p class="text-xs text-slate-400 mt-1">5-Star Food Hygiene Rating</p>
-<p class="text-[11px] text-slate-500 mt-3">Registered food business with Thurrock Council.</p>
-</div>
-</div>
-<div class="max-w-7xl mx-auto pt-8 mt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-2">
-<p>© 2026 The Hungry Fox Ltd. All rights reserved.</p>
-<div class="flex gap-4">
-<a class="hover:text-white" href="#allergen-section">Allergen Safety</a>
-<a class="hover:text-white" href="https://ratings.food.gov.uk/business/1981131/the-hungry-fox" rel="noopener" target="_blank">FSA Rating</a>
-</div>
-</div>
-</footer>
-<!-- Self-Contained JavaScript Catalog & Order Logic -->
-<script>
+        <div class="flex items-center gap-4 text-xs font-bold text-orange-400 pt-2">
+          <a href="https://www.instagram.com/thehungryfox2026/" target="_blank" rel="noopener" class="hover:underline">Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61594740146032" target="_blank" rel="noopener" class="hover:underline">Facebook</a>
+          <a href="https://www.youtube.com/channel/UC6uMbrnxCjwqm_Ua9-SHubA" target="_blank" rel="noopener" class="hover:underline">YouTube</a>
+          <a href="https://www.tiktok.com/@thehungryfox2026" target="_blank" rel="noopener" class="hover:underline">TikTok</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Kitchen Hours</h4>
+        <p class="text-xs text-slate-300">Monday – Sunday</p>
+        <p class="text-xs font-bold text-orange-400 mt-0.5">11:00 AM – 11:30 PM</p>
+        <p class="text-[11px] text-slate-400 mt-2">Open 7 days a week for delivery across Grays and Thurrock.</p>
+      </div>
+
+      <div>
+        <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Compliance & Location</h4>
+        <p class="text-xs text-slate-300">Clarence Road, Grays, RM17 6QJ</p>
+        <p class="text-xs text-emerald-400 font-bold mt-1">100% Halal Certified</p>
+        <p class="text-xs text-slate-400 mt-1">5-Star Food Hygiene Rating</p>
+        <p class="text-[11px] text-slate-500 mt-3">Registered food business with Thurrock Council.</p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto pt-8 mt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-2">
+      <p>© 2026 The Hungry Fox Ltd. All rights reserved.</p>
+      <div class="flex gap-4">
+        <a href="#allergen-section" class="hover:text-white">Allergen Safety</a>
+        <a href="https://ratings.food.gov.uk/business/1981131/the-hungry-fox" target="_blank" rel="noopener" class="hover:text-white">FSA Rating</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Self-Contained JavaScript Catalog, Option Rules & Ordering Engine -->
+  <script>
     const API_BASE_URL = 'https://hungryfox-api.thehungryfox2026.workers.dev';
     const MIN_ORDER_AMOUNT = 15.00;
 
@@ -433,90 +462,205 @@
       return idx === -1 ? 999 : idx;
     }
 
-    // Complete In-Memory Products (All 99 Catalog Items)
+    // Standardised Option Lists
+    const CHICKEN_FLAVOURS = [
+      'Plain',
+      'Garlic Parmesan (Classic)',
+      'Sticky BBQ (Classic)',
+      'Peri Peri (Mild)',
+      'Honey Sriracha (Mild)',
+      'Spicy Algerian (Mild)',
+      'Smoky Cajun (Mild)',
+      'Buffalo (Mild)',
+      'Spicy BBQ (Hot)',
+      'Volcano (Hot)',
+      'Naga Sauce (Hot)',
+      'Mango Habanero (Hot)',
+      'Hot Hot (Extra Hot)',
+      'Seoul Fire (Extreme Hot)'
+    ];
+
+    const DRIZZLE_OPTIONS = [
+      'No Drizzle',
+      'Garlic Parmesan',
+      'Sticky BBQ',
+      'Peri Peri',
+      'Honey Sriracha',
+      'Spicy Algerian',
+      'Smoky Cajun',
+      'Buffalo',
+      'Spicy BBQ',
+      'Volcano',
+      'Naga Sauce',
+      'Mango Habanero',
+      'Hot Hot',
+      'Seoul Fire'
+    ];
+
+    const SEASONING_OPTIONS = [
+      'No Seasoning',
+      'Regular Salt',
+      'Peri Peri Salt',
+      'Cajun Dust',
+      'Chipotle Chilli Salt'
+    ];
+
+    const WING_COOKING_OPTIONS = ['Baked', 'Fried'];
+    const DONER_TYPE_OPTIONS = ['Chicken Doner', 'Meat Doner', 'Mixed Doner'];
+    const DONER_SPICE_OPTIONS = ['MILD', 'CHILLI & HONEY', 'NAGA'];
+
+    const BREAD_OPTIONS = [
+      { name: 'Plain Naan', price: 0 },
+      { name: 'Plain Pitta Bread', price: 0 },
+      { name: 'Garlic Naan', price: 0.99 },
+      { name: 'Peri Peri Pitta Bread', price: 0.49 }
+    ];
+
+    const SNACK_OPTIONS = [
+      'Mini Singara (Bengali Samosa) (4 Pcs)',
+      'Vegetable Spring Roll (2 Pcs)',
+      'Vegetable Samosa (2 Pcs)',
+      'Medium Singara (2 Pcs)'
+    ];
+
+    const BUNDLE_SIDES = [
+      { name: 'Plain Naan', price: 0 },
+      { name: 'Beans', price: 0 },
+      { name: 'Coleslaw', price: 0 },
+      { name: 'Plain Pitta Bread', price: 0 },
+      { name: 'Garlic Naan', price: 0.99 },
+      { name: 'Peri Peri Pitta Bread', price: 0.49 },
+      { name: 'Onion Rings (3 Pcs)', price: 0.99 },
+      { name: 'Garlic Bread (2 Pcs)', price: 0.99 },
+      { name: 'Halloumi Fries (2 Pcs)', price: 1.00 },
+      { name: 'Mozzarella Sticks (2 Pcs)', price: 1.00 },
+      { name: 'Vegetable Samosa (2 Pcs)', price: 1.19 },
+      { name: 'Vegetable Spring Roll (2 Pcs)', price: 1.19 },
+      { name: 'Mini Singara (Bengali Samosa) (4 Pcs)', price: 1.29 }
+    ];
+
+    const CANNED_DRINKS = [
+      { name: 'Coke', price: 0 },
+      { name: 'Diet Coke', price: 0 },
+      { name: 'Pepsi', price: 0 },
+      { name: 'Pepsi Max', price: 0 },
+      { name: 'Tango Orange', price: 0 },
+      { name: 'Tango Apple', price: 0 },
+      { name: '7UP', price: 0 },
+      { name: 'Dr Pepper', price: 0 },
+      { name: 'Fruit Shoot', price: 0 },
+      { name: 'Red Bull', price: 1.00 }
+    ];
+
+    const BOTTLED_DRINKS = [
+      'Bottle Coke',
+      'Bottle Diet Coke',
+      'Bottle Pepsi',
+      'Bottle Pepsi Max',
+      'Bottle Tango',
+      'Bottle 7UP'
+    ];
+
+    const KIDS_DRINKS = ['Fruit Shoot', 'Water'];
+
+    const DIP_OPTIONS = [
+      'Plain Mayo',
+      'Garlic Mayo',
+      'BBQ',
+      'Tomato Ketchup',
+      'Peri Mayo',
+      'Spicy Mayo',
+      'Sweet Chilli'
+    ];
+
+    // Complete 99 Products Inventory
     const HUNGRY_FOX_PRODUCTS = [
       // 1. Special Featured
-      { Product_ID: 'FEA001', Product_Name: 'Quarter Chicken & Sides', Category: 'Special Featured', Price: 9.49, Description: 'A quarter baked chicken, coated in your choice of flavor and served with fries and your choice of naan or pitta bread.' },
-      { Product_ID: 'FEA002', Product_Name: 'Half Chicken & Sides', Category: 'Special Featured', Price: 12.49, Description: 'A generous half baked chicken, coated in your choice of flavor and served with fries and your choice of naan or pitta bread.' },
-      { Product_ID: 'FEA003', Product_Name: 'Doner Bread Snack Meal', Category: 'Special Featured', Price: 13.99, Description: 'Your choice of chicken, meat or mixed doner, served with plain naan, garlic naan, plain pitta or peri peri pitta, plus a drink and dip.' },
-      { Product_ID: 'FEA004', Product_Name: 'Wings & Fries Combo', Category: 'Special Featured', Price: 6.49, Description: 'A tasty combination of chicken wings and fries, with your choice of wing flavor.' },
-      { Product_ID: 'FEA005', Product_Name: 'Baked Combo for 1', Category: 'Special Featured', Price: 10.99, Description: 'A satisfying baked chicken combo featuring a quarter chicken, two baked wings, seasoned fries and a canned drink.' },
-      { Product_ID: 'FEA006', Product_Name: 'Doner Snack Bundle', Category: 'Special Featured', Price: 11.99, Description: 'A tasty doner snack bundle with your choice of samosa, spring roll or singara, served with fries and a drink.' },
-      { Product_ID: 'FEA007', Product_Name: 'Doner Deluxe Meal', Category: 'Special Featured', Price: 9.49, Description: 'Enjoy your choice of doner meat with coleslaw or beans, accompanied by a canned drink.' },
-      { Product_ID: 'FEA008', Product_Name: 'Buldak & Snack Combo', Category: 'Special Featured', Price: 9.99, Description: 'A spicy Buldak noodle combo served with your choice of snack, dip and drink.' },
-      { Product_ID: 'FEA009', Product_Name: 'Wings & Loaded Fries Bundle', Category: 'Special Featured', Price: 10.99, Description: 'Eight chicken wings tossed in your choice of flavor, served with loaded fries, a dip and a canned drink.' },
-      { Product_ID: 'FEA010', Product_Name: 'Tenders & Loaded Fries Bundle', Category: 'Special Featured', Price: 10.99, Description: 'Six crispy chicken tenders coated in your choice of flavor, served with loaded fries, a dip and a canned drink.' },
-      { Product_ID: 'FEA011', Product_Name: 'Quarter Chicken Loaded Fries Bundle', Category: 'Special Featured', Price: 10.99, Description: 'A quarter baked chicken coated in your choice of flavor, served with loaded fries, a dip and a canned drink.' },
+      { Product_ID: 'FEA001', Product_Name: 'Half Chicken & Sides', Category: 'Special Featured', Price: 12.49, Description: 'A generous half baked chicken, coated in your choice of flavor and served with fries and your choice of naan or pitta bread.' },
+      { Product_ID: 'FEA002', Product_Name: 'Quarter Chicken & Sides', Category: 'Special Featured', Price: 9.49, Description: 'A quarter baked chicken, coated in your choice of flavor and served with fries and your choice of naan or pitta bread.' },
+      { Product_ID: 'FEA003', Product_Name: 'Doner Bread Snack Meal', Category: 'Special Featured', Price: 13.99, Description: 'Your choice of chicken, meat, or mixed doner served with bread, a snack, drink, and dip.' },
+      { Product_ID: 'FEA004', Product_Name: 'Wings & Fries Combo', Category: 'Special Featured', Price: 6.49, Description: 'Four wings, baked or fried, served with fries, your choice of flavor, and a dip.' },
+      { Product_ID: 'FEA005', Product_Name: 'Baked Combo for 1', Category: 'Special Featured', Price: 10.99, Description: 'Quarter baked chicken, two baked wings, seasoned fries, and a canned drink.' },
+      { Product_ID: 'FEA006', Product_Name: 'Doner Snack Bundle', Category: 'Special Featured', Price: 11.99, Description: 'Your choice of doner with a snack, fries, and a drink.' },
+      { Product_ID: 'FEA007', Product_Name: 'Doner Deluxe Meal', Category: 'Special Featured', Price: 9.49, Description: 'Your choice of doner served with coleslaw or beans and a canned drink.' },
+      { Product_ID: 'FEA008', Product_Name: 'Buldak & Snack Combo', Category: 'Special Featured', Price: 9.99, Description: 'Spicy Buldak Fire Noodles served with your choice of snack, dip, and drink.' },
+      { Product_ID: 'FEA009', Product_Name: 'Wings & Loaded Fries Bundle', Category: 'Special Featured', Price: 10.99, Description: 'Eight wings, baked or fried, with your choice of flavor, loaded fries, dip, and canned drink.' },
+      { Product_ID: 'FEA010', Product_Name: 'Tenders & Loaded Fries Bundle', Category: 'Special Featured', Price: 10.99, Description: 'Six crispy tenders coated in your choice of flavor, with loaded fries, dip, and canned drink.' },
+      { Product_ID: 'FEA011', Product_Name: 'Quarter Chicken Loaded Fries Bundle', Category: 'Special Featured', Price: 9.99, Description: 'Quarter baked chicken coated in your choice of flavor, served with loaded fries, dip, and canned drink.' },
 
       // 2. Solo Chicken or Upgrade to Meal
-      { Product_ID: 'CHK001', Product_Name: 'Quarter Baked Chicken', Category: 'Solo Chicken or Upgrade to Meal', Price: 5.49, Description: 'Enjoy a quarter of our oven-baked chicken, coated in your choice of our signature flavors.' },
-      { Product_ID: 'CHK002', Product_Name: 'Half Baked Chicken', Category: 'Solo Chicken or Upgrade to Meal', Price: 8.49, Description: 'A generous half chicken, oven-baked and coated in your choice of our signature flavors.' },
-      { Product_ID: 'WNG001', Product_Name: 'Baked Wings (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 6.99, Description: 'Six delicious oven-baked chicken wings, finished in your choice of our signature flavors.' },
-      { Product_ID: 'WNG002', Product_Name: 'Fried Wings (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 6.49, Description: 'Six crispy-coated fried chicken wings, tossed in your choice of our signature flavors.' },
-      { Product_ID: 'TND001', Product_Name: 'Tenders (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 7.99, Description: 'Six crispy-coated chicken breast tenders, coated in your choice of our signature flavors.' },
+      { Product_ID: 'CHK001', Product_Name: 'Quarter Baked Chicken', Category: 'Solo Chicken or Upgrade to Meal', Price: 5.49, Description: 'Quarter oven-baked chicken coated in your choice of signature flavor.' },
+      { Product_ID: 'CHK002', Product_Name: 'Half Baked Chicken', Category: 'Solo Chicken or Upgrade to Meal', Price: 8.49, Description: 'Half oven-baked chicken coated in your choice of signature flavor.' },
+      { Product_ID: 'WNG001', Product_Name: 'Baked Wings (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 6.99, Description: 'Six oven-baked wings coated in your choice of flavor.' },
+      { Product_ID: 'WNG002', Product_Name: 'Fried Wings (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 6.49, Description: 'Six crispy-coated fried wings coated in your choice of flavor.' },
+      { Product_ID: 'TND001', Product_Name: 'Tenders (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 7.99, Description: 'Six crispy-coated chicken breast tenders coated in your choice of flavor.' },
       { Product_ID: 'SD005', Product_Name: 'Chilli Cheese Bites (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 4.99, Description: 'Six tasty chilli cheese bites with spicy jalapeno bits.' },
-      { Product_ID: 'CHK005', Product_Name: 'Whole Baked Chicken', Category: 'Solo Chicken or Upgrade to Meal', Price: 12.49, Description: 'A whole oven-baked chicken, finished in your choice of one of our signature flavors. Perfect for sharing.' },
+      { Product_ID: 'CHK005', Product_Name: 'Whole Baked Chicken', Category: 'Solo Chicken or Upgrade to Meal', Price: 12.49, Description: 'Whole oven-baked chicken coated in your choice of signature flavor.' },
 
       // 3. Signature Doners & Noodles
       { Product_ID: 'NDL001', Product_Name: 'Buldak Fire Noodles (HOT)', Category: 'Signature Doners & Noodles', Price: 7.49, Description: 'A portion of spicy Buldak Fire Noodles, made for those who enjoy a fiery kick.' },
-      { Product_ID: 'DON001', Product_Name: 'Chicken Doner', Category: 'Signature Doners & Noodles', Price: 7.99, Description: 'Our chicken doner, served as a delicious doner option.' },
-      { Product_ID: 'DON002', Product_Name: 'Meat Doner', Category: 'Signature Doners & Noodles', Price: 8.99, Description: 'Our meat doner, served as a delicious doner option.' },
-      { Product_ID: 'DON003', Product_Name: 'Mixed Doner', Category: 'Signature Doners & Noodles', Price: 9.99, Description: 'Enjoy a combination of chicken doner and meat doner together.' },
+      { Product_ID: 'DON001', Product_Name: 'Chicken Doner', Category: 'Signature Doners & Noodles', Price: 7.99, Description: 'Sizzling seasoned chicken doner slices.' },
+      { Product_ID: 'DON002', Product_Name: 'Meat Doner', Category: 'Signature Doners & Noodles', Price: 8.99, Description: 'Succulent lamb meat doner slices.' },
+      { Product_ID: 'DON003', Product_Name: 'Mixed Doner', Category: 'Signature Doners & Noodles', Price: 9.99, Description: 'Combination of chicken doner and meat doner together.' },
 
       // 4. Signature Rice
-      { Product_ID: 'RIC001', Product_Name: 'Flavour Rice', Category: 'Signature Rice', Price: 3.49, Description: 'A tasty portion of our savory flavored rice, perfect as a side with your favorite chicken.' },
-      { Product_ID: 'RIC002', Product_Name: 'Chicken Rice Bowl', Category: 'Signature Rice', Price: 8.49, Description: 'A signature rice bowl served with your choice of a quarter chicken, four chicken tenders or five chicken wings.' },
-      { Product_ID: 'RIC003', Product_Name: 'Egg Fried Rice', Category: 'Signature Rice', Price: 4.49, Description: 'A delicious portion of egg fried rice, perfect as a meal or side.' },
-      { Product_ID: 'RIC004', Product_Name: 'Vegetable Fried Rice', Category: 'Signature Rice', Price: 4.99, Description: 'A tasty portion of vegetable fried rice, perfect as a meal or side.' },
-      { Product_ID: 'RIC005', Product_Name: 'Chicken Fried Rice', Category: 'Signature Rice', Price: 5.49, Description: 'A satisfying portion of chicken fried rice, perfect as a meal or side.' },
-      { Product_ID: 'RIC006', Product_Name: 'Prawn Fried Rice', Category: 'Signature Rice', Price: 5.99, Description: 'A tasty portion of prawn fried rice, perfect as a meal or side.' },
+      { Product_ID: 'RIC001', Product_Name: 'Flavour Rice', Category: 'Signature Rice', Price: 3.49, Description: 'Savory flavored rice.' },
+      { Product_ID: 'RIC002', Product_Name: 'Chicken Rice Bowl', Category: 'Signature Rice', Price: 8.49, Description: 'Signature rice served with your choice of chicken.' },
+      { Product_ID: 'RIC003', Product_Name: 'Egg Fried Rice', Category: 'Signature Rice', Price: 4.49, Description: 'Wok-style egg fried rice.' },
+      { Product_ID: 'RIC004', Product_Name: 'Vegetable Fried Rice', Category: 'Signature Rice', Price: 4.99, Description: 'Fragrant rice fried with mixed garden vegetables.' },
+      { Product_ID: 'RIC005', Product_Name: 'Chicken Fried Rice', Category: 'Signature Rice', Price: 5.49, Description: 'Wok-tossed rice with tender seasoned chicken pieces.' },
+      { Product_ID: 'RIC006', Product_Name: 'Prawn Fried Rice', Category: 'Signature Rice', Price: 5.99, Description: 'Wok-tossed rice with succulent prawns.' },
 
       // 5. Sharing Platters
-      { Product_ID: 'PLT001', Product_Name: '25 Wings', Category: 'Sharing Platters', Price: 20.99, Description: 'A generous portion of 25 chicken wings, tossed in your choice of two signature flavors.' },
-      { Product_ID: 'PLT002', Product_Name: 'Baked Combo for Family', Category: 'Sharing Platters', Price: 28.99, Description: 'A family-sized feast featuring one whole baked chicken, eight wings, four portions of fries and a bottled drink.' },
-      { Product_ID: 'PLT003', Product_Name: '25 Tenders', Category: 'Sharing Platters', Price: 26.99, Description: 'A generous portion of 25 crispy chicken tenders, coated in your choice of two signature flavors.' },
+      { Product_ID: 'PLT001', Product_Name: '25 Wings', Category: 'Sharing Platters', Price: 20.99, Description: 'Twenty-five wings with your choice of two signature flavors.' },
+      { Product_ID: 'PLT002', Product_Name: 'Baked Combo for Family', Category: 'Sharing Platters', Price: 28.99, Description: 'Whole baked chicken, eight baked wings, four portions of fries, and one bottled drink.' },
+      { Product_ID: 'PLT003', Product_Name: '25 Tenders', Category: 'Sharing Platters', Price: 26.99, Description: 'Twenty-five tenders with your choice of two signature flavors.' },
 
       // 6. Ultimate Share Bundles
-      { Product_ID: 'BDL001', Product_Name: '15 Wings Bundle', Category: 'Ultimate Share Bundles', Price: 18.99, Description: 'A delicious bundle of 15 chicken wings tossed in your choice of two flavors, served with two portions of fries, one side and a bottled drink.' },
-      { Product_ID: 'BDL002', Product_Name: '20 Wing Party Bundle', Category: 'Ultimate Share Bundles', Price: 22.99, Description: 'A party-sized portion of 20 chicken wings tossed in your choice of two flavors, served with four portions of fries, one side and a bottled drink.' },
-      { Product_ID: 'BDL003', Product_Name: '15 Tenders Bundle', Category: 'Ultimate Share Bundles', Price: 21.99, Description: '15 crispy chicken tenders coated in your choice of two flavors, served with two portions of fries, one side and a bottled drink.' },
-      { Product_ID: 'BDL004', Product_Name: '20 Tender Party Bundle', Category: 'Ultimate Share Bundles', Price: 27.99, Description: 'A party-sized portion of 20 crispy chicken tenders coated in your choice of two flavors, served with four portions of fries, one side and a bottled drink.' },
-      { Product_ID: 'BDL005', Product_Name: 'Double Flavour Wings Bundle', Category: 'Ultimate Share Bundles', Price: 15.99, Description: 'A generous portion of 12 chicken wings, tossed in your choice of two flavors, served with two portions of fries, two dips and two drinks.' },
-      { Product_ID: 'BDL006', Product_Name: 'Wings and Tenders Mix Bundle', Category: 'Ultimate Share Bundles', Price: 15.99, Description: 'Six chicken wings and six crispy tenders, served with two portions of fries and two canned drinks.' },
+      { Product_ID: 'BDL001', Product_Name: '15 Wings Bundle', Category: 'Ultimate Share Bundles', Price: 18.99, Description: 'Fifteen wings, two flavors, two portions of fries, one side, and one bottled drink.' },
+      { Product_ID: 'BDL002', Product_Name: '20 Wing Party Bundle', Category: 'Ultimate Share Bundles', Price: 22.99, Description: 'Twenty wings, two flavors, four portions of fries, one side, and one bottled drink.' },
+      { Product_ID: 'BDL003', Product_Name: '15 Tenders Bundle', Category: 'Ultimate Share Bundles', Price: 21.99, Description: 'Fifteen tenders, two flavors, two portions of fries, one side, and one bottled drink.' },
+      { Product_ID: 'BDL004', Product_Name: '20 Tender Party Bundle', Category: 'Ultimate Share Bundles', Price: 27.99, Description: 'Twenty tenders, two flavors, four portions of fries, one side, and one bottled drink.' },
+      { Product_ID: 'BDL005', Product_Name: 'Double Flavour Wings Bundle', Category: 'Ultimate Share Bundles', Price: 15.99, Description: 'Twelve wings, two flavors, two portions of fries, two dips, and two drinks.' },
+      { Product_ID: 'BDL006', Product_Name: 'Wings and Tenders Mix Bundle', Category: 'Ultimate Share Bundles', Price: 15.99, Description: 'Six wings, six tenders, two portions of fries, and two canned drinks.' },
       { Product_ID: 'BND001', Product_Name: 'Lone Fox', Category: 'Ultimate Share Bundles', Price: 10.99, Description: '1/4 Chicken + 2 Wings + Fries + 330ml Can.' },
       { Product_ID: 'BND002', Product_Name: 'Fox Pack', Category: 'Ultimate Share Bundles', Price: 18.99, Description: '1/2 Chicken + 4 Wings + 2 Fries + 2 Cans.' },
       { Product_ID: 'BND003', Product_Name: 'Fox Feast', Category: 'Ultimate Share Bundles', Price: 28.99, Description: 'Full Chicken + 8 Wings + 4 Fries + 1.5L Bottle.' },
-      { Product_ID: 'BND004', Product_Name: 'Baked Combo for 2', Category: 'Ultimate Share Bundles', Price: 18.99, Description: 'Half a baked chicken, four wings, two portions of fries and two canned drinks.' },
+      { Product_ID: 'BND004', Product_Name: 'Baked Combo for 2', Category: 'Ultimate Share Bundles', Price: 18.99, Description: 'Half baked chicken, four baked wings, two portions of fries, and two canned drinks.' },
+      { Product_ID: 'BDL007', Product_Name: 'Wings, Tender & Fries Duo', Category: 'Ultimate Share Bundles', Price: 9.99, Description: 'Three wings, three tenders, two portions of fries, and two dips.' },
 
       // 7. Kids Menu
-      { Product_ID: 'KID001', Product_Name: 'Kids Chicken Nuggets Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Chicken nuggets served with small fries and a choice of Fruit Shoot or water.' },
-      { Product_ID: 'KID002', Product_Name: 'Kids Mozzarella Sticks Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Mozzarella sticks, served with small fries and a choice of Fruit Shoot or water.' },
-      { Product_ID: 'KID003', Product_Name: 'Kids Halloumi Fries Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Halloumi fries, served with small fries and a choice of Fruit Shoot or water.' },
-      { Product_ID: 'KID004', Product_Name: 'Kids Onion Rings Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Onion rings served with small fries and a choice of Fruit Shoot or water.' },
-      { Product_ID: 'KID005', Product_Name: 'Kids Chicken Tenders Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Crispy chicken tenders served with small fries and a choice of Fruit Shoot or water.' },
-      { Product_ID: 'KID006', Product_Name: 'Kids Wings Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Chicken wings served with small fries and a choice of Fruit Shoot or water.' },
+      { Product_ID: 'KID001', Product_Name: 'Kids Chicken Nuggets Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Four chicken nuggets, small fries, and one kids drink.' },
+      { Product_ID: 'KID002', Product_Name: 'Kids Mozzarella Sticks Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Four mozzarella sticks, small fries, and one kids drink.' },
+      { Product_ID: 'KID003', Product_Name: 'Kids Halloumi Fries Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Four halloumi fries, small fries, and one kids drink.' },
+      { Product_ID: 'KID004', Product_Name: 'Kids Onion Rings Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Six onion rings, small fries, and one kids drink.' },
+      { Product_ID: 'KID005', Product_Name: 'Kids Chicken Tenders Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Three tenders, small fries, and one kids drink.' },
+      { Product_ID: 'KID006', Product_Name: 'Kids Wings Meal', Category: 'Kids Menu', Price: 4.99, Description: 'Four wings, baked or fried, small fries, and one kids drink.' },
 
       // 8. Fries & Wedges
       { Product_ID: 'FRS001', Product_Name: 'Fries (Small)', Category: 'Fries & Wedges', Price: 1.50, Description: 'A portion of golden, crispy skin-on fries.' },
       { Product_ID: 'FRS002', Product_Name: 'Fries (Large)', Category: 'Fries & Wedges', Price: 2.99, Description: 'A generous portion of golden, crispy skin-on fries.' },
-      { Product_ID: 'FRS003', Product_Name: 'Chicken Loaded Fries', Category: 'Fries & Wedges', Price: 4.99, Description: 'A hearty portion of fries topped with delicious chicken pieces.' },
-      { Product_ID: 'FRS004', Product_Name: 'Chicken & Cheese Loaded Fries', Category: 'Fries & Wedges', Price: 5.49, Description: 'A hearty portion of fries loaded with chicken pieces and cheese.' },
-      { Product_ID: 'FRS005', Product_Name: 'Wedges', Category: 'Fries & Wedges', Price: 3.49, Description: 'A portion of tasty seasoned potato wedges.' },
-      { Product_ID: 'FRS006', Product_Name: 'Chicken Loaded Wedges', Category: 'Fries & Wedges', Price: 5.49, Description: 'Potato wedges topped with delicious chicken pieces.' },
-      { Product_ID: 'FRS007', Product_Name: 'Chicken & Cheese Loaded Wedges', Category: 'Fries & Wedges', Price: 5.99, Description: 'Potato wedges loaded with chicken pieces and melted cheese.' },
-      { Product_ID: 'FRS008', Product_Name: 'Cheese Loaded Fries', Category: 'Fries & Wedges', Price: 3.99, Description: 'A generous portion of fries topped with warm cheese.' },
-      { Product_ID: 'FRS009', Product_Name: 'Cheese Loaded Wedges', Category: 'Fries & Wedges', Price: 4.49, Description: 'A generous portion of potato wedges topped with cheese.' },
+      { Product_ID: 'FRS003', Product_Name: 'Chicken Loaded Fries', Category: 'Fries & Wedges', Price: 4.99, Description: 'Fries topped with chicken pieces.' },
+      { Product_ID: 'FRS004', Product_Name: 'Chicken & Cheese Loaded Fries', Category: 'Fries & Wedges', Price: 5.49, Description: 'Fries loaded with chicken and cheese.' },
+      { Product_ID: 'FRS005', Product_Name: 'Wedges', Category: 'Fries & Wedges', Price: 3.49, Description: 'Crispy seasoned potato wedges.' },
+      { Product_ID: 'FRS006', Product_Name: 'Chicken Loaded Wedges', Category: 'Fries & Wedges', Price: 5.49, Description: 'Wedges topped with chicken pieces.' },
+      { Product_ID: 'FRS007', Product_Name: 'Chicken & Cheese Loaded Wedges', Category: 'Fries & Wedges', Price: 5.99, Description: 'Wedges loaded with chicken and cheese.' },
+      { Product_ID: 'FRS008', Product_Name: 'Cheese Loaded Fries', Category: 'Fries & Wedges', Price: 3.99, Description: 'Fries topped with cheese.' },
+      { Product_ID: 'FRS009', Product_Name: 'Cheese Loaded Wedges', Category: 'Fries & Wedges', Price: 4.49, Description: 'Wedges topped with cheese.' },
 
       // 9. Premium Sides
-      { Product_ID: 'SD001', Product_Name: 'Mozzarella Sticks (6 Pcs)', Category: 'Premium Sides', Price: 4.99, Description: 'Six delicious mozzarella sticks, perfect for a tasty snack or side.' },
-      { Product_ID: 'SD002', Product_Name: 'Onion Rings (8 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Eight onion rings, perfect for sharing.' },
-      { Product_ID: 'SD003', Product_Name: 'Halloumi Fries (6 Pcs)', Category: 'Premium Sides', Price: 4.99, Description: 'Six portions of crispy halloumi fries.' },
-      { Product_ID: 'SD004', Product_Name: 'Mini Singara (8 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Eight mini singara, perfect for a savory snack.' },
-      { Product_ID: 'SD006', Product_Name: 'Chilli Cheese Bites (3 Pcs)', Category: 'Premium Sides', Price: 2.79, Description: 'Three tasty chilli cheese bites with jalapeno.' },
-      { Product_ID: 'SD007', Product_Name: 'Vegetable Samosa (4 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Four vegetable samosas with aromatic spiced filling.' },
-      { Product_ID: 'SD008', Product_Name: 'Vegetable Spring Roll (4 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Four vegetable spring rolls with shredded vegetables.' },
-      { Product_ID: 'SD009', Product_Name: 'Veg Bao Buns (2 Pcs)', Category: 'Premium Sides', Price: 1.99, Description: 'Two fluffy vegetable bao buns, perfect as a snack.' },
-      { Product_ID: 'SD010', Product_Name: 'Prawn Gyoza (3 Pcs)', Category: 'Premium Sides', Price: 1.99, Description: 'Three pieces of prawn gyoza, pan-fried to perfection.' },
+      { Product_ID: 'SD001', Product_Name: 'Mozzarella Sticks (6 Pcs)', Category: 'Premium Sides', Price: 4.99, Description: 'Six delicious mozzarella sticks. Includes 1 free dip.' },
+      { Product_ID: 'SD002', Product_Name: 'Onion Rings (8 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Eight crisp onion rings. Includes 1 free dip.' },
+      { Product_ID: 'SD003', Product_Name: 'Halloumi Fries (6 Pcs)', Category: 'Premium Sides', Price: 4.99, Description: 'Six portions of crispy halloumi fries. Includes 1 free dip.' },
+      { Product_ID: 'SD004', Product_Name: 'Mini Singara (8 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Eight mini singara with spiced vegetable filling. Includes 1 free dip.' },
+      { Product_ID: 'SD006', Product_Name: 'Chilli Cheese Bites (3 Pcs)', Category: 'Premium Sides', Price: 2.79, Description: 'Three tasty chilli cheese bites. Includes 1 free dip.' },
+      { Product_ID: 'SD007', Product_Name: 'Vegetable Samosa (4 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Four vegetable samosas with aromatic spiced filling. Includes 1 free dip.' },
+      { Product_ID: 'SD008', Product_Name: 'Vegetable Spring Roll (4 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Four vegetable spring rolls. Includes 1 free dip.' },
+      { Product_ID: 'SD009', Product_Name: 'Veg Bao Buns (2 Pcs)', Category: 'Premium Sides', Price: 1.99, Description: 'Two fluffy vegetable bao buns. Includes 1 free dip.' },
+      { Product_ID: 'SD010', Product_Name: 'Prawn Gyoza (3 Pcs)', Category: 'Premium Sides', Price: 1.99, Description: 'Three pieces of pan-fried prawn gyoza. Includes 1 free dip.' },
+      { Product_ID: 'SD011', Product_Name: 'Chilli Cheese Bites (6 Pcs)', Category: 'Premium Sides', Price: 4.99, Description: 'Six tasty chilli cheese bites. Includes 1 free dip.' },
+      { Product_ID: 'SD012', Product_Name: 'Mac N Cheese Bites (8 Pcs)', Category: 'Premium Sides', Price: 5.99, Description: 'Eight delicious mac and cheese bites. Includes 1 free dip.' },
+      { Product_ID: 'SD013', Product_Name: 'Medium Singara (4 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Four medium singaras. Includes 1 free dip.' },
 
       // 10. Breads & Sides
       { Product_ID: 'BRD001', Product_Name: 'Plain Naan', Category: 'Breads & Sides', Price: 1.29, Description: 'Soft and fluffy plain naan bread.' },
@@ -559,69 +703,11 @@
       { Product_ID: 'DRK017', Product_Name: 'Bottle 7up', Category: 'Drinks', Price: 2.99, Description: 'A chilled bottle of 7UP.' }
     ];
 
-    // Inlined Flavours & Customisations
-    const HUNGRY_FOX_CUSTOMISATIONS = [
-      { Customisation_Group: 'Flavour', Option_Name: 'Lemon & Herb', Extra_Price: 0 },
-      { Customisation_Group: 'Flavour', Option_Name: 'Mild Peri', Extra_Price: 0 },
-      { Customisation_Group: 'Flavour', Option_Name: 'Medium Peri', Extra_Price: 0 },
-      { Customisation_Group: 'Flavour', Option_Name: 'Hot Peri', Extra_Price: 0 },
-      { Customisation_Group: 'Flavour', Option_Name: 'Extra Hot Peri', Extra_Price: 0 },
-      { Customisation_Group: 'Flavour', Option_Name: 'Naga Fire', Extra_Price: 0 },
-      { Customisation_Group: 'Flavour', Option_Name: 'Korean Sweet & Spicy', Extra_Price: 0 },
-      { Customisation_Group: 'Flavour', Option_Name: 'Smokey BBQ', Extra_Price: 0 },
-      { Customisation_Group: 'Fries_Seasoning', Option_Name: 'Regular Salt', Extra_Price: 0 },
-      { Customisation_Group: 'Fries_Seasoning', Option_Name: 'No Salt', Extra_Price: 0 },
-      { Customisation_Group: 'Fries_Seasoning', Option_Name: 'Peri Peri Salt', Extra_Price: 0 },
-      { Customisation_Group: 'Fries_Seasoning', Option_Name: 'Chipotle Chilli Salt', Extra_Price: 0 },
-      { Customisation_Group: 'Fries_Seasoning', Option_Name: 'Cajun Dust', Extra_Price: 0 },
-      { Customisation_Group: 'Bread_Choice', Option_Name: 'Plain Naan', Extra_Price: 0 },
-      { Customisation_Group: 'Bread_Choice', Option_Name: 'Plain Pitta Bread', Extra_Price: 0 },
-      { Customisation_Group: 'Bread_Choice', Option_Name: 'Garlic Naan Upgrade', Extra_Price: 1.00 },
-      { Customisation_Group: 'Bread_Choice', Option_Name: 'Peri Peri Pitta Upgrade', Extra_Price: 0.30 },
-      { Customisation_Group: 'Meal_Upgrade', Option_Name: 'Solo (No Meal)', Extra_Price: 0 },
-      { Customisation_Group: 'Meal_Upgrade', Option_Name: 'Make it a Meal (+Fries & Can)', Extra_Price: 1.99 },
-      { Customisation_Group: 'Drink_Choice', Option_Name: 'Coke', Extra_Price: 0 },
-      { Customisation_Group: 'Drink_Choice', Option_Name: 'Diet Coke', Extra_Price: 0 },
-      { Customisation_Group: 'Drink_Choice', Option_Name: 'Pepsi Max', Extra_Price: 0 },
-      { Customisation_Group: 'Drink_Choice', Option_Name: '7up', Extra_Price: 0 },
-      { Customisation_Group: 'Drink_Choice', Option_Name: 'Tango Orange', Extra_Price: 0 }
-    ];
-
-    // Inlined Selection Rules
-    const HUNGRY_FOX_PRODUCT_GROUPS = [
-      { Product_ID: 'CHK001', Customisation_Group: 'Flavour', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'CHK001', Customisation_Group: 'Meal_Upgrade', Min_Selections: 0, Max_Selections: 1 },
-      { Product_ID: 'CHK002', Customisation_Group: 'Flavour', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'CHK002', Customisation_Group: 'Meal_Upgrade', Min_Selections: 0, Max_Selections: 1 },
-      { Product_ID: 'WNG001', Customisation_Group: 'Flavour', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'WNG001', Customisation_Group: 'Meal_Upgrade', Min_Selections: 0, Max_Selections: 1 },
-      { Product_ID: 'WNG002', Customisation_Group: 'Flavour', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'WNG002', Customisation_Group: 'Meal_Upgrade', Min_Selections: 0, Max_Selections: 1 },
-      { Product_ID: 'TND001', Customisation_Group: 'Flavour', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'TND001', Customisation_Group: 'Meal_Upgrade', Min_Selections: 0, Max_Selections: 1 },
-      { Product_ID: 'CHK005', Customisation_Group: 'Flavour', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'FEA001', Customisation_Group: 'Flavour', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'FEA001', Customisation_Group: 'Bread_Choice', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'FEA001', Customisation_Group: 'Fries_Seasoning', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'FEA002', Customisation_Group: 'Flavour', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'FEA002', Customisation_Group: 'Bread_Choice', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'FEA002', Customisation_Group: 'Fries_Seasoning', Min_Selections: 1, Max_Selections: 1 },
-      { Product_ID: 'PLT001', Customisation_Group: 'Flavour', Min_Selections: 2, Max_Selections: 2 },
-      { Product_ID: 'PLT003', Customisation_Group: 'Flavour', Min_Selections: 2, Max_Selections: 2 },
-      { Product_ID: 'BDL001', Customisation_Group: 'Flavour', Min_Selections: 2, Max_Selections: 2 },
-      { Product_ID: 'BDL002', Customisation_Group: 'Flavour', Min_Selections: 2, Max_Selections: 2 },
-      { Product_ID: 'BDL003', Customisation_Group: 'Flavour', Min_Selections: 2, Max_Selections: 2 },
-      { Product_ID: 'BDL004', Customisation_Group: 'Flavour', Min_Selections: 2, Max_Selections: 2 },
-      { Product_ID: 'BDL005', Customisation_Group: 'Flavour', Min_Selections: 2, Max_Selections: 2 }
-    ];
-
     // State
     const state = {
       products: HUNGRY_FOX_PRODUCTS,
-      customisations: HUNGRY_FOX_CUSTOMISATIONS,
-      productGroups: HUNGRY_FOX_PRODUCT_GROUPS,
       cart: [],
-      activeCustomItem: null,
+      activeItem: null,
       deliveryQuote: null
     };
 
@@ -638,18 +724,18 @@
       return '£' + Number(val || 0).toFixed(2);
     }
 
-    // Populate Menu
+    // Render Menu
     function renderMenu() {
       const rawCategories = [...new Set(state.products.map(p => p.Category))];
       const sortedCategories = rawCategories.sort((a, b) => getCategoryRank(a) - getCategoryRank(b));
 
-      // Category Navigation Bar
+      // Category Pill Navigation
       const navBar = document.getElementById('category-nav-bar');
       navBar.innerHTML = sortedCategories.map((cat, idx) => `
         <a href="#cat-${idx}" class="nav-pill">${esc(cat)}</a>
       `).join('');
 
-      // Menu Cards
+      // Menu Section Grid
       const menuContainer = document.getElementById('menu-container');
       menuContainer.innerHTML = sortedCategories.map((cat, idx) => {
         const items = state.products.filter(p => p.Category === cat);
@@ -670,8 +756,8 @@
                     ${p.Description ? `<p class="text-xs text-slate-300 mt-1.5 leading-relaxed">${esc(p.Description)}</p>` : ''}
                   </div>
                   <div class="mt-4 pt-3 flex items-center justify-end border-t border-[#1e293b]">
-                    <button onclick="handleAddToCartClick('${esc(p.Product_ID)}')" class="btn-orange px-4 py-2 rounded-lg text-xs font-bold shadow-md">
-                      + Add to Order
+                    <button onclick="handleProductOrder('${esc(p.Product_ID)}')" class="btn-orange px-4 py-2 rounded-lg text-xs font-bold shadow-md">
+                      ${needsModal(p.Product_ID) ? '+ Customise' : '+ Add to Order'}
                     </button>
                   </div>
                 </article>
@@ -682,149 +768,452 @@
       }).join('');
     }
 
-    // Check if item needs modal customization
-    function handleAddToCartClick(productId) {
-      const product = state.products.find(p => p.Product_ID === productId);
-      if (!product) return;
+    function needsModal(productId) {
+      const nonModal = ['NDL001', 'RIC001', 'RIC003', 'RIC004', 'RIC005', 'RIC006', 'BRD001', 'BRD002', 'BRD003', 'BRD004', 'BRD007', 'BRD008', 'BRD009', 'SD005'];
+      if (productId.startsWith('DES') || productId.startsWith('DRK')) return false;
+      return !nonModal.includes(productId);
+    }
 
-      const rules = state.productGroups.filter(g => g.Product_ID === productId);
-      if (rules.length === 0) {
-        // Direct addition without popup
-        addToCartDirect(product, []);
+    function handleProductOrder(productId) {
+      const p = state.products.find(i => i.Product_ID === productId);
+      if (!p) return;
+
+      if (!needsModal(productId)) {
+        addToCartDirect(p, []);
       } else {
-        // Open customization popup
-        openCustomModal(product, rules);
+        openCustomModal(p);
       }
     }
 
-    function addToCartDirect(product, selectedOptions) {
-      const extraTotal = selectedOptions.reduce((acc, opt) => acc + (opt.Extra_Price || 0), 0);
+    function addToCartDirect(product, options) {
+      const extraTotal = options.reduce((sum, opt) => sum + (opt.price || 0), 0);
       const unitPrice = product.Price + extraTotal;
+      const optionsKey = options.map(o => `${o.label}:${o.value}`).sort().join('|');
 
-      state.cart.push({
-        id: Date.now() + Math.random(),
-        productId: product.Product_ID,
-        name: product.Product_Name,
-        basePrice: product.Price,
-        unitPrice: unitPrice,
-        options: selectedOptions,
-        quantity: 1
-      });
+      const existingIndex = state.cart.findIndex(i => i.productId === product.Product_ID && i.optionsKey === optionsKey);
+      if (existingIndex > -1) {
+        state.cart[existingIndex].quantity += 1;
+      } else {
+        state.cart.push({
+          id: Date.now() + Math.random(),
+          productId: product.Product_ID,
+          name: product.Product_Name,
+          basePrice: product.Price,
+          unitPrice: unitPrice,
+          options: options,
+          optionsKey: optionsKey,
+          quantity: 1
+        });
+      }
 
       renderCart();
       toggleCartDrawer(true);
     }
 
-    // Customization Modal Logic
-    function openCustomModal(product, rules) {
-      state.activeCustomItem = { product, rules };
+    // Modal Builder per Exact Specification Rules
+    function openCustomModal(product) {
+      state.activeItem = { product };
+      const id = product.Product_ID;
+      const c = document.getElementById('modal-options-container');
+      c.innerHTML = '';
 
       document.getElementById('modal-product-title').textContent = product.Product_Name;
       document.getElementById('modal-product-base-price').textContent = 'Base Price: ' + formatGBP(product.Price);
 
-      const container = document.getElementById('modal-options-container');
-      container.innerHTML = rules.map(rule => {
-        const groupOptions = state.customisations.filter(c => c.Customisation_Group === rule.Customisation_Group);
+      let html = '';
 
-        if (rule.Customisation_Group === 'Flavour' && rule.Max_Selections === 2) {
-          // Two separate dropdown slots for 2-flavour bundles
-          return `
-            <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-200 uppercase tracking-wide">
-                Flavour Selections (Choose 2)
-              </label>
-              <div class="grid grid-cols-2 gap-2">
-                <div>
-                  <span class="text-[10px] text-slate-400 block mb-1">Flavour 1</span>
-                  <select id="modal-flavour-slot-1" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-orange-500">
-                    ${groupOptions.map(opt => `<option value="${esc(opt.Option_Name)}">${esc(opt.Option_Name)}</option>`).join('')}
-                  </select>
-                </div>
-                <div>
-                  <span class="text-[10px] text-slate-400 block mb-1">Flavour 2</span>
-                  <select id="modal-flavour-slot-2" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-orange-500">
-                    ${groupOptions.map(opt => `<option value="${esc(opt.Option_Name)}">${esc(opt.Option_Name)}</option>`).join('')}
-                  </select>
-                </div>
-              </div>
-            </div>
-          `;
-        }
+      // 1. Product-specific choices
+      if (['DON001', 'DON002', 'DON003'].includes(id)) {
+        html += renderSelect('Doner Spice', 'doner_spice', DONER_SPICE_OPTIONS);
+      } else if (['FEA003', 'FEA006', 'FEA007'].includes(id)) {
+        html += renderSelect('Doner Type', 'doner_type', DONER_TYPE_OPTIONS);
+        html += renderSelect('Doner Spice', 'doner_spice', DONER_SPICE_OPTIONS);
+      }
 
-        return `
-          <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-200 uppercase tracking-wide">
-              ${esc(rule.Customisation_Group.replace('_', ' '))}
-            </label>
-            <select data-custom-group="${esc(rule.Customisation_Group)}" onchange="updateModalPrice()" class="modal-select-field w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-orange-500">
-              ${rule.Min_Selections === 0 ? '<option value="" data-extra="0">None / Standard</option>' : ''}
-              ${groupOptions.map(opt => `
-                <option value="${esc(opt.Option_Name)}" data-extra="${opt.Extra_Price}">
-                  ${esc(opt.Option_Name)} ${opt.Extra_Price > 0 ? '(+' + formatGBP(opt.Extra_Price) + ')' : ''}
-                </option>
-              `).join('')}
+      if (id === 'RIC002') {
+        html += `
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-200 uppercase">Choose Chicken Portion</label>
+            <select id="rice-portion-select" onchange="handleRicePortionChange()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+              <option value="Quarter chicken">Quarter Chicken</option>
+              <option value="Four tenders">Four Tenders</option>
+              <option value="Five wings">Five Wings</option>
+            </select>
+          </div>
+          <div id="rice-wings-cooking-wrap" class="hidden space-y-1">
+            <label class="block text-xs font-bold text-slate-200 uppercase">Wing Cooking Type</label>
+            <select id="rice-wings-cooking" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+              ${WING_COOKING_OPTIONS.map(w => `<option value="${w}">${w}</option>`).join('')}
             </select>
           </div>
         `;
-      }).join('');
+      }
 
+      if (['FEA003', 'FEA006', 'FEA008'].includes(id)) {
+        html += renderSelect('Snack Choice', 'snack_choice', SNACK_OPTIONS);
+      }
+
+      // 2. Wing cooking type
+      if (['FEA004', 'FEA009', 'PLT001', 'BDL001', 'BDL002', 'BDL005', 'BDL006', 'BDL007', 'KID006'].includes(id)) {
+        html += renderSelect('Wing Cooking Type', 'wing_cooking', WING_COOKING_OPTIONS);
+      }
+
+      // 3. Choose your flavor
+      if (['FEA001', 'FEA002', 'FEA004', 'FEA005', 'FEA011', 'CHK001', 'CHK002', 'WNG001', 'WNG002', 'TND001', 'CHK005', 'KID006'].includes(id)) {
+        html += renderSelect('Chicken Flavour', 'flavour_1', CHICKEN_FLAVOURS);
+      } else if (id === 'FEA009') {
+        html += renderSelect('Wing Flavour', 'flavour_1', CHICKEN_FLAVOURS);
+      } else if (id === 'FEA010') {
+        html += renderSelect('Tender Flavour', 'flavour_1', CHICKEN_FLAVOURS);
+      } else if (['PLT001', 'PLT003', 'BDL001', 'BDL002', 'BDL003', 'BDL004', 'BDL005'].includes(id)) {
+        html += `
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-bold text-slate-200 uppercase mb-1">Flavour 1</label>
+              <select id="sel-flavour_1" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+                ${CHICKEN_FLAVOURS.map(f => `<option value="${f}">${f}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-200 uppercase mb-1">Flavour 2</label>
+              <select id="sel-flavour_2" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+                ${CHICKEN_FLAVOURS.map(f => `<option value="${f}">${f}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+        `;
+      } else if (id === 'PLT002' || id === 'BND004') {
+        html += renderSelect('Chicken Flavour', 'flavour_1', CHICKEN_FLAVOURS);
+        html += renderSelect('Wing Flavour', 'flavour_2', CHICKEN_FLAVOURS);
+      } else if (id === 'BDL006' || id === 'BDL007') {
+        html += renderSelect('Wing Flavour', 'flavour_1', CHICKEN_FLAVOURS);
+        html += renderSelect('Tender Flavour', 'flavour_2', CHICKEN_FLAVOURS);
+      }
+
+      // 4. Fries / Wedges Seasoning
+      if (['FRS001', 'FRS002', 'FRS005', 'FEA001', 'FEA002', 'FEA004', 'FEA005', 'FEA006', 'KID001', 'KID002', 'KID003', 'KID004', 'KID005', 'KID006'].includes(id)) {
+        html += renderSelect(id.includes('Wedges') || id === 'FRS005' ? 'Wedges Seasoning' : 'Fries Seasoning', 'seasoning_1', SEASONING_OPTIONS);
+      } else if (['FRS003', 'FRS004', 'FRS006', 'FRS007', 'FRS008', 'FRS009', 'FEA009', 'FEA010', 'FEA011'].includes(id)) {
+        // Enforce exact loaded order: Seasoning -> Drizzle -> Dip -> Drink
+        html += renderSelect(id.includes('Wedges') ? 'Wedges Seasoning' : 'Fries Seasoning', 'seasoning_1', SEASONING_OPTIONS);
+      } else if (['BDL001', 'BDL003', 'BDL005', 'BDL006', 'BDL007', 'BND004'].includes(id)) {
+        html += `
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-bold text-slate-200 uppercase mb-1">Fries 1 Seasoning</label>
+              <select id="sel-seasoning_1" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+                ${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-200 uppercase mb-1">Fries 2 Seasoning</label>
+              <select id="sel-seasoning_2" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+                ${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+        `;
+      } else if (['PLT002', 'BDL002', 'BDL004'].includes(id)) {
+        html += `
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-slate-200 uppercase">Fries Seasonings (4 Portions)</label>
+            <div class="grid grid-cols-2 gap-2">
+              <div><span class="text-[10px] text-slate-400 block mb-0.5">Portion 1</span><select id="sel-seasoning_1" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+              <div><span class="text-[10px] text-slate-400 block mb-0.5">Portion 2</span><select id="sel-seasoning_2" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+              <div><span class="text-[10px] text-slate-400 block mb-0.5">Portion 3</span><select id="sel-seasoning_3" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+              <div><span class="text-[10px] text-slate-400 block mb-0.5">Portion 4</span><select id="sel-seasoning_4" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+            </div>
+          </div>
+        `;
+      }
+
+      // 5. Choose drizzle (Only for loaded items and Chicken Rice Bowl)
+      if (['FRS003', 'FRS004', 'FRS006', 'FRS007', 'FRS008', 'FRS009', 'RIC002', 'FEA009', 'FEA010', 'FEA011'].includes(id)) {
+        html += renderSelect('Chicken Drizzle', 'drizzle', DRIZZLE_OPTIONS);
+      }
+
+      // 6. Choose side
+      if (id === 'FEA007') {
+        html += renderSelect('Choose Side', 'doner_side', ['Coleslaw', 'Beans']);
+      } else if (['BDL001', 'BDL002', 'BDL003', 'BDL004'].includes(id)) {
+        html += `
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-200 uppercase">Choose Bundle Side</label>
+            <select id="sel-bundle_side" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+              ${BUNDLE_SIDES.map(s => `<option value="${s.name}" data-price="${s.price}">${s.name} ${s.price > 0 ? '(+' + formatGBP(s.price) + ')' : '(Free)'}</option>`).join('')}
+            </select>
+          </div>
+        `;
+      }
+
+      // 7. Choose bread
+      if (['FEA001', 'FEA002', 'FEA003'].includes(id)) {
+        html += `
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-200 uppercase">Choose Bread</label>
+            <select id="sel-bread" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+              ${BREAD_OPTIONS.map(b => `<option value="${b.name}" data-price="${b.price}">${b.name} ${b.price > 0 ? '(+' + formatGBP(b.price) + ')' : '(Free)'}</option>`).join('')}
+            </select>
+          </div>
+        `;
+      }
+
+      // 8. Choose dip
+      if (['FEA003', 'FEA004', 'FEA008', 'FEA009', 'FEA010', 'FEA011', 'BRD005', 'BRD006'].includes(id) || product.Category === 'Premium Sides') {
+        html += renderSelect(product.Category === 'Premium Sides' ? 'Included Free Dip' : 'Choose Dip', 'dip_1', DIP_OPTIONS);
+      } else if (['BDL005', 'BDL007'].includes(id)) {
+        html += `
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-bold text-slate-200 uppercase mb-1">Dip 1</label>
+              <select id="sel-dip_1" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+                ${DIP_OPTIONS.map(d => `<option value="${d}">${d}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-200 uppercase mb-1">Dip 2</label>
+              <select id="sel-dip_2" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+                ${DIP_OPTIONS.map(d => `<option value="${d}">${d}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+        `;
+      }
+
+      // 9. Choose drink
+      if (['FEA003', 'FEA005', 'FEA006', 'FEA007', 'FEA008', 'FEA009', 'FEA010', 'FEA011'].includes(id)) {
+        html += `
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-200 uppercase">Choose Canned Drink</label>
+            <select id="sel-drink_1" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+              ${CANNED_DRINKS.map(d => `<option value="${d.name}" data-price="${d.price}">${d.name} ${d.price > 0 ? '(+' + formatGBP(d.price) + ')' : ''}</option>`).join('')}
+            </select>
+          </div>
+        `;
+      } else if (['BDL005', 'BDL006', 'BND004'].includes(id)) {
+        html += `
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-bold text-slate-200 uppercase mb-1">Drink 1</label>
+              <select id="sel-drink_1" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+                ${CANNED_DRINKS.map(d => `<option value="${d.name}" data-price="${d.price}">${d.name} ${d.price > 0 ? '(+' + formatGBP(d.price) + ')' : ''}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-200 uppercase mb-1">Drink 2</label>
+              <select id="sel-drink_2" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+                ${CANNED_DRINKS.map(d => `<option value="${d.name}" data-price="${d.price}">${d.name} ${d.price > 0 ? '(+' + formatGBP(d.price) + ')' : ''}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+        `;
+      } else if (['PLT002', 'BDL001', 'BDL002', 'BDL003', 'BDL004'].includes(id)) {
+        html += renderSelect('Choose Bottled Drink', 'drink_1', BOTTLED_DRINKS);
+      } else if (product.Category === 'Kids Menu') {
+        html += renderSelect('Choose Kids Drink', 'drink_1', KIDS_DRINKS);
+      }
+
+      // Solo Chicken Optional Meal Upgrade
+      if (['CHK001', 'CHK002', 'WNG001', 'WNG002', 'TND001'].includes(id)) {
+        html += `
+          <div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-3">
+            <label class="flex items-center gap-2 cursor-pointer font-bold text-xs text-orange-400">
+              <input type="checkbox" id="solo-upgrade-chk" onchange="handleSoloMealToggle()" class="w-4 h-4 text-orange-500 rounded bg-[#0b1326] border-slate-700" />
+              Make it a Meal (+£1.99) — Includes Fries & Canned Drink
+            </label>
+            <div id="solo-upgrade-fields" class="hidden space-y-2 pt-2 border-t border-slate-800">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Fries Seasoning</label>
+                <select id="sel-meal_seasoning" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">
+                  ${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Canned Drink</label>
+                <select id="sel-meal_drink" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">
+                  ${CANNED_DRINKS.map(d => `<option value="${d.name}" data-price="${d.price}">${d.name} ${d.price > 0 ? '(+' + formatGBP(d.price) + ')' : ''}</option>`).join('')}
+                </select>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (id === 'CHK005') {
+        // Whole Chicken Meal Upgrade (+£6.50)
+        html += `
+          <div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-3">
+            <label class="flex items-center gap-2 cursor-pointer font-bold text-xs text-orange-400">
+              <input type="checkbox" id="whole-upgrade-chk" onchange="handleWholeMealToggle()" class="w-4 h-4 text-orange-500 rounded bg-[#0b1326] border-slate-700" />
+              Whole Chicken Meal (+£6.50) — Includes 2 Fries & Bottled Drink
+            </label>
+            <div id="whole-upgrade-fields" class="hidden space-y-2 pt-2 border-t border-slate-800">
+              <div class="grid grid-cols-2 gap-2">
+                <div><span class="text-[10px] text-slate-400 block mb-0.5">Fries 1 Seasoning</span><select id="sel-whole_seasoning_1" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+                <div><span class="text-[10px] text-slate-400 block mb-0.5">Fries 2 Seasoning</span><select id="sel-whole_seasoning_2" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Bottled Drink</label>
+                <select id="sel-whole_drink" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">
+                  ${BOTTLED_DRINKS.map(b => `<option value="${b}">${b}</option>`).join('')}
+                </select>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      c.innerHTML = html;
       updateModalPrice();
       document.getElementById('custom-modal').classList.remove('hidden');
       document.getElementById('custom-modal').classList.add('flex');
     }
 
-    function updateModalPrice() {
-      if (!state.activeCustomItem) return;
-      let total = state.activeCustomItem.product.Price;
+    function renderSelect(label, id, options) {
+      return `
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-200 uppercase">${esc(label)}</label>
+          <select id="sel-${id}" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-orange-500">
+            ${options.map(opt => `<option value="${esc(opt)}">${esc(opt)}</option>`).join('')}
+          </select>
+        </div>
+      `;
+    }
 
-      const selects = document.querySelectorAll('.modal-select-field');
-      selects.forEach(sel => {
-        const selectedOpt = sel.options[sel.selectedIndex];
-        if (selectedOpt) {
-          total += Number(selectedOpt.getAttribute('data-extra') || 0);
+    function handleRicePortionChange() {
+      const val = document.getElementById('rice-portion-select').value;
+      const wrap = document.getElementById('rice-wings-cooking-wrap');
+      if (val === 'Five wings') {
+        wrap.classList.remove('hidden');
+      } else {
+        wrap.classList.add('hidden');
+      }
+    }
+
+    function handleSoloMealToggle() {
+      const chk = document.getElementById('solo-upgrade-chk').checked;
+      const f = document.getElementById('solo-upgrade-fields');
+      if (chk) f.classList.remove('hidden'); else f.classList.add('hidden');
+      updateModalPrice();
+    }
+
+    function handleWholeMealToggle() {
+      const chk = document.getElementById('whole-upgrade-chk').checked;
+      const f = document.getElementById('whole-upgrade-fields');
+      if (chk) f.classList.remove('hidden'); else f.classList.add('hidden');
+      updateModalPrice();
+    }
+
+    function updateModalPrice() {
+      if (!state.activeItem) return;
+      let total = state.activeItem.product.Price;
+
+      const breadSel = document.getElementById('sel-bread');
+      if (breadSel) {
+        const p = Number(breadSel.options[breadSel.selectedIndex]?.getAttribute('data-price') || 0);
+        total += p;
+      }
+
+      const sideSel = document.getElementById('sel-bundle_side');
+      if (sideSel) {
+        const p = Number(sideSel.options[sideSel.selectedIndex]?.getAttribute('data-price') || 0);
+        total += p;
+      }
+
+      ['drink_1', 'drink_2'].forEach(dId => {
+        const dSel = document.getElementById('sel-' + dId);
+        if (dSel) {
+          const p = Number(dSel.options[dSel.selectedIndex]?.getAttribute('data-price') || 0);
+          total += p;
         }
       });
+
+      const soloChk = document.getElementById('solo-upgrade-chk');
+      if (soloChk && soloChk.checked) {
+        total += 1.99;
+        const mDrink = document.getElementById('sel-meal_drink');
+        if (mDrink) {
+          total += Number(mDrink.options[mDrink.selectedIndex]?.getAttribute('data-price') || 0);
+        }
+      }
+
+      const wholeChk = document.getElementById('whole-upgrade-chk');
+      if (wholeChk && wholeChk.checked) {
+        total += 6.50;
+      }
 
       document.getElementById('modal-total-price').textContent = formatGBP(total);
     }
 
     function confirmAddToCart() {
-      if (!state.activeCustomItem) return;
-      const { product, rules } = state.activeCustomItem;
-      const selectedOptions = [];
+      if (!state.activeItem) return;
+      const p = state.activeItem.product;
+      const opts = [];
 
-      const f1 = document.getElementById('modal-flavour-slot-1');
-      const f2 = document.getElementById('modal-flavour-slot-2');
-      if (f1 && f2) {
-        selectedOptions.push({ Customisation_Group: 'Flavour', Option_Name: 'Flavour 1: ' + f1.value, Extra_Price: 0 });
-        selectedOptions.push({ Customisation_Group: 'Flavour', Option_Name: 'Flavour 2: ' + f2.value, Extra_Price: 0 });
-      }
+      const fields = [
+        { id: 'sel-doner_type', label: 'Doner Type' },
+        { id: 'sel-doner_spice', label: 'Doner Spice' },
+        { id: 'rice-portion-select', label: 'Chicken Portion' },
+        { id: 'rice-wings-cooking', label: 'Wing Cooking' },
+        { id: 'sel-snack_choice', label: 'Snack Choice' },
+        { id: 'sel-wing_cooking', label: 'Wing Cooking' },
+        { id: 'sel-flavour_1', label: 'Flavour 1' },
+        { id: 'sel-flavour_2', label: 'Flavour 2' },
+        { id: 'sel-seasoning_1', label: 'Seasoning 1' },
+        { id: 'sel-seasoning_2', label: 'Seasoning 2' },
+        { id: 'sel-seasoning_3', label: 'Seasoning 3' },
+        { id: 'sel-seasoning_4', label: 'Seasoning 4' },
+        { id: 'sel-drizzle', label: 'Drizzle' },
+        { id: 'sel-doner_side', label: 'Side' },
+        { id: 'sel-bundle_side', label: 'Bundle Side', priceAttr: true },
+        { id: 'sel-bread', label: 'Bread Choice', priceAttr: true },
+        { id: 'sel-dip_1', label: 'Dip 1' },
+        { id: 'sel-dip_2', label: 'Dip 2' },
+        { id: 'sel-drink_1', label: 'Drink 1', priceAttr: true },
+        { id: 'sel-drink_2', label: 'Drink 2', priceAttr: true }
+      ];
 
-      const selects = document.querySelectorAll('.modal-select-field');
-      selects.forEach(sel => {
-        const val = sel.value;
-        if (val) {
-          const opt = sel.options[sel.selectedIndex];
-          const extra = Number(opt.getAttribute('data-extra') || 0);
-          selectedOptions.push({
-            Customisation_Group: sel.getAttribute('data-custom-group'),
-            Option_Name: val,
-            Extra_Price: extra
-          });
+      fields.forEach(f => {
+        const el = document.getElementById(f.id);
+        if (el && !el.closest('.hidden')) {
+          const val = el.value;
+          const pr = f.priceAttr ? Number(el.options[el.selectedIndex]?.getAttribute('data-price') || 0) : 0;
+          opts.push({ label: f.label, value: val, price: pr });
         }
       });
 
+      const soloChk = document.getElementById('solo-upgrade-chk');
+      if (soloChk && soloChk.checked) {
+        opts.push({ label: 'Meal Upgrade', value: 'Fries & Drink (+£1.99)', price: 1.99 });
+        const sSeason = document.getElementById('sel-meal_seasoning');
+        if (sSeason) opts.push({ label: 'Meal Fries Seasoning', value: sSeason.value, price: 0 });
+        const sDrink = document.getElementById('sel-meal_drink');
+        if (sDrink) {
+          const extraD = Number(sDrink.options[sDrink.selectedIndex]?.getAttribute('data-price') || 0);
+          opts.push({ label: 'Meal Drink', value: sDrink.value, price: extraD });
+        }
+      }
+
+      const wholeChk = document.getElementById('whole-upgrade-chk');
+      if (wholeChk && wholeChk.checked) {
+        opts.push({ label: 'Whole Chicken Meal Upgrade', value: '2 Fries & Bottled Drink (+£6.50)', price: 6.50 });
+        const w1 = document.getElementById('sel-whole_seasoning_1');
+        const w2 = document.getElementById('sel-whole_seasoning_2');
+        const wd = document.getElementById('sel-whole_drink');
+        if (w1) opts.push({ label: 'Fries 1 Seasoning', value: w1.value, price: 0 });
+        if (w2) opts.push({ label: 'Fries 2 Seasoning', value: w2.value, price: 0 });
+        if (wd) opts.push({ label: 'Meal Bottled Drink', value: wd.value, price: 0 });
+      }
+
       closeCustomModal();
-      addToCartDirect(product, selectedOptions);
+      addToCartDirect(p, opts);
     }
 
     function closeCustomModal() {
       document.getElementById('custom-modal').classList.add('hidden');
       document.getElementById('custom-modal').classList.remove('flex');
-      state.activeCustomItem = null;
+      state.activeItem = null;
     }
 
-    // Cart Management
+    // Basket & Calculation State
     function renderCart() {
       const container = document.getElementById('cart-items-container');
       const subtotal = state.cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
@@ -835,7 +1224,7 @@
       document.getElementById('cart-drawer-count').textContent = totalCount;
       document.getElementById('cart-subtotal-val').textContent = formatGBP(subtotal);
 
-      // Minimum £15 Order Logic
+      // Enforce £15.00 Minimum Order Constraint
       const minStatus = document.getElementById('cart-min-status');
       const minBar = document.getElementById('cart-min-bar');
       const checkoutBtn = document.getElementById('checkout-btn');
@@ -844,7 +1233,7 @@
       minBar.style.width = progress + '%';
 
       if (subtotal >= MIN_ORDER_AMOUNT) {
-        minStatus.textContent = 'Unlocked! Free Delivery Eligibility';
+        minStatus.textContent = 'Unlocked! Minimum Reached';
         minStatus.className = 'text-emerald-400 font-bold';
         minBar.className = 'bg-emerald-500 h-full transition-all duration-300';
         checkoutBtn.disabled = false;
@@ -864,7 +1253,7 @@
           <div class="text-center py-16 text-slate-400">
             <svg class="w-12 h-12 mx-auto text-slate-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
             <p class="font-bold text-slate-300">Your basket is empty</p>
-            <p class="text-xs mt-1">Select your dishes to begin your delivery order.</p>
+            <p class="text-xs mt-1">Select dishes to begin your delivery order.</p>
           </div>
         `;
         return;
@@ -877,7 +1266,7 @@
               <h4 class="font-bold text-white text-xs">${esc(item.name)}</h4>
               ${item.options.length > 0 ? `
                 <div class="text-[10px] text-slate-400 mt-1 space-y-0.5">
-                  ${item.options.map(o => `<div>• ${esc(o.Option_Name)}</div>`).join('')}
+                  ${item.options.map(o => `<div>• <span class="text-slate-300">${esc(o.label)}:</span> ${esc(o.value)}${o.price > 0 ? ` (+${formatGBP(o.price)})` : ''}</div>`).join('')}
                 </div>
               ` : ''}
             </div>
@@ -922,7 +1311,6 @@
       }
     }
 
-    // Allergen Table Collapse Toggle
     function toggleAllergenTable() {
       const wrap = document.getElementById('allergen-table-wrap');
       const btn = document.getElementById('allergen-toggle-btn');
@@ -935,7 +1323,7 @@
       }
     }
 
-    // Hero Postcode Radius Checker (Live Cloudflare API + Fallback)
+    // Hero Postcode Radius Checker (Cloudflare API + Local Tier Fallback)
     async function handlePostcodeCheck(e) {
       e.preventDefault();
       const input = document.getElementById('check-postcode-input');
@@ -962,8 +1350,7 @@
           result.innerHTML = `<span class="text-amber-400">Postcode is outside our 10-mile radius. Please order via Uber Eats / Deliveroo.</span>`;
         }
       } catch (err) {
-        // Local radius rule calculation
-        result.innerHTML = `<span class="text-emerald-400 font-bold">✓ Delivery Zone:</span> <span class="text-slate-300">Free delivery on orders £15+ within 5.0 miles of RM17 6QJ.</span>`;
+        result.innerHTML = `<span class="text-emerald-400 font-bold">✓ Delivery Zone:</span> <span class="text-slate-300">Free delivery up to 5.0 miles of RM17 6QJ (Orders £15+).</span>`;
       } finally {
         btn.disabled = false;
         btn.textContent = 'Check Radius';
@@ -1014,7 +1401,7 @@
       }
     }
 
-    // Initialization
+    // Initialize Menu & Cart on Page Load
     document.addEventListener('DOMContentLoaded', () => {
       renderMenu();
       renderCart();
