@@ -377,9 +377,9 @@
           <span>Total Payable:</span>
           <span id="checkout-final-payable" class="text-orange-400 text-lg">£0.00</span>
         </div>
-        <p class="text-[11px] text-amber-300/80 bg-amber-950/30 p-2.5 rounded-lg border border-amber-800/40">
-          Direct online card payment is not enabled yet, so this website cannot place an order. Please use our official Uber Eats or Deliveroo stores for now.
-        </p>
+        <p class="text-[11px] text-slate-400">You will be redirected to Stripe's secure checkout. Your order is confirmed only after payment succeeds.</p>
+        <button id="place-order-btn" type="button" onclick="submitWebsiteOrder()" class="w-full btn-orange py-3 rounded-xl font-extrabold text-sm">Continue to Secure Payment</button>
+        <p id="checkout-submit-status" role="status" class="text-xs text-center text-slate-400"></p>
       </div>
     </div>
   </div>
@@ -1387,6 +1387,68 @@
         status.className = 'text-xs mt-1.5 text-red-400 font-bold';
         document.getElementById('checkout-final-payable').textContent = 'Quote required';
         renderCart();
+      }
+    }
+
+    async function submitWebsiteOrder() {
+      const btn = document.getElementById('place-order-btn');
+      const status = document.getElementById('checkout-submit-status');
+      const customer = {
+        name: document.getElementById('cust-name').value.trim(),
+        phone: document.getElementById('cust-phone').value.trim(),
+        email: document.getElementById('cust-email').value.trim(),
+        postcode: document.getElementById('cust-postcode').value.trim().toUpperCase(),
+        address: document.getElementById('cust-address').value.trim(),
+        notes: document.getElementById('cust-notes').value.trim()
+      };
+      if (!customer.name || !customer.phone || !customer.email || !customer.postcode || !customer.address) {
+        status.textContent = 'Please complete all required delivery details.';
+        status.className = 'text-xs text-center text-red-400';
+        return;
+      }
+      if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(customer.email)) {
+        status.textContent = 'Please enter a valid email address.';
+        status.className = 'text-xs text-center text-red-400';
+        return;
+      }
+      if (!state.cart.length) {
+        status.textContent = 'Your basket is empty.';
+        return;
+      }
+      if (!state.deliveryQuote) {
+        status.textContent = 'Please query and confirm your delivery quote first.';
+        status.className = 'text-xs text-center text-amber-300';
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Preparing secure checkout...';
+      status.textContent = 'Creating your secure payment session...';
+      status.className = 'text-xs text-center text-slate-400';
+      try {
+        const response = await fetch(`${API_BASE_URL}/create-checkout-session`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            customer,
+            items: state.cart.map(item => ({
+              productId: item.productId,
+              quantity: item.quantity,
+              options: item.options.map(option => ({
+                label: option.label,
+                value: option.value,
+                price: option.price
+              }))
+            }))
+          })
+        });
+        const data = await response.json();
+        if (!response.ok || !data.url) throw new Error(data.error || 'Could not start secure checkout.');
+        window.location.href = data.url;
+      } catch (error) {
+        status.textContent = error.message || 'Checkout failed. Please try again.';
+        status.className = 'text-xs text-center text-red-400';
+        btn.disabled = false;
+        btn.textContent = 'Continue to Secure Payment';
       }
     }
 
