@@ -553,7 +553,7 @@
       'Bottle 7UP'
     ];
 
-    const KIDS_DRINKS = ['Fruit Shoot', 'Water'];
+    const KIDS_DRINKS = ['Fruit Shoot', 'Blackcurrant Fruit Shoot', 'Orange Fruit Shoot', 'Water'];
 
     const DIP_OPTIONS = [
       'Plain Mayo',
@@ -586,7 +586,6 @@
       { Product_ID: 'WNG001', Product_Name: 'Baked Wings (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 6.99, Description: 'Six oven-baked wings coated in your choice of flavor.' },
       { Product_ID: 'WNG002', Product_Name: 'Fried Wings (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 6.49, Description: 'Six crispy-coated fried wings coated in your choice of flavor.' },
       { Product_ID: 'TND001', Product_Name: 'Tenders (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 7.99, Description: 'Six crispy-coated chicken breast tenders coated in your choice of flavor.' },
-      { Product_ID: 'SD005', Product_Name: 'Chilli Cheese Bites (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 4.99, Description: 'Six tasty chilli cheese bites with spicy jalapeno bits.' },
       { Product_ID: 'CHK005', Product_Name: 'Whole Baked Chicken', Category: 'Solo Chicken or Upgrade to Meal', Price: 12.49, Description: 'Whole oven-baked chicken coated in your choice of signature flavor.' },
 
       // 3. Signature Doners & Noodles
@@ -615,9 +614,6 @@
       { Product_ID: 'BDL004', Product_Name: '20 Tender Party Bundle', Category: 'Ultimate Share Bundles', Price: 27.99, Description: 'Twenty tenders, two flavors, four portions of fries, one side, and one bottled drink.' },
       { Product_ID: 'BDL005', Product_Name: 'Double Flavour Wings Bundle', Category: 'Ultimate Share Bundles', Price: 15.99, Description: 'Twelve wings, two flavors, two portions of fries, two dips, and two drinks.' },
       { Product_ID: 'BDL006', Product_Name: 'Wings and Tenders Mix Bundle', Category: 'Ultimate Share Bundles', Price: 15.99, Description: 'Six wings, six tenders, two portions of fries, and two canned drinks.' },
-      { Product_ID: 'BND001', Product_Name: 'Lone Fox', Category: 'Ultimate Share Bundles', Price: 10.99, Description: '1/4 Chicken + 2 Wings + Fries + 330ml Can.' },
-      { Product_ID: 'BND002', Product_Name: 'Fox Pack', Category: 'Ultimate Share Bundles', Price: 18.99, Description: '1/2 Chicken + 4 Wings + 2 Fries + 2 Cans.' },
-      { Product_ID: 'BND003', Product_Name: 'Fox Feast', Category: 'Ultimate Share Bundles', Price: 28.99, Description: 'Full Chicken + 8 Wings + 4 Fries + 1.5L Bottle.' },
       { Product_ID: 'BND004', Product_Name: 'Baked Combo for 2', Category: 'Ultimate Share Bundles', Price: 18.99, Description: 'Half baked chicken, four baked wings, two portions of fries, and two canned drinks.' },
       { Product_ID: 'BDL007', Product_Name: 'Wings, Tender & Fries Duo', Category: 'Ultimate Share Bundles', Price: 9.99, Description: 'Three wings, three tenders, two portions of fries, and two dips.' },
 
@@ -678,6 +674,8 @@
       // 12. Drinks (Strictly Last)
       { Product_ID: 'DRK001', Product_Name: 'Water', Category: 'Drinks', Price: 1.00, Description: 'A refreshing bottle of water.' },
       { Product_ID: 'DRK002', Product_Name: 'Fruit Shoot', Category: 'Drinks', Price: 1.00, Description: 'A refreshing Fruit Shoot drink.' },
+      { Product_ID: 'DRK018', Product_Name: 'Blackcurrant Fruit Shoot', Category: 'Drinks', Price: 1.00, Description: 'A refreshing Blackcurrant Fruit Shoot drink.' },
+      { Product_ID: 'DRK019', Product_Name: 'Orange Fruit Shoot', Category: 'Drinks', Price: 1.00, Description: 'A refreshing Orange Fruit Shoot drink.' },
       { Product_ID: 'DRK003', Product_Name: 'Coke', Category: 'Drinks', Price: 1.29, Description: 'A chilled can of classic Coca-Cola.' },
       { Product_ID: 'DRK004', Product_Name: 'Diet Coke', Category: 'Drinks', Price: 1.29, Description: 'A chilled can of Diet Coke.' },
       { Product_ID: 'DRK005', Product_Name: 'Pepsi', Category: 'Drinks', Price: 1.29, Description: 'A chilled can of Pepsi.' },
@@ -882,6 +880,10 @@
         html += renderSelect('Tender Flavour', 'flavour_2', CHICKEN_FLAVOURS);
       }
 
+      if (id === 'FEA005') {
+        html += renderSelect('Wing Flavour', 'flavour_2', CHICKEN_FLAVOURS);
+      }
+
       // 4. Fries / Wedges Seasoning
       if (['FRS001', 'FRS002', 'FRS005', 'FEA001', 'FEA002', 'FEA004', 'FEA005', 'FEA006', 'KID001', 'KID002', 'KID003', 'KID004', 'KID005', 'KID006'].includes(id)) {
         html += renderSelect(id.includes('Wedges') || id === 'FRS005' ? 'Wedges Seasoning' : 'Fries Seasoning', 'seasoning_1', SEASONING_OPTIONS);
@@ -1006,7 +1008,7 @@
       }
 
       // Solo Chicken Optional Meal Upgrade
-      if (['CHK001', 'CHK002', 'WNG001', 'WNG002', 'TND001'].includes(id)) {
+      if (['CHK001', 'CHK002', 'WNG001', 'WNG002', 'TND001', 'SD001', 'SD002', 'SD003', 'SD011'].includes(id)) {
         html += `
           <div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-3">
             <label class="flex items-center gap-2 cursor-pointer font-bold text-xs text-orange-400">
