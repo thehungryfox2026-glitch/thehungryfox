@@ -386,7 +386,7 @@
           <span id="checkout-final-payable" class="text-orange-400 text-lg">£0.00</span>
         </div>
         <p class="text-[11px] text-amber-300/80 bg-amber-950/30 p-2.5 rounded-lg border border-amber-800/40">
-          Direct online orders are received and printed immediately in our kitchen. You may also complete your order via our official Uber Eats or Deliveroo store links.
+          Direct online card payment is not enabled yet, so this website cannot place an order. Please use our official Uber Eats or Deliveroo stores for now.
         </p>
       </div>
     </div>
@@ -1224,28 +1224,20 @@
       document.getElementById('cart-drawer-count').textContent = totalCount;
       document.getElementById('cart-subtotal-val').textContent = formatGBP(subtotal);
 
-      // Enforce £15.00 Minimum Order Constraint
+      // Apply the £4 surcharge to baskets below £15.00
       const minStatus = document.getElementById('cart-min-status');
       const minBar = document.getElementById('cart-min-bar');
       const checkoutBtn = document.getElementById('checkout-btn');
 
       const progress = Math.min(100, (subtotal / MIN_ORDER_AMOUNT) * 100);
       minBar.style.width = progress + '%';
+      const surcharge = subtotal > 0 && subtotal < MIN_ORDER_AMOUNT ? 4 : 0;
+      minStatus.textContent = subtotal >= MIN_ORDER_AMOUNT ? 'No small-order surcharge' : (subtotal > 0 ? '£4.00 small-order surcharge' : 'Your basket is empty');
+      minStatus.className = subtotal >= MIN_ORDER_AMOUNT ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold';
+      minBar.className = (subtotal >= MIN_ORDER_AMOUNT ? 'bg-emerald-500' : 'bg-orange-500') + ' h-full transition-all duration-300';
+      checkoutBtn.disabled = state.cart.length === 0;
 
-      if (subtotal >= MIN_ORDER_AMOUNT) {
-        minStatus.textContent = 'Unlocked! Minimum Reached';
-        minStatus.className = 'text-emerald-400 font-bold';
-        minBar.className = 'bg-emerald-500 h-full transition-all duration-300';
-        checkoutBtn.disabled = false;
-      } else {
-        const diff = MIN_ORDER_AMOUNT - subtotal;
-        minStatus.textContent = formatGBP(diff) + ' away from minimum';
-        minStatus.className = 'text-amber-400 font-bold';
-        minBar.className = 'bg-orange-500 h-full transition-all duration-300';
-        checkoutBtn.disabled = true;
-      }
-
-      const totalPayable = subtotal + (state.deliveryQuote?.fee || 0);
+      const totalPayable = subtotal + surcharge + (state.deliveryQuote?.deliveryFee || 0);
       document.getElementById('cart-total-val').textContent = formatGBP(totalPayable);
 
       if (state.cart.length === 0) {
@@ -1338,19 +1330,16 @@
       result.innerHTML = '<span class="text-slate-400">Querying live delivery route...</span>';
 
       try {
-        const res = await fetch(`${API_BASE_URL}/delivery-quote?postcode=${encodeURIComponent(postcode)}`);
+        const res = await fetch(`${API_BASE_URL}/delivery-quote?postcode=${encodeURIComponent(postcode)}&basketSubtotal=15`);
         const data = await res.json();
-
-        if (data.eligible) {
-          result.innerHTML = `
-            <span class="text-emerald-400 font-bold">✓ Eligible for delivery!</span>
-            <span class="text-slate-300 ml-1">Distance: ~${data.distance_miles} mi | Fee: ${data.fee === 0 ? 'FREE' : formatGBP(data.fee)}</span>
-          `;
+        if (!res.ok || data.error) throw new Error(data.error || 'Postcode check failed');
+        if (data.available) {
+          result.innerHTML = `<span class="text-emerald-400 font-bold">✓ Delivery available!</span><span class="text-slate-300 ml-1">Approx. ${Number(data.approximateDistanceMiles).toFixed(1)} mi | Delivery: ${Number(data.deliveryFee) === 0 ? 'FREE' : formatGBP(data.deliveryFee)}</span>`;
         } else {
-          result.innerHTML = `<span class="text-amber-400">Postcode is outside our 10-mile radius. Please order via Uber Eats / Deliveroo.</span>`;
+          result.innerHTML = `<span class="text-amber-400">${esc(data.message || 'Outside our 10-mile delivery area. Please use Uber Eats / Deliveroo.')}</span>`;
         }
       } catch (err) {
-        result.innerHTML = `<span class="text-emerald-400 font-bold">✓ Delivery Zone:</span> <span class="text-slate-300">Free delivery up to 5.0 miles of RM17 6QJ (Orders £15+).</span>`;
+        result.innerHTML = '<span class="text-red-400">We could not check this postcode just now. Please try again.</span>';
       } finally {
         btn.disabled = false;
         btn.textContent = 'Check Radius';
@@ -1360,8 +1349,11 @@
     // Checkout Flow
     function initiateCheckout() {
       toggleCartDrawer(false);
+      state.deliveryQuote = null;
+      document.getElementById('checkout-quote-status').textContent = 'Enter your postcode to calculate delivery.';
       const subtotal = state.cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
-      document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal);
+      const surcharge = subtotal > 0 && subtotal < MIN_ORDER_AMOUNT ? 4 : 0;
+      document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal + surcharge);
       document.getElementById('checkout-modal').classList.remove('hidden');
       document.getElementById('checkout-modal').classList.add('flex');
     }
@@ -1374,30 +1366,35 @@
     async function calculateCheckoutDeliveryFee() {
       const pc = document.getElementById('cust-postcode').value.trim();
       const status = document.getElementById('checkout-quote-status');
-      if (!pc) return;
-
+      if (!pc) { status.textContent = 'Enter your postcode first.'; return; }
+      const subtotal = state.cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
+      state.deliveryQuote = null;
       status.textContent = 'Querying live quote...';
       status.className = 'text-xs mt-1.5 text-slate-400 font-bold';
-
       try {
-        const res = await fetch(`${API_BASE_URL}/delivery-quote?postcode=${encodeURIComponent(pc)}`);
+        const res = await fetch(`${API_BASE_URL}/delivery-quote?postcode=${encodeURIComponent(pc)}&basketSubtotal=${encodeURIComponent(subtotal)}`);
         const data = await res.json();
-        if (data.eligible) {
-          const fee = Number(data.fee || 0);
-          state.deliveryQuote = { fee: fee, miles: data.distance_miles };
-          status.textContent = `Quote Confirmed: ${fee === 0 ? 'FREE DELIVERY' : formatGBP(fee)} (~${data.distance_miles} miles)`;
-          status.className = 'text-xs mt-1.5 text-emerald-400 font-bold';
-
-          const subtotal = state.cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
-          document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal + fee);
-          document.getElementById('cart-delivery-val').textContent = fee === 0 ? 'FREE' : formatGBP(fee);
-        } else {
-          status.textContent = 'Address is outside our 10-mile radius.';
+        if (!res.ok || data.error) throw new Error(data.error || 'Quote failed');
+        if (!data.available) {
+          status.textContent = data.message || 'Address is outside our 10-mile delivery radius.';
           status.className = 'text-xs mt-1.5 text-red-400 font-bold';
+          document.getElementById('checkout-final-payable').textContent = 'Unavailable';
+          renderCart();
+          return;
         }
-      } catch (err) {
-        status.textContent = 'Delivery rate applied: RM area flat tier';
+        const fee = Number(data.deliveryFee || 0);
+        const surcharge = Number(data.smallOrderSurcharge || 0);
+        state.deliveryQuote = { deliveryFee: fee, miles: data.approximateDistanceMiles };
+        status.textContent = `Delivery: ${fee === 0 ? 'FREE' : formatGBP(fee)} (~${data.approximateDistanceMiles} mi)${surcharge ? ' · £4.00 small-order surcharge' : ''}`;
         status.className = 'text-xs mt-1.5 text-emerald-400 font-bold';
+        document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal + surcharge + fee);
+        renderCart();
+      } catch (err) {
+        state.deliveryQuote = null;
+        status.textContent = 'We could not calculate delivery. Please try again.';
+        status.className = 'text-xs mt-1.5 text-red-400 font-bold';
+        document.getElementById('checkout-final-payable').textContent = 'Quote required';
+        renderCart();
       }
     }
 
