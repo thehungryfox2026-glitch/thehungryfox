@@ -121,19 +121,10 @@
         </div>
       </a>
 
-      <!-- Quick Delivery Tier Badges -->
-      <div class="flex items-center gap-3">
-        <div class="hidden md:flex items-center gap-2 text-xs">
-          <span class="bg-emerald-950/80 text-emerald-300 border border-emerald-800/80 px-3 py-1.5 rounded-full font-bold">
-            0–5 mi: FREE DELIVERY
-          </span>
-          <span class="bg-blue-950/80 text-blue-300 border border-blue-800/80 px-3 py-1.5 rounded-full font-bold">
-            >5–8 mi: £1.99
-          </span>
-          <span class="bg-purple-950/80 text-purple-300 border border-purple-800/80 px-3 py-1.5 rounded-full font-bold">
-            >8–10 mi: £3.99
-          </span>
-        </div>
+      <!-- Simple delivery message -->
+      <div class="hidden sm:block text-xs font-bold text-emerald-300">
+        We deliver to most local areas · Check your postcode for free delivery
+      </div>
 
         <!-- Basket Trigger Button -->
         <button onclick="toggleCartDrawer(true)" class="relative flex items-center gap-2.5 bg-orange-600 hover:bg-orange-500 text-white px-4 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-orange-950/50 transition">
@@ -168,15 +159,15 @@
         Piping hot baked & fried chicken feast boxes, fiery buldak noodles, and freshly sizzled doner dispatched directly from us straight to your door across Grays and Thurrock.
       </p>
 
-      <!-- Postcode Radius Verification Tool -->
+      <!-- Postcode Delivery Availability Checker -->
       <div class="pt-4 max-w-md mx-auto">
         <form onsubmit="handlePostcodeCheck(event)" class="flex gap-2">
-          <input type="text" id="check-postcode-input" placeholder="Enter full postcode (e.g. RM17 6QJ)" class="flex-1 bg-[#131b2e] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 uppercase font-mono" required />
+          <input type="text" id="check-postcode-input" placeholder="Enter your postcode" class="flex-1 bg-[#131b2e] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 uppercase font-mono" required />
           <button type="submit" id="check-postcode-btn" class="btn-orange px-5 py-2.5 rounded-xl text-xs font-bold shrink-0">
             Check Radius
           </button>
         </form>
-        <div id="check-postcode-result" class="text-xs mt-2.5 hidden"></div>
+        <p class="text-xs text-emerald-300 mt-3 font-semibold">We deliver to most local areas. Enter your postcode to check delivery availability and see if you qualify for FREE DELIVERY.</p>\n        <div id="check-postcode-result" class="text-xs mt-2.5 hidden"></div>
       </div>
     </div>
   </section>
@@ -1327,7 +1318,7 @@
       btn.disabled = true;
       btn.textContent = 'Checking...';
       result.classList.remove('hidden');
-      result.innerHTML = '<span class="text-slate-400">Querying live delivery route...</span>';
+      result.innerHTML = '<span class="text-slate-400">Checking delivery availability...</span>';
 
       try {
         const res = await fetch(`${API_BASE_URL}/delivery-quote?postcode=${encodeURIComponent(postcode)}&basketSubtotal=15`);
@@ -1342,7 +1333,7 @@
         result.innerHTML = '<span class="text-red-400">We could not check this postcode just now. Please try again.</span>';
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Check Radius';
+        btn.textContent = 'Check Delivery';
       }
     }
 
