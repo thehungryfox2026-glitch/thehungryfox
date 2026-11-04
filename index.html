@@ -1326,7 +1326,7 @@
         const data = await res.json();
         if (!res.ok || data.error) throw new Error(data.error || 'Postcode check failed');
         if (data.available) {
-          result.innerHTML = `<span class="text-emerald-400 font-bold">✓ Delivery available!</span><span class="text-slate-300 ml-1">Approx. ${Number(data.approximateDistanceMiles).toFixed(1)} mi | Delivery: ${Number(data.deliveryFee) === 0 ? 'FREE' : formatGBP(data.deliveryFee)}</span>`;
+          result.innerHTML = `<span class="text-emerald-400 font-bold">✓ Delivery available!</span><span class="text-slate-300 ml-1">${Number(data.deliveryFee) === 0 ? 'FREE DELIVERY' : 'Delivery available.'}</span>`;
         } else {
           result.innerHTML = `<span class="text-amber-400">${esc(data.message || 'Outside our 10-mile delivery area. Please use Uber Eats / Deliveroo.')}</span>`;
         }
@@ -1376,8 +1376,8 @@
         }
         const fee = Number(data.deliveryFee || 0);
         const surcharge = Number(data.smallOrderSurcharge || 0);
-        state.deliveryQuote = { deliveryFee: fee, miles: data.approximateDistanceMiles };
-        status.textContent = `Delivery: ${fee === 0 ? 'FREE' : formatGBP(fee)} (~${data.approximateDistanceMiles} mi)${surcharge ? ' · £4.00 small-order surcharge' : ''}`;
+        state.deliveryQuote = { deliveryFee: fee };
+        status.textContent = `${fee === 0 ? 'FREE DELIVERY' : 'Delivery available.'}${surcharge ? ' · £4.00 small-order surcharge' : ''}`;
         status.className = 'text-xs mt-1.5 text-emerald-400 font-bold';
         document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal + surcharge + fee);
         renderCart();
