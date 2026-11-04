@@ -1411,7 +1411,7 @@
         status.className = 'text-xs text-center text-red-400';
         return;
       }
-      if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(customer.email)) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email)) {
         status.textContent = 'Please enter a valid email address.';
         status.className = 'text-xs text-center text-red-400';
         return;
