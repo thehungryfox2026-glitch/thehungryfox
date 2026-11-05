@@ -36,25 +36,31 @@ export async function savePaidOrder(session, lineItems, env) {
   if(!env.DB) throw new Error("D1 database binding DB is missing");
   const m=session.metadata||{};
   const reference=session.id.slice(-8).toUpperCase();
+  const deliveryPrefix="Delivery and minimum-order adjustment";
   const lines=(lineItems||[]).map(x=>({
     name:String(x.description||"Hungry Fox item"),
     quantity:Number(x.quantity||1),
     amount:Number(x.amount_total||0)
   }));
-  const delivery=lines.filter(x=>x.name.startsWith("Delivery and minimum-order adjustment")).reduce((n,x)=>n+x.amount,0);
-  const subtotal=lines.filter(x=>!x.name.startsWith("Delivery and minimum-order adjustment")).reduce((n,x)=>n+x.amount,0);
-  const total=Number(session.amount_total||subtotal+delivery);
-  const inserted=await env.DB.prepare(`INSERT OR IGNORE INTO orders
+  const delivery=lines.filter(x=>x.name.startsWith(deliveryPrefix)).reduce((n,x)=>n+x.amount,0);
+  const subtotal=lines.filter(x=>!x.name.startsWith(deliveryPrefix)).reduce((n,x)=>n+x.amount,0);
+  const total=Number(session.amount_total??(subtotal+delivery));
+  await env.DB.prepare(`INSERT OR IGNORE INTO orders
     (id,stripe_session_id,order_reference,customer_name,customer_phone,customer_email,delivery_address,postcode,delivery_zone,notes,subtotal_pence,delivery_pence,total_pence,payment_status,kitchen_status)
     VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,'paid','NEW')`)
     .bind(session.id,session.id,reference,String(m.customer_name||"Customer"),String(m.customer_phone||""),String(m.customer_email||session.customer_details?.email||""),String(m.delivery_address||""),String(m.postcode||""),String(m.delivery_zone||""),String(m.notes||""),subtotal,delivery,total).run();
-  if(!inserted.meta?.changes) return;
+
   const order=await env.DB.prepare("SELECT id FROM orders WHERE stripe_session_id=?").bind(session.id).first();
   if(!order) throw new Error("Could not retrieve saved order");
-  for(const line of lines.filter(x=>!x.name.startsWith("Delivery and minimum-order adjustment"))) {
-    await env.DB.prepare("INSERT INTO order_items (order_id,product_name,quantity,unit_price_pence,options) VALUES (?,?,?,?,?)")
-      .bind(order.id,line.name,line.quantity,Math.round(line.amount/Math.max(1,line.quantity)),null).run();
-  }
+
+  const existing=await env.DB.prepare("SELECT COUNT(*) AS count FROM order_items WHERE order_id=?").bind(order.id).first();
+  if(Number(existing?.count||0)>0 || !lines.some(x=>!x.name.startsWith(deliveryPrefix))) return;
+
+  const statements=lines.filter(x=>!x.name.startsWith(deliveryPrefix)).map(line=>
+    env.DB.prepare("INSERT INTO order_items (order_id,product_name,quantity,unit_price_pence,options) VALUES (?,?,?,?,?)")
+      .bind(order.id,line.name,line.quantity,Math.round(line.amount/Math.max(1,line.quantity)),null)
+  );
+  if(statements.length) await env.DB.batch(statements);
 }
 async function login(req,env) {
   if(!env.DASHBOARD_PASSWORD) return json({error:"Dashboard password is not configured."},503);
