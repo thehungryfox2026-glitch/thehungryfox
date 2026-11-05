@@ -378,9 +378,23 @@
       </div>
 
       <div class="p-5 border-t border-slate-800 bg-[#0a101d] flex flex-col gap-2">
-        <div class="flex justify-between items-center text-sm font-bold text-white">
-          <span>Total Payable:</span>
-          <span id="checkout-final-payable" class="text-orange-400 text-lg">£0.00</span>
+        <div class="space-y-2 text-xs text-slate-300">
+          <div class="flex justify-between">
+            <span>Item subtotal</span>
+            <span id="checkout-item-subtotal" class="font-bold text-white">£0.00</span>
+          </div>
+          <div id="checkout-small-order-row" class="flex justify-between">
+            <span>Small-order charge</span>
+            <span id="checkout-small-order-charge" class="font-bold text-amber-400">£0.00</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Delivery</span>
+            <span id="checkout-delivery-fee" class="font-bold text-white">To be calculated</span>
+          </div>
+          <div class="flex justify-between items-center text-sm font-black text-white pt-2 border-t border-slate-800">
+            <span>Total to pay</span>
+            <span id="checkout-final-payable" class="text-orange-400 text-lg">£0.00</span>
+          </div>
         </div>
         <p class="text-[11px] text-slate-400">You will be redirected to Stripe's secure checkout. Your order is confirmed only after payment succeeds.</p>
         <button id="place-order-btn" type="button" onclick="submitWebsiteOrder()" class="w-full btn-orange py-3 rounded-xl font-extrabold text-sm">Continue to Secure Payment</button>
@@ -1350,6 +1364,10 @@
       document.getElementById('checkout-quote-status').textContent = 'Enter your postcode to calculate delivery.';
       const subtotal = state.cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
       const surcharge = subtotal > 0 && subtotal < MIN_ORDER_AMOUNT ? 4 : 0;
+      document.getElementById('checkout-item-subtotal').textContent = formatGBP(subtotal);
+      document.getElementById('checkout-small-order-charge').textContent = formatGBP(surcharge);
+      document.getElementById('checkout-small-order-row').classList.toggle('hidden', surcharge === 0);
+      document.getElementById('checkout-delivery-fee').textContent = 'To be calculated';
       document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal + surcharge);
       document.getElementById('checkout-modal').classList.remove('hidden');
       document.getElementById('checkout-modal').classList.add('flex');
@@ -1380,10 +1398,14 @@
           return;
         }
         const fee = Number(data.deliveryFee || 0);
-        const surcharge = Number(data.smallOrderSurcharge || 0);
+        const surcharge = subtotal > 0 && subtotal < MIN_ORDER_AMOUNT ? 4 : 0;
         state.deliveryQuote = { deliveryFee: fee };
-        status.textContent = `${fee === 0 ? 'FREE DELIVERY' : `Delivery charge: ${formatGBP(fee)}`}${surcharge ? ' · £4.00 small-order surcharge' : ''}`;
+        status.textContent = fee === 0 ? 'FREE DELIVERY' : `Delivery charge: ${formatGBP(fee)}`;
         status.className = 'text-xs mt-1.5 text-emerald-400 font-bold';
+        document.getElementById('checkout-item-subtotal').textContent = formatGBP(subtotal);
+        document.getElementById('checkout-small-order-charge').textContent = formatGBP(surcharge);
+        document.getElementById('checkout-small-order-row').classList.toggle('hidden', surcharge === 0);
+        document.getElementById('checkout-delivery-fee').textContent = fee === 0 ? 'FREE' : formatGBP(fee);
         document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal + surcharge + fee);
         renderCart();
       } catch (err) {
