@@ -44,10 +44,11 @@ export async function savePaidOrder(session, lineItems, env) {
   const delivery=lines.filter(x=>x.name.startsWith("Delivery and minimum-order adjustment")).reduce((n,x)=>n+x.amount,0);
   const subtotal=lines.filter(x=>!x.name.startsWith("Delivery and minimum-order adjustment")).reduce((n,x)=>n+x.amount,0);
   const total=Number(session.amount_total||subtotal+delivery);
-  await env.DB.prepare(`INSERT OR IGNORE INTO orders
+  const inserted=await env.DB.prepare(`INSERT OR IGNORE INTO orders
     (id,stripe_session_id,order_reference,customer_name,customer_phone,customer_email,delivery_address,postcode,delivery_zone,notes,subtotal_pence,delivery_pence,total_pence,payment_status,kitchen_status)
     VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,'paid','NEW')`)
     .bind(session.id,session.id,reference,String(m.customer_name||"Customer"),String(m.customer_phone||""),String(m.customer_email||session.customer_details?.email||""),String(m.delivery_address||""),String(m.postcode||""),String(m.delivery_zone||""),String(m.notes||""),subtotal,delivery,total).run();
+  if(!inserted.meta?.changes) return;
   const order=await env.DB.prepare("SELECT id FROM orders WHERE stripe_session_id=?").bind(session.id).first();
   if(!order) throw new Error("Could not retrieve saved order");
   for(const line of lines.filter(x=>!x.name.startsWith("Delivery and minimum-order adjustment"))) {
