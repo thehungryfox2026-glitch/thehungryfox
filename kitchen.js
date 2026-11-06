@@ -5,6 +5,32 @@ const enc = new TextEncoder();
 function json(data, status=200) {
   return new Response(JSON.stringify(data), {status, headers: {"Content-Type":"application/json","Cache-Control":"no-store"}});
 }
+function escapeHtml(value) {
+  return String(value||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+async function sendRefundEmail(env,order,amountPence) {
+  if(!env.RESEND_API_KEY) return "not_configured";
+  if(!order.customer_email) return "no_customer_email";
+  const key="customer-refund/"+order.id;
+  await env.DB.prepare("CREATE TABLE IF NOT EXISTS order_email_sends (idempotency_key TEXT PRIMARY KEY, status TEXT NOT NULL, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
+  await env.DB.prepare("INSERT OR IGNORE INTO order_email_sends (idempotency_key,status) VALUES (?, 'pending')").bind(key).run();
+  const claim=await env.DB.prepare("UPDATE order_email_sends SET status='processing',updated_at=CURRENT_TIMESTAMP WHERE idempotency_key=? AND (status IN ('pending','failed') OR (status='processing' AND updated_at < datetime('now','-10 minutes')))").bind(key).run();
+  if(!claim.meta?.changes) return "already_sent_or_processing";
+  const amount="£"+(Number(amountPence||0)/100).toFixed(2);
+  const name=String(order.customer_name||"there");
+  const reference=String(order.order_reference||order.id);
+  const text="Hi "+name+",\n\nYour Hungry Fox order "+reference+" has been cancelled and a full refund of "+amount+" has been issued to your original payment method. Your bank or card provider may take a few working days to show the refund.\n\nThank you,\nThe Hungry Fox";
+  const html="<div style='font-family:Arial,sans-serif;color:#242424;max-width:600px;margin:auto'><div style='background:#f7f0e5;padding:18px 24px;text-align:center'><h1 style='color:#211b18;font-size:24px;margin:0'>THE HUNGRY FOX</h1></div><div style='padding:24px'><h2 style='color:#d87518'>Your refund has been issued</h2><p>Hi "+escapeHtml(name)+",</p><p>Your Hungry Fox order has been cancelled and a full refund has been issued to your original payment method.</p><p><strong>Order reference:</strong> "+escapeHtml(reference)+"<br><strong>Refund amount:</strong> "+amount+"</p><p>Your bank or card provider may take a few working days to show the refund.</p><p>Thank you,<br>The Hungry Fox</p></div></div>";
+  try {
+    const response=await fetch("https://api.resend.com/emails",{method:"POST",headers:{Authorization:"Bearer "+env.RESEND_API_KEY,"Content-Type":"application/json","Idempotency-Key":key},body:JSON.stringify({from:"The Hungry Fox <orders@thehungryfox.co.uk>",to:[order.customer_email],subject:"Your Hungry Fox refund — "+reference,text,html})});
+    if(!response.ok) throw new Error("Resend refund email failed ("+response.status+"): "+await response.text());
+    await env.DB.prepare("UPDATE order_email_sends SET status='sent',updated_at=CURRENT_TIMESTAMP WHERE idempotency_key=?").bind(key).run();
+    return "sent";
+  } catch(error) {
+    await env.DB.prepare("UPDATE order_email_sends SET status='failed',updated_at=CURRENT_TIMESTAMP WHERE idempotency_key=?").bind(key).run();
+    return "failed";
+  }
+}
 function safeEqual(a,b) {
   if (typeof a !== "string" || typeof b !== "string" || a.length !== b.length) return false;
   let n=0; for(let i=0;i<a.length;i++) n |= a.charCodeAt(i)^b.charCodeAt(i);
@@ -90,9 +116,9 @@ async function api(req,env,url) {
   if(req.method==="POST"&&url.pathname==="/kitchen/api/cancel") {
     let body; try { body=await req.json(); } catch { return json({error:"Invalid request."},400); }
     if(!body.id) return json({error:"Order reference is missing."},400);
-    const order=await env.DB.prepare("SELECT id,stripe_session_id,payment_status,kitchen_status FROM orders WHERE id=?").bind(body.id).first();
+    const order=await env.DB.prepare("SELECT id,stripe_session_id,order_reference,customer_name,customer_email,total_pence,payment_status,kitchen_status FROM orders WHERE id=?").bind(body.id).first();
     if(!order) return json({error:"Order not found."},404);
-    if(order.payment_status==="refunded") return json({ok:true,refundStatus:"refunded"});
+    if(order.payment_status==="refunded") { const emailStatus=await sendRefundEmail(env,order,order.total_pence); return json({ok:true,refundStatus:"refunded",emailStatus}); }
     if(!["paid","refund_pending"].includes(order.payment_status)) return json({error:"This order is not eligible for a refund."},409);
     if(!["NEW","READY"].includes(order.kitchen_status)) return json({error:"This order can no longer be cancelled from the kitchen dashboard."},409);
     if(!env.STRIPE_SECRET_KEY) return json({error:"Stripe is not configured. No refund was made."},503);
@@ -112,7 +138,8 @@ async function api(req,env,url) {
     if(refund.status==="failed"||refund.status==="canceled") return json({error:"Stripe did not complete the refund. The order has not been cancelled."},502);
     const paymentStatus=refund.status==="succeeded"?"refunded":"refund_pending";
     await env.DB.prepare("UPDATE orders SET kitchen_status='CANCELLED',payment_status=?,updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(paymentStatus,order.id).run();
-    return json({ok:true,refundStatus:paymentStatus});
+    const emailStatus=paymentStatus==="refunded"?await sendRefundEmail(env,order,refund.amount):"not_sent_refund_pending";
+    return json({ok:true,refundStatus:paymentStatus,emailStatus});
   }
   return json({error:"Not found."},404);
 }
