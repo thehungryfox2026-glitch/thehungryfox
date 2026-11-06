@@ -133,6 +133,9 @@ async function retryPendingRefund(env,order) {
       }
     }
   }
+  if((latest?.status==="pending"||latest?.status==="succeeded")&&!refunds.some(r=>r.id===latest.stripe_refund_id)) {
+    return {httpStatus:409,error:"Stripe's refund list does not match the last recorded attempt. No new refund was created; please review it manually."};
+  }
   let attemptNumber,idempotencyKey,amountPence=remaining;
   if(latest?.status==="processing") {
     attemptNumber=latest.attempt_number;
