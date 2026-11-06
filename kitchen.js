@@ -160,7 +160,7 @@ async function retryPendingRefund(env,order) {
   const status=refund.status==="succeeded"?"succeeded":refund.status==="failed"||refund.status==="canceled"?"failed":"pending";
   await env.DB.prepare("UPDATE order_refund_attempts SET stripe_refund_id=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE order_id=? AND attempt_number=?").bind(refund.id||null,status,order.id,attemptNumber).run();
   if(status==="succeeded") {
-    const totalRefunded=succeeded+Number(refund.amount||amountPence);
+    const totalRefunded=succeeded+(refunds.some(r=>r.id===refund.id)?0:Number(refund.amount||amountPence));
     if(totalRefunded>=Number(order.total_pence||0)) {
       await env.DB.prepare("UPDATE orders SET payment_status='refunded',kitchen_status='CANCELLED',updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(order.id).run();
       const emailStatus=await sendRefundEmail(env,order,order.total_pence);
