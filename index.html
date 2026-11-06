@@ -735,7 +735,6 @@
         BRD009: { Gluten:'Contains', Eggs:'May contain', Milk:'May contain', Nuts:'May contain', Sesame:'May contain', note:'Peri Peri Pitta uses the same pitta bread supplier label.' },
         SD004: { Gluten:'Contains', Soybeans:'Contains', note:'Mini vegetable singara label: wheat flour (gluten) and soya.' },
         DES001: { Milk:'Contains', Nuts:'Contains', note:'Little Moons honey-roasted pistachio mochi label identifies milk and pistachio.' },
-        DES002: { Milk:'Contains', note:'Strawberry & cream mochi is an ice-cream/cream product; confirm current pack before service.' },
         RIC003: { Eggs:'Contains', note:'Egg Fried Rice is explicitly described as containing egg; full recipe cross-contact status is not verified.' },
         RIC006: { Crustaceans:'Contains', note:'Prawn Fried Rice is explicitly described as containing prawns; full recipe cross-contact status is not verified.' }
       };
@@ -745,7 +744,7 @@
         const item = evidence[product.Product_ID] || {};
         const noteParts = [];
         if (item.note) noteParts.push(item.note);
-        if (flavourItems.has(product.Product_ID)) noteParts.push('Selected chicken flavour changes the allergen profile. Spicy Algerian supplier label lists egg and wheat/gluten; Naga sauce label warns of possible traces of nuts and peanuts. Check the exact sauce label for the selected flavour.');
+        if (flavourItems.has(product.Product_ID)) noteParts.push('Selected chicken flavour changes the allergen profile: Garlic Parmesan uses a cheese ingredient whose supplier label identifies milk; Spicy Algerian sauce label lists egg and wheat/gluten; Naga sauce label warns of possible traces of nuts and peanuts. Check the exact current sauce label for the selected flavour.');
         if (breadChoiceItems.has(product.Product_ID)) noteParts.push('Customer chooses naan or pitta; the bread choice changes the allergen profile.');
         if (!item.note && !flavourItems.has(product.Product_ID)) noteParts.push('Recipe, supplier label and preparation details not fully matched to this menu item.');
         return `<tr><td class="sticky left-0 bg-[#131b2e] py-2.5 px-3 font-semibold text-white">${esc(product.Product_Name)}</td>
