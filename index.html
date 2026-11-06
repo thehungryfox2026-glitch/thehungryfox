@@ -722,6 +722,17 @@
       return '£' + Number(val || 0).toFixed(2);
     }
 
+    // Render an individual row for every product in the live menu catalog.
+    // Unknown values remain unknown until the exact current recipe and supplier label are verified.
+    function renderAllergenMatrix() {
+      const body = document.getElementById('allergen-menu-rows');
+      if (!body) return;
+      const allergens = ['Gluten','Crustaceans','Eggs','Fish','Peanuts','Soybeans','Milk','Nuts','Celery','Mustard','Sesame','Sulphites','Lupin','Molluscs'];
+      body.innerHTML = HUNGRY_FOX_PRODUCTS.map(product => `
+        <tr><td class="sticky left-0 bg-[#131b2e] py-2.5 px-3 font-semibold text-white">${esc(product.Product_Name)}</td>
+        ${allergens.map(() => '<td class="py-2.5 px-2 text-amber-300 font-semibold">Not confirmed</td>').join('')}</tr>`).join('');
+    }
+
     // Render Menu
     function renderMenu() {
       const rawCategories = [...new Set(state.products.map(p => p.Category))];
@@ -1482,6 +1493,7 @@
     // Show payment status only after verifying the Stripe session with the Worker.
     document.addEventListener('DOMContentLoaded', async () => {
       renderMenu();
+      renderAllergenMatrix();
       renderCart();
       const params = new URLSearchParams(window.location.search);
       const payment = params.get('payment');
