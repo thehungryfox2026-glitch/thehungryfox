@@ -250,7 +250,7 @@ function beep(){if(!soundOn)return;try{ctx=ctx||new(window.AudioContext||window.
 function saveAlertIds(){try{localStorage.setItem("hf_order_alerts",JSON.stringify([...pendingAlerts]))}catch{}}
 function startAlertLoop(){if(!soundOn||!pendingAlerts.size||alertTimer)return;beep();alertTimer=setInterval(()=>{if(!pendingAlerts.size){clearInterval(alertTimer);alertTimer=null;return}beep()},5000)}
 function acknowledgeAlert(id){pendingAlerts.delete(id);saveAlertIds();if(!pendingAlerts.size&&alertTimer){clearInterval(alertTimer);alertTimer=null}load()}
-function ackButton(o){return pendingAlerts.has(o.id)?"<button class=\"warn\" data-order=\""+esc(o.id)+"\" onclick=\"acknowledgeAlert(this.dataset.order)\">Acknowledge alert</button>":""}
+function ackButton(o){return pendingAlerts.has(o.id)?"<button class=\\\"warn\\\" data-order=\\\""+esc(o.id)+"\\\" onclick=\\\"acknowledgeAlert(this.dataset.order)\\\">Acknowledge alert</button>":""}
 function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function money(n){return "£"+(Number(n||0)/100).toFixed(2)}
 function receiptParts(item){
