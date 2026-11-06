@@ -1,0 +1,16 @@
+name = "hungryfox-api-preview"
+main = "worker.js"
+compatibility_date = "2026-11-04"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hungryfox-orders-preview"
+database_id = "890b458f-f4e6-4f2d-974f-ff1b1ddf9b5a"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[observability.logs]
+invocation_logs = true
+head_sampling_rate = 1

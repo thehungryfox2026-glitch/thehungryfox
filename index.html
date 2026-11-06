@@ -184,51 +184,70 @@
       <!-- Generated dynamically from self-contained catalog -->
     </div>
 
-    <!-- Statutory 14 Allergen Matrix -->
+    <!-- Individual menu-item allergen register -->
     <section id="allergen-section" class="mt-16 pt-10 border-t border-[#1e293b]">
       <div class="bg-[#131b2e] border border-slate-800 rounded-2xl p-6 sm:p-8">
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
-          <div>
-            <span class="text-amber-400 text-xs uppercase tracking-wider font-extrabold block">Food Standards Agency Compliance</span>
-            <h2 class="font-serif text-2xl font-bold text-white mt-1">Statutory 14 Allergen Matrix</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl">
-              Prepared in a kitchen where allergens are handled. Please review below or inform our staff if you have severe dietary allergies before ordering.
-            </p>
+        <div class="mb-6">
+          <span class="text-amber-400 text-xs uppercase tracking-wider font-extrabold block">Allergen information</span>
+          <h2 class="font-serif text-2xl font-bold text-white mt-1">Allergen information by menu item</h2>
+          <p class="text-slate-300 text-sm mt-2 max-w-3xl">We take food allergies seriously. The supplier-label information currently available to us is not sufficient to confirm the allergen status of every recipe, sauce, coating, side and drink. Please contact us before ordering if you have an allergy. We will check the product information and preparation details with you.</p>
+          <p class="text-amber-300 text-xs font-bold mt-3">Important: “Not confirmed” does not mean allergen-free. This register is not a substitute for checking the current packaging and recipe before serving.</p>
+          <div class="mt-5 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4">
+            <h3 class="font-bold text-amber-200 text-sm">Cross-Contamination Warning</h3>
+            <p class="text-slate-200 text-sm mt-2 leading-relaxed">Our food is prepared in a small kitchen where Gluten, Milk, Egg, Soya, Mustard, and Crustaceans are handled. We use a shared fryer for our chicken, sides, and spring rolls. We cannot guarantee a 100% allergen-free environment.</p>
           </div>
-          <button onclick="toggleAllergenTable()" id="allergen-toggle-btn" class="bg-[#1e293b] hover:bg-slate-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-slate-700 transition">
-            Hide Allergen Matrix
-          </button>
+          <div class="mt-5 border-t border-slate-800 pt-5">
+            <h3 class="font-bold text-white text-sm">Allergen information supplied for our menu</h3>
+            <p class="text-xs text-slate-400 mt-1">The following summary reflects the ingredient and precautionary information supplied for these products. Individual recipes, selected sauces, toppings and preparation may add allergens; please contact us before ordering if you have an allergy.</p>
+            <div class="grid md:grid-cols-2 gap-4 mt-3 text-xs text-slate-300">
+              <div>
+                <h4 class="font-bold text-rose-300 mb-1">Contains</h4>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li><strong>Gluten (wheat):</strong> Fried Wings, Tenders, Nuggets, Doners, Samosas, Spring Rolls, Mac N Cheese Bites, Halloumi Fries, Prawn Gyoza, Bao Buns, Buldak Noodles, all breads, Hot Hot Wing Sauce, Algerian Sauce and Soy Sauce.</li>
+                  <li><strong>Milk:</strong> Mac N Cheese Bites, Halloumi Fries, Hot Hot Wing Sauce, Garlic Bread, Garlic Naan, Parmesan and all Little Moons Mochi except Pineapple Sorbet.</li>
+                  <li><strong>Egg:</strong> Mayo-based dips (Plain, Garlic, Peri, Spicy), Spicy Algerian Sauce and Egg Fried Rice.</li>
+                  <li><strong>Mustard:</strong> Mayo-based dips, Spicy Algerian Sauce, Doner Meat and Samosa/Singara.</li>
+                  <li><strong>Soya:</strong> Fried Wings, Tenders, Nuggets, Doner Meat, Samosa, Bao Buns, Prawn Gyoza, Buldak Noodles, Soy Sauce and all Mochi.</li>
+                  <li><strong>Crustaceans (prawns):</strong> Prawn Gyoza and Prawn Fried Rice.</li>
+                  <li><strong>Nuts (tree nuts):</strong> Pistachio Mochi; traces of other nuts in all Mochi.</li>
+                  <li><strong>Sesame:</strong> Buldak Noodles.</li>
+                  <li><strong>Sulphites:</strong> Meat Doner and Mixed Doner.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-amber-300 mb-1">May contain / traces</h4>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li><strong>Celery:</strong> Doner Meat, Buffalo, Volcano, BBQ, Honey Sriracha and Algerian Sauces.</li>
+                  <li><strong>Peanuts:</strong> Naga Sauce and all Mochi except Pineapple Sorbet.</li>
+                </ul>
+                <p class="mt-3 text-slate-400">Please tell us about any allergy before ordering so we can discuss the ingredients and preparation of your chosen items.</p>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div id="allergen-table-wrap" class="overflow-x-auto custom-scrollbar">
-          <table class="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider bg-[#0a101d]">
-                <th class="py-3 px-3 font-bold text-white">Menu Item</th>
-                <th class="py-3 px-2">Gluten</th>
-                <th class="py-3 px-2">Milk</th>
-                <th class="py-3 px-2">Egg</th>
-                <th class="py-3 px-2">Soy</th>
-                <th class="py-3 px-2">Mustard</th>
-                <th class="py-3 px-2">Celery</th>
-                <th class="py-3 px-2">Sesame</th>
-                <th class="py-3 px-2">Nuts</th>
-                <th class="py-3 px-2">Sulphites</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-800 text-slate-300">
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Baked Wings / Plain Chicken</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Fried Wings & Tenders</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Buldak Fire Noodles</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Doner Meat (Chicken / Lamb)</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Skin-on Fries & Wedges</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Mozzarella & Halloumi Bites</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Mochi Artisan Gelato</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td></tr>
-            </tbody>
+        <div class="flex flex-wrap gap-3 text-xs mb-4">
+          <span class="rounded-lg bg-amber-500/10 border border-amber-500/30 px-3 py-2 text-amber-200">Not confirmed = information not verified</span>
+          <span class="rounded-lg bg-rose-500/10 border border-rose-500/30 px-3 py-2 text-rose-200">Contains</span><span class="rounded-lg bg-amber-500/10 border border-amber-500/30 px-3 py-2 text-amber-200">May contain</span><span class="rounded-lg bg-slate-800 border border-slate-700 px-3 py-2 text-slate-300">Not confirmed</span><span class="rounded-lg bg-slate-800 border border-slate-700 px-3 py-2 text-slate-300">14 regulated allergens listed</span>
+        </div>
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs border-collapse min-w-[1450px]">
+            <thead><tr class="border-b border-slate-700 bg-[#0a101d] text-slate-300 uppercase tracking-wide">
+              <th class="sticky left-0 bg-[#0a101d] py-3 px-3 text-white">Menu item</th>
+              <th class="py-3 px-2">Cereals containing gluten</th><th class="py-3 px-2">Crustaceans</th><th class="py-3 px-2">Eggs</th><th class="py-3 px-2">Fish</th><th class="py-3 px-2">Peanuts</th><th class="py-3 px-2">Soybeans</th><th class="py-3 px-2">Milk</th><th class="py-3 px-2">Nuts</th><th class="py-3 px-2">Celery</th><th class="py-3 px-2">Mustard</th><th class="py-3 px-2">Sesame</th><th class="py-3 px-2">Sulphur dioxide / sulphites</th><th class="py-3 px-2">Lupin</th><th class="py-3 px-2">Molluscs</th><th class="py-3 px-3">Evidence / recipe notes</th>
+            </tr></thead>
+            <tbody id="allergen-menu-rows" class="divide-y divide-slate-800 text-slate-300"></tbody>
           </table>
-          <p class="text-[11px] text-slate-400 mt-3 italic">
-            Key: <strong class="text-amber-400">✓</strong> = Contains directly | <strong class="text-slate-500">1</strong> = May Contain (Cross-contamination risk) | <strong>X</strong> = Free from
-          </p>
+        </div>
+        <div class="mt-6 border-t border-slate-800 pt-5">
+          <h3 class="font-bold text-white text-sm">Supplier-label information identified in our records</h3>
+          <ul class="list-disc pl-5 mt-2 space-y-1.5 text-xs text-slate-300">
+            <li>Vegetable bao bun packaging identifies wheat and soy ingredients/allergens.</li>
+            <li>Pitta bread packaging identifies wheat/gluten; its precautionary statement also refers to possible egg, milk, sesame and other nuts.</li>
+            <li>Garlic and coriander naan packaging identifies wheat/gluten and milk in its ingredient/allergen information.</li>
+            <li>Parmigiano Reggiano packaging identifies milk.</li>
+            <li>The seasoning label shown states that the factory also handles celery, gluten, eggs, milk, mustard, soy and sulphites. This is a factory-handling warning for that seasoning supplier, not proof that every menu item contains those allergens.</li>
+            <li>The Spicy Algerian sauce label lists egg and wheat/gluten. The Naga sauce label warns that spices may contain traces of nuts and peanuts. These apply when that sauce is selected; they are not assigned as universal allergens to every chicken item. Other sauce and dessert labels are not fully legible or not yet matched to the exact recipe, so their remaining status is shown as Not confirmed.</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -735,6 +754,52 @@
       return '£' + Number(val || 0).toFixed(2);
     }
 
+    // Evidence-based allergen register. Only positive label/menu evidence is entered;
+    // an unlisted allergen stays "Not confirmed", never silently treated as absent.
+    function renderAllergenMatrix() {
+      const body = document.getElementById('allergen-menu-rows');
+      if (!body) return;
+      const allergens = ['Gluten','Crustaceans','Eggs','Fish','Peanuts','Soybeans','Milk','Nuts','Celery','Mustard','Sesame','Sulphites','Lupin','Molluscs'];
+      const evidence = {
+        SD009: { Gluten:'Contains', Soybeans:'Contains', note:'Bao-bun supplier label: wheat and soy ingredients.' },
+        SD003: { Gluten:'Contains', Crustaceans:'Does not contain', Eggs:'May contain', Fish:'Does not contain', Peanuts:'Does not contain', Soybeans:'May contain', Milk:'Contains', Nuts:'Does not contain', Celery:'Does not contain', Mustard:'May contain', Sesame:'Does not contain', Sulphites:'Does not contain', Lupin:'Does not contain', Molluscs:'Does not contain', note:'Supplier packaging photo, PDF page 40: halloumi cheese (41%) contains cow’s milk and goat’s milk, with sheep’s milk also listed; wheat flour and wheat starch are ingredients. Packaging says may also contain soya, egg and mustard.' },
+        KID003: { Gluten:'Contains', Crustaceans:'Does not contain', Eggs:'May contain', Fish:'Does not contain', Peanuts:'Does not contain', Soybeans:'May contain', Milk:'Contains', Nuts:'Does not contain', Celery:'Does not contain', Mustard:'May contain', Sesame:'Does not contain', Sulphites:'Does not contain', Lupin:'Does not contain', Molluscs:'Does not contain', note:'Kids Halloumi Fries Meal includes the same halloumi fries shown on supplier packaging photo, PDF page 40: milk and wheat ingredients; may also contain soya, egg and mustard.' },
+        SD001: { Gluten:'Contains', Milk:'Contains', Soybeans:'May contain', Eggs:'May contain', Peanuts:'Does not contain', Crustaceans:'Does not contain', Fish:'Does not contain', Nuts:'Does not contain', Celery:'Does not contain', Mustard:'Does not contain', Sesame:'Does not contain', Sulphites:'Does not contain', Lupin:'Does not contain', Molluscs:'Does not contain', note:'Full mozzarella sticks ingredient and allergen advice supplied by the restaurant. Contains milk and wheat; may contain traces of soya and egg.' },
+        SD010: { Gluten:'Contains', Crustaceans:'Contains', Eggs:'May contain', Fish:'Contains', Peanuts:'Does not contain', Soybeans:'Contains', Milk:'Does not contain', Nuts:'Does not contain', Celery:'May contain', Mustard:'Does not contain', Sesame:'Contains', Sulphites:'Does not contain', Lupin:'Does not contain', Molluscs:'Does not contain', note:'Full prawn gyoza ingredient list supplied by the restaurant. Contains wheat/gluten, prawn (crustacean), fish (cod), soya and sesame. May contain celery and egg.' },
+        SD002: { Gluten:'Contains', Crustaceans:'Does not contain', Eggs:'Does not contain', Fish:'Does not contain', Peanuts:'Does not contain', Soybeans:'Does not contain', Milk:'Does not contain', Nuts:'Does not contain', Celery:'Does not contain', Mustard:'Does not contain', Sesame:'Does not contain', Sulphites:'Does not contain', Lupin:'Does not contain', Molluscs:'Does not contain', note:'Full JJ Breaded Onion Rings ingredient list supplied by the restaurant. Wheat flour, wheat starch, wheat fibre and wheat-derived dextrose are present; no other regulated allergens are listed.' },
+        SD012: { Gluten:'Contains', Crustaceans:'Does not contain', Eggs:'Does not contain', Fish:'Does not contain', Peanuts:'Does not contain', Soybeans:'Does not contain', Milk:'Contains', Nuts:'Does not contain', Celery:'Does not contain', Mustard:'Does not contain', Sesame:'Does not contain', Sulphites:'Does not contain', Lupin:'Does not contain', Molluscs:'Does not contain', note:'Full ingredient list supplied by the restaurant for Mac N Cheese Bites: wheat flour, durum wheat semolina and wheat starch; mozzarella, processed cheese, butter, milk protein, whey, cheddar and skimmed milk powder. Contains wheat/gluten and milk; no other regulated allergens are listed in the supplied ingredient list.' },
+        KID004: { Gluten:'Contains', Crustaceans:'Does not contain', Eggs:'Does not contain', Fish:'Does not contain', Peanuts:'Does not contain', Soybeans:'Does not contain', Milk:'Does not contain', Nuts:'Does not contain', Celery:'Does not contain', Mustard:'Does not contain', Sesame:'Does not contain', Sulphites:'Does not contain', Lupin:'Does not contain', Molluscs:'Does not contain', note:'Kids Onion Rings Meal includes JJ Breaded Onion Rings. Full ingredient list supplied by the restaurant: wheat flour, wheat starch, wheat fibre and wheat-derived dextrose are present; no other regulated allergens are listed for the onion rings.' },
+        DON001: { Gluten:'Contains', Soybeans:'Contains', Celery:'Contains', Mustard:'Contains', note:'Chicken doner: confirmed allergen breakdown supplied by the restaurant. Gluten/wheat, soya, celery and mustard are identified in the chicken seasoning/marinade. Bread and dip choices add allergens separately: naan/pitta contains wheat; naan also contains milk and may contain sesame/egg; mayonnaise-based dips contain egg and mustard; check selected dip and bread.' },
+        DON002: { Gluten:'Contains', Soybeans:'Contains', Celery:'Contains', Mustard:'Contains', Sulphites:'Contains', note:'Meat doner: same confirmed allergen profile as the meat component in the mixed doner, as confirmed by the restaurant. Bread and dip choices add allergens separately.' },
+        DON003: { Gluten:'Contains', Soybeans:'Contains', Celery:'Contains', Mustard:'Contains', Sulphites:'Contains', note:'Mixed chicken and meat doner: confirmed allergen breakdown supplied by the restaurant. Gluten/wheat, soya, celery, mustard and sulphites are identified in the doner components. Bread and dip choices add allergens separately: naan/pitta contains wheat; naan also contains milk and may contain sesame/egg; mayonnaise-based dips contain egg and mustard; BBQ/sweet chilli may add sulphites and gluten depending on the selected product.' },
+        BRD001: { Gluten:'Contains', Crustaceans:'Does not contain', Eggs:'Does not contain', Fish:'Does not contain', Peanuts:'Does not contain', Soybeans:'Does not contain', Milk:'Does not contain', Nuts:'Does not contain', Celery:'Does not contain', Mustard:'Does not contain', Sesame:'Does not contain', Sulphites:'Does not contain', Lupin:'Does not contain', Molluscs:'Does not contain', note:'Plain naan full ingredient list and allergen advice supplied by the restaurant: wheat flour is the only regulated allergen identified; the label says allergens including cereals containing gluten are shown in bold.' },
+        BRD007: { Gluten:'Contains', Milk:'Contains', note:'Garlic/coriander naan supplier label: wheat/gluten and milk.' },
+        BRD008: { Gluten:'Contains', Eggs:'May contain', Milk:'May contain', Nuts:'May contain', Sesame:'May contain', note:'Pitta supplier label: wheat/gluten; precautionary may-contain statement includes egg, milk, sesame and other nuts.' },
+        BRD009: { Gluten:'Contains', Eggs:'May contain', Milk:'May contain', Nuts:'May contain', Sesame:'May contain', note:'Peri Peri Pitta uses the same pitta bread supplier label.' },
+        SD004: { Gluten:'Contains', Soybeans:'Contains', note:'Mini vegetable singara label: wheat flour (gluten) and soya.' },
+        DES001: { Milk:'Contains', Nuts:'Contains', note:'Little Moons honey-roasted pistachio mochi label identifies milk and pistachio.' },
+        RIC003: { Eggs:'Contains', note:'Egg Fried Rice is explicitly described as containing egg; full recipe cross-contact status is not verified.' },
+        RIC006: { Crustaceans:'Contains', note:'Prawn Fried Rice is explicitly described as containing prawns; full recipe cross-contact status is not verified.' }
+      };
+      const flavourItems = new Set(['FEA001','FEA002','FEA004','FEA005','FEA009','FEA010','FEA011','CHK001','CHK002','WNG001','WNG002','TND001','CHK005','PLT001','PLT003','BDL001','BDL002','BDL003','BDL004','BDL005','BDL006','BDL007','KID006','RIC002']);
+      const breadChoiceItems = new Set(['FEA001','FEA002']);
+      body.innerHTML = HUNGRY_FOX_PRODUCTS.map(product => {
+        const item = evidence[product.Product_ID] || {};
+        const noteParts = [];
+        if (item.note) noteParts.push(item.note);
+        if (flavourItems.has(product.Product_ID)) noteParts.push('Selected chicken flavour changes the allergen profile: Garlic Parmesan uses a cheese ingredient whose supplier label identifies milk; Spicy Algerian sauce label lists egg and wheat/gluten; Naga sauce label warns of possible traces of nuts and peanuts. Check the exact current sauce label for the selected flavour.');
+        if (breadChoiceItems.has(product.Product_ID)) noteParts.push('Customer chooses naan or pitta; the bread choice changes the allergen profile.');
+        if (!item.note && !flavourItems.has(product.Product_ID)) noteParts.push('Recipe, supplier label and preparation details not fully matched to this menu item.');
+        return `<tr><td class="sticky left-0 bg-[#131b2e] py-2.5 px-3 font-semibold text-white">${esc(product.Product_Name)}</td>
+          ${allergens.map(name => {
+            const status = item[name] || 'Not confirmed';
+            const colour = status === 'Contains' ? 'text-rose-300' : status === 'May contain' ? 'text-amber-300' : 'text-slate-400';
+            return `<td class="py-2.5 px-2 ${colour} font-semibold">${status}</td>`;
+          }).join('')}
+          <td class="py-2.5 px-3 text-slate-300 min-w-[280px]">${esc(noteParts.join(' '))}</td></tr>`;
+      }).join('');
+    }
+
     // Render Menu
     function renderMenu() {
       const rawCategories = [...new Set(state.products.map(p => p.Category))];
@@ -869,8 +934,10 @@
         html += renderSelect('Wing Cooking Type', 'wing_cooking', WING_COOKING_OPTIONS);
       }
 
+      if (id === 'CHK005') html += renderSelect('Chicken Flavour', 'flavour_1', CHICKEN_FLAVOURS);
+
       // 3. Choose your flavor
-      if (['FEA001', 'FEA002', 'FEA004', 'FEA005', 'FEA011', 'CHK001', 'CHK002', 'WNG001', 'WNG002', 'TND001', 'CHK005', 'KID006'].includes(id)) {
+      if (['FEA001', 'FEA002', 'FEA004', 'FEA005', 'FEA011', 'CHK001', 'CHK002', 'WNG001', 'WNG002', 'TND001', 'KID006'].includes(id)) {
         html += renderSelect('Chicken Flavour', 'flavour_1', CHICKEN_FLAVOURS);
       } else if (id === 'FEA009') {
         html += renderSelect('Wing Flavour', 'flavour_1', CHICKEN_FLAVOURS);
@@ -1493,6 +1560,7 @@
     // Show payment status only after verifying the Stripe session with the Worker.
     document.addEventListener('DOMContentLoaded', async () => {
       renderMenu();
+      renderAllergenMatrix();
       renderCart();
       const params = new URLSearchParams(window.location.search);
       const payment = params.get('payment');
