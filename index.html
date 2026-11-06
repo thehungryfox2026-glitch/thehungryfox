@@ -184,51 +184,38 @@
       <!-- Generated dynamically from self-contained catalog -->
     </div>
 
-    <!-- Statutory 14 Allergen Matrix -->
+    <!-- Individual menu-item allergen register -->
     <section id="allergen-section" class="mt-16 pt-10 border-t border-[#1e293b]">
       <div class="bg-[#131b2e] border border-slate-800 rounded-2xl p-6 sm:p-8">
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
-          <div>
-            <span class="text-amber-400 text-xs uppercase tracking-wider font-extrabold block">Food Standards Agency Compliance</span>
-            <h2 class="font-serif text-2xl font-bold text-white mt-1">Statutory 14 Allergen Matrix</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl">
-              Prepared in a kitchen where allergens are handled. Please review below or inform our staff if you have severe dietary allergies before ordering.
-            </p>
-          </div>
-          <button onclick="toggleAllergenTable()" id="allergen-toggle-btn" class="bg-[#1e293b] hover:bg-slate-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-slate-700 transition">
-            Hide Allergen Matrix
-          </button>
+        <div class="mb-6">
+          <span class="text-amber-400 text-xs uppercase tracking-wider font-extrabold block">Allergen information</span>
+          <h2 class="font-serif text-2xl font-bold text-white mt-1">Allergen information by menu item</h2>
+          <p class="text-slate-300 text-sm mt-2 max-w-3xl">We take food allergies seriously. The supplier-label information currently available to us is not sufficient to confirm the allergen status of every recipe, sauce, coating, side and drink. Please contact us before ordering if you have an allergy. We will check the product information and preparation details with you.</p>
+          <p class="text-amber-300 text-xs font-bold mt-3">Important: “Not confirmed” does not mean allergen-free. This register is not a substitute for checking the current packaging and recipe before serving.</p>
         </div>
-
-        <div id="allergen-table-wrap" class="overflow-x-auto custom-scrollbar">
-          <table class="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider bg-[#0a101d]">
-                <th class="py-3 px-3 font-bold text-white">Menu Item</th>
-                <th class="py-3 px-2">Gluten</th>
-                <th class="py-3 px-2">Milk</th>
-                <th class="py-3 px-2">Egg</th>
-                <th class="py-3 px-2">Soy</th>
-                <th class="py-3 px-2">Mustard</th>
-                <th class="py-3 px-2">Celery</th>
-                <th class="py-3 px-2">Sesame</th>
-                <th class="py-3 px-2">Nuts</th>
-                <th class="py-3 px-2">Sulphites</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-800 text-slate-300">
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Baked Wings / Plain Chicken</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Fried Wings & Tenders</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Buldak Fire Noodles</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Doner Meat (Chicken / Lamb)</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Skin-on Fries & Wedges</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Mozzarella & Halloumi Bites</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td></tr>
-              <tr><td class="py-2.5 px-3 font-semibold text-white">Mochi Artisan Gelato</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-amber-400 font-bold">✓</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2">X</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2 text-slate-500">1</td><td class="py-2.5 px-2">X</td></tr>
-            </tbody>
+        <div class="flex flex-wrap gap-3 text-xs mb-4">
+          <span class="rounded-lg bg-amber-500/10 border border-amber-500/30 px-3 py-2 text-amber-200">Not confirmed = information not verified</span>
+          <span class="rounded-lg bg-slate-800 border border-slate-700 px-3 py-2 text-slate-300">14 regulated allergens listed</span>
+        </div>
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs border-collapse min-w-[1050px]">
+            <thead><tr class="border-b border-slate-700 bg-[#0a101d] text-slate-300 uppercase tracking-wide">
+              <th class="sticky left-0 bg-[#0a101d] py-3 px-3 text-white">Menu item</th>
+              <th class="py-3 px-2">Cereals containing gluten</th><th class="py-3 px-2">Crustaceans</th><th class="py-3 px-2">Eggs</th><th class="py-3 px-2">Fish</th><th class="py-3 px-2">Peanuts</th><th class="py-3 px-2">Soybeans</th><th class="py-3 px-2">Milk</th><th class="py-3 px-2">Nuts</th><th class="py-3 px-2">Celery</th><th class="py-3 px-2">Mustard</th><th class="py-3 px-2">Sesame</th><th class="py-3 px-2">Sulphur dioxide / sulphites</th><th class="py-3 px-2">Lupin</th><th class="py-3 px-2">Molluscs</th>
+            </tr></thead>
+            <tbody id="allergen-menu-rows" class="divide-y divide-slate-800 text-slate-300"></tbody>
           </table>
-          <p class="text-[11px] text-slate-400 mt-3 italic">
-            Key: <strong class="text-amber-400">✓</strong> = Contains directly | <strong class="text-slate-500">1</strong> = May Contain (Cross-contamination risk) | <strong>X</strong> = Free from
-          </p>
+        </div>
+        <div class="mt-6 border-t border-slate-800 pt-5">
+          <h3 class="font-bold text-white text-sm">Supplier-label information identified in our records</h3>
+          <ul class="list-disc pl-5 mt-2 space-y-1.5 text-xs text-slate-300">
+            <li>Vegetable bao bun packaging identifies wheat and soy ingredients/allergens.</li>
+            <li>Pitta bread packaging identifies wheat/gluten; its precautionary statement also refers to possible egg, milk, sesame and other nuts.</li>
+            <li>Garlic and coriander naan packaging identifies wheat/gluten and milk in its ingredient/allergen information.</li>
+            <li>Parmigiano Reggiano packaging identifies milk.</li>
+            <li>The seasoning label shown states that the factory also handles celery, gluten, eggs, milk, mustard, soy and sulphites. This is a factory-handling warning for that seasoning supplier, not proof that every menu item contains those allergens.</li>
+            <li>Some sauce, dessert and other ingredient labels are present, but each must be matched to the exact product and current recipe before an allergen can be assigned to a menu item.</li>
+          </ul>
         </div>
       </div>
     </section>
