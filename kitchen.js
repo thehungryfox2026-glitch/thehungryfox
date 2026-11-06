@@ -122,14 +122,22 @@ async function retryPendingRefund(env,order) {
   const remaining=Math.max(0,Number(order.total_pence||0)-succeeded);
   if(!remaining) return {httpStatus:409,error:"The refund total could not be verified. Please review this payment manually."};
   await env.DB.prepare("CREATE TABLE IF NOT EXISTS order_refund_attempts (order_id TEXT NOT NULL, attempt_number INTEGER NOT NULL, idempotency_key TEXT NOT NULL UNIQUE, stripe_refund_id TEXT, status TEXT NOT NULL, amount_pence INTEGER NOT NULL, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(order_id,attempt_number))").run();
-  const latest=await env.DB.prepare("SELECT attempt_number,idempotency_key,status,amount_pence FROM order_refund_attempts WHERE order_id=? ORDER BY attempt_number DESC LIMIT 1").bind(order.id).first();
+  let latest=await env.DB.prepare("SELECT attempt_number,idempotency_key,stripe_refund_id,status,amount_pence FROM order_refund_attempts WHERE order_id=? ORDER BY attempt_number DESC LIMIT 1").bind(order.id).first();
+  if(latest?.stripe_refund_id) {
+    const recorded=refunds.find(r=>r.id===latest.stripe_refund_id);
+    if(recorded) {
+      const recordedStatus=recorded.status==="succeeded"?"succeeded":recorded.status==="failed"||recorded.status==="canceled"?"failed": "pending";
+      if(recordedStatus!==latest.status) {
+        await env.DB.prepare("UPDATE order_refund_attempts SET status=?,updated_at=CURRENT_TIMESTAMP WHERE order_id=? AND attempt_number=?").bind(recordedStatus,order.id,latest.attempt_number).run();
+        latest.status=recordedStatus;
+      }
+    }
+  }
   let attemptNumber,idempotencyKey,amountPence=remaining;
   if(latest?.status==="processing") {
     attemptNumber=latest.attempt_number;
     idempotencyKey=latest.idempotency_key;
     amountPence=latest.amount_pence;
-  } else if(latest?.status==="pending"||latest?.status==="succeeded") {
-    return {httpStatus:409,error:"The last recorded refund attempt needs manual review. No new refund was created."};
   } else {
     attemptNumber=Number(latest?.attempt_number||0)+1;
     idempotencyKey="hungryfox-order-refund-"+order.id+"-retry-"+attemptNumber;
