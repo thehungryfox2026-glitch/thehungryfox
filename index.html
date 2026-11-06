@@ -195,13 +195,13 @@
         </div>
         <div class="flex flex-wrap gap-3 text-xs mb-4">
           <span class="rounded-lg bg-amber-500/10 border border-amber-500/30 px-3 py-2 text-amber-200">Not confirmed = information not verified</span>
-          <span class="rounded-lg bg-slate-800 border border-slate-700 px-3 py-2 text-slate-300">14 regulated allergens listed</span>
+          <span class="rounded-lg bg-rose-500/10 border border-rose-500/30 px-3 py-2 text-rose-200">Contains</span><span class="rounded-lg bg-amber-500/10 border border-amber-500/30 px-3 py-2 text-amber-200">May contain</span><span class="rounded-lg bg-slate-800 border border-slate-700 px-3 py-2 text-slate-300">Not confirmed</span><span class="rounded-lg bg-slate-800 border border-slate-700 px-3 py-2 text-slate-300">14 regulated allergens listed</span>
         </div>
         <div class="overflow-x-auto custom-scrollbar">
-          <table class="w-full text-left text-xs border-collapse min-w-[1050px]">
+          <table class="w-full text-left text-xs border-collapse min-w-[1450px]">
             <thead><tr class="border-b border-slate-700 bg-[#0a101d] text-slate-300 uppercase tracking-wide">
               <th class="sticky left-0 bg-[#0a101d] py-3 px-3 text-white">Menu item</th>
-              <th class="py-3 px-2">Cereals containing gluten</th><th class="py-3 px-2">Crustaceans</th><th class="py-3 px-2">Eggs</th><th class="py-3 px-2">Fish</th><th class="py-3 px-2">Peanuts</th><th class="py-3 px-2">Soybeans</th><th class="py-3 px-2">Milk</th><th class="py-3 px-2">Nuts</th><th class="py-3 px-2">Celery</th><th class="py-3 px-2">Mustard</th><th class="py-3 px-2">Sesame</th><th class="py-3 px-2">Sulphur dioxide / sulphites</th><th class="py-3 px-2">Lupin</th><th class="py-3 px-2">Molluscs</th>
+              <th class="py-3 px-2">Cereals containing gluten</th><th class="py-3 px-2">Crustaceans</th><th class="py-3 px-2">Eggs</th><th class="py-3 px-2">Fish</th><th class="py-3 px-2">Peanuts</th><th class="py-3 px-2">Soybeans</th><th class="py-3 px-2">Milk</th><th class="py-3 px-2">Nuts</th><th class="py-3 px-2">Celery</th><th class="py-3 px-2">Mustard</th><th class="py-3 px-2">Sesame</th><th class="py-3 px-2">Sulphur dioxide / sulphites</th><th class="py-3 px-2">Lupin</th><th class="py-3 px-2">Molluscs</th><th class="py-3 px-3">Evidence / recipe notes</th>
             </tr></thead>
             <tbody id="allergen-menu-rows" class="divide-y divide-slate-800 text-slate-300"></tbody>
           </table>
@@ -214,7 +214,7 @@
             <li>Garlic and coriander naan packaging identifies wheat/gluten and milk in its ingredient/allergen information.</li>
             <li>Parmigiano Reggiano packaging identifies milk.</li>
             <li>The seasoning label shown states that the factory also handles celery, gluten, eggs, milk, mustard, soy and sulphites. This is a factory-handling warning for that seasoning supplier, not proof that every menu item contains those allergens.</li>
-            <li>Some sauce, dessert and other ingredient labels are present, but each must be matched to the exact product and current recipe before an allergen can be assigned to a menu item.</li>
+            <li>The Spicy Algerian sauce label lists egg and wheat/gluten. The Naga sauce label warns that spices may contain traces of nuts and peanuts. These apply when that sauce is selected; they are not assigned as universal allergens to every chicken item. Other sauce and dessert labels are not fully legible or not yet matched to the exact recipe, so their remaining status is shown as Not confirmed.</li>
           </ul>
         </div>
       </div>
@@ -722,15 +722,40 @@
       return '£' + Number(val || 0).toFixed(2);
     }
 
-    // Render an individual row for every product in the live menu catalog.
-    // Unknown values remain unknown until the exact current recipe and supplier label are verified.
+    // Evidence-based allergen register. Only positive label/menu evidence is entered;
+    // an unlisted allergen stays "Not confirmed", never silently treated as absent.
     function renderAllergenMatrix() {
       const body = document.getElementById('allergen-menu-rows');
       if (!body) return;
       const allergens = ['Gluten','Crustaceans','Eggs','Fish','Peanuts','Soybeans','Milk','Nuts','Celery','Mustard','Sesame','Sulphites','Lupin','Molluscs'];
-      body.innerHTML = HUNGRY_FOX_PRODUCTS.map(product => `
-        <tr><td class="sticky left-0 bg-[#131b2e] py-2.5 px-3 font-semibold text-white">${esc(product.Product_Name)}</td>
-        ${allergens.map(() => '<td class="py-2.5 px-2 text-amber-300 font-semibold">Not confirmed</td>').join('')}</tr>`).join('');
+      const evidence = {
+        SD009: { Gluten:'Contains', Soybeans:'Contains', note:'Bao-bun supplier label: wheat and soy ingredients.' },
+        BRD007: { Gluten:'Contains', Milk:'Contains', note:'Garlic/coriander naan supplier label: wheat/gluten and milk.' },
+        BRD008: { Gluten:'Contains', Eggs:'May contain', Milk:'May contain', Nuts:'May contain', Sesame:'May contain', note:'Pitta supplier label: wheat/gluten; precautionary may-contain statement includes egg, milk, sesame and other nuts.' },
+        BRD009: { Gluten:'Contains', Eggs:'May contain', Milk:'May contain', Nuts:'May contain', Sesame:'May contain', note:'Peri Peri Pitta uses the same pitta bread supplier label.' },
+        SD004: { Gluten:'Contains', Soybeans:'Contains', note:'Mini vegetable singara label: wheat flour (gluten) and soya.' },
+        DES001: { Milk:'Contains', Nuts:'Contains', note:'Little Moons honey-roasted pistachio mochi label identifies milk and pistachio.' },
+        DES002: { Milk:'Contains', note:'Strawberry & cream mochi is an ice-cream/cream product; confirm current pack before service.' },
+        RIC003: { Eggs:'Contains', note:'Egg Fried Rice is explicitly described as containing egg; full recipe cross-contact status is not verified.' },
+        RIC006: { Crustaceans:'Contains', note:'Prawn Fried Rice is explicitly described as containing prawns; full recipe cross-contact status is not verified.' }
+      };
+      const flavourItems = new Set(['FEA001','FEA002','FEA004','FEA005','FEA009','FEA010','FEA011','CHK001','CHK002','WNG001','WNG002','TND001','CHK005','PLT001','PLT003','BDL001','BDL002','BDL003','BDL004','BDL005','BDL006','BDL007','KID006','RIC002']);
+      const breadChoiceItems = new Set(['FEA001','FEA002']);
+      body.innerHTML = HUNGRY_FOX_PRODUCTS.map(product => {
+        const item = evidence[product.Product_ID] || {};
+        const noteParts = [];
+        if (item.note) noteParts.push(item.note);
+        if (flavourItems.has(product.Product_ID)) noteParts.push('Selected chicken flavour changes the allergen profile. Spicy Algerian supplier label lists egg and wheat/gluten; Naga sauce label warns of possible traces of nuts and peanuts. Check the exact sauce label for the selected flavour.');
+        if (breadChoiceItems.has(product.Product_ID)) noteParts.push('Customer chooses naan or pitta; the bread choice changes the allergen profile.');
+        if (!item.note && !flavourItems.has(product.Product_ID)) noteParts.push('Recipe, supplier label and preparation details not fully matched to this menu item.');
+        return `<tr><td class="sticky left-0 bg-[#131b2e] py-2.5 px-3 font-semibold text-white">${esc(product.Product_Name)}</td>
+          ${allergens.map(name => {
+            const status = item[name] || 'Not confirmed';
+            const colour = status === 'Contains' ? 'text-rose-300' : status === 'May contain' ? 'text-amber-300' : 'text-slate-400';
+            return `<td class="py-2.5 px-2 ${colour} font-semibold">${status}</td>`;
+          }).join('')}
+          <td class="py-2.5 px-3 text-slate-300 min-w-[280px]">${esc(noteParts.join(' '))}</td></tr>`;
+      }).join('');
     }
 
     // Render Menu
