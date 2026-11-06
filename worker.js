@@ -17,14 +17,10 @@ const ALLOWED_LABELS={
 "Doner Spice":["DON001","DON002","DON003","FEA003","FEA006","FEA007"],
 "Doner Type":["FEA003","FEA006","FEA007"],
 "Snack Choice":["FEA003","FEA006","FEA008"],
-"Wing Cooking Type":["FEA004","FEA009","PLT001","BDL001","BDL002","BDL005","BDL006","BDL007","KID006"],
-"Wing Cooking":["RIC002"],
-"Chicken Flavour":["FEA001","FEA002","FEA004","FEA005","FEA011","CHK001","CHK002","CHK005","KID006","PLT002","BND004"],
-"Wing Flavour":["FEA005","FEA009","PLT002","BND004","BDL006","BDL007"],
-"Tender Flavour":["BDL006","BDL007","FEA010"],
-"Flavour 1":["PLT001","PLT003","BDL001","BDL002","BDL003","BDL004","BDL005"],
-"Flavour 2":["PLT001","PLT003","BDL001","BDL002","BDL003","BDL004","BDL005","BDL006","BDL007"],
-"Seasoning 1":["FRS001","FRS002","FRS005","FEA001","FEA002","FEA004","FEA005","FEA006","KID001","KID002","KID003","KID004","KID005","KID006","FRS003","FRS004","FRS006","FRS007","FRS008","FRS009","FEA009","FEA010","FEA011"],
+"Wing Cooking":["FEA004","FEA009","PLT001","BDL001","BDL002","BDL005","BDL006","BDL007","KID006","RIC002"],
+"Flavour 1":["FEA001","FEA002","FEA004","FEA005","FEA009","FEA010","FEA011","CHK001","CHK002","CHK005","WNG001","WNG002","TND001","KID006","PLT001","PLT002","PLT003","BDL001","BDL002","BDL003","BDL004","BDL005","BDL006","BDL007","BND004"],
+"Flavour 2":["FEA005","PLT001","PLT002","PLT003","BDL001","BDL002","BDL003","BDL004","BDL005","BDL006","BDL007","BND004"],
+"Seasoning 1":["FRS001","FRS002","FRS005","FEA001","FEA002","FEA004","FEA005","FEA006","KID001","KID002","KID003","KID004","KID005","KID006","FRS003","FRS004","FRS006","FRS007","FRS008","FRS009","FEA009","FEA010","FEA011","BDL001","BDL003","BDL005","BDL006","BDL007","BND004","PLT002","BDL002","BDL004"],
 "Seasoning 2":["BDL001","BDL003","BDL005","BDL006","BDL007","BND004","PLT002","BDL002","BDL004"],
 "Seasoning 3":["PLT002","BDL002","BDL004"],
 "Seasoning 4":["PLT002","BDL002","BDL004"],
@@ -34,10 +30,8 @@ const ALLOWED_LABELS={
 "Bread Choice":["FEA001","FEA002","FEA003"],
 "Dip 1":["FEA003","FEA004","FEA008","FEA009","FEA010","FEA011","BRD005","BRD006","SD001","SD002","SD003","SD004","SD006","SD007","SD008","SD009","SD010","SD011","SD012","SD013"],
 "Dip 2":["BDL005","BDL007"],
-"Drink 1":["FEA003","FEA005","FEA006","FEA007","FEA008","FEA009","FEA010","FEA011","BDL005","BDL006","BND004"],
+"Drink 1":["FEA003","FEA005","FEA006","FEA007","FEA008","FEA009","FEA010","FEA011","BDL005","BDL006","BND004","PLT002","BDL001","BDL002","BDL003","BDL004","KID001","KID002","KID003","KID004","KID005","KID006"],
 "Drink 2":["BDL005","BDL006","BND004"],
-"Bottled Drink":["PLT002","BDL001","BDL002","BDL003","BDL004"],
-"Kids Drink":["KID001","KID002","KID003","KID004","KID005","KID006"],
 "Meal Upgrade":["CHK001","CHK002","WNG001","WNG002","TND001","SD001","SD002","SD003","SD011"],
 "Meal Fries Seasoning":["CHK001","CHK002","WNG001","WNG002","TND001","SD001","SD002","SD003","SD011"],
 "Meal Drink":["CHK001","CHK002","WNG001","WNG002","TND001","SD001","SD002","SD003","SD011"],
@@ -58,19 +52,19 @@ function validateOptions(productId,options){
   let expected=0;
   if(label==="Bundle Side"){if(!(value in BUNDLE_SIDES))return null;expected=BUNDLE_SIDES[value];}
   else if(label==="Bread Choice"){if(!(value in BREADS))return null;expected=BREADS[value];}
-  else if(["Drink 1","Drink 2","Meal Drink"].includes(label)){if(!CANNED.includes(value))return null;expected=value==="Red Bull"?100:0;}
+  else if(["Drink 1","Drink 2","Meal Drink"].includes(label)){if(!CANNED.includes(value)&&!BOTTLED.includes(value)&&!KIDS_DRINKS.includes(value))return null;expected=value==="Red Bull"?100:0;}
   else if(label==="Meal Upgrade"){if(value!=="Fries & Drink (+£1.99)")return null;expected=199;}
   else if(label==="Whole Chicken Meal Upgrade"){if(value!=="2 Fries & Bottled Drink (+£6.50)")return null;expected=650;}
   else if(["Doner Spice"].includes(label)){if(!DONER_SPICES.includes(value))return null;}
   else if(label==="Doner Type"){if(!DONER_TYPES.includes(value))return null;}
   else if(label==="Snack Choice"){if(!SNACKS.includes(value))return null;}
-  else if(["Wing Cooking Type","Wing Cooking"].includes(label)){if(!WING_COOKING.includes(value))return null;}
-  else if(["Chicken Flavour","Wing Flavour","Tender Flavour","Flavour 1","Flavour 2"].includes(label)){if(!FLAVOURS.includes(value))return null;}
+  else if(label==="Wing Cooking"){if(!WING_COOKING.includes(value))return null;}
+  else if(["Flavour 1","Flavour 2"].includes(label)){if(!FLAVOURS.includes(value))return null;}
   else if(label.startsWith("Seasoning")||label.includes("Seasoning")){if(!FRIES_SEASONING.includes(value))return null;}
   else if(label==="Drizzle"){if(!DRIZZLES.includes(value))return null;}
   else if(label==="Side"){if(!["Coleslaw","Beans"].includes(value))return null;}
   else if(label==="Dip 1"||label==="Dip 2"){if(!DIPS.includes(value))return null;}
-  else if(label==="Bottled Drink"||label==="Meal Bottled Drink"){if(!BOTTLED.includes(value))return null;}
+  else if(label==="Meal Bottled Drink"){if(!BOTTLED.includes(value))return null;}
   else if(label==="Kids Drink"){if(!KIDS_DRINKS.includes(value))return null;}
   else if(label==="Meal Fries Seasoning"||label==="Fries 1 Seasoning"||label==="Fries 2 Seasoning"){if(!SEASONINGS.includes(value))return null;}
   else if(label==="Chicken Portion"){if(!["Quarter chicken","Four tenders","Five wings"].includes(value))return null;}
