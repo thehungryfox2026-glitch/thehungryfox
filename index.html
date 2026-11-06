@@ -869,6 +869,8 @@
         html += renderSelect('Wing Cooking Type', 'wing_cooking', WING_COOKING_OPTIONS);
       }
 
+      if (id === 'CHK005') html += renderSelect('Chicken Flavour', 'flavour_1', CHICKEN_FLAVOURS);
+
       // 3. Choose your flavor
       if (['FEA001', 'FEA002', 'FEA004', 'FEA005', 'FEA011', 'CHK001', 'CHK002', 'WNG001', 'WNG002', 'TND001', 'KID006'].includes(id)) {
         html += renderSelect('Chicken Flavour', 'flavour_1', CHICKEN_FLAVOURS);
