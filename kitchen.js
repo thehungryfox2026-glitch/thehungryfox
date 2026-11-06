@@ -118,7 +118,12 @@ async function retryPendingRefund(env,order) {
     const emailStatus=await sendRefundEmail(env,order,order.total_pence);
     return {refundStatus:"refunded",emailStatus};
   }
-  if(pending.length) return {refundStatus:"refund_pending",message:"Stripe is still processing an existing refund. No duplicate refund was created."};
+  if(pending.length) {
+    const ar=await fetch("https://api.stripe.com/v1/account",{headers:{Authorization:"Bearer "+key}});
+    const account=ar.ok?await ar.json():{};
+    const details=pending.map(r=>r.id+" "+r.status+" £"+(Number(r.amount||0)/100).toFixed(2)).join(", ");
+    return {refundStatus:"refund_pending",message:"Stripe API check: account "+(account.id||"unavailable")+", payment "+paymentIntent.slice(-8)+", refund "+details+". No duplicate refund was created."};
+  }
   const remaining=Math.max(0,Number(order.total_pence||0)-succeeded);
   if(!remaining) return {httpStatus:409,error:"The refund total could not be verified. Please review this payment manually."};
   await env.DB.prepare("CREATE TABLE IF NOT EXISTS order_refund_attempts (order_id TEXT NOT NULL, attempt_number INTEGER NOT NULL, idempotency_key TEXT NOT NULL UNIQUE, stripe_refund_id TEXT, status TEXT NOT NULL, amount_pence INTEGER NOT NULL, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(order_id,attempt_number))").run();
