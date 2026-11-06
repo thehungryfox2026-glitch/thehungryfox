@@ -1,13 +1,93 @@
 import { kitchenFetch, savePaidOrder } from "./kitchen.js";
 const ALLOWED_ORIGINS=new Set(["https://thehungryfox.co.uk","https://www.thehungryfox.co.uk","https://thehungryfox2026-glitch.github.io"]);
 const MENU={FEA001:["Half Chicken & Sides",12.49],FEA002:["Quarter Chicken & Sides",9.49],FEA003:["Doner Bread Snack Meal",13.99],FEA004:["Wings & Fries Combo",6.49],FEA005:["Baked Combo for 1",10.99],FEA006:["Doner Snack Bundle",11.99],FEA007:["Doner Deluxe Meal",9.49],FEA008:["Buldak & Snack Combo",9.99],FEA009:["Wings & Loaded Fries Bundle",10.99],FEA010:["Tenders & Loaded Fries Bundle",10.99],FEA011:["Quarter Chicken Loaded Fries Bundle",9.99],CHK001:["Quarter Baked Chicken",5.49],CHK002:["Half Baked Chicken",8.49],CHK005:["Whole Baked Chicken",12.49],WNG001:["Baked Wings (6 Pcs)",6.99],WNG002:["Fried Wings (6 Pcs)",6.49],TND001:["Tenders (6 Pcs)",7.99],NDL001:["Buldak Fire Noodles (HOT)",7.49],DON001:["Chicken Doner",7.99],DON002:["Meat Doner",8.99],DON003:["Mixed Doner",9.99],RIC001:["Flavour Rice",3.49],RIC002:["Chicken Rice Bowl",8.49],RIC003:["Egg Fried Rice",4.49],RIC004:["Vegetable Fried Rice",4.99],RIC005:["Chicken Fried Rice",5.49],RIC006:["Prawn Fried Rice",5.99],PLT001:["25 Wings",20.99],PLT002:["Baked Combo for Family",28.99],PLT003:["25 Tenders",26.99],BDL001:["15 Wings Bundle",18.99],BDL002:["20 Wing Party Bundle",22.99],BDL003:["15 Tenders Bundle",21.99],BDL004:["20 Tender Party Bundle",27.99],BDL005:["Double Flavour Wings Bundle",15.99],BDL006:["Wings and Tenders Mix Bundle",15.99],BND004:["Baked Combo for 2",18.99],BDL007:["Wings, Tender & Fries Duo",9.99],KID001:["Kids Chicken Nuggets Meal",4.99],KID002:["Kids Mozzarella Sticks Meal",4.99],KID003:["Kids Halloumi Fries Meal",4.99],KID004:["Kids Onion Rings Meal",4.99],KID005:["Kids Chicken Tenders Meal",4.99],KID006:["Kids Wings Meal",4.99],FRS001:["Fries (Small)",1.50],FRS002:["Fries (Large)",2.99],FRS003:["Chicken Loaded Fries",4.99],FRS004:["Chicken & Cheese Loaded Fries",5.49],FRS005:["Wedges",3.49],FRS006:["Chicken Loaded Wedges",5.49],FRS007:["Chicken & Cheese Loaded Wedges",5.99],FRS008:["Cheese Loaded Fries",3.99],FRS009:["Cheese Loaded Wedges",4.49],SD001:["Mozzarella Sticks (6 Pcs)",4.99],SD002:["Onion Rings (8 Pcs)",3.49],SD003:["Halloumi Fries (6 Pcs)",4.99],SD004:["Mini Singara (8 Pcs)",3.49],SD006:["Chilli Cheese Bites (3 Pcs)",2.79],SD007:["Vegetable Samosa (4 Pcs)",3.49],SD008:["Vegetable Spring Roll (4 Pcs)",3.49],SD009:["Veg Bao Buns (2 Pcs)",1.99],SD010:["Prawn Gyoza (3 Pcs)",1.99],SD011:["Chilli Cheese Bites (6 Pcs)",4.99],SD012:["Mac N Cheese Bites (8 Pcs)",5.99],SD013:["Medium Singara (4 Pcs)",3.49],BRD001:["Plain Naan",1.29],BRD002:["Garlic Bread (4 Pcs)",1.99],BRD003:["Beans",1.99],BRD004:["Coleslaw",1.99],BRD005:["Dip - Small",0.30],BRD006:["Dip - Large",0.50],BRD007:["Garlic Naan",2.19],BRD008:["Plain Pitta Bread",0.99],BRD009:["Peri Peri Pitta Bread",1.29],DES001:["Honey Roasted Pistachio Mochi (2 Pcs)",3.99],DES002:["Strawberry & Cream Mochi (2 Pcs)",3.99],DES003:["Pineapple & Mandarin Sorbet Mochi (2 Pcs)",3.99],DES004:["Ben & Jerry Cookie Dough",6.49],DES005:["Ben & Jerry Caramel Chew Chew",6.49],DES006:["Iced Latte Mochi (2 Pcs)",3.99],DES007:["Brown Butter Caramel Mochi (2 Pcs)",3.99],DES008:["Vegan Chocolate Fudge Mochi (2 Pcs)",3.99],DRK001:["Water",1],DRK018:["Blackcurrant Fruit Shoot",1],DRK019:["Orange Fruit Shoot",1],DRK003:["Coke",1.29],DRK004:["Diet Coke",1.29],DRK005:["Pepsi",1.29],DRK006:["Pepsi Max",1.29],DRK007:["Tango Orange",1.29],DRK008:["Tango apple",1.29],DRK009:["7up",1.29],DRK010:["Dr Pepper",1.29],DRK011:["Red Bull",2.15],DRK012:["Bottle Coke",2.99],DRK013:["Bottle Diet Coke",2.99],DRK014:["Bottle Pepsi",2.99],DRK015:["Bottle Pepsi Max",2.99],DRK016:["Bottle Tango",2.99],DRK017:["Bottle 7up",2.99]};
+
+const FLAVOURS=["Plain","Garlic Parmesan (Classic)","Sticky BBQ (Classic)","Peri Peri (Mild)","Honey Sriracha (Mild)","Spicy Algerian (Mild)","Smoky Cajun (Mild)","Buffalo (Mild)","Spicy BBQ (Hot)","Volcano (Hot)","Naga Sauce (Hot)","Mango Habanero (Hot)","Hot Hot (Extra Hot)","Seoul Fire (Extreme Hot)"];
+const DRIZZLES=["No Drizzle","Garlic Parmesan","Sticky BBQ","Peri Peri","Honey Sriracha","Spicy Algerian","Smoky Cajun","Buffalo","Spicy BBQ","Volcano","Naga Sauce","Mango Habanero","Hot Hot","Seoul Fire"];
+const SEASONINGS=["No Seasoning","Regular Salt","Peri Peri Salt","Cajun Dust","Chipotle Chilli Salt"];
+const DIPS=["Plain Mayo","Garlic Mayo","BBQ","Tomato Ketchup","Peri Mayo","Spicy Mayo","Sweet Chilli"];
+const CANNED=["Coke","Diet Coke","Pepsi","Pepsi Max","Tango Orange","Tango Apple","7UP","Dr Pepper","Red Bull"];
+const BOTTLED=["Bottle Coke","Bottle Diet Coke","Bottle Pepsi","Bottle Pepsi Max","Bottle Tango","Bottle 7UP"];
+const KIDS_DRINKS=["Blackcurrant Fruit Shoot","Orange Fruit Shoot","Water"];
+const BREADS={"Plain Naan":0,"Plain Pitta Bread":0,"Garlic Naan":99,"Peri Peri Pitta Bread":49};
+const BUNDLE_SIDES={"Plain Naan":0,"Beans":0,"Coleslaw":0,"Plain Pitta Bread":0,"Garlic Naan":99,"Peri Peri Pitta Bread":49,"Onion Rings (3 Pcs)":99,"Garlic Bread (2 Pcs)":99,"Halloumi Fries (2 Pcs)":100,"Mozzarella Sticks (2 Pcs)":100,"Vegetable Samosa (2 Pcs)":119,"Vegetable Spring Roll (2 Pcs)":119,"Mini Singara (Bengali Samosa) (4 Pcs)":129};
+const SNACKS=["Mini Singara (Bengali Samosa) (4 Pcs)","Vegetable Spring Roll (2 Pcs)","Vegetable Samosa (2 Pcs)","Medium Singara (2 Pcs)"];
+const DONER_TYPES=["Chicken Doner","Meat Doner","Mixed Doner"],DONER_SPICES=["MILD","CHILLI & HONEY","NAGA"],WING_COOKING=["Baked","Fried"],FRIES_SEASONING=SEASONINGS;
+const ALLOWED_LABELS={
+"Doner Spice":["DON001","DON002","DON003","FEA003","FEA006","FEA007"],
+"Doner Type":["FEA003","FEA006","FEA007"],
+"Snack Choice":["FEA003","FEA006","FEA008"],
+"Wing Cooking Type":["FEA004","FEA009","PLT001","BDL001","BDL002","BDL005","BDL006","BDL007","KID006"],
+"Wing Cooking":["RIC002"],
+"Chicken Flavour":["FEA001","FEA002","FEA004","FEA005","FEA011","CHK001","CHK002","CHK005","KID006","PLT002","BND004"],
+"Wing Flavour":["FEA005","PLT002","BND004","BDL006","BDL007"],
+"Tender Flavour":["BDL006","BDL007","FEA010"],
+"Flavour 1":["PLT001","PLT003","BDL001","BDL002","BDL003","BDL004","BDL005"],
+"Flavour 2":["PLT001","PLT003","BDL001","BDL002","BDL003","BDL004","BDL005","BDL006","BDL007"],
+"Seasoning 1":["FRS001","FRS002","FRS005","FEA001","FEA002","FEA004","FEA005","FEA006","KID001","KID002","KID003","KID004","KID005","KID006","FRS003","FRS004","FRS006","FRS007","FRS008","FRS009","FEA009","FEA010","FEA011"],
+"Seasoning 2":["BDL001","BDL003","BDL005","BDL006","BDL007","BND004","PLT002","BDL002","BDL004"],
+"Seasoning 3":["PLT002","BDL002","BDL004"],
+"Seasoning 4":["PLT002","BDL002","BDL004"],
+"Drizzle":["FRS003","FRS004","FRS006","FRS007","FRS008","FRS009","RIC002","FEA009","FEA010","FEA011"],
+"Side":["FEA007"],
+"Bundle Side":["BDL001","BDL002","BDL003","BDL004"],
+"Bread Choice":["FEA001","FEA002","FEA003"],
+"Dip 1":["FEA003","FEA004","FEA008","FEA009","FEA010","FEA011","BRD005","BRD006","SD001","SD002","SD003","SD004","SD006","SD007","SD008","SD009","SD010","SD011","SD012","SD013"],
+"Dip 2":["BDL005","BDL007"],
+"Drink 1":["FEA003","FEA005","FEA006","FEA007","FEA008","FEA009","FEA010","FEA011","BDL005","BDL006","BND004"],
+"Drink 2":["BDL005","BDL006","BND004"],
+"Bottled Drink":["PLT002","BDL001","BDL002","BDL003","BDL004"],
+"Kids Drink":["KID001","KID002","KID003","KID004","KID005","KID006"],
+"Meal Upgrade":["CHK001","CHK002","WNG001","WNG002","TND001","SD001","SD002","SD003","SD011"],
+"Meal Fries Seasoning":["CHK001","CHK002","WNG001","WNG002","TND001","SD001","SD002","SD003","SD011"],
+"Meal Drink":["CHK001","CHK002","WNG001","WNG002","TND001","SD001","SD002","SD003","SD011"],
+"Whole Chicken Meal Upgrade":["CHK005"],
+"Fries 1 Seasoning":["CHK005"],
+"Fries 2 Seasoning":["CHK005"],
+"Meal Bottled Drink":["CHK005"],
+"Rice Portion":["RIC002"]
+};
+function validateOptions(productId,options){
+ if(!Array.isArray(options))return null;
+ const seen=new Set();let extra=0;
+ for(const x of options){
+  if(!x||typeof x.label!=="string"||typeof x.value!=="string")return null;
+  const label=x.label,value=x.value,key=label+"\u0000"+value;
+  if(seen.has(label)||!ALLOWED_LABELS[label]?.includes(productId))return null;
+  seen.add(label);
+  let expected=0;
+  if(label==="Bundle Side"){if(!(value in BUNDLE_SIDES))return null;expected=BUNDLE_SIDES[value];}
+  else if(label==="Bread Choice"){if(!(value in BREADS))return null;expected=BREADS[value];}
+  else if(["Drink 1","Drink 2","Meal Drink"].includes(label)){if(!CANNED.includes(value))return null;expected=value==="Red Bull"?100:0;}
+  else if(label==="Meal Upgrade"){if(value!=="Fries & Drink (+£1.99)")return null;expected=199;}
+  else if(label==="Whole Chicken Meal Upgrade"){if(value!=="2 Fries & Bottled Drink (+£6.50)")return null;expected=650;}
+  else if(["Doner Spice"].includes(label)){if(!DONER_SPICES.includes(value))return null;}
+  else if(label==="Doner Type"){if(!DONER_TYPES.includes(value))return null;}
+  else if(label==="Snack Choice"){if(!SNACKS.includes(value))return null;}
+  else if(["Wing Cooking Type","Wing Cooking"].includes(label)){if(!WING_COOKING.includes(value))return null;}
+  else if(["Chicken Flavour","Wing Flavour","Tender Flavour","Flavour 1","Flavour 2"].includes(label)){if(!FLAVOURS.includes(value))return null;}
+  else if(label.startsWith("Seasoning")||label.includes("Seasoning")){if(!FRIES_SEASONING.includes(value))return null;}
+  else if(label==="Drizzle"){if(!DRIZZLES.includes(value))return null;}
+  else if(label==="Side"){if(!["Coleslaw","Beans"].includes(value))return null;}
+  else if(label==="Dip 1"||label==="Dip 2"){if(!DIPS.includes(value))return null;}
+  else if(label==="Bottled Drink"||label==="Meal Bottled Drink"){if(!BOTTLED.includes(value))return null;}
+  else if(label==="Kids Drink"){if(!KIDS_DRINKS.includes(value))return null;}
+  else if(label==="Meal Fries Seasoning"||label==="Fries 1 Seasoning"||label==="Fries 2 Seasoning"){if(!SEASONINGS.includes(value))return null;}
+  else if(label==="Rice Portion"){if(!["Quarter chicken","Four tenders","Five wings"].includes(value))return null;}
+  else return null;
+  const cents=Math.round(Number(x.price||0)*100);
+  if(!Number.isInteger(cents)||cents!==expected)return null;
+  extra+=expected;
+ }
+ return extra;
+}
 const cors=o=>({"Access-Control-Allow-Origin":ALLOWED_ORIGINS.has(o)?o:"https://thehungryfox.co.uk","Access-Control-Allow-Methods":"GET,POST,OPTIONS","Access-Control-Allow-Headers":"Content-Type","Vary":"Origin"});
 const out=(d,s=200,o="")=>new Response(JSON.stringify(d),{status:s,headers:{"Content-Type":"application/json",...cors(o)}});
 const norm=s=>String(s||"").toUpperCase().replace(/\s+/g,"").trim();
 async function quote(input,subtotal=0){const pc=norm(input);if(!/^[A-Z]{1,2}\d[A-Z\d]?\d[A-Z]{2}$/.test(pc))return{available:false,message:"Please enter a valid UK postcode."};const outward=pc.replace(/\d[A-Z]{2}$/,"");let fee=null,zone="";
 if(outward.startsWith("RM17")){fee=0;zone="Grays";}else if(outward.startsWith("RM16")){fee=0;zone="RM16";}else if(outward.startsWith("RM20")){fee=0;zone="West Thurrock";}else if(outward.startsWith("RM15")){fee=1.99;zone="South Ockendon";}else if(outward.startsWith("RM19")){fee=1.99;zone="Purfleet";}else if(pc.startsWith("RM187")){fee=1.99;zone="Tilbury";}else if(pc.startsWith("RM188")){fee=3.99;zone="RM18 8";}else if(pc==="SS170RN"||pc==="SS170QD"||pc==="SS170PP"){fee=3.99;zone="Linford";}if(fee===null)return{available:false,message:"Sorry, this postcode is outside our current delivery area."};const surcharge=subtotal>0&&subtotal<15?4:0;return{available:true,deliveryFee:fee,minimumOrderSurcharge:surcharge,totalDeliveryAndSurcharge:fee+surcharge,zone};}
 async function create(req,env,o){if(!env.STRIPE_SECRET_KEY)return out({error:"Stripe secret key is not configured on this Worker."},503,o);let b;try{b=await req.json();}catch{return out({error:"Invalid order details."},400,o);}const c=b.customer||{},items=b.items;if(!c.name||!c.phone||!c.email||!c.postcode||!c.address||!Array.isArray(items)||!items.length)return out({error:"Complete your delivery details and basket."},400,o);if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email))return out({error:"Enter a valid email address."},400,o);
-let subtotal=0,rows=[];for(const it of items){const p=MENU[it.productId],q=Number(it.quantity);if(!p||!Number.isInteger(q)||q<1||q>30)return out({error:"An item in your basket could not be verified. Refresh and try again."},400,o);let extra=0;const opts=Array.isArray(it.options)?it.options:[];for(const x of opts){const cents=Math.round(Number(x.price||0)*100);if(!Number.isInteger(cents)||![0,30,50,99,100,119,129,199,650].includes(cents))return out({error:"An option price could not be verified."},400,o);extra+=cents;}const unit=Math.round(p[1]*100)+extra;subtotal+=unit*q;rows.push({name:p[0],description:opts.map(x=>String(x.label||"")+": "+String(x.value||"")).join(", ").slice(0,450),unit,quantity:q});}
+let subtotal=0,rows=[];for(const it of items){const p=MENU[it.productId],q=Number(it.quantity);if(!p||!Number.isInteger(q)||q<1||q>30)return out({error:"An item in your basket could not be verified. Refresh and try again."},400,o);const opts=it.options===undefined?[]:it.options;const extra=validateOptions(it.productId,opts);if(extra===null)return out({error:"An option or option price could not be verified for this item. Refresh and try again."},400,o);const unit=Math.round(p[1]*100)+extra;subtotal+=unit*q;rows.push({name:p[0],description:opts.map(x=>String(x.label||"")+": "+String(x.value||"")).join(", ").slice(0,450),unit,quantity:q});}
 const d=await quote(c.postcode,subtotal/100);if(!d.available)return out({error:d.message},400,o);if(d.totalDeliveryAndSurcharge)rows.push({name:"Delivery and minimum-order adjustment",description:"Delivery zone: "+d.zone,unit:Math.round(d.totalDeliveryAndSurcharge*100),quantity:1});
 const form=new URLSearchParams();form.set("mode","payment");form.set("success_url","https://thehungryfox.co.uk/?payment=success&session_id={CHECKOUT_SESSION_ID}");form.set("cancel_url","https://thehungryfox.co.uk/?payment=cancelled");form.set("customer_email",c.email);form.set("phone_number_collection[enabled]","true");form.set("metadata[customer_name]",String(c.name).slice(0,200));form.set("metadata[customer_phone]",String(c.phone).slice(0,80));form.set("metadata[customer_email]",String(c.email).slice(0,200));form.set("metadata[postcode]",String(c.postcode).slice(0,20));form.set("metadata[delivery_address]",String(c.address).slice(0,400));form.set("metadata[notes]",String(c.notes||"").slice(0,500));form.set("metadata[delivery_zone]",d.zone);rows.forEach((x,i)=>{form.set("line_items["+i+"][price_data][currency]","gbp");form.set("line_items["+i+"][price_data][product_data][name]",x.name+(x.description?" — "+x.description:""));form.set("line_items["+i+"][price_data][unit_amount]",String(x.unit));form.set("line_items["+i+"][quantity]",String(x.quantity));});
 const r=await fetch("https://api.stripe.com/v1/checkout/sessions",{method:"POST",headers:{Authorization:"Bearer "+env.STRIPE_SECRET_KEY,"Content-Type":"application/x-www-form-urlencoded"},body:form});const data=await r.json();if(!r.ok)return out({error:data.error?.message||"Stripe checkout failed."},502,o);return out({url:data.url},200,o);}
