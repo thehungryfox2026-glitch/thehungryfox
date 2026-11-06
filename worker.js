@@ -20,7 +20,7 @@ const ALLOWED_LABELS={
 "Wing Cooking Type":["FEA004","FEA009","PLT001","BDL001","BDL002","BDL005","BDL006","BDL007","KID006"],
 "Wing Cooking":["RIC002"],
 "Chicken Flavour":["FEA001","FEA002","FEA004","FEA005","FEA011","CHK001","CHK002","CHK005","KID006","PLT002","BND004"],
-"Wing Flavour":["FEA005","PLT002","BND004","BDL006","BDL007"],
+"Wing Flavour":["FEA005","FEA009","PLT002","BND004","BDL006","BDL007"],
 "Tender Flavour":["BDL006","BDL007","FEA010"],
 "Flavour 1":["PLT001","PLT003","BDL001","BDL002","BDL003","BDL004","BDL005"],
 "Flavour 2":["PLT001","PLT003","BDL001","BDL002","BDL003","BDL004","BDL005","BDL006","BDL007"],
@@ -45,7 +45,7 @@ const ALLOWED_LABELS={
 "Fries 1 Seasoning":["CHK005"],
 "Fries 2 Seasoning":["CHK005"],
 "Meal Bottled Drink":["CHK005"],
-"Rice Portion":["RIC002"]
+"Chicken Portion":["RIC002"]
 };
 function validateOptions(productId,options){
  if(!Array.isArray(options))return null;
@@ -73,7 +73,7 @@ function validateOptions(productId,options){
   else if(label==="Bottled Drink"||label==="Meal Bottled Drink"){if(!BOTTLED.includes(value))return null;}
   else if(label==="Kids Drink"){if(!KIDS_DRINKS.includes(value))return null;}
   else if(label==="Meal Fries Seasoning"||label==="Fries 1 Seasoning"||label==="Fries 2 Seasoning"){if(!SEASONINGS.includes(value))return null;}
-  else if(label==="Rice Portion"){if(!["Quarter chicken","Four tenders","Five wings"].includes(value))return null;}
+  else if(label==="Chicken Portion"){if(!["Quarter chicken","Four tenders","Five wings"].includes(value))return null;}
   else return null;
   const cents=Math.round(Number(x.price||0)*100);
   if(!Number.isInteger(cents)||cents!==expected)return null;
