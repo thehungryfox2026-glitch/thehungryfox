@@ -160,9 +160,14 @@ async function retryPendingRefund(env,order) {
   const status=refund.status==="succeeded"?"succeeded":refund.status==="failed"||refund.status==="canceled"?"failed":"pending";
   await env.DB.prepare("UPDATE order_refund_attempts SET stripe_refund_id=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE order_id=? AND attempt_number=?").bind(refund.id||null,status,order.id,attemptNumber).run();
   if(status==="succeeded") {
-    await env.DB.prepare("UPDATE orders SET payment_status='refunded',kitchen_status='CANCELLED',updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(order.id).run();
-    const emailStatus=await sendRefundEmail(env,order,order.total_pence);
-    return {refundStatus:"refunded",emailStatus};
+    const totalRefunded=succeeded+Number(refund.amount||amountPence);
+    if(totalRefunded>=Number(order.total_pence||0)) {
+      await env.DB.prepare("UPDATE orders SET payment_status='refunded',kitchen_status='CANCELLED',updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(order.id).run();
+      const emailStatus=await sendRefundEmail(env,order,order.total_pence);
+      return {refundStatus:"refunded",emailStatus};
+    }
+    await env.DB.prepare("UPDATE orders SET payment_status='refund_pending',kitchen_status='CANCELLED',updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(order.id).run();
+    return {refundStatus:"refund_pending",message:"Stripe issued a partial refund. The remaining balance still needs to be refunded."};
   }
   if(status==="failed") return {refundStatus:"refund_failed",message:"Stripe declined this retry. You can check the payment and try again if appropriate."};
   await env.DB.prepare("UPDATE orders SET payment_status='refund_pending',kitchen_status='CANCELLED',updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(order.id).run();
