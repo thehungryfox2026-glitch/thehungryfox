@@ -1,0 +1,3 @@
+Harmless commit to trigger the Cloudflare preview build for hungryfox-api-preview.
+
+This file is not used by the application.
