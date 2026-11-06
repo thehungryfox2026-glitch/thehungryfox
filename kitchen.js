@@ -95,6 +95,68 @@ async function login(req,env) {
   const token=await makeCookie(env.DASHBOARD_PASSWORD);
   return new Response(JSON.stringify({ok:true}),{headers:{"Content-Type":"application/json","Cache-Control":"no-store","Set-Cookie":cookieHeader(token,43200)}});
 }
+async function retryPendingRefund(env,order) {
+  if(!env.STRIPE_SECRET_KEY) return {httpStatus:503,error:"Stripe is not configured. No retry was made."};
+  const key=env.STRIPE_SECRET_KEY;
+  const sessionId=String(order.stripe_session_id||"");
+  if((sessionId.startsWith("cs_test_")&&!key.startsWith("sk_test_"))||(sessionId.startsWith("cs_live_")&&!key.startsWith("sk_live_"))||!/^cs_(test|live)_[A-Za-z0-9]+$/.test(sessionId)) return {httpStatus:409,error:"The Stripe payment reference does not match this environment. No retry was made."};
+  const sr=await fetch("https://api.stripe.com/v1/checkout/sessions/"+encodeURIComponent(sessionId),{headers:{Authorization:"Bearer "+key}});
+  const session=await sr.json();
+  if(!sr.ok) return {httpStatus:502,error:session.error?.message||"Could not verify the Stripe payment."};
+  if(session.payment_status!=="paid") return {httpStatus:409,error:"Stripe does not show this payment as paid."};
+  const paymentIntent=typeof session.payment_intent==="string"?session.payment_intent:session.payment_intent?.id;
+  if(!paymentIntent) return {httpStatus:409,error:"Stripe did not provide a payment reference."};
+  const lr=await fetch("https://api.stripe.com/v1/refunds?payment_intent="+encodeURIComponent(paymentIntent)+"&limit=100",{headers:{Authorization:"Bearer "+key}});
+  const listed=await lr.json();
+  if(!lr.ok) return {httpStatus:502,error:listed.error?.message||"Could not check the existing Stripe refunds."};
+  if(listed.has_more) return {httpStatus:409,error:"There are many refund records for this payment. Please review it manually before retrying."};
+  const refunds=Array.isArray(listed.data)?listed.data:[];
+  const succeeded=refunds.filter(r=>r.status==="succeeded").reduce((n,r)=>n+Number(r.amount||0),0);
+  const pending=refunds.filter(r=>r.status==="pending"||r.status==="requires_action");
+  if(succeeded>=Number(order.total_pence||0)) {
+    await env.DB.prepare("UPDATE orders SET payment_status='refunded',kitchen_status='CANCELLED',updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(order.id).run();
+    const emailStatus=await sendRefundEmail(env,order,order.total_pence);
+    return {refundStatus:"refunded",emailStatus};
+  }
+  if(pending.length) return {refundStatus:"refund_pending",message:"Stripe is still processing an existing refund. No duplicate refund was created."};
+  const remaining=Math.max(0,Number(order.total_pence||0)-succeeded);
+  if(!remaining) return {httpStatus:409,error:"The refund total could not be verified. Please review this payment manually."};
+  await env.DB.prepare("CREATE TABLE IF NOT EXISTS order_refund_attempts (order_id TEXT NOT NULL, attempt_number INTEGER NOT NULL, idempotency_key TEXT NOT NULL UNIQUE, stripe_refund_id TEXT, status TEXT NOT NULL, amount_pence INTEGER NOT NULL, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(order_id,attempt_number))").run();
+  const latest=await env.DB.prepare("SELECT attempt_number,idempotency_key,status,amount_pence FROM order_refund_attempts WHERE order_id=? ORDER BY attempt_number DESC LIMIT 1").bind(order.id).first();
+  let attemptNumber,idempotencyKey,amountPence=remaining;
+  if(latest?.status==="processing") {
+    attemptNumber=latest.attempt_number;
+    idempotencyKey=latest.idempotency_key;
+    amountPence=latest.amount_pence;
+  } else if(latest?.status==="pending"||latest?.status==="succeeded") {
+    return {httpStatus:409,error:"The last recorded refund attempt needs manual review. No new refund was created."};
+  } else {
+    attemptNumber=Number(latest?.attempt_number||0)+1;
+    idempotencyKey="hungryfox-order-refund-"+order.id+"-retry-"+attemptNumber;
+    await env.DB.prepare("INSERT OR IGNORE INTO order_refund_attempts (order_id,attempt_number,idempotency_key,status,amount_pence) VALUES (?,?,?,'processing',?)").bind(order.id,attemptNumber,idempotencyKey,amountPence).run();
+    const claimed=await env.DB.prepare("SELECT attempt_number,idempotency_key,status,amount_pence FROM order_refund_attempts WHERE order_id=? AND attempt_number=?").bind(order.id,attemptNumber).first();
+    if(!claimed) return {httpStatus:500,error:"Could not safely prepare the refund retry."};
+    idempotencyKey=claimed.idempotency_key;
+    amountPence=claimed.amount_pence;
+    if(claimed.status!=="processing") return {refundStatus:claimed.status==="succeeded"?"refunded":claimed.status==="pending"?"refund_pending":"refund_failed"};
+  }
+  const form=new URLSearchParams();
+  form.set("payment_intent",paymentIntent);
+  form.set("amount",String(amountPence));
+  const rr=await fetch("https://api.stripe.com/v1/refunds",{method:"POST",headers:{Authorization:"Bearer "+key,"Content-Type":"application/x-www-form-urlencoded","Idempotency-Key":idempotencyKey},body:form});
+  const refund=await rr.json();
+  if(!rr.ok) return {httpStatus:502,error:refund.error?.message||"Stripe could not process the refund retry. The attempt is held safely for another status check."};
+  const status=refund.status==="succeeded"?"succeeded":refund.status==="failed"||refund.status==="canceled"?"failed":"pending";
+  await env.DB.prepare("UPDATE order_refund_attempts SET stripe_refund_id=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE order_id=? AND attempt_number=?").bind(refund.id||null,status,order.id,attemptNumber).run();
+  if(status==="succeeded") {
+    await env.DB.prepare("UPDATE orders SET payment_status='refunded',kitchen_status='CANCELLED',updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(order.id).run();
+    const emailStatus=await sendRefundEmail(env,order,order.total_pence);
+    return {refundStatus:"refunded",emailStatus};
+  }
+  if(status==="failed") return {refundStatus:"refund_failed",message:"Stripe declined this retry. You can check the payment and try again if appropriate."};
+  await env.DB.prepare("UPDATE orders SET payment_status='refund_pending',kitchen_status='CANCELLED',updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(order.id).run();
+  return {refundStatus:"refund_pending",message:"Stripe is still processing the refund. No duplicate refund will be created while it is pending."};
+}
 async function api(req,env,url) {
   if(!await authorised(req,env)) return json({error:"Please sign in again."},401);
   if(req.method==="GET"&&url.pathname==="/kitchen/api/orders") {
@@ -112,6 +174,21 @@ async function api(req,env,url) {
     const result=await env.DB.prepare("UPDATE orders SET kitchen_status=?,updated_at=CURRENT_TIMESTAMP WHERE id=? AND payment_status='paid' AND kitchen_status IN ('NEW','READY')").bind(body.status,body.id).run();
     if(!result.meta?.changes) return json({error:"Order not found or status can no longer be changed."},404);
     return json({ok:true});
+  }
+  if(req.method==="POST"&&url.pathname==="/kitchen/api/retry-refund") {
+    let body; try { body=await req.json(); } catch { return json({error:"Invalid request."},400); }
+    if(!body.id) return json({error:"Order reference is missing."},400);
+    const order=await env.DB.prepare("SELECT id,stripe_session_id,order_reference,customer_name,customer_email,total_pence,payment_status,kitchen_status FROM orders WHERE id=?").bind(body.id).first();
+    if(!order) return json({error:"Order not found."},404);
+    if(order.payment_status==="refunded") { const emailStatus=await sendRefundEmail(env,order,order.total_pence); return json({ok:true,refundStatus:"refunded",emailStatus}); }
+    if(order.payment_status!=="refund_pending"||order.kitchen_status!=="CANCELLED") return json({error:"Only cancelled orders with a pending refund can be checked or retried."},409);
+    try {
+      const result=await retryPendingRefund(env,order);
+      if(result.httpStatus) return json({error:result.error},result.httpStatus);
+      return json({ok:true,...result});
+    } catch(error) {
+      return json({error:"Could not safely check the refund. No additional refund was intentionally created. Please try again shortly."},502);
+    }
   }
   if(req.method==="POST"&&url.pathname==="/kitchen/api/cancel") {
     let body; try { body=await req.json(); } catch { return json({error:"Invalid request."},400); }
@@ -151,10 +228,12 @@ async function request(path,options={}){const r=await fetch(path,{...options,hea
 function beep(){if(!soundOn)return;try{ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=880;g.gain.value=.12;o.start();o.stop(ctx.currentTime+.22)}catch{}}
 function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function money(n){return "£"+(Number(n||0)/100).toFixed(2)}
-async function load(){try{const d=await request("/kitchen/api/orders");const orders=d.orders||[];const fresh=orders.filter(o=>!known.has(o.id)&&o.kitchen_status==="NEW");if(!first&&fresh.length)beep();known=new Set(orders.map(o=>o.id));first=false;$("last").textContent=" Last refreshed "+new Date().toLocaleTimeString();$("orders").innerHTML=orders.length?orders.map(o=>\`<article class="order"><div class="orderhead"><div><h2>Order #\${esc(o.order_reference)}</h2><span class="muted">\${new Date(o.created_at.replace(" ","T")+"Z").toLocaleString()}</span></div><span class="pill">\${statusLabel(o)}</span></div><ul class="items">\${(o.items||[]).map(i=>\`<li><strong>\${i.quantity} × \${esc(i.product_name)}</strong> — \${money(i.unit_price_pence*i.quantity)} \${i.options?"<br>"+esc(i.options):""}</li>\`).join("")}</ul><div class="details"><strong>Customer:</strong> \${esc(o.customer_name)}<br><strong>Phone:</strong> \${esc(o.customer_phone)}<br><strong>Email:</strong> \${esc(o.customer_email)}<br><strong>Delivery:</strong> \${esc(o.delivery_address)}, \${esc(o.postcode)} (\${esc(o.delivery_zone)})<br><strong>Notes:</strong> \${esc(o.notes)||"None"}<br><strong>Subtotal:</strong> \${money(o.subtotal_pence)} · <strong>Delivery:</strong> \${money(o.delivery_pence)} · <strong>Total:</strong> <strong>\${money(o.total_pence)}</strong></div><div class="actions no-print">\${o.kitchen_status==="NEW"?button(o,"READY","Ready",""):o.kitchen_status==="READY"?button(o,"OUT_FOR_DELIVERY","Start Delivery",""):""}\${["NEW","READY"].includes(o.kitchen_status)?cancelButton(o):""}</div></article>\`).join(""):'<div class="panel empty">No paid website orders yet.</div>'}catch(e){if(e.message.includes("sign in"))showLogin();}}
+async function load(){try{const d=await request("/kitchen/api/orders");const orders=d.orders||[];const fresh=orders.filter(o=>!known.has(o.id)&&o.kitchen_status==="NEW");if(!first&&fresh.length)beep();known=new Set(orders.map(o=>o.id));first=false;$("last").textContent=" Last refreshed "+new Date().toLocaleTimeString();$("orders").innerHTML=orders.length?orders.map(o=>\`<article class="order"><div class="orderhead"><div><h2>Order #\${esc(o.order_reference)}</h2><span class="muted">\${new Date(o.created_at.replace(" ","T")+"Z").toLocaleString()}</span></div><span class="pill">\${statusLabel(o)}</span></div><ul class="items">\${(o.items||[]).map(i=>\`<li><strong>\${i.quantity} × \${esc(i.product_name)}</strong> — \${money(i.unit_price_pence*i.quantity)} \${i.options?"<br>"+esc(i.options):""}</li>\`).join("")}</ul><div class="details"><strong>Customer:</strong> \${esc(o.customer_name)}<br><strong>Phone:</strong> \${esc(o.customer_phone)}<br><strong>Email:</strong> \${esc(o.customer_email)}<br><strong>Delivery:</strong> \${esc(o.delivery_address)}, \${esc(o.postcode)} (\${esc(o.delivery_zone)})<br><strong>Notes:</strong> \${esc(o.notes)||"None"}<br><strong>Subtotal:</strong> \${money(o.subtotal_pence)} · <strong>Delivery:</strong> \${money(o.delivery_pence)} · <strong>Total:</strong> <strong>\${money(o.total_pence)}</strong></div><div class="actions no-print">\${o.kitchen_status==="NEW"?button(o,"READY","Ready",""):o.kitchen_status==="READY"?button(o,"OUT_FOR_DELIVERY","Start Delivery",""):""}\${["NEW","READY"].includes(o.kitchen_status)?cancelButton(o):""}${o.kitchen_status==="CANCELLED"&&o.payment_status==="refund_pending"?retryRefundButton(o):""}</div></article>\`).join(""):'<div class="panel empty">No paid website orders yet.</div>'}catch(e){if(e.message.includes("sign in"))showLogin();}}
 function statusLabel(o){if(o.kitchen_status==="OUT_FOR_DELIVERY")return "OUT FOR DELIVERY";if(o.kitchen_status==="CANCELLED")return o.payment_status==="refunded"?"CANCELLED · REFUNDED":"CANCELLED · REFUND PENDING";return esc(String(o.kitchen_status||"").replaceAll("_"," "));}
 function button(o,status,label,cls){return '<button class="'+cls+'" onclick="changeStatus(&#39;'+esc(o.id)+'&#39;,&#39;'+status+'&#39;)">'+label+'</button>'}
 function cancelButton(o){return '<button class="warn" onclick="cancelOrder(&#39;'+esc(o.id)+'&#39;)">Cancel Order</button>'}
+function retryRefundButton(o){return '<button class="warn" onclick="retryRefund(&#39;'+esc(o.id)+'&#39;)">Check / Retry Refund</button>'}
+async function retryRefund(id){if(!confirm("Check Stripe for the existing refund. If it failed or was not created, this will safely retry the outstanding amount. Continue?"))return;try{const result=await request("/kitchen/api/retry-refund",{method:"POST",body:JSON.stringify({id})});alert(result.refundStatus==="refunded"?(result.emailStatus==="sent"?"Refund confirmed. Customer email sent.":"Refund confirmed. Customer email status: "+result.emailStatus+"."):result.message||"Refund status: "+result.refundStatus+".");await load()}catch(e){alert(e.message)}}
 async function changeStatus(id,status){try{await request("/kitchen/api/status",{method:"POST",body:JSON.stringify({id,status})});await load()}catch(e){alert(e.message)}}
 async function cancelOrder(id){if(!confirm("Confirm you have contacted the customer and they have declined a substitute. This will issue a FULL refund through Stripe. Continue?"))return;try{const result=await request("/kitchen/api/cancel",{method:"POST",body:JSON.stringify({id})});alert(result.refundStatus!=="refunded"?"Order cancelled. Stripe refund is pending.":result.emailStatus==="sent"?"Order cancelled. Full refund issued and customer email sent.":result.emailStatus==="failed"?"Refund issued, but the customer email could not be sent.":result.emailStatus==="not_configured"?"Refund issued. Customer email was not sent because email is not configured in this environment.":"Refund issued. Customer email status: "+result.emailStatus+".");await load()}catch(e){alert(e.message)}}
 function showLogin(){$("login").classList.remove("hidden");$("app").classList.add("hidden");$("logout").classList.add("hidden")}
