@@ -243,8 +243,8 @@ async function api(req,env,url) {
 }
 const PAGE = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Hungry Fox — Dashboard</title><style>
 *{box-sizing:border-box}body{margin:0;background:#f4f1eb;color:#211b18;font:15px Arial,sans-serif}header{background:#211b18;color:#fff;padding:16px 22px;display:flex;justify-content:space-between;align-items:center}.brand{display:flex;align-items:center;gap:12px}.brand img{width:46px;height:46px;object-fit:contain;background:#f7f0e5;border-radius:8px;padding:3px}h1{font-size:20px;margin:0}main{max-width:1100px;margin:24px auto;padding:0 14px}.panel,.order{background:white;border-radius:10px;padding:18px;margin-bottom:14px;box-shadow:0 2px 9px #0000000d}input,button,select{font:inherit;padding:11px;border-radius:7px;border:1px solid #ccc}button{cursor:pointer;background:#211b18;color:white;border:0;margin:4px 4px 4px 0}button.secondary{background:#eee;color:#211b18}button.warn{background:#a12c20}.hidden{display:none}.muted{color:#6b625b}.orderhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.items{padding-left:18px}.pill{font-size:13px;font-weight:700;min-width:150px;min-height:38px;padding:8px 14px;border-radius:4px;background:#000;color:#fff;display:inline-flex;align-items:center;justify-content:center;text-align:center;letter-spacing:.4px}.details{line-height:1.6}.actions{margin-top:12px}.empty{text-align:center;padding:35px}.login{max-width:380px;margin:12vh auto}.login input{width:100%;margin:8px 0}.login button{width:100%}@media print{header,.no-print,#login{display:none!important}body{background:white}.order{box-shadow:none;break-inside:avoid;border:1px solid #ddd}main{max-width:none;margin:0;padding:0}}
-</style></head><body><header><div class="brand"><img src="https://thehungryfox.co.uk/hungry-fox-logo-dark.png" alt="The Hungry Fox logo"><h1>THE HUNGRY FOX — DASHBOARD</h1></div><button id="logout" class="secondary hidden">Sign out</button></header><main><section id="login" class="panel login"><h2>Staff sign in</h2><form id="loginForm"><input id="password" type="password" placeholder="Dashboard password" autocomplete="current-password" required><button>Sign in</button><p id="loginError" class="muted"></p></form></section><section id="app" class="hidden"><div class="panel no-print"><strong>THE HUNGRY FOX ORDERS</strong> <span class="muted">— updates automatically every 5 seconds</span> <button id="sound" class="secondary">Enable sound</button><button id="checkPrinter" class="secondary">Check Bluetooth printer</button><button id="autoPrint" class="secondary">Auto print: OFF</button><button onclick="window.print()" class="secondary">Print orders</button><span id="printerStatus" class="muted">Bluetooth printer not checked</span><span id="last" class="muted"></span></div><div id="orders"></div></section></main><script>
-const $=id=>document.getElementById(id);let known=new Set(),soundOn=false,ctx=null,first=true,latestOrders=[],printerReady=false,printerName="",processingPending=false,autoPrintEnabled=localStorage.getItem("hf_auto_print")==="true",pendingAlerts=new Set();let alertTimer=null;try{pendingAlerts=new Set(JSON.parse(localStorage.getItem("hf_order_alerts")||"[]"))}catch{}
+</style></head><body><header><div class="brand"><img src="https://thehungryfox.co.uk/hungry-fox-logo-dark.png" alt="The Hungry Fox logo"><h1>THE HUNGRY FOX — DASHBOARD</h1></div><button id="logout" class="secondary hidden">Sign out</button></header><main><section id="login" class="panel login"><h2>Staff sign in</h2><form id="loginForm"><input id="password" type="password" placeholder="Dashboard password" autocomplete="current-password" required><button>Sign in</button><p id="loginError" class="muted"></p></form></section><section id="app" class="hidden"><div class="panel no-print"><strong>THE HUNGRY FOX ORDERS</strong> <span class="muted">— updates automatically every 5 seconds</span> <button id="sound" class="secondary">Enable sound</button><button onclick="window.print()" class="secondary">Print orders</button><span id="printerStatus" class="muted">Manual printing · USB printer via Android print menu</span><span id="last" class="muted"></span></div><div id="orders"></div></section></main><script>
+const $=id=>document.getElementById(id);let known=new Set(),soundOn=false,ctx=null,first=true,latestOrders=[],pendingAlerts=new Set();let alertTimer=null;try{pendingAlerts=new Set(JSON.parse(localStorage.getItem("hf_order_alerts")||"[]"))}catch{}
 async function request(path,options={}){const r=await fetch(path,{...options,headers:{"Content-Type":"application/json",...(options.headers||{})}});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||"Request failed");return d}
 function beep(){if(!soundOn)return;try{ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();const tones=[1046,784,1046,784];tones.forEach((hz,i)=>{const o=ctx.createOscillator(),g=ctx.createGain(),t=ctx.currentTime+i*.32;o.connect(g);g.connect(ctx.destination);o.type="sine";o.frequency.value=hz;g.gain.setValueAtTime(.35,t);g.gain.exponentialRampToValueAtTime(.001,t+.23);o.start(t);o.stop(t+.24)})}catch{}}
 function saveAlertIds(){try{localStorage.setItem("hf_order_alerts",JSON.stringify([...pendingAlerts]))}catch{}}
@@ -308,7 +308,7 @@ function receiptHtml(order){
   return "<div class='item'><div class='line'><span>"+esc(String(item.quantity||1)+" × "+part.name)+"</span><strong>"+esc(money(Number(item.unit_price_pence||0)*Number(item.quantity||1)))+"</strong></div>"+(part.options?"<div class='option'>"+esc(part.options)+"</div>":"")+"</div>";
  }).join("");
  const note=order.notes?"<section><strong>ORDER NOTES</strong><p>"+esc(order.notes)+"</p></section>":"";
- return "<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Hungry Fox receipt</title><style>*{box-sizing:border-box}body{margin:0;padding:16px;background:#eee8df;color:#211b18;font:14px Arial,sans-serif}.receipt{width:80mm;max-width:100%;margin:0 auto;background:#fff;padding:5mm 4mm}.brand{text-align:center;font-size:21px;font-weight:900;letter-spacing:1px}.tag{text-align:center;font-size:9px;margin:4px 0 12px}.center{text-align:center}.small{font-size:11px;color:#554c45}.rule{border:0;border-top:1px dashed #555;margin:10px 0}.line{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.item{margin:8px 0}.option{font-size:11px;color:#514941;margin:3px 0 0 8px;line-height:1.35;overflow-wrap:anywhere}.section{font-weight:bold;margin:8px 0 5px}.details{line-height:1.5;overflow-wrap:anywhere}.totals .line{margin:5px 0}.grand{font-size:16px;font-weight:bold;margin-top:8px}.footer{text-align:center;line-height:1.5;margin-top:12px;font-size:11px}.paid{font-weight:bold;text-align:center;border:1px solid #211b18;padding:5px;margin-top:10px}.actions{max-width:80mm;margin:12px auto;text-align:center}.actions button{padding:10px 18px;background:#211b18;color:white;border:0;border-radius:6px;font-weight:bold}@media print{body{padding:0;background:white}.receipt{width:80mm;max-width:none;margin:0;padding:3mm 3mm}.actions{display:none}@page{size:80mm auto;margin:0}}</style></head><body><div class='receipt'><div class='brand'>THE HUNGRY FOX</div><div class='tag'>CRACKING CHICKEN. INSANE FLAVORS.</div><hr class='rule'><div class='center'><strong>CUSTOMER RECEIPT</strong><div><strong>ORDER #"+esc(order.order_reference||order.id)+"</strong></div><div class='small'>"+esc(receiptDate(order))+"</div></div><hr class='rule'><div class='section'>DELIVERY DETAILS</div><div class='details'>"+esc(order.customer_name||"Customer")+"<br>"+esc(order.delivery_address||"")+"<br>"+esc(order.postcode||"")+"<br>Phone: "+esc(order.customer_phone||"")+"</div><hr class='rule'><div class='section'>YOUR ORDER</div>"+itemHtml+"<hr class='rule'><div class='totals'><div class='line'><span>Subtotal</span><span>"+esc(money(order.subtotal_pence))+"</span></div><div class='line'><span>Delivery & adjustment</span><span>"+esc(money(order.delivery_pence))+"</span></div><div class='line grand'><span>TOTAL PAID</span><span>"+esc(money(order.total_pence))+"</span></div></div><div class='paid'>PAID ONLINE</div>"+note+"<hr class='rule'><div class='footer'><strong>THANK YOU FOR ORDERING!</strong><br>thehungryfox.co.uk<br>Instagram & TikTok<br>@thehungryfox2026</div></div><div class='actions'><button onclick='window.print()'>Print receipt</button></div></body></html>";
+ return "<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Hungry Fox receipt</title><style>*{box-sizing:border-box}body{margin:0;padding:16px;background:#eee8df;color:#211b18;font:14px Arial,sans-serif}.receipt{width:58mm;max-width:100%;margin:0 auto;background:#fff;padding:3mm 4.75mm}.brand{text-align:center;font-size:21px;font-weight:900;letter-spacing:1px}.tag{text-align:center;font-size:9px;margin:4px 0 12px}.center{text-align:center}.small{font-size:11px;color:#554c45}.rule{border:0;border-top:1px dashed #555;margin:10px 0}.line{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.item{margin:8px 0}.option{font-size:11px;color:#514941;margin:3px 0 0 8px;line-height:1.35;overflow-wrap:anywhere}.section{font-weight:bold;margin:8px 0 5px}.details{line-height:1.5;overflow-wrap:anywhere}.totals .line{margin:5px 0}.grand{font-size:16px;font-weight:bold;margin-top:8px}.footer{text-align:center;line-height:1.5;margin-top:12px;font-size:11px}.paid{font-weight:bold;text-align:center;border:1px solid #211b18;padding:5px;margin-top:10px}.actions{max-width:80mm;margin:12px auto;text-align:center}.actions button{padding:10px 18px;background:#211b18;color:white;border:0;border-radius:6px;font-weight:bold}@media print{body{padding:0;background:white}.receipt{width:58mm;max-width:none;margin:0;padding:3mm 4.75mm}.actions{display:none}@page{size:58mm auto;margin:0}}</style></head><body><div class='receipt'><div class='brand'>THE HUNGRY FOX</div><div class='tag'>CRACKING CHICKEN. INSANE FLAVORS.</div><hr class='rule'><div class='center'><strong>CUSTOMER RECEIPT</strong><div><strong>ORDER #"+esc(order.order_reference||order.id)+"</strong></div><div class='small'>"+esc(receiptDate(order))+"</div></div><hr class='rule'><div class='section'>DELIVERY DETAILS</div><div class='details'>"+esc(order.customer_name||"Customer")+"<br>"+esc(order.delivery_address||"")+"<br>"+esc(order.postcode||"")+"<br>Phone: "+esc(order.customer_phone||"")+"</div><hr class='rule'><div class='section'>YOUR ORDER</div>"+itemHtml+"<hr class='rule'><div class='totals'><div class='line'><span>Subtotal</span><span>"+esc(money(order.subtotal_pence))+"</span></div><div class='line'><span>Delivery & adjustment</span><span>"+esc(money(order.delivery_pence))+"</span></div><div class='line grand'><span>TOTAL PAID</span><span>"+esc(money(order.total_pence))+"</span></div></div><div class='paid'>PAID ONLINE</div>"+note+"<hr class='rule'><div class='footer'><strong>THANK YOU FOR ORDERING!</strong><br>thehungryfox.co.uk<br>Instagram & TikTok<br>@thehungryfox2026</div></div><div class='actions'><button onclick='window.print()'>Print receipt</button></div></body></html>";
 }
 function previewReceipt(id){
  const order=latestOrders.find(function(x){return x.id===id;});
@@ -317,86 +317,8 @@ function previewReceipt(id){
  if(!win){alert("Please allow pop-ups for the kitchen dashboard to preview the receipt.");return;}
  win.document.open();win.document.write(receiptHtml(order));win.document.close();
 }
-function printStateMap(){
- try{return JSON.parse(localStorage.getItem("hf_receipt_print_states")||"{}")}catch{return {}}
-}
-function savePrintState(id,state){
- const map=printStateMap();map[id]={state:state,updatedAt:Date.now()};
- try{localStorage.setItem("hf_receipt_print_states",JSON.stringify(map))}catch{}
-}
-function pendingPrintIds(){
- try{return JSON.parse(localStorage.getItem("hf_receipt_auto_queue")||"[]")}catch{return []}
-}
-function savePendingPrintIds(ids){
- try{localStorage.setItem("hf_receipt_auto_queue",JSON.stringify(ids))}catch{}
-}
-function setPrinterMessage(message){
- const node=$("printerStatus");if(node)node.textContent=message;
-}
-function setAutoPrintButton(){
- const node=$("autoPrint");if(node)node.textContent="Auto print: "+(autoPrintEnabled?"ON":"OFF");
-}
-async function checkPrinter(){
- try{
-  const response=await fetch("http://localhost:9100/health",{signal:AbortSignal.timeout(1800)});
-  if(!response.ok)throw new Error("Bridge not ready");
-  const data=await response.json();
-  printerReady=!!data.printer?.connected;
-  printerName=data.printer?.name||"";
-  setPrinterMessage(printerReady?"Bluetooth printer connected"+(printerName?" · "+printerName:""):"Print bridge found, but no printer is selected");
- }catch(error){
-  printerReady=false;printerName="";
-  setPrinterMessage("Bluetooth print bridge not detected on this tablet");
- }
- if(printerReady&&autoPrintEnabled) await processPendingAutoPrint();
-}
-async function sendReceiptToPrinter(order){
- const response=await fetch("http://localhost:9100/print",{
-  method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body:JSON.stringify({paperWidth:80,cut:true,reference:"Order #"+String(order.order_reference||order.id),content:receiptContent(order)})
- });
- const data=await response.json().catch(function(){return {}});
- if(!response.ok)throw new Error(data.fix||data.detail||data.error||"The printer could not complete this receipt.");
- return data;
-}
-async function printReceipt(id){
- const order=latestOrders.find(function(x){return x.id===id;});
- if(!order){alert("Order details are not loaded. Refresh and try again.");return;}
- const prior=printStateMap()[id];
- if(prior?.state==="printed"&&!confirm("This receipt has already printed. Print another copy?"))return;
- if(!printerReady)await checkPrinter();
- if(!printerReady){previewReceipt(id);alert("The Bluetooth print bridge is not connected. The receipt preview has opened. When you buy the printer, install Cleanter on the Android tablet, pair a Bluetooth Classic ESC/POS printer and select it.");return;}
- try{
-  await sendReceiptToPrinter(order);savePrintState(id,"printed");
-  const pending=pendingPrintIds().filter(function(x){return x!==id});savePendingPrintIds(pending);
-  alert("Receipt sent to the Bluetooth printer.");
- }catch(error){savePrintState(id,"failed");alert(error.message+" Check the printer before trying again, to avoid duplicate copies.");}
-}
-async function processPendingAutoPrint(){
- if(processingPending||!printerReady||!autoPrintEnabled)return;
- processingPending=true;
- try{
-  const ids=pendingPrintIds();
-  for(const id of ids){
-   const order=latestOrders.find(function(x){return x.id===id;});
-   if(!order)continue;
-   if(printStateMap()[id]?.state==="printed"||printStateMap()[id]?.state==="failed")continue;
-   try{await sendReceiptToPrinter(order);savePrintState(id,"printed");}
-   catch(error){savePrintState(id,"failed");setPrinterMessage("Auto-print failed for order #"+String(order.order_reference||order.id)+". Check printer; use Print Receipt to retry.");}
-  }
-  savePendingPrintIds(ids.filter(function(id){const state=printStateMap()[id]?.state;return state!=="printed"&&state!=="failed";}));
- }finally{processingPending=false;}
-}
-function queueAutoPrint(orders){
- const ids=pendingPrintIds();
- orders.forEach(function(order){
-  if(!ids.includes(order.id)&&!["printed","failed"].includes(printStateMap()[order.id]?.state))ids.push(order.id);
- });
- savePendingPrintIds(ids);
- if(printerReady)processPendingAutoPrint();
-}
-async function load(){try{const d=await request("/kitchen/api/orders");const orders=d.orders||[];latestOrders=orders;const fresh=orders.filter(o=>!known.has(o.id)&&o.kitchen_status==="NEW");const firstSeen=orders.filter(o=>!known.has(o.id)&&o.payment_status==="paid"&&["NEW","READY","OUT_FOR_DELIVERY"].includes(o.kitchen_status));if(!first&&fresh.length){fresh.forEach(o=>pendingAlerts.add(o.id));saveAlertIds();startAlertLoop()}if(!first&&autoPrintEnabled&&firstSeen.length)queueAutoPrint(firstSeen);known=new Set(orders.map(o=>o.id));first=false;$("last").textContent=" Last refreshed "+new Date().toLocaleTimeString();$("orders").innerHTML=orders.length?orders.map(o=>\`<article class="order"><div class="orderhead"><div><h2>Order #\${esc(o.order_reference)}</h2><span class="muted">\${new Date(o.created_at.replace(" ","T")+"Z").toLocaleString()}</span></div><span class="pill">\${statusLabel(o)}</span></div><ul class="items">\${(o.items||[]).map(i=>\`<li><strong>\${i.quantity} × \${esc(i.product_name)}</strong> — \${money(i.unit_price_pence*i.quantity)} \${i.options?"<br>"+esc(i.options):""}</li>\`).join("")}</ul><div class="details"><strong>Customer:</strong> \${esc(o.customer_name)}<br><strong>Phone:</strong> \${esc(o.customer_phone)}<br><strong>Email:</strong> \${esc(o.customer_email)}<br><strong>Delivery:</strong> \${esc(o.delivery_address)}, \${esc(o.postcode)} (\${esc(o.delivery_zone)})<br><strong>Notes:</strong> \${esc(o.notes)||"None"}<br><strong>Subtotal:</strong> \${money(o.subtotal_pence)} · <strong>Delivery:</strong> \${money(o.delivery_pence)} · <strong>Total:</strong> <strong>\${money(o.total_pence)}</strong></div><div class="actions no-print">\${ackButton(o)}<button class="secondary" onclick="printReceipt(&#39;\${esc(o.id)}&#39;)">Print customer receipt</button>\${o.kitchen_status==="NEW"?button(o,"READY","Ready",""):o.kitchen_status==="READY"?button(o,"OUT_FOR_DELIVERY","Start Delivery",""):""}\${["NEW","READY"].includes(o.kitchen_status)?cancelButton(o):""}\${o.kitchen_status==="CANCELLED"&&o.payment_status==="refund_pending"?retryRefundButton(o):""}</div></article>\`).join(""):'<div class="panel empty">No paid website orders yet.</div>'}catch(e){if(e.message.includes("sign in"))showLogin();}}
+function printReceipt(id){previewReceipt(id);}
+async function load(){try{const d=await request("/kitchen/api/orders");const orders=d.orders||[];latestOrders=orders;const fresh=orders.filter(o=>!known.has(o.id)&&o.kitchen_status==="NEW");if(!first&&fresh.length){fresh.forEach(o=>pendingAlerts.add(o.id));saveAlertIds();startAlertLoop()}known=new Set(orders.map(o=>o.id));first=false;$("last").textContent=" Last refreshed "+new Date().toLocaleTimeString();$("orders").innerHTML=orders.length?orders.map(o=>\`<article class="order"><div class="orderhead"><div><h2>Order #\${esc(o.order_reference)}</h2><span class="muted">\${new Date(o.created_at.replace(" ","T")+"Z").toLocaleString()}</span></div><span class="pill">\${statusLabel(o)}</span></div><ul class="items">\${(o.items||[]).map(i=>\`<li><strong>\${i.quantity} × \${esc(i.product_name)}</strong> — \${money(i.unit_price_pence*i.quantity)} \${i.options?"<br>"+esc(i.options):""}</li>\`).join("")}</ul><div class="details"><strong>Customer:</strong> \${esc(o.customer_name)}<br><strong>Phone:</strong> \${esc(o.customer_phone)}<br><strong>Email:</strong> \${esc(o.customer_email)}<br><strong>Delivery:</strong> \${esc(o.delivery_address)}, \${esc(o.postcode)} (\${esc(o.delivery_zone)})<br><strong>Notes:</strong> \${esc(o.notes)||"None"}<br><strong>Subtotal:</strong> \${money(o.subtotal_pence)} · <strong>Delivery:</strong> \${money(o.delivery_pence)} · <strong>Total:</strong> <strong>\${money(o.total_pence)}</strong></div><div class="actions no-print">\${ackButton(o)}<button class="secondary" onclick="printReceipt(&#39;\${esc(o.id)}&#39;)">Print receipt</button>\${o.kitchen_status==="NEW"?button(o,"READY","Ready",""):o.kitchen_status==="READY"?button(o,"OUT_FOR_DELIVERY","Start Delivery",""):""}\${["NEW","READY"].includes(o.kitchen_status)?cancelButton(o):""}\${o.kitchen_status==="CANCELLED"&&o.payment_status==="refund_pending"?retryRefundButton(o):""}</div></article>\`).join(""):'<div class="panel empty">No paid website orders yet.</div>'}catch(e){if(e.message.includes("sign in"))showLogin();}}
 function statusLabel(o){if(o.kitchen_status==="OUT_FOR_DELIVERY")return "OUT FOR DELIVERY";if(o.kitchen_status==="CANCELLED")return o.payment_status==="refunded"?"CANCELLED · REFUNDED":"CANCELLED · REFUND PENDING";return esc(String(o.kitchen_status||"").replaceAll("_"," "));}
 function button(o,status,label,cls){return '<button class="'+cls+'" onclick="changeStatus(&#39;'+esc(o.id)+'&#39;,&#39;'+status+'&#39;)">'+label+'</button>'}
 function cancelButton(o){return '<button class="warn" onclick="cancelOrder(&#39;'+esc(o.id)+'&#39;)">Cancel Order</button>'}
@@ -405,13 +327,11 @@ async function retryRefund(id){if(!confirm("Check Stripe for the existing refund
 async function changeStatus(id,status){try{await request("/kitchen/api/status",{method:"POST",body:JSON.stringify({id,status})});await load()}catch(e){alert(e.message)}}
 async function cancelOrder(id){if(!confirm("Confirm you have contacted the customer and they have declined a substitute. This will issue a FULL refund through Stripe. Continue?"))return;try{const result=await request("/kitchen/api/cancel",{method:"POST",body:JSON.stringify({id})});alert(result.refundStatus!=="refunded"?"Order cancelled. Stripe refund is pending.":result.emailStatus==="sent"?"Order cancelled. Full refund issued and customer email sent.":result.emailStatus==="failed"?"Refund issued, but the customer email could not be sent.":result.emailStatus==="not_configured"?"Refund issued. Customer email was not sent because email is not configured in this environment.":"Refund issued. Customer email status: "+result.emailStatus+".");await load()}catch(e){alert(e.message)}}
 function showLogin(){$("login").classList.remove("hidden");$("app").classList.add("hidden");$("logout").classList.add("hidden")}
-function showApp(){$("login").classList.add("hidden");$("app").classList.remove("hidden");$("logout").classList.remove("hidden");setAutoPrintButton();checkPrinter();load()}
+function showApp(){$("login").classList.add("hidden");$("app").classList.remove("hidden");$("logout").classList.remove("hidden");load()}
 $("loginForm").addEventListener("submit",async e=>{e.preventDefault();$("loginError").textContent="";try{await request("/kitchen/login",{method:"POST",body:JSON.stringify({password:$("password").value})});$("password").value="";showApp()}catch(e){$("loginError").textContent=e.message}});
 $("logout").addEventListener("click",async()=>{await fetch("/kitchen/logout",{method:"POST"});showLogin()});
 $("sound").addEventListener("click",()=>{soundOn=true;ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();$("sound").textContent="Sound enabled";if(pendingAlerts.size)startAlertLoop();else beep()});
-$("checkPrinter").addEventListener("click",checkPrinter);
-$("autoPrint").addEventListener("click",()=>{autoPrintEnabled=!autoPrintEnabled;localStorage.setItem("hf_auto_print",String(autoPrintEnabled));setAutoPrintButton();if(autoPrintEnabled){checkPrinter();}});
-fetch("/kitchen/api/orders").then(r=>{if(r.ok)showApp()}).catch(()=>{});setInterval(()=>{if(!$("app").classList.contains("hidden"))load()},5000);setInterval(()=>{if(!$("app").classList.contains("hidden"))checkPrinter()},15000);
+fetch("/kitchen/api/orders").then(r=>{if(r.ok)showApp()}).catch(()=>{});setInterval(()=>{if(!$("app").classList.contains("hidden"))load()},5000);
 </script></body></html>`;
 export async function kitchenFetch(req,env,url) {
   if(url.pathname==="/kitchen"&&req.method==="GET") return new Response(PAGE,{headers:{"Content-Type":"text/html; charset=utf-8","Cache-Control":"no-store","X-Content-Type-Options":"nosniff"}});
