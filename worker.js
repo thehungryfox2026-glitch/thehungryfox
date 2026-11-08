@@ -87,7 +87,7 @@ async function loyaltyVerifyCode(req,env,o){
  await env.LOYALTY_DB.prepare("DELETE FROM loyalty_otps WHERE email=?").bind(email).run();
  const customer=await env.LOYALTY_DB.prepare("SELECT id,customer_name,order_count FROM loyalty_customers WHERE email=?").bind(email).first();
  if(!customer)return out({error:"No loyalty account was found for that email yet."},404,o);
- const rewards=await env.LOYALTY_DB.prepare("SELECT id,reward_code,reward_name,milestone_order,earned_at FROM loyalty_rewards WHERE customer_id=? AND status='available' ORDER BY milestone_order").bind(customer.id).all();
+ const rewards=await env.LOYALTY_DB.prepare("SELECT id,reward_code,reward_name,milestone_order,earned_at FROM loyalty_rewards WHERE customer_id=? AND status='available' AND NOT EXISTS (SELECT 1 FROM loyalty_reward_reservations rr WHERE rr.reward_id=loyalty_rewards.id AND rr.expires_at>?) ORDER BY milestone_order").bind(customer.id,Math.floor(Date.now()/1000)).all();
  const token=await createLoyaltyToken(customer,env);
  return out({token,expiresIn:604800,customer:{name:customer.customer_name,orders:customer.order_count},rewards:rewards.results||[]},200,o);
 }
