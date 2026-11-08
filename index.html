@@ -1022,6 +1022,13 @@
         `;
       }
 
+      // Cheese-loaded upgrade for regular fries. The selected number is the number of fries portions upgraded.
+      const friesUpgradePortions = { FRS001:1, FRS002:1, FEA001:1, FEA002:1, FEA004:1, FEA005:1, FEA006:1, KID001:1, KID002:1, KID003:1, KID004:1, KID005:1, KID006:1, BDL001:2, BDL003:2, BDL005:2, BDL006:2, BDL007:2, BND004:2, PLT002:4, BDL002:4, BDL004:4 };
+      if (friesUpgradePortions[id]) {
+        const maxLoaded = friesUpgradePortions[id];
+        html += '<div class="space-y-1"><label class="block text-xs font-bold text-slate-200 uppercase">Cheese-Loaded Fries Upgrade</label><select id="sel-fries_upgrade_qty" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">' + Array.from({length:maxLoaded+1},(_,n)=>'<option value="'+n+'">'+(n===0?'Keep all regular': 'Load '+n+' portion'+(n===1?'':'s')+' (+'+formatGBP(n*0.99)+')')+'</option>').join('') + '</select><p class="text-[10px] text-slate-400">Adds cheese only. Existing fries seasoning choices remain unchanged. +£0.99 per portion.</p></div>';
+      }
+
       // 5. Choose drizzle (Only for loaded items and Chicken Rice Bowl)
       if (['FRS003', 'FRS004', 'FRS006', 'FRS007', 'FRS008', 'FRS009', 'RIC002', 'FEA009', 'FEA010', 'FEA011'].includes(id)) {
         html += renderSelect('Chicken Drizzle', 'drizzle', DRIZZLE_OPTIONS);
@@ -1149,6 +1156,10 @@
                 </select>
               </div>
               <div>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Cheese-Loaded Fries Upgrade</label>
+                <select id="sel-meal_fries_upgrade_qty" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white"><option value="0">Keep regular fries</option><option value="1">Loaded Fries (+£0.99)</option></select>
+              </div>
+              <div>
                 <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Canned Drink</label>
                 <select id="sel-meal_drink" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">
                   ${CANNED_DRINKS.map(d => `<option value="${d.name}" data-price="${d.price}">${d.name} ${d.price > 0 ? '(+' + formatGBP(d.price) + ')' : ''}</option>`).join('')}
@@ -1169,6 +1180,10 @@
               <div class="grid grid-cols-2 gap-2">
                 <div><span class="text-[10px] text-slate-400 block mb-0.5">Fries 1 Seasoning</span><select id="sel-whole_seasoning_1" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
                 <div><span class="text-[10px] text-slate-400 block mb-0.5">Fries 2 Seasoning</span><select id="sel-whole_seasoning_2" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Cheese-Loaded Fries Upgrade</label>
+                <select id="sel-whole_fries_upgrade_qty" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white"><option value="0">Keep both regular</option><option value="1">Load 1 portion (+£0.99)</option><option value="2">Load both portions (+£1.98)</option></select>
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Bottled Drink</label>
@@ -1276,6 +1291,9 @@
         }
       });
 
+      const generalFriesUpgrade = document.getElementById('sel-fries_upgrade_qty');
+      if (generalFriesUpgrade) total += Math.max(0, Number(generalFriesUpgrade.value) || 0) * 0.99;
+
       const soloChk = document.getElementById('solo-upgrade-chk');
       if (soloChk && soloChk.checked) {
         total += 1.99;
@@ -1288,9 +1306,14 @@
       document.querySelectorAll('.optional-addon-qty').forEach(input => { total += Math.max(0, Math.floor(Number(input.value) || 0)) * Number(input.dataset.price || 0); });
       document.querySelectorAll('.addon-drink-qty').forEach(input => { total += Math.max(0, Math.floor(Number(input.value) || 0)) * Number(input.dataset.surcharge || 0); });
 
+      const mealFriesUpgrade = document.getElementById('sel-meal_fries_upgrade_qty');
+      if (soloChk && soloChk.checked && mealFriesUpgrade) total += Math.max(0, Number(mealFriesUpgrade.value) || 0) * 0.99;
+
       const wholeChk = document.getElementById('whole-upgrade-chk');
       if (wholeChk && wholeChk.checked) {
         total += 6.50;
+        const wholeFriesUpgrade = document.getElementById('sel-whole_fries_upgrade_qty');
+        if (wholeFriesUpgrade) total += Math.max(0, Number(wholeFriesUpgrade.value) || 0) * 0.99;
       }
 
       document.getElementById('modal-total-price').textContent = formatGBP(total);
@@ -1338,6 +1361,11 @@
         opts.push({ label: 'Meal Upgrade', value: 'Fries & Drink (+£1.99)', price: 1.99 });
         const sSeason = document.getElementById('sel-meal_seasoning');
         if (sSeason) opts.push({ label: 'Meal Fries Seasoning', value: sSeason.value, price: 0 });
+        const mealFriesUpgrade = document.getElementById('sel-meal_fries_upgrade_qty');
+        if (mealFriesUpgrade) {
+          const count = Math.max(0, Number(mealFriesUpgrade.value) || 0);
+          if (count) opts.push({ label: 'Cheese-Loaded Fries Upgrade', value: count + ' portion' + (count === 1 ? '' : 's'), price: count * 0.99 });
+        }
         const sDrink = document.getElementById('sel-meal_drink');
         if (sDrink) {
           const extraD = Number(sDrink.options[sDrink.selectedIndex]?.getAttribute('data-price') || 0);
@@ -1350,10 +1378,21 @@
         opts.push({ label: 'Whole Chicken Meal Upgrade', value: '2 Fries & Bottled Drink (+£6.50)', price: 6.50 });
         const w1 = document.getElementById('sel-whole_seasoning_1');
         const w2 = document.getElementById('sel-whole_seasoning_2');
+        const wholeFriesUpgrade = document.getElementById('sel-whole_fries_upgrade_qty');
+        if (wholeFriesUpgrade) {
+          const count = Math.max(0, Number(wholeFriesUpgrade.value) || 0);
+          if (count) opts.push({ label: 'Cheese-Loaded Fries Upgrade', value: count + ' portion' + (count === 1 ? '' : 's'), price: count * 0.99 });
+        }
         const wd = document.getElementById('sel-whole_drink');
         if (w1) opts.push({ label: 'Fries 1 Seasoning', value: w1.value, price: 0 });
         if (w2) opts.push({ label: 'Fries 2 Seasoning', value: w2.value, price: 0 });
         if (wd) opts.push({ label: 'Meal Bottled Drink', value: wd.value, price: 0 });
+      }
+
+      const genericFriesUpgrade = document.getElementById('sel-fries_upgrade_qty');
+      if (genericFriesUpgrade) {
+        const count = Math.max(0, Number(genericFriesUpgrade.value) || 0);
+        if (count) opts.push({ label: 'Cheese-Loaded Fries Upgrade', value: count + ' portion' + (count === 1 ? '' : 's'), price: count * 0.99 });
       }
 
       const drinkCanQty = Math.max(0, Math.floor(Number(document.getElementById('addon-Drink-Can')?.value) || 0));
