@@ -1108,9 +1108,10 @@
         html += renderSelect('Choose Kids Drink', 'drink_1', KIDS_DRINKS);
       }
 
-      // Optional multi-select add-ons for Solo Buldak Fire Noodles
-      if (id === 'NDL001') {
-        const buldakAddOns = [
+      // Optional add-ons for Solo Buldak Fire Noodles and all three doner kebabs.
+      // Quantity fields allow customers to order multiple of the same add-on.
+      if (['NDL001', 'DON001', 'DON002', 'DON003'].includes(id)) {
+        const addOns = [
           ['Fried Egg', 0.99],
           ['Fries', 0.99],
           ['Drink Can', 0.99],
@@ -1123,8 +1124,8 @@
           ['Vegetable Samosa', 1.49],
           ['Medium Vegetable Singara (2 Pcs)', 1.49]
         ];
-        html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-2"><p class="font-bold text-xs text-orange-400">Optional Add-ons — Choose Any</p><label class="flex items-center gap-2 text-xs text-slate-200"><input type="checkbox" id="buldak-no-addon" onchange="handleBuldakNoAddon(this)" checked> No Add On</label><div id="buldak-addon-list" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-2">' +
-          buldakAddOns.map((a,i) => '<label class="flex items-center gap-2 text-xs text-slate-200"><input type="checkbox" class="buldak-addon" data-name="' + a[0] + '" data-price="' + a[1] + '" onchange="handleBuldakAddonChange(this)"> ' + a[0] + ' (+' + formatGBP(a[1]) + ')</label>').join('') +
+        html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-2"><p class="font-bold text-xs text-orange-400">Optional Add-ons — Choose Any Quantity</p><label class="flex items-center gap-2 text-xs text-slate-200"><input type="checkbox" id="optional-no-addon" onchange="handleOptionalNoAddon(this)" checked> No Add On</label><div id="optional-addon-list" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-2">' +
+          addOns.map((a,i) => '<label class="flex items-center justify-between gap-2 text-xs text-slate-200"><span>' + a[0] + ' (+' + formatGBP(a[1]) + ')</span><input type="number" min="0" step="1" value="0" inputmode="numeric" aria-label="' + a[0] + ' quantity" class="optional-addon-qty w-16 bg-[#0b1326] border border-slate-700 rounded p-1.5 text-white" data-name="' + a[0] + '" data-price="' + a[1] + '" oninput="handleOptionalAddonChange(this)"></label>').join('') +
           '</div></div>';
       }
 
@@ -1182,10 +1183,10 @@
       document.getElementById('custom-modal').classList.add('flex');
     }
 
-    function handleBuldakNoAddon(el) {
-      const list = document.getElementById('buldak-addon-list');
+    function handleOptionalNoAddon(el) {
+      const list = document.getElementById('optional-addon-list');
       if (el.checked) {
-        document.querySelectorAll('.buldak-addon').forEach(cb => cb.checked = false);
+        document.querySelectorAll('.optional-addon-qty').forEach(input => input.value = '0');
         list.classList.add('hidden');
       } else {
         list.classList.remove('hidden');
@@ -1193,11 +1194,11 @@
       updateModalPrice();
     }
 
-    function handleBuldakAddonChange(el) {
-      const noAddon = document.getElementById('buldak-no-addon');
-      const anySelected = [...document.querySelectorAll('.buldak-addon')].some(cb => cb.checked);
+    function handleOptionalAddonChange() {
+      const noAddon = document.getElementById('optional-no-addon');
+      const anySelected = [...document.querySelectorAll('.optional-addon-qty')].some(input => Number(input.value) > 0);
       noAddon.checked = !anySelected;
-      document.getElementById('buldak-addon-list').classList.toggle('hidden', noAddon.checked);
+      document.getElementById('optional-addon-list').classList.toggle('hidden', noAddon.checked);
       updateModalPrice();
     }
 
@@ -1269,7 +1270,7 @@
         }
       }
 
-      document.querySelectorAll('.buldak-addon:checked').forEach(cb => { total += Number(cb.dataset.price || 0); });
+      document.querySelectorAll('.optional-addon-qty').forEach(input => { total += Math.max(0, Math.floor(Number(input.value) || 0)) * Number(input.dataset.price || 0); });
 
       const wholeChk = document.getElementById('whole-upgrade-chk');
       if (wholeChk && wholeChk.checked) {
@@ -1339,11 +1340,16 @@
         if (wd) opts.push({ label: 'Meal Bottled Drink', value: wd.value, price: 0 });
       }
 
-      document.querySelectorAll('.buldak-addon:checked').forEach(cb => opts.push({
-        label: 'Buldak Add-on', value: cb.dataset.name, price: Number(cb.dataset.price || 0)
-      }));
-      if (document.getElementById('buldak-no-addon')?.checked) {
-        opts.push({ label: 'Buldak Add-on', value: 'No Add On', price: 0 });
+      document.querySelectorAll('.optional-addon-qty').forEach(input => {
+        const quantity = Math.max(0, Math.floor(Number(input.value) || 0));
+        if (quantity > 0) opts.push({
+          label: 'Optional Add-on',
+          value: quantity + ' x ' + input.dataset.name,
+          price: quantity * Number(input.dataset.price || 0)
+        });
+      });
+      if (document.getElementById('optional-no-addon')?.checked) {
+        opts.push({ label: 'Optional Add-on', value: 'No Add On', price: 0 });
       }
 
       closeCustomModal();
