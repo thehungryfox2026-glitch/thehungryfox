@@ -156,6 +156,10 @@
       <h1 class="font-serif text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
         Hand-Tossed Sizzle. Deep Fox Crunch.
       </h1>
+      <div class="max-w-2xl mx-auto rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-left">
+        <p class="text-emerald-300 font-extrabold text-sm">Website basket offers</p>
+        <p class="text-slate-200 text-xs sm:text-sm mt-1">Get 10% off food orders of £20 or more, or 15% off food orders of £30 or more. Discount applies to food only.</p>
+      </div>
       <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
         Piping hot baked & fried chicken feast boxes, fiery buldak noodles, and freshly sizzled doner delivered straight to your door across Grays and Thurrock.
       </p>
@@ -329,6 +333,10 @@
         <div class="flex justify-between">
           <span>Item subtotal</span>
           <span id="cart-subtotal-val" class="font-bold text-white">£0.00</span>
+        </div>
+        <div id="cart-promo-row" class="hidden flex justify-between text-emerald-300">
+          <span id="cart-promo-label">Website offer</span>
+          <span id="cart-promo-val" class="font-bold">−£0.00</span>
         </div>
         <div id="cart-small-order-row" class="flex justify-between">
           <span>Small-order charge</span>
@@ -1448,6 +1456,12 @@
       document.getElementById('header-basket-count').textContent = totalCount;
       document.getElementById('cart-drawer-count').textContent = totalCount;
       document.getElementById('cart-subtotal-val').textContent = formatGBP(subtotal);
+      const promoRate = subtotal >= 30 ? 0.15 : (subtotal >= 20 ? 0.10 : 0);
+      const promoDiscount = Math.round(subtotal * promoRate * 100) / 100;
+      const promoRow = document.getElementById('cart-promo-row');
+      promoRow.classList.toggle('hidden', promoDiscount === 0);
+      document.getElementById('cart-promo-label').textContent = `Website offer (${Math.round(promoRate * 100)}%)`;
+      document.getElementById('cart-promo-val').textContent = '−' + formatGBP(promoDiscount);
 
       // Apply the £4 surcharge to baskets below £15.00
       const minStatus = document.getElementById('cart-min-status');
@@ -1469,7 +1483,7 @@
       minBar.className = (subtotal >= MIN_ORDER_AMOUNT ? 'bg-emerald-500' : 'bg-orange-500') + ' h-full transition-all duration-300';
       checkoutBtn.disabled = state.cart.length === 0;
 
-      const totalPayable = subtotal + surcharge + (state.deliveryQuote?.deliveryFee || 0);
+      const totalPayable = subtotal - promoDiscount + surcharge + (state.deliveryQuote?.deliveryFee || 0);
       document.getElementById('cart-total-val').textContent = formatGBP(totalPayable);
 
       if (state.cart.length === 0) {
