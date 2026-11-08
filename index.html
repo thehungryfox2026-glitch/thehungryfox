@@ -1684,7 +1684,7 @@
     }
     async function requestLoyaltyCode() {
       const email=document.getElementById('loyalty-email').value.trim().toLowerCase();
-      if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){loyaltyStatus('Please enter a valid email address.',true);return;}
+      if(!/^[^\s@]+@[^\s@]+\\.[^\s@]+$/.test(email)){loyaltyStatus('Please enter a valid email address.',true);return;}
       const btn=document.getElementById('loyalty-send-code');btn.disabled=true;loyaltyStatus('Sending your code…');
       try{
         const res=await fetch(API_BASE_URL+'/loyalty/request-code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
@@ -1695,7 +1695,7 @@
     }
     async function verifyLoyaltyCode() {
       const code=document.getElementById('loyalty-code').value.trim();
-      if(!/^\\d{6}$/.test(code)){loyaltyStatus('Enter the six-digit code from your email.',true);return;}
+      if(!/^\d{6}$/.test(code)){loyaltyStatus('Enter the six-digit code from your email.',true);return;}
       loyaltyStatus('Verifying your code…');
       try{
         const res=await fetch(API_BASE_URL+'/loyalty/verify-code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:loyaltyEmailForCode||document.getElementById('loyalty-email').value.trim().toLowerCase(),code})});
