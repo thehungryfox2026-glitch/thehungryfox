@@ -1076,7 +1076,7 @@
       }
 
       // 9. Choose drink
-      if (['FEA003', 'FEA005', 'FEA006', 'FEA007', 'FEA008', 'FEA009', 'FEA010', 'FEA011', 'NDL001'].includes(id)) {
+      if (['FEA003', 'FEA005', 'FEA006', 'FEA007', 'FEA008', 'FEA009', 'FEA010', 'FEA011'].includes(id)) {
         html += `
           <div class="space-y-1">
             <label class="block text-xs font-bold text-slate-200 uppercase">Choose Canned Drink</label>
@@ -1108,8 +1108,8 @@
         html += renderSelect('Choose Kids Drink', 'drink_1', KIDS_DRINKS);
       }
 
-      // Optional add-ons for Solo Buldak Fire Noodles and all three doner kebabs.
-      // Quantity fields allow customers to order multiple of the same add-on.
+      // Unified optional paid add-ons for Solo Buldak Fire Noodles and all three doner kebabs.
+      // All add-ons are optional, start at quantity zero, and have no maximum quantity.
       if (['NDL001', 'DON001', 'DON002', 'DON003'].includes(id)) {
         const addOns = [
           ['Fried Egg', 0.99],
@@ -1124,8 +1124,8 @@
           ['Vegetable Samosa', 1.49],
           ['Medium Vegetable Singara (2 Pcs)', 1.49]
         ];
-        html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-2"><p class="font-bold text-xs text-orange-400">Optional Add-ons</p><p class="text-[11px] text-slate-400">Scroll through the extras and choose a quantity for anything you would like. Leave as “Don’t add” for no extra.</p><div id="optional-addon-list" class="max-h-56 overflow-y-auto overscroll-contain pr-1 space-y-2">' +
-          addOns.map(a => '<div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-2"><label for="addon-' + a[0].replace(/[^a-z0-9]/gi,'-') + '" class="text-xs text-slate-200 flex-1">' + a[0] + ' <span class="text-slate-400">(+' + formatGBP(a[1]) + ' each)</span></label><select id="addon-' + a[0].replace(/[^a-z0-9]/gi,'-') + '" aria-label="' + a[0] + ' quantity" class="optional-addon-qty w-28 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="' + a[0] + '" data-price="' + a[1] + '" onchange="handleOptionalAddonChange(this)"><option value="0">Don’t add</option>' + [1,2,3,4,5].map(q => '<option value="' + q + '">' + q + '</option>').join('') + '</select></div>').join('') +
+        html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-3"><div><p class="font-bold text-xs text-orange-400">Choose your add-ons</p><p class="text-[11px] text-slate-400 mt-1">All extras are optional and charged at the prices shown. Select No Add-on or enter a quantity for any extras you want.</p></div><label class="flex items-center gap-2 text-xs text-slate-200 font-semibold"><input type="checkbox" id="no-optional-addons" checked onchange="handleNoOptionalAddonsChange(this)" class="w-4 h-4 rounded bg-[#0b1326] border-slate-700" /> No Add-on</label><div id="optional-addon-list" class="max-h-56 overflow-y-auto overscroll-contain pr-1 space-y-2">' +
+          addOns.map(a => '<div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-2"><label for="addon-' + a[0].replace(/[^a-z0-9]/gi,'-') + '" class="text-xs text-slate-200 flex-1">' + a[0] + ' <span class="text-slate-400">(+' + formatGBP(a[1]) + ' each)</span></label><input type="number" min="0" step="1" inputmode="numeric" value="0" id="addon-' + a[0].replace(/[^a-z0-9]/gi,'-') + '" aria-label="' + a[0] + ' quantity" class="optional-addon-qty w-20 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="' + a[0] + '" data-price="' + a[1] + '" oninput="handleOptionalAddonChange(this)" /></div>').join('') +
           '</div></div>';
       }
 
@@ -1183,7 +1183,17 @@
       document.getElementById('custom-modal').classList.add('flex');
     }
 
-    function handleOptionalAddonChange() {
+    function handleOptionalAddonChange(input) {
+      const noAddons = document.getElementById('no-optional-addons');
+      if (noAddons && Number(input?.value || 0) > 0) noAddons.checked = false;
+      if (noAddons && [...document.querySelectorAll('.optional-addon-qty')].every(field => Math.max(0, Math.floor(Number(field.value) || 0)) === 0)) noAddons.checked = true;
+      updateModalPrice();
+    }
+
+    function handleNoOptionalAddonsChange(checkbox) {
+      if (checkbox.checked) {
+        document.querySelectorAll('.optional-addon-qty').forEach(input => { input.value = 0; });
+      }
       updateModalPrice();
     }
 
