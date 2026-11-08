@@ -186,7 +186,12 @@
 
     <!-- Individual menu-item allergen register -->
     <section id="allergen-section" class="mt-16 pt-10 border-t border-[#1e293b]">
-      <div class="bg-[#131b2e] border border-slate-800 rounded-2xl p-6 sm:p-8">
+      <div class="bg-[#131b2e] border border-slate-800 rounded-2xl p-4 sm:p-5">
+        <button type="button" id="allergen-toggle-btn" aria-controls="allergen-details" aria-expanded="false" onclick="toggleAllergenDetails()" class="w-full flex items-center justify-between gap-4 text-left">
+          <span class="font-bold text-amber-400 text-sm uppercase tracking-wider">Allergen Information</span>
+          <span id="allergen-toggle-icon" class="text-amber-400 text-xl" aria-hidden="true">＋</span>
+        </button>
+        <div id="allergen-details" class="hidden pt-6">
         <div class="mb-6">
           <span class="text-amber-400 text-xs uppercase tracking-wider font-extrabold block">Allergen information</span>
           <h2 class="font-serif text-2xl font-bold text-white mt-1">Allergen information by menu item</h2>
@@ -248,6 +253,7 @@
             <li>The seasoning label shown states that the factory also handles celery, gluten, eggs, milk, mustard, soy and sulphites. This is a factory-handling warning for that seasoning supplier, not proof that every menu item contains those allergens.</li>
             <li>The Spicy Algerian sauce label lists egg and wheat/gluten. The Naga sauce label warns that spices may contain traces of nuts and peanuts. These apply when that sauce is selected; they are not assigned as universal allergens to every chicken item. Other sauce and dessert labels are not fully legible or not yet matched to the exact recipe, so their remaining status is shown as Not confirmed.</li>
           </ul>
+        </div>
         </div>
       </div>
     </section>
@@ -558,6 +564,12 @@
     ];
 
     const BUNDLE_SIDES = [
+      { name: 'Mini Singara (4 pcs)', price: 1.19 },
+      { name: 'Medium Singara', price: 1.49 },
+      { name: 'Vegetable Samosa', price: 1.49 },
+      { name: 'Vegetable Singara (2 Pcs)', price: 1.49 },
+      { name: 'Halloumi', price: 1.19 },
+      { name: 'Mozzarella sticks', price: 1.19 },
       { name: 'Plain Naan', price: 0 },
       { name: 'Beans', price: 0 },
       { name: 'Coleslaw', price: 0 },
@@ -574,6 +586,9 @@
     ];
 
     const CANNED_DRINKS = [
+      { name: 'Blackcurrant Fruit Shoot', price: 0 },
+      { name: 'Orange Fruit Shoot', price: 0 },
+      { name: 'Water', price: 0 },
       { name: 'Coke', price: 0 },
       { name: 'Diet Coke', price: 0 },
       { name: 'Pepsi', price: 0 },
@@ -591,10 +606,14 @@
       'Bottle Pepsi',
       'Bottle Pepsi Max',
       'Bottle Tango',
-      'Bottle 7UP'
+      'Bottle 7UP',
+      'Blackcurrant Fruit Shoot',
+      'Orange Fruit Shoot',
+      'Water'
     ];
 
     const KIDS_DRINKS = ['Blackcurrant Fruit Shoot', 'Orange Fruit Shoot', 'Water'];
+    const KIDS_FLAVOURS = CHICKEN_FLAVOURS.filter(f => f === 'Plain' || f.includes('(Classic)') || f.includes('(Mild)'));
 
     const DIP_OPTIONS = [
       'Plain Mayo',
@@ -609,8 +628,8 @@
     // Complete 99 Products Inventory
     const HUNGRY_FOX_PRODUCTS = [
       // 1. Special Featured
-      { Product_ID: 'FEA001', Product_Name: 'Half Chicken & Sides', Category: 'Special Featured', Price: 12.49, Description: 'A generous half baked chicken, coated in your choice of flavor and served with fries and your choice of naan or pitta bread.' },
       { Product_ID: 'FEA002', Product_Name: 'Quarter Chicken & Sides', Category: 'Special Featured', Price: 9.49, Description: 'A quarter baked chicken, coated in your choice of flavor and served with fries and your choice of naan or pitta bread.' },
+      { Product_ID: 'FEA001', Product_Name: 'Half Chicken & Sides', Category: 'Special Featured', Price: 12.49, Description: 'A generous half baked chicken, coated in your choice of flavor and served with fries and your choice of naan or pitta bread.' },
       { Product_ID: 'FEA003', Product_Name: 'Doner Bread Snack Meal', Category: 'Special Featured', Price: 13.99, Description: 'Your choice of chicken, meat, or mixed doner served with bread, a snack, drink, and dip.' },
       { Product_ID: 'FEA004', Product_Name: 'Wings & Fries Combo', Category: 'Special Featured', Price: 6.49, Description: 'Four wings, baked or fried, served with fries, your choice of flavor, and a dip.' },
       { Product_ID: 'FEA005', Product_Name: 'Baked Combo for 1', Category: 'Special Featured', Price: 10.99, Description: 'Quarter baked chicken, two baked wings, seasoned fries, and a canned drink.' },
@@ -912,8 +931,8 @@
             <label class="block text-xs font-bold text-slate-200 uppercase">Choose Chicken Portion</label>
             <select id="rice-portion-select" onchange="handleRicePortionChange()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
               <option value="Quarter chicken">Quarter Chicken</option>
-              <option value="Four tenders">Four Tenders</option>
-              <option value="Five wings">Five Wings</option>
+              <option value="4 tenders">4 Tenders</option>
+              <option value="5 wings">5 Wings</option>
             </select>
           </div>
           <div id="rice-wings-cooking-wrap" class="hidden space-y-1">
@@ -938,11 +957,13 @@
 
       // 3. Choose your flavor
       if (['FEA001', 'FEA002', 'FEA004', 'FEA005', 'FEA011', 'CHK001', 'CHK002', 'WNG001', 'WNG002', 'TND001', 'KID006'].includes(id)) {
-        html += renderSelect('Chicken Flavour', 'flavour_1', CHICKEN_FLAVOURS);
+        html += renderSelect('Chicken Flavour', 'flavour_1', id === 'KID006' ? KIDS_FLAVOURS : CHICKEN_FLAVOURS);
       } else if (id === 'FEA009') {
         html += renderSelect('Wing Flavour', 'flavour_1', CHICKEN_FLAVOURS);
       } else if (id === 'FEA010') {
         html += renderSelect('Tender Flavour', 'flavour_1', CHICKEN_FLAVOURS);
+      } else if (id === 'KID005') {
+        html += renderSelect('Chicken Flavour', 'flavour_1', KIDS_FLAVOURS);
       } else if (['PLT001', 'PLT003', 'BDL001', 'BDL002', 'BDL003', 'BDL004', 'BDL005'].includes(id)) {
         html += `
           <div class="grid grid-cols-2 gap-2">
@@ -998,12 +1019,10 @@
       } else if (['PLT002', 'BDL002', 'BDL004'].includes(id)) {
         html += `
           <div class="space-y-2">
-            <label class="block text-xs font-bold text-slate-200 uppercase">Fries Seasonings (4 Portions)</label>
+            <label class="block text-xs font-bold text-slate-200 uppercase">Fries Seasonings (4 Portions — choose up to 2)</label>
             <div class="grid grid-cols-2 gap-2">
-              <div><span class="text-[10px] text-slate-400 block mb-0.5">Portion 1</span><select id="sel-seasoning_1" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
-              <div><span class="text-[10px] text-slate-400 block mb-0.5">Portion 2</span><select id="sel-seasoning_2" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
-              <div><span class="text-[10px] text-slate-400 block mb-0.5">Portion 3</span><select id="sel-seasoning_3" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
-              <div><span class="text-[10px] text-slate-400 block mb-0.5">Portion 4</span><select id="sel-seasoning_4" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+              <div><span class="text-[10px] text-slate-400 block mb-0.5">Seasoning 1</span><select id="sel-seasoning_1" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+              <div><span class="text-[10px] text-slate-400 block mb-0.5">Seasoning 2</span><select id="sel-seasoning_2" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
             </div>
           </div>
         `;
@@ -1063,7 +1082,7 @@
       }
 
       // 9. Choose drink
-      if (['FEA003', 'FEA005', 'FEA006', 'FEA007', 'FEA008', 'FEA009', 'FEA010', 'FEA011'].includes(id)) {
+      if (['FEA003', 'FEA005', 'FEA006', 'FEA007', 'FEA008', 'FEA009', 'FEA010', 'FEA011', 'NDL001'].includes(id)) {
         html += `
           <div class="space-y-1">
             <label class="block text-xs font-bold text-slate-200 uppercase">Choose Canned Drink</label>
@@ -1093,6 +1112,20 @@
         html += renderSelect('Choose Bottled Drink', 'drink_1', BOTTLED_DRINKS);
       } else if (product.Category === 'Kids Menu') {
         html += renderSelect('Choose Kids Drink', 'drink_1', KIDS_DRINKS);
+      }
+
+      // Optional multi-select add-ons for Solo Buldak Fire Noodles
+      if (id === 'NDL001') {
+        const buldakAddOns = [
+          ['Fried egg', 0.99], ['Fries', 0.99], ['Drink Can', 0.99],
+          ['Plain naan', 0.99], ['Plain pitta bread', 0.99], ['Garlic naan', 1.49],
+          ['Peri peri pitta bread', 0.99], ['Mini singara (4 pcs)', 1.19],
+          ['Medium singara', 1.49], ['Vegetable Samosa', 1.49],
+          ['Vegetable Singara (2 Pcs)', 1.49]
+        ];
+        html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-2"><p class="font-bold text-xs text-orange-400">Optional Add-ons — choose any</p><label class="flex items-center gap-2 text-xs text-slate-200"><input type="checkbox" id="buldak-no-addon" onchange="handleBuldakNoAddon(this)" checked> No Add On</label><div id="buldak-addon-list" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-2">' +
+          buldakAddOns.map((a,i) => '<label class="flex items-center gap-2 text-xs text-slate-200"><input type="checkbox" class="buldak-addon" data-name="' + a[0] + '" data-price="' + a[1] + '" onchange="handleBuldakAddonChange(this)"> ' + a[0] + ' (+' + formatGBP(a[1]) + ')</label>').join('') +
+          '</div></div>';
       }
 
       // Solo Chicken Optional Meal Upgrade
@@ -1149,6 +1182,25 @@
       document.getElementById('custom-modal').classList.add('flex');
     }
 
+    function handleBuldakNoAddon(el) {
+      const list = document.getElementById('buldak-addon-list');
+      if (el.checked) {
+        document.querySelectorAll('.buldak-addon').forEach(cb => cb.checked = false);
+        list.classList.add('hidden');
+      } else {
+        list.classList.remove('hidden');
+      }
+      updateModalPrice();
+    }
+
+    function handleBuldakAddonChange(el) {
+      const noAddon = document.getElementById('buldak-no-addon');
+      const anySelected = [...document.querySelectorAll('.buldak-addon')].some(cb => cb.checked);
+      noAddon.checked = !anySelected;
+      document.getElementById('buldak-addon-list').classList.toggle('hidden', noAddon.checked);
+      updateModalPrice();
+    }
+
     function renderSelect(label, id, options) {
       return `
         <div class="space-y-1">
@@ -1163,7 +1215,7 @@
     function handleRicePortionChange() {
       const val = document.getElementById('rice-portion-select').value;
       const wrap = document.getElementById('rice-wings-cooking-wrap');
-      if (val === 'Five wings') {
+      if (val === '5 wings') {
         wrap.classList.remove('hidden');
       } else {
         wrap.classList.add('hidden');
@@ -1216,6 +1268,8 @@
           total += Number(mDrink.options[mDrink.selectedIndex]?.getAttribute('data-price') || 0);
         }
       }
+
+      document.querySelectorAll('.buldak-addon:checked').forEach(cb => { total += Number(cb.dataset.price || 0); });
 
       const wholeChk = document.getElementById('whole-upgrade-chk');
       if (wholeChk && wholeChk.checked) {
@@ -1283,6 +1337,13 @@
         if (w1) opts.push({ label: 'Fries 1 Seasoning', value: w1.value, price: 0 });
         if (w2) opts.push({ label: 'Fries 2 Seasoning', value: w2.value, price: 0 });
         if (wd) opts.push({ label: 'Meal Bottled Drink', value: wd.value, price: 0 });
+      }
+
+      document.querySelectorAll('.buldak-addon:checked').forEach(cb => opts.push({
+        label: 'Buldak Add-on', value: cb.dataset.name, price: Number(cb.dataset.price || 0)
+      }));
+      if (document.getElementById('buldak-no-addon')?.checked) {
+        opts.push({ label: 'Buldak Add-on', value: 'No Add On', price: 0 });
       }
 
       closeCustomModal();
@@ -1392,16 +1453,14 @@
       }
     }
 
-    function toggleAllergenTable() {
-      const wrap = document.getElementById('allergen-table-wrap');
+    function toggleAllergenDetails() {
+      const details = document.getElementById('allergen-details');
       const btn = document.getElementById('allergen-toggle-btn');
-      if (wrap.classList.contains('hidden')) {
-        wrap.classList.remove('hidden');
-        btn.textContent = 'Hide Allergen Matrix';
-      } else {
-        wrap.classList.add('hidden');
-        btn.textContent = 'View Statutory Allergen Matrix';
-      }
+      const icon = document.getElementById('allergen-toggle-icon');
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      details.classList.toggle('hidden', expanded);
+      btn.setAttribute('aria-expanded', String(!expanded));
+      icon.textContent = expanded ? '＋' : '−';
     }
 
     // Hero Postcode Radius Checker (Cloudflare API + Local Tier Fallback)
