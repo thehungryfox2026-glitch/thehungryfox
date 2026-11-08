@@ -7,3 +7,9 @@ binding = "LOYALTY_DB"
 database_name = "hungryfox-loyalty"
 database_id = "23c39a4b-3dcd-4aac-bc2e-ae6cf99d062d"
 migrations_dir = "migrations"
+
+[[previews.d1_databases]]
+binding = "LOYALTY_DB"
+database_name = "hungryfox-loyalty-preview"
+database_id = "82cba031-d300-4bf0-836e-1c5ec415230e"
+migrations_dir = "migrations"
