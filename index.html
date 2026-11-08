@@ -569,14 +569,15 @@
       { name: 'Beans', price: 0 },
       { name: 'Coleslaw', price: 0 },
       { name: 'Mini Singara (4 Pcs)', price: 1.19 },
-      { name: 'Medium Singara', price: 1.49 },
-      { name: 'Vegetable Samosa', price: 1.49 },
+      { name: 'Vegetable Spring Roll (2 Pcs)', price: 1.49 },
+      { name: 'Vegetable Samosa (2 Pcs)', price: 1.49 },
       { name: 'Medium Vegetable Singara (2 Pcs)', price: 1.49 },
+
       { name: 'Halloumi Fries (2 Pcs)', price: 1.19 },
       { name: 'Mozzarella Sticks (2 Pcs)', price: 1.19 },
       { name: 'Garlic Naan', price: 0.99 },
       { name: 'Peri Peri Pitta Bread', price: 0.49 },
-      { name: 'Onion Rings (3 Pcs)', price: 0.99 },
+      { name: 'Onion Rings (4 Pcs)', price: 0.99 },
       { name: 'Garlic Bread (2 Pcs)', price: 0.99 }
     ];
 
@@ -630,8 +631,8 @@
       { Product_ID: 'FEA006', Product_Name: 'Doner Snack Bundle', Category: 'Special Featured', Price: 11.99, Description: 'Your choice of doner with a snack, fries, and a drink.' },
       { Product_ID: 'FEA007', Product_Name: 'Doner Deluxe Meal', Category: 'Special Featured', Price: 9.49, Description: 'Your choice of doner served with coleslaw or beans and a canned drink.' },
       { Product_ID: 'FEA008', Product_Name: 'Buldak & Snack Combo', Category: 'Special Featured', Price: 9.99, Description: 'Spicy Buldak Fire Noodles served with your choice of snack, dip, and drink.' },
-      { Product_ID: 'FEA009', Product_Name: 'Wings & Loaded Fries Bundle', Category: 'Special Featured', Price: 10.99, Description: 'Eight wings, baked or fried, with your choice of flavor, loaded fries, dip, and canned drink.' },
-      { Product_ID: 'FEA010', Product_Name: 'Tenders & Loaded Fries Bundle', Category: 'Special Featured', Price: 10.99, Description: 'Six crispy tenders coated in your choice of flavor, with loaded fries, dip, and canned drink.' },
+      { Product_ID: 'FEA009', Product_Name: 'Wings & Loaded Fries Bundle', Category: 'Special Featured', Price: 11.99, Description: 'Eight wings, baked or fried, with your choice of flavor, loaded fries, dip, and canned drink.' },
+      { Product_ID: 'FEA010', Product_Name: 'Tenders & Loaded Fries Bundle', Category: 'Special Featured', Price: 11.99, Description: 'Six crispy tenders coated in your choice of flavor, with loaded fries, dip, and canned drink.' },
       { Product_ID: 'FEA011', Product_Name: 'Quarter Chicken Loaded Fries Bundle', Category: 'Special Featured', Price: 9.99, Description: 'Quarter baked chicken coated in your choice of flavor, served with loaded fries, dip, and canned drink.' },
 
       // 2. Solo Chicken or Upgrade to Meal
@@ -745,6 +746,10 @@
       { Product_ID: 'DRK016', Product_Name: 'Bottle Tango', Category: 'Drinks', Price: 2.99, Description: 'A chilled bottle of Tango.' },
       { Product_ID: 'DRK017', Product_Name: 'Bottle 7up', Category: 'Drinks', Price: 2.99, Description: 'A chilled bottle of 7UP.' }
     ];
+
+    const DESSERT_OPTIONS = HUNGRY_FOX_PRODUCTS
+      .filter(product => product.Category === 'Desserts')
+      .map(product => ({ name: product.Product_Name, price: product.Price }));
 
     // State
     const state = {
@@ -1127,8 +1132,8 @@
           ['Garlic Naan', 1.49],
           ['Peri Peri Pitta Bread', 0.99],
           ['Mini Singara (4 Pcs)', 1.19],
-          ['Medium Singara', 1.49],
-          ['Vegetable Samosa', 1.49],
+          ['Vegetable Spring Roll (2 Pcs)', 1.49],
+          ['Vegetable Samosa (2 Pcs)', 1.49],
           ['Medium Vegetable Singara (2 Pcs)', 1.49]
         ];
         html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-3"><div><p class="font-bold text-xs text-orange-400">Choose your add-ons</p><p class="text-[11px] text-slate-400 mt-1">All extras are optional and charged at the prices shown. Select No Add-on or enter a quantity for any extras you want.</p></div><label class="flex items-center gap-2 text-xs text-slate-200 font-semibold"><input type="checkbox" id="no-optional-addons" checked onchange="handleNoOptionalAddonsChange(this)" class="w-4 h-4 rounded bg-[#0b1326] border-slate-700" /> No Add-on</label><div id="optional-addon-list" class="max-h-56 overflow-y-auto overscroll-contain pr-1 space-y-2">' +
@@ -1138,6 +1143,19 @@
             return '<div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-2"><label for="addon-' + key + '" class="text-xs text-slate-200 flex-1">' + a[0] + ' <span class="text-slate-400">(+' + formatGBP(a[1]) + ' each)</span></label><input type="number" min="0" step="1" inputmode="numeric" value="0" id="addon-' + key + '" aria-label="' + a[0] + ' quantity" class="optional-addon-qty w-20 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="' + a[0] + '" data-price="' + a[1] + '" oninput="handleOptionalAddonChange(this)" /></div>';
           }).join('') +
           '</div></div>';
+      }
+
+      // Optional dessert choice for Special Featured, Sharing Platters and Ultimate Share Bundles only.
+      if (['Special Featured', 'Sharing Platters', 'Ultimate Share Bundles'].includes(product.Category)) {
+        html += `
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-200 uppercase">Got Room For Dessert?</label>
+            <select id="sel-dessert" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
+              <option value="No Dessert" data-price="0">No Dessert</option>
+              ${DESSERT_OPTIONS.map(d => `<option value="${d.name}" data-price="${d.price}">${d.name} (+${formatGBP(d.price)})</option>`).join('')}
+            </select>
+          </div>
+        `;
       }
 
       // Solo Chicken Optional Meal Upgrade
@@ -1316,6 +1334,9 @@
         if (wholeFriesUpgrade) total += Math.max(0, Number(wholeFriesUpgrade.value) || 0) * 0.99;
       }
 
+      const dessertSel = document.getElementById('sel-dessert');
+      if (dessertSel) total += Number(dessertSel.options[dessertSel.selectedIndex]?.getAttribute('data-price') || 0);
+
       document.getElementById('modal-total-price').textContent = formatGBP(total);
     }
 
@@ -1344,7 +1365,8 @@
         { id: 'sel-dip_1', label: 'Dip 1' },
         { id: 'sel-dip_2', label: 'Dip 2' },
         { id: 'sel-drink_1', label: 'Drink 1', priceAttr: true },
-        { id: 'sel-drink_2', label: 'Drink 2', priceAttr: true }
+        { id: 'sel-drink_2', label: 'Drink 2', priceAttr: true },
+        { id: 'sel-dessert', label: 'Dessert', priceAttr: true }
       ];
 
       fields.forEach(f => {
