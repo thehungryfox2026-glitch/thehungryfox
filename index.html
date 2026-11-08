@@ -564,16 +564,16 @@
     ];
 
     const BUNDLE_SIDES = [
+      { name: 'Plain Naan', price: 0 },
+      { name: 'Plain Pitta Bread', price: 0 },
+      { name: 'Beans', price: 0 },
+      { name: 'Coleslaw', price: 0 },
       { name: 'Mini Singara (4 pcs)', price: 1.19 },
       { name: 'Medium Singara', price: 1.49 },
       { name: 'Vegetable Samosa', price: 1.49 },
       { name: 'Vegetable Singara (2 Pcs)', price: 1.49 },
       { name: 'Halloumi', price: 1.19 },
       { name: 'Mozzarella sticks', price: 1.19 },
-      { name: 'Plain Naan', price: 0 },
-      { name: 'Beans', price: 0 },
-      { name: 'Coleslaw', price: 0 },
-      { name: 'Plain Pitta Bread', price: 0 },
       { name: 'Garlic Naan', price: 0.99 },
       { name: 'Peri Peri Pitta Bread', price: 0.49 },
       { name: 'Onion Rings (3 Pcs)', price: 0.99 },
@@ -586,8 +586,6 @@
     ];
 
     const CANNED_DRINKS = [
-      { name: 'Blackcurrant Fruit Shoot', price: 0 },
-      { name: 'Orange Fruit Shoot', price: 0 },
       { name: 'Water', price: 0 },
       { name: 'Coke', price: 0 },
       { name: 'Diet Coke', price: 0 },
@@ -597,10 +595,12 @@
       { name: 'Tango Apple', price: 0 },
       { name: '7UP', price: 0 },
       { name: 'Dr Pepper', price: 0 },
+      { name: 'Blackcurrant Fruit Shoot', price: 0 },
+      { name: 'Orange Fruit Shoot', price: 0 },
       { name: 'Red Bull', price: 1.00 }
     ];
-
     const BOTTLED_DRINKS = [
+      'Water',
       'Bottle Coke',
       'Bottle Diet Coke',
       'Bottle Pepsi',
@@ -608,11 +608,10 @@
       'Bottle Tango',
       'Bottle 7UP',
       'Blackcurrant Fruit Shoot',
-      'Orange Fruit Shoot',
-      'Water'
+      'Orange Fruit Shoot'
     ];
 
-    const KIDS_DRINKS = ['Blackcurrant Fruit Shoot', 'Orange Fruit Shoot', 'Water'];
+    const KIDS_DRINKS = ['Water', 'Blackcurrant Fruit Shoot', 'Orange Fruit Shoot'];
     const KIDS_FLAVOURS = CHICKEN_FLAVOURS.filter(f => f === 'Plain' || f.includes('(Classic)') || f.includes('(Mild)'));
 
     const DIP_OPTIONS = [
