@@ -1022,6 +1022,13 @@
         `;
       }
 
+      // Cheese-loaded upgrade for regular fries. The selected number is the number of fries portions upgraded.
+      const friesUpgradePortions = { FEA001:1, FEA002:1, FEA004:1, FEA005:1, FEA006:1, KID001:1, KID002:1, KID003:1, KID004:1, KID005:1, KID006:1, BDL001:2, BDL003:2, BDL005:2, BDL006:2, BDL007:2, BND004:2 };
+      if (friesUpgradePortions[id]) {
+        const maxLoaded = friesUpgradePortions[id];
+        html += '<div class="space-y-1"><label class="block text-xs font-bold text-slate-200 uppercase">Cheese-Loaded Fries Upgrade</label><select id="sel-fries_upgrade_qty" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">' + Array.from({length:maxLoaded+1},(_,n)=>'<option value="'+n+'">'+(n===0?'Keep all regular': 'Load '+n+' portion'+(n===1?'':'s')+' (+'+formatGBP(n*0.99)+')')+'</option>').join('') + '</select><p class="text-[10px] text-slate-400">Adds cheese only. Existing fries seasoning choices remain unchanged. +£0.99 per portion.</p></div>';
+      }
+
       // 5. Choose drizzle (Only for loaded items and Chicken Rice Bowl)
       if (['FRS003', 'FRS004', 'FRS006', 'FRS007', 'FRS008', 'FRS009', 'RIC002', 'FEA009', 'FEA010', 'FEA011'].includes(id)) {
         html += renderSelect('Chicken Drizzle', 'drizzle', DRIZZLE_OPTIONS);
@@ -1127,7 +1134,7 @@
         html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-3"><div><p class="font-bold text-xs text-orange-400">Choose your add-ons</p><p class="text-[11px] text-slate-400 mt-1">All extras are optional and charged at the prices shown. Select No Add-on or enter a quantity for any extras you want.</p></div><label class="flex items-center gap-2 text-xs text-slate-200 font-semibold"><input type="checkbox" id="no-optional-addons" checked onchange="handleNoOptionalAddonsChange(this)" class="w-4 h-4 rounded bg-[#0b1326] border-slate-700" /> No Add-on</label><div id="optional-addon-list" class="max-h-56 overflow-y-auto overscroll-contain pr-1 space-y-2">' +
           addOns.map(a => {
             const key = a[0].replace(/[^a-z0-9]/gi,'-');
-            if (a[0] === 'Drink Can') return '<div class="border-b border-slate-800 pb-3 space-y-2"><div class="flex items-center justify-between gap-3"><label for="addon-' + key + '" class="text-xs text-slate-200 flex-1">Drink Can <span class="text-slate-400">(+' + formatGBP(a[1]) + ' each)</span></label><input type="number" min="0" step="1" inputmode="numeric" value="0" id="addon-' + key + '" aria-label="Drink Can quantity" class="optional-addon-qty w-20 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="Drink Can" data-price="' + a[1] + '" oninput="handleOptionalAddonChange(this); toggleAddonDrinkChoices();" /></div><div id="addon-drink-choices" class="hidden ml-3 pl-3 border-l-2 border-orange-500/40 space-y-2"><p class="text-[11px] font-bold text-orange-300">Choose your drinks</p><p class="text-[10px] text-slate-400">Choose drink quantities to match your cans.</p>' + CANNED_DRINKS.map(d => '<div class="flex items-center justify-between gap-3"><label for="addon-drink-' + d.name.replace(/[^a-z0-9]/gi,'-') + '" class="text-xs text-slate-200 flex-1">' + d.name + (d.name === 'Red Bull' ? ' <span class="text-slate-400">(+£1.00 each)</span>' : '') + '</label><input type="number" min="0" step="1" inputmode="numeric" value="0" id="addon-drink-' + d.name.replace(/[^a-z0-9]/gi,'-') + '" aria-label="' + d.name + ' quantity" class="addon-drink-qty w-16 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="' + d.name + '" data-surcharge="' + (d.name === 'Red Bull' ? 1 : 0) + '" oninput="handleAddonDrinkChoiceChange()" /></div>').join('') + '<p id="addon-drink-count" class="text-[10px] text-slate-400">Chosen 0 of 0 cans</p></div></div>';
+            if (a[0] === 'Drink Can') return '<div class="border-b border-slate-800 pb-3 space-y-2"><div class="flex items-center justify-between gap-3"><label for="addon-' + key + '" class="text-xs text-slate-200 flex-1">Drink Can <span class="text-slate-400">(+' + formatGBP(a[1]) + ' each)</span></label><input type="number" min="0" step="1" inputmode="numeric" value="0" id="addon-' + key + '" aria-label="Drink Can quantity" class="optional-addon-qty w-20 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="Drink Can" data-price="' + a[1] + '" oninput="handleOptionalAddonChange(this); toggleAddonDrinkChoices();" /></div><div id="addon-drink-choices" class="hidden ml-3 pl-3 border-l-2 border-orange-500/40 space-y-2"><p class="text-[11px] font-bold text-orange-300">Choose your drinks</p><p class="text-[10px] text-slate-400">Choose any drinks you would like. Each Drink Can add-on includes one can.</p>' + CANNED_DRINKS.map(d => '<div class="flex items-center justify-between gap-3"><label for="addon-drink-' + d.name.replace(/[^a-z0-9]/gi,'-') + '" class="text-xs text-slate-200 flex-1">' + d.name + (d.name === 'Red Bull' ? ' <span class="text-slate-400">(+£1.00 each)</span>' : '') + '</label><input type="number" min="0" step="1" inputmode="numeric" value="0" id="addon-drink-' + d.name.replace(/[^a-z0-9]/gi,'-') + '" aria-label="' + d.name + ' quantity" class="addon-drink-qty w-16 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="' + d.name + '" data-surcharge="' + (d.name === 'Red Bull' ? 1 : 0) + '" oninput="handleAddonDrinkChoiceChange()" /></div>').join('') + '</div></div>';
             return '<div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-2"><label for="addon-' + key + '" class="text-xs text-slate-200 flex-1">' + a[0] + ' <span class="text-slate-400">(+' + formatGBP(a[1]) + ' each)</span></label><input type="number" min="0" step="1" inputmode="numeric" value="0" id="addon-' + key + '" aria-label="' + a[0] + ' quantity" class="optional-addon-qty w-20 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="' + a[0] + '" data-price="' + a[1] + '" oninput="handleOptionalAddonChange(this)" /></div>';
           }).join('') +
           '</div></div>';
@@ -1147,6 +1154,10 @@
                 <select id="sel-meal_seasoning" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">
                   ${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}
                 </select>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Cheese-Loaded Fries Upgrade</label>
+                <select id="sel-meal_fries_upgrade_qty" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white"><option value="0">Keep regular fries</option><option value="1">Loaded Fries (+£0.99)</option></select>
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Canned Drink</label>
@@ -1171,6 +1182,10 @@
                 <div><span class="text-[10px] text-slate-400 block mb-0.5">Fries 2 Seasoning</span><select id="sel-whole_seasoning_2" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
               </div>
               <div>
+                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Cheese-Loaded Fries Upgrade</label>
+                <select id="sel-whole_fries_upgrade_qty" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white"><option value="0">Keep both regular</option><option value="1">Load 1 portion (+£0.99)</option><option value="2">Load both portions (+£1.98)</option></select>
+              </div>
+              <div>
                 <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Bottled Drink</label>
                 <select id="sel-whole_drink" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">
                   ${BOTTLED_DRINKS.map(b => `<option value="${b}">${b}</option>`).join('')}
@@ -1192,20 +1207,11 @@
       const panel = document.getElementById('addon-drink-choices');
       if (panel) panel.classList.toggle('hidden', qty === 0);
       if (qty === 0) document.querySelectorAll('.addon-drink-qty').forEach(input => { input.value = 0; });
-      updateAddonDrinkCount();
-    }
-
-    function updateAddonDrinkCount() {
-      const target = Math.max(0, Math.floor(Number(document.getElementById('addon-Drink-Can')?.value) || 0));
-      const chosen = [...document.querySelectorAll('.addon-drink-qty')].reduce((sum, input) => sum + Math.max(0, Math.floor(Number(input.value) || 0)), 0);
-      const status = document.getElementById('addon-drink-count');
-      if (status) status.textContent = 'Chosen ' + chosen + ' of ' + target + ' cans';
     }
 
     function handleAddonDrinkChoiceChange() {
       const noAddons = document.getElementById('no-optional-addons');
       if (noAddons && [...document.querySelectorAll('.optional-addon-qty')].some(field => Math.max(0, Math.floor(Number(field.value) || 0)) > 0)) noAddons.checked = false;
-      updateAddonDrinkCount();
       updateModalPrice();
     }
 
@@ -1222,7 +1228,6 @@
         document.querySelectorAll('.optional-addon-qty, .addon-drink-qty').forEach(input => { input.value = 0; });
         const panel = document.getElementById('addon-drink-choices');
         if (panel) panel.classList.add('hidden');
-        updateAddonDrinkCount();
       }
       updateModalPrice();
     }
@@ -1286,6 +1291,9 @@
         }
       });
 
+      const generalFriesUpgrade = document.getElementById('sel-fries_upgrade_qty');
+      if (generalFriesUpgrade) total += Math.max(0, Number(generalFriesUpgrade.value) || 0) * 0.99;
+
       const soloChk = document.getElementById('solo-upgrade-chk');
       if (soloChk && soloChk.checked) {
         total += 1.99;
@@ -1298,9 +1306,14 @@
       document.querySelectorAll('.optional-addon-qty').forEach(input => { total += Math.max(0, Math.floor(Number(input.value) || 0)) * Number(input.dataset.price || 0); });
       document.querySelectorAll('.addon-drink-qty').forEach(input => { total += Math.max(0, Math.floor(Number(input.value) || 0)) * Number(input.dataset.surcharge || 0); });
 
+      const mealFriesUpgrade = document.getElementById('sel-meal_fries_upgrade_qty');
+      if (soloChk && soloChk.checked && mealFriesUpgrade) total += Math.max(0, Number(mealFriesUpgrade.value) || 0) * 0.99;
+
       const wholeChk = document.getElementById('whole-upgrade-chk');
       if (wholeChk && wholeChk.checked) {
         total += 6.50;
+        const wholeFriesUpgrade = document.getElementById('sel-whole_fries_upgrade_qty');
+        if (wholeFriesUpgrade) total += Math.max(0, Number(wholeFriesUpgrade.value) || 0) * 0.99;
       }
 
       document.getElementById('modal-total-price').textContent = formatGBP(total);
@@ -1348,6 +1361,11 @@
         opts.push({ label: 'Meal Upgrade', value: 'Fries & Drink (+£1.99)', price: 1.99 });
         const sSeason = document.getElementById('sel-meal_seasoning');
         if (sSeason) opts.push({ label: 'Meal Fries Seasoning', value: sSeason.value, price: 0 });
+        const mealFriesUpgrade = document.getElementById('sel-meal_fries_upgrade_qty');
+        if (mealFriesUpgrade) {
+          const count = Math.max(0, Number(mealFriesUpgrade.value) || 0);
+          if (count) opts.push({ label: 'Cheese-Loaded Fries Upgrade', value: count + ' portion' + (count === 1 ? '' : 's'), price: count * 0.99 });
+        }
         const sDrink = document.getElementById('sel-meal_drink');
         if (sDrink) {
           const extraD = Number(sDrink.options[sDrink.selectedIndex]?.getAttribute('data-price') || 0);
@@ -1360,19 +1378,25 @@
         opts.push({ label: 'Whole Chicken Meal Upgrade', value: '2 Fries & Bottled Drink (+£6.50)', price: 6.50 });
         const w1 = document.getElementById('sel-whole_seasoning_1');
         const w2 = document.getElementById('sel-whole_seasoning_2');
+        const wholeFriesUpgrade = document.getElementById('sel-whole_fries_upgrade_qty');
+        if (wholeFriesUpgrade) {
+          const count = Math.max(0, Number(wholeFriesUpgrade.value) || 0);
+          if (count) opts.push({ label: 'Cheese-Loaded Fries Upgrade', value: count + ' portion' + (count === 1 ? '' : 's'), price: count * 0.99 });
+        }
         const wd = document.getElementById('sel-whole_drink');
         if (w1) opts.push({ label: 'Fries 1 Seasoning', value: w1.value, price: 0 });
         if (w2) opts.push({ label: 'Fries 2 Seasoning', value: w2.value, price: 0 });
         if (wd) opts.push({ label: 'Meal Bottled Drink', value: wd.value, price: 0 });
       }
 
+      const genericFriesUpgrade = document.getElementById('sel-fries_upgrade_qty');
+      if (genericFriesUpgrade) {
+        const count = Math.max(0, Number(genericFriesUpgrade.value) || 0);
+        if (count) opts.push({ label: 'Cheese-Loaded Fries Upgrade', value: count + ' portion' + (count === 1 ? '' : 's'), price: count * 0.99 });
+      }
+
       const drinkCanQty = Math.max(0, Math.floor(Number(document.getElementById('addon-Drink-Can')?.value) || 0));
       const drinkFields = [...document.querySelectorAll('.addon-drink-qty')].filter(input => Math.max(0, Math.floor(Number(input.value) || 0)) > 0);
-      const chosenDrinkQty = drinkFields.reduce((sum, input) => sum + Math.max(0, Math.floor(Number(input.value) || 0)), 0);
-      if (drinkCanQty > 0 && chosenDrinkQty !== drinkCanQty) {
-        alert('Please choose exactly ' + drinkCanQty + ' drink' + (drinkCanQty === 1 ? '' : 's') + ' for your Drink Can add-on.');
-        return;
-      }
       document.querySelectorAll('.optional-addon-qty').forEach(input => {
         const quantity = Math.max(0, Math.floor(Number(input.value) || 0));
         if (quantity > 0 && input.dataset.name !== 'Drink Can') opts.push({ label: 'Optional Add-on', value: quantity + ' x ' + input.dataset.name, price: quantity * Number(input.dataset.price || 0) });
