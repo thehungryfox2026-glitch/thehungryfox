@@ -1023,7 +1023,7 @@
       }
 
       // Cheese-loaded upgrade for regular fries. The selected number is the number of fries portions upgraded.
-      const friesUpgradePortions = { FRS001:1, FRS002:1, FEA001:1, FEA002:1, FEA004:1, FEA005:1, FEA006:1, KID001:1, KID002:1, KID003:1, KID004:1, KID005:1, KID006:1, BDL001:2, BDL003:2, BDL005:2, BDL006:2, BDL007:2, BND004:2, PLT002:4, BDL002:4, BDL004:4 };
+      const friesUpgradePortions = { FEA001:1, FEA002:1, FEA004:1, FEA005:1, FEA006:1, KID001:1, KID002:1, KID003:1, KID004:1, KID005:1, KID006:1, BDL001:2, BDL003:2, BDL005:2, BDL006:2, BDL007:2, BND004:2 };
       if (friesUpgradePortions[id]) {
         const maxLoaded = friesUpgradePortions[id];
         html += '<div class="space-y-1"><label class="block text-xs font-bold text-slate-200 uppercase">Cheese-Loaded Fries Upgrade</label><select id="sel-fries_upgrade_qty" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">' + Array.from({length:maxLoaded+1},(_,n)=>'<option value="'+n+'">'+(n===0?'Keep all regular': 'Load '+n+' portion'+(n===1?'':'s')+' (+'+formatGBP(n*0.99)+')')+'</option>').join('') + '</select><p class="text-[10px] text-slate-400">Adds cheese only. Existing fries seasoning choices remain unchanged. +£0.99 per portion.</p></div>';
