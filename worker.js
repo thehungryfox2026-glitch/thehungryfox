@@ -63,7 +63,7 @@ async function loyaltyVerifyCode(req,env,o){
  const token=await createLoyaltyToken(customer,env);
  return out({token,expiresIn:604800,customer:{name:customer.customer_name,orders:customer.order_count},rewards:rewards.results||[]},200,o);
 }
-function base64url(bytes){let binary="";for(const b of bytes)binary+=String.fromCharCode(b);return btoa(binary).replace(/=/g,"").replace(/\\+/g,"-").replace(/\\//g,"_");}
+function base64url(bytes){let binary="";for(const b of bytes)binary+=String.fromCharCode(b);return btoa(binary).replace(/=/g,"").replace(/\+/g,"-").replace(/\//g,"_");}
 async function createLoyaltyToken(customer,env){
  const payload=base64url(new TextEncoder().encode(JSON.stringify({sub:customer.id,email:customer.email,exp:Math.floor(Date.now()/1000)+604800})));
  const key=await crypto.subtle.importKey("raw",new TextEncoder().encode(env.LOYALTY_OTP_SECRET),{name:"HMAC",hash:"SHA-256"},false,["sign"]);
@@ -71,7 +71,7 @@ async function createLoyaltyToken(customer,env){
  return payload+"."+base64url(new Uint8Array(sig));
 }
 async function readLoyaltyToken(req,env){
- const token=(req.headers.get("Authorization")||"").replace(/^Bearer\\s+/i,"");
+ const token=(req.headers.get("Authorization")||"").replace(/^Bearer\s+/i,"");
  const parts=token.split(".");if(parts.length!==2||!env.LOYALTY_OTP_SECRET)return null;
  try{
   const key=await crypto.subtle.importKey("raw",new TextEncoder().encode(env.LOYALTY_OTP_SECRET),{name:"HMAC",hash:"SHA-256"},false,["verify"]);
