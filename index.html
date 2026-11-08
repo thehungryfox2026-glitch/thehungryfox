@@ -858,7 +858,7 @@
     }
 
     function needsModal(productId) {
-      const nonModal = ['NDL001', 'RIC001', 'RIC003', 'RIC004', 'RIC005', 'RIC006', 'BRD001', 'BRD002', 'BRD003', 'BRD004', 'BRD007', 'BRD008', 'BRD009', 'SD005'];
+      const nonModal = ['RIC001', 'RIC003', 'RIC004', 'RIC005', 'RIC006', 'BRD001', 'BRD002', 'BRD003', 'BRD004', 'BRD007', 'BRD008', 'BRD009', 'SD005'];
       if (productId.startsWith('DES') || productId.startsWith('DRK')) return false;
       return !nonModal.includes(productId);
     }
@@ -1124,8 +1124,8 @@
           ['Vegetable Samosa', 1.49],
           ['Medium Vegetable Singara (2 Pcs)', 1.49]
         ];
-        html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-2"><p class="font-bold text-xs text-orange-400">Optional Add-ons — Choose Any Quantity</p><label class="flex items-center gap-2 text-xs text-slate-200"><input type="checkbox" id="optional-no-addon" onchange="handleOptionalNoAddon(this)" checked> No Add On</label><div id="optional-addon-list" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-2">' +
-          addOns.map((a,i) => '<label class="flex items-center justify-between gap-2 text-xs text-slate-200"><span>' + a[0] + ' (+' + formatGBP(a[1]) + ')</span><input type="number" min="0" step="1" value="0" inputmode="numeric" aria-label="' + a[0] + ' quantity" class="optional-addon-qty w-16 bg-[#0b1326] border border-slate-700 rounded p-1.5 text-white" data-name="' + a[0] + '" data-price="' + a[1] + '" oninput="handleOptionalAddonChange(this)"></label>').join('') +
+        html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-2"><p class="font-bold text-xs text-orange-400">Optional Add-ons</p><p class="text-[11px] text-slate-400">Scroll through the extras and choose a quantity for anything you would like. Leave as “Don’t add” for no extra.</p><div id="optional-addon-list" class="max-h-56 overflow-y-auto overscroll-contain pr-1 space-y-2">' +
+          addOns.map(a => '<div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-2"><label for="addon-' + a[0].replace(/[^a-z0-9]/gi,'-') + '" class="text-xs text-slate-200 flex-1">' + a[0] + ' <span class="text-slate-400">(+' + formatGBP(a[1]) + ' each)</span></label><select id="addon-' + a[0].replace(/[^a-z0-9]/gi,'-') + '" aria-label="' + a[0] + ' quantity" class="optional-addon-qty w-28 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="' + a[0] + '" data-price="' + a[1] + '" onchange="handleOptionalAddonChange(this)"><option value="0">Don’t add</option>' + [1,2,3,4,5].map(q => '<option value="' + q + '">' + q + '</option>').join('') + '</select></div>').join('') +
           '</div></div>';
       }
 
@@ -1183,22 +1183,7 @@
       document.getElementById('custom-modal').classList.add('flex');
     }
 
-    function handleOptionalNoAddon(el) {
-      const list = document.getElementById('optional-addon-list');
-      if (el.checked) {
-        document.querySelectorAll('.optional-addon-qty').forEach(input => input.value = '0');
-        list.classList.add('hidden');
-      } else {
-        list.classList.remove('hidden');
-      }
-      updateModalPrice();
-    }
-
     function handleOptionalAddonChange() {
-      const noAddon = document.getElementById('optional-no-addon');
-      const anySelected = [...document.querySelectorAll('.optional-addon-qty')].some(input => Number(input.value) > 0);
-      noAddon.checked = !anySelected;
-      document.getElementById('optional-addon-list').classList.toggle('hidden', noAddon.checked);
       updateModalPrice();
     }
 
@@ -1348,10 +1333,6 @@
           price: quantity * Number(input.dataset.price || 0)
         });
       });
-      if (document.getElementById('optional-no-addon')?.checked) {
-        opts.push({ label: 'Optional Add-on', value: 'No Add On', price: 0 });
-      }
-
       closeCustomModal();
       addToCartDirect(p, opts);
     }
