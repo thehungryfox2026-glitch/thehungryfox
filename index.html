@@ -1125,7 +1125,11 @@
           ['Medium Vegetable Singara (2 Pcs)', 1.49]
         ];
         html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-3"><div><p class="font-bold text-xs text-orange-400">Choose your add-ons</p><p class="text-[11px] text-slate-400 mt-1">All extras are optional and charged at the prices shown. Select No Add-on or enter a quantity for any extras you want.</p></div><label class="flex items-center gap-2 text-xs text-slate-200 font-semibold"><input type="checkbox" id="no-optional-addons" checked onchange="handleNoOptionalAddonsChange(this)" class="w-4 h-4 rounded bg-[#0b1326] border-slate-700" /> No Add-on</label><div id="optional-addon-list" class="max-h-56 overflow-y-auto overscroll-contain pr-1 space-y-2">' +
-          addOns.map(a => '<div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-2"><label for="addon-' + a[0].replace(/[^a-z0-9]/gi,'-') + '" class="text-xs text-slate-200 flex-1">' + a[0] + ' <span class="text-slate-400">(+' + formatGBP(a[1]) + ' each)</span></label><input type="number" min="0" step="1" inputmode="numeric" value="0" id="addon-' + a[0].replace(/[^a-z0-9]/gi,'-') + '" aria-label="' + a[0] + ' quantity" class="optional-addon-qty w-20 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="' + a[0] + '" data-price="' + a[1] + '" oninput="handleOptionalAddonChange(this)" /></div>').join('') +
+          addOns.map(a => {
+            const key = a[0].replace(/[^a-z0-9]/gi,'-');
+            if (a[0] === 'Drink Can') return '<div class="border-b border-slate-800 pb-3 space-y-2"><div class="flex items-center justify-between gap-3"><label for="addon-' + key + '" class="text-xs text-slate-200 flex-1">Drink Can <span class="text-slate-400">(+' + formatGBP(a[1]) + ' each)</span></label><input type="number" min="0" step="1" inputmode="numeric" value="0" id="addon-' + key + '" aria-label="Drink Can quantity" class="optional-addon-qty w-20 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="Drink Can" data-price="' + a[1] + '" oninput="handleOptionalAddonChange(this); toggleAddonDrinkChoices();" /></div><div id="addon-drink-choices" class="hidden ml-3 pl-3 border-l-2 border-orange-500/40 space-y-2"><p class="text-[11px] font-bold text-orange-300">Choose your drinks</p><p class="text-[10px] text-slate-400">Choose drink quantities to match your cans.</p>' + CANNED_DRINKS.map(d => '<div class="flex items-center justify-between gap-3"><label for="addon-drink-' + d.name.replace(/[^a-z0-9]/gi,'-') + '" class="text-xs text-slate-200 flex-1">' + d.name + (d.name === 'Red Bull' ? ' <span class="text-slate-400">(+£1.00 each)</span>' : '') + '</label><input type="number" min="0" step="1" inputmode="numeric" value="0" id="addon-drink-' + d.name.replace(/[^a-z0-9]/gi,'-') + '" aria-label="' + d.name + ' quantity" class="addon-drink-qty w-16 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="' + d.name + '" data-surcharge="' + (d.name === 'Red Bull' ? 1 : 0) + '" oninput="handleAddonDrinkChoiceChange()" /></div>').join('') + '<p id="addon-drink-count" class="text-[10px] text-slate-400">Chosen 0 of 0 cans</p></div></div>';
+            return '<div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-2"><label for="addon-' + key + '" class="text-xs text-slate-200 flex-1">' + a[0] + ' <span class="text-slate-400">(+' + formatGBP(a[1]) + ' each)</span></label><input type="number" min="0" step="1" inputmode="numeric" value="0" id="addon-' + key + '" aria-label="' + a[0] + ' quantity" class="optional-addon-qty w-20 bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white" data-name="' + a[0] + '" data-price="' + a[1] + '" oninput="handleOptionalAddonChange(this)" /></div>';
+          }).join('') +
           '</div></div>';
       }
 
@@ -1183,16 +1187,42 @@
       document.getElementById('custom-modal').classList.add('flex');
     }
 
+    function toggleAddonDrinkChoices() {
+      const qty = Math.max(0, Math.floor(Number(document.getElementById('addon-Drink-Can')?.value) || 0));
+      const panel = document.getElementById('addon-drink-choices');
+      if (panel) panel.classList.toggle('hidden', qty === 0);
+      if (qty === 0) document.querySelectorAll('.addon-drink-qty').forEach(input => { input.value = 0; });
+      updateAddonDrinkCount();
+    }
+
+    function updateAddonDrinkCount() {
+      const target = Math.max(0, Math.floor(Number(document.getElementById('addon-Drink-Can')?.value) || 0));
+      const chosen = [...document.querySelectorAll('.addon-drink-qty')].reduce((sum, input) => sum + Math.max(0, Math.floor(Number(input.value) || 0)), 0);
+      const status = document.getElementById('addon-drink-count');
+      if (status) status.textContent = 'Chosen ' + chosen + ' of ' + target + ' cans';
+    }
+
+    function handleAddonDrinkChoiceChange() {
+      const noAddons = document.getElementById('no-optional-addons');
+      if (noAddons && [...document.querySelectorAll('.optional-addon-qty')].some(field => Math.max(0, Math.floor(Number(field.value) || 0)) > 0)) noAddons.checked = false;
+      updateAddonDrinkCount();
+      updateModalPrice();
+    }
+
     function handleOptionalAddonChange(input) {
       const noAddons = document.getElementById('no-optional-addons');
       if (noAddons && Number(input?.value || 0) > 0) noAddons.checked = false;
+      if (input?.dataset?.name === 'Drink Can') toggleAddonDrinkChoices();
       if (noAddons && [...document.querySelectorAll('.optional-addon-qty')].every(field => Math.max(0, Math.floor(Number(field.value) || 0)) === 0)) noAddons.checked = true;
       updateModalPrice();
     }
 
     function handleNoOptionalAddonsChange(checkbox) {
       if (checkbox.checked) {
-        document.querySelectorAll('.optional-addon-qty').forEach(input => { input.value = 0; });
+        document.querySelectorAll('.optional-addon-qty, .addon-drink-qty').forEach(input => { input.value = 0; });
+        const panel = document.getElementById('addon-drink-choices');
+        if (panel) panel.classList.add('hidden');
+        updateAddonDrinkCount();
       }
       updateModalPrice();
     }
@@ -1266,6 +1296,7 @@
       }
 
       document.querySelectorAll('.optional-addon-qty').forEach(input => { total += Math.max(0, Math.floor(Number(input.value) || 0)) * Number(input.dataset.price || 0); });
+      document.querySelectorAll('.addon-drink-qty').forEach(input => { total += Math.max(0, Math.floor(Number(input.value) || 0)) * Number(input.dataset.surcharge || 0); });
 
       const wholeChk = document.getElementById('whole-upgrade-chk');
       if (wholeChk && wholeChk.checked) {
@@ -1335,14 +1366,22 @@
         if (wd) opts.push({ label: 'Meal Bottled Drink', value: wd.value, price: 0 });
       }
 
+      const drinkCanQty = Math.max(0, Math.floor(Number(document.getElementById('addon-Drink-Can')?.value) || 0));
+      const drinkFields = [...document.querySelectorAll('.addon-drink-qty')].filter(input => Math.max(0, Math.floor(Number(input.value) || 0)) > 0);
+      const chosenDrinkQty = drinkFields.reduce((sum, input) => sum + Math.max(0, Math.floor(Number(input.value) || 0)), 0);
+      if (drinkCanQty > 0 && chosenDrinkQty !== drinkCanQty) {
+        alert('Please choose exactly ' + drinkCanQty + ' drink' + (drinkCanQty === 1 ? '' : 's') + ' for your Drink Can add-on.');
+        return;
+      }
       document.querySelectorAll('.optional-addon-qty').forEach(input => {
         const quantity = Math.max(0, Math.floor(Number(input.value) || 0));
-        if (quantity > 0) opts.push({
-          label: 'Optional Add-on',
-          value: quantity + ' x ' + input.dataset.name,
-          price: quantity * Number(input.dataset.price || 0)
-        });
+        if (quantity > 0 && input.dataset.name !== 'Drink Can') opts.push({ label: 'Optional Add-on', value: quantity + ' x ' + input.dataset.name, price: quantity * Number(input.dataset.price || 0) });
       });
+      if (drinkCanQty > 0) {
+        const drinkSummary = drinkFields.map(input => Math.max(0, Math.floor(Number(input.value) || 0)) + ' x ' + input.dataset.name).join(', ');
+        const extra = drinkFields.reduce((sum, input) => sum + Math.max(0, Math.floor(Number(input.value) || 0)) * Number(input.dataset.surcharge || 0), 0);
+        opts.push({ label: 'Optional Add-on', value: drinkCanQty + ' x Drink Can (' + drinkSummary + ')', price: drinkCanQty * 0.99 + extra });
+      }
       closeCustomModal();
       addToCartDirect(p, opts);
     }
