@@ -1425,7 +1425,7 @@
         if (data.available) {
           result.innerHTML = `<span class="text-emerald-400 font-bold">✓ Delivery available!</span><span class="text-slate-300 ml-1">${Number(data.deliveryFee) === 0 ? 'FREE DELIVERY' : `Delivery charge: ${formatGBP(data.deliveryFee)}`}</span>`;
         } else {
-          result.innerHTML = `<span class="text-amber-400">${esc(data.message || 'Outside our 10-mile delivery area. Please use Uber Eats / Deliveroo.')}</span>`;
+          result.innerHTML = `<span class="text-amber-400">Far From Us, No Issue — we're still available on:</span> <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="text-orange-400 hover:underline font-bold">Uber Eats</a> <span class="text-slate-300">&amp;</span> <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener" class="text-cyan-400 hover:underline font-bold">Deliveroo</a>`;
         }
       } catch (err) {
         result.innerHTML = '<span class="text-red-400">We could not check this postcode just now. Please try again.</span>';
@@ -1469,8 +1469,8 @@
         const data = await res.json();
         if (!res.ok || data.error) throw new Error(data.error || 'Quote failed');
         if (!data.available) {
-          status.textContent = data.message || 'Address is outside our 10-mile delivery radius.';
-          status.className = 'text-xs mt-1.5 text-red-400 font-bold';
+          status.innerHTML = `<span>Far From Us, No Issue — we're still available on:</span> <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="text-orange-400 hover:underline font-bold">Uber Eats</a> <span>&amp;</span> <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener" class="text-cyan-400 hover:underline font-bold">Deliveroo</a>`;
+          status.className = 'text-xs mt-1.5 text-amber-400 font-bold';
           document.getElementById('checkout-final-payable').textContent = 'Unavailable';
           renderCart();
           return;
