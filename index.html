@@ -127,6 +127,7 @@
         <span class="text-slate-300">Prefer delivery apps? Find us on <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="text-orange-400 hover:underline font-bold">Uber Eats</a> &amp; <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener" class="text-orange-400 hover:underline font-bold">Deliveroo</a>.</span>
       </div>
 
+        <button onclick="openLoyaltyModal()" class="hidden sm:inline-flex items-center gap-2 border border-orange-500/50 text-orange-300 hover:bg-orange-500/10 px-3 py-2.5 rounded-full font-bold text-xs transition">Fox Rewards</button>
         <!-- Basket Trigger Button -->
         <button onclick="toggleCartDrawer(true)" class="relative flex items-center gap-2.5 bg-orange-600 hover:bg-orange-500 text-white px-4 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-orange-950/50 transition">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -362,6 +363,35 @@
       </div>
     </div>
   </aside>
+
+  <!-- Loyalty Account Modal -->
+  <div id="loyalty-modal" class="fixed inset-0 z-[70] bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-[#131b2e] border border-slate-700 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+      <div class="p-5 border-b border-slate-800 flex justify-between items-center">
+        <div><p class="text-[10px] uppercase tracking-[.2em] text-orange-400 font-extrabold">The Hungry Fox</p><h3 class="font-serif text-xl font-bold text-white">Fox Rewards</h3></div>
+        <button onclick="closeLoyaltyModal()" class="text-slate-400 hover:text-white text-2xl leading-none" aria-label="Close">&times;</button>
+      </div>
+      <div class="p-5 overflow-y-auto space-y-4">
+        <div id="loyalty-signin">
+          <p class="text-sm text-slate-300 mb-4">Use the email address from your website orders. We’ll email you a one-time sign-in code.</p>
+          <label class="block text-xs font-bold text-slate-300 uppercase mb-1" for="loyalty-email">Email address</label>
+          <input id="loyalty-email" type="email" autocomplete="email" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-3 text-sm text-white" placeholder="name@domain.com">
+          <button id="loyalty-send-code" onclick="requestLoyaltyCode()" class="btn-orange w-full mt-3 rounded-lg py-3 text-sm font-bold">Email me a sign-in code</button>
+          <div id="loyalty-code-area" class="hidden mt-4">
+            <label class="block text-xs font-bold text-slate-300 uppercase mb-1" for="loyalty-code">Six-digit code</label>
+            <input id="loyalty-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-3 text-sm text-white tracking-[.35em]" placeholder="000000">
+            <button onclick="verifyLoyaltyCode()" class="btn-orange w-full mt-3 rounded-lg py-3 text-sm font-bold">Verify and view rewards</button>
+          </div>
+        </div>
+        <div id="loyalty-account" class="hidden">
+          <div class="flex justify-between items-start gap-3"><div><p class="text-xs text-slate-400">Welcome back</p><h4 id="loyalty-customer-name" class="text-xl font-bold text-white"></h4><p id="loyalty-order-progress" class="text-sm text-orange-300 mt-1"></p></div><button onclick="signOutLoyalty()" class="text-xs text-slate-400 underline">Sign out</button></div>
+          <div class="mt-4 rounded-xl bg-[#0b1326] border border-slate-700 p-4"><p class="font-bold text-white text-sm">Your available rewards</p><div id="loyalty-reward-list" class="mt-3 space-y-3"></div></div>
+          <p class="text-xs leading-5 text-slate-400 mt-3">Rewards are earned through successful website orders only. They can be used on eligible website orders with at least £20 in food items.</p>
+        </div>
+        <p id="loyalty-status" role="status" class="text-xs text-slate-300"></p>
+      </div>
+    </div>
+  </div>
 
   <!-- Delivery Details Checkout Modal -->
   <div id="checkout-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
@@ -1634,6 +1664,71 @@
         document.getElementById('checkout-final-payable').textContent = 'Quote required';
         renderCart();
       }
+    }
+
+    let loyaltySessionToken = sessionStorage.getItem('hf_loyalty_session') || '';
+    let loyaltyEmailForCode = '';
+
+    function openLoyaltyModal() {
+      const modal = document.getElementById('loyalty-modal');
+      modal.classList.remove('hidden'); modal.classList.add('flex');
+      if (loyaltySessionToken) loadLoyaltyAccount();
+    }
+    function closeLoyaltyModal() {
+      const modal = document.getElementById('loyalty-modal');
+      modal.classList.add('hidden'); modal.classList.remove('flex');
+    }
+    function loyaltyStatus(message, error=false) {
+      const el=document.getElementById('loyalty-status'); el.textContent=message;
+      el.className='text-xs '+(error?'text-red-400':'text-slate-300');
+    }
+    async function requestLoyaltyCode() {
+      const email=document.getElementById('loyalty-email').value.trim().toLowerCase();
+      if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){loyaltyStatus('Please enter a valid email address.',true);return;}
+      const btn=document.getElementById('loyalty-send-code');btn.disabled=true;loyaltyStatus('Sending your code…');
+      try{
+        const res=await fetch(API_BASE_URL+'/loyalty/request-code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+        const data=await res.json();if(!res.ok)throw new Error(data.error||'Could not send your code.');
+        loyaltyEmailForCode=email;document.getElementById('loyalty-code-area').classList.remove('hidden');
+        loyaltyStatus(data.message||'Check your email for your sign-in code.');
+      }catch(e){loyaltyStatus(e.message,true);}finally{btn.disabled=false;}
+    }
+    async function verifyLoyaltyCode() {
+      const code=document.getElementById('loyalty-code').value.trim();
+      if(!/^\\d{6}$/.test(code)){loyaltyStatus('Enter the six-digit code from your email.',true);return;}
+      loyaltyStatus('Verifying your code…');
+      try{
+        const res=await fetch(API_BASE_URL+'/loyalty/verify-code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:loyaltyEmailForCode||document.getElementById('loyalty-email').value.trim().toLowerCase(),code})});
+        const data=await res.json();if(!res.ok)throw new Error(data.error||'That code could not be verified.');
+        loyaltySessionToken=data.token;sessionStorage.setItem('hf_loyalty_session',loyaltySessionToken);
+        showLoyaltyAccount(data);
+      }catch(e){loyaltyStatus(e.message,true);}
+    }
+    async function loadLoyaltyAccount() {
+      try{
+        const res=await fetch(API_BASE_URL+'/loyalty/account',{headers:{Authorization:'Bearer '+loyaltySessionToken}});
+        const data=await res.json();if(!res.ok)throw new Error(data.error||'Please sign in again.');
+        showLoyaltyAccount(data);
+      }catch(e){signOutLoyalty(false);loyaltyStatus(e.message,true);}
+    }
+    function showLoyaltyAccount(data) {
+      document.getElementById('loyalty-signin').classList.add('hidden');
+      document.getElementById('loyalty-account').classList.remove('hidden');
+      document.getElementById('loyalty-customer-name').textContent=data.customer.name||'Fox Rewards member';
+      const count=Number(data.customer.orders||0);
+      document.getElementById('loyalty-order-progress').textContent=count>=5?'You’ve completed your first five website orders.':count+' of 5 qualifying website orders completed';
+      const list=document.getElementById('loyalty-reward-list');list.replaceChildren();
+      const rewards=data.rewards||[];
+      if(!rewards.length){const p=document.createElement('p');p.className='text-sm text-slate-400';p.textContent='No rewards available yet. Keep hunting — your next reward is on its way.';list.appendChild(p);}
+      rewards.forEach(reward=>{const item=document.createElement('div');item.className='border-t border-slate-700 pt-3';const name=document.createElement('p');name.className='text-sm font-bold text-orange-300';name.textContent=reward.reward_name;const note=document.createElement('p');note.className='text-xs text-slate-400 mt-1';note.textContent='Unlocked after website order '+reward.milestone_order;item.append(name,note);list.appendChild(item);});
+      loyaltyStatus('Your loyalty account is up to date.');
+    }
+    function signOutLoyalty(showMessage=true) {
+      loyaltySessionToken='';sessionStorage.removeItem('hf_loyalty_session');
+      document.getElementById('loyalty-account').classList.add('hidden');
+      document.getElementById('loyalty-signin').classList.remove('hidden');
+      document.getElementById('loyalty-code-area').classList.add('hidden');
+      if(showMessage)loyaltyStatus('You have been signed out.');
     }
 
     async function submitWebsiteOrder() {
