@@ -568,21 +568,16 @@
       { name: 'Plain Pitta Bread', price: 0 },
       { name: 'Beans', price: 0 },
       { name: 'Coleslaw', price: 0 },
-      { name: 'Mini Singara (4 pcs)', price: 1.19 },
+      { name: 'Mini Singara (4 Pcs)', price: 1.19 },
       { name: 'Medium Singara', price: 1.49 },
       { name: 'Vegetable Samosa', price: 1.49 },
-      { name: 'Vegetable Singara (2 Pcs)', price: 1.49 },
-      { name: 'Halloumi', price: 1.19 },
-      { name: 'Mozzarella sticks', price: 1.19 },
+      { name: 'Medium Vegetable Singara (2 Pcs)', price: 1.49 },
+      { name: 'Halloumi Fries (2 Pcs)', price: 1.19 },
+      { name: 'Mozzarella Sticks (2 Pcs)', price: 1.19 },
       { name: 'Garlic Naan', price: 0.99 },
       { name: 'Peri Peri Pitta Bread', price: 0.49 },
       { name: 'Onion Rings (3 Pcs)', price: 0.99 },
-      { name: 'Garlic Bread (2 Pcs)', price: 0.99 },
-      { name: 'Halloumi Fries (2 Pcs)', price: 1.00 },
-      { name: 'Mozzarella Sticks (2 Pcs)', price: 1.00 },
-      { name: 'Vegetable Samosa (2 Pcs)', price: 1.19 },
-      { name: 'Vegetable Spring Roll (2 Pcs)', price: 1.19 },
-      { name: 'Mini Singara (Bengali Samosa) (4 Pcs)', price: 1.29 }
+      { name: 'Garlic Bread (2 Pcs)', price: 0.99 }
     ];
 
     const CANNED_DRINKS = [
@@ -1116,13 +1111,19 @@
       // Optional multi-select add-ons for Solo Buldak Fire Noodles
       if (id === 'NDL001') {
         const buldakAddOns = [
-          ['Fried egg', 0.99], ['Fries', 0.99], ['Drink Can', 0.99],
-          ['Plain naan', 0.99], ['Plain pitta bread', 0.99], ['Garlic naan', 1.49],
-          ['Peri peri pitta bread', 0.99], ['Mini singara (4 pcs)', 1.19],
-          ['Medium singara', 1.49], ['Vegetable Samosa', 1.49],
-          ['Vegetable Singara (2 Pcs)', 1.49]
+          ['Fried Egg', 0.99],
+          ['Fries', 0.99],
+          ['Canned Drink', 0.99],
+          ['Plain Naan', 0.99],
+          ['Plain Pitta Bread', 0.99],
+          ['Garlic Naan', 1.49],
+          ['Peri Peri Pitta Bread', 0.99],
+          ['Mini Singara (4 Pcs)', 1.19],
+          ['Medium Singara', 1.49],
+          ['Vegetable Samosa', 1.49],
+          ['Medium Vegetable Singara (2 Pcs)', 1.49]
         ];
-        html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-2"><p class="font-bold text-xs text-orange-400">Optional Add-ons — choose any</p><label class="flex items-center gap-2 text-xs text-slate-200"><input type="checkbox" id="buldak-no-addon" onchange="handleBuldakNoAddon(this)" checked> No Add On</label><div id="buldak-addon-list" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-2">' +
+        html += '<div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-2"><p class="font-bold text-xs text-orange-400">Optional Add-ons — Choose Any</p><label class="flex items-center gap-2 text-xs text-slate-200"><input type="checkbox" id="buldak-no-addon" onchange="handleBuldakNoAddon(this)" checked> No Add On</label><div id="buldak-addon-list" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-2">' +
           buldakAddOns.map((a,i) => '<label class="flex items-center gap-2 text-xs text-slate-200"><input type="checkbox" class="buldak-addon" data-name="' + a[0] + '" data-price="' + a[1] + '" onchange="handleBuldakAddonChange(this)"> ' + a[0] + ' (+' + formatGBP(a[1]) + ')</label>').join('') +
           '</div></div>';
       }
