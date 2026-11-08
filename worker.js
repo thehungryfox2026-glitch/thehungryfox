@@ -60,7 +60,36 @@ async function loyaltyVerifyCode(req,env,o){
  const customer=await env.LOYALTY_DB.prepare("SELECT id,customer_name,order_count FROM loyalty_customers WHERE email=?").bind(email).first();
  if(!customer)return out({error:"No loyalty account was found for that email yet."},404,o);
  const rewards=await env.LOYALTY_DB.prepare("SELECT id,reward_code,reward_name,milestone_order,earned_at FROM loyalty_rewards WHERE customer_id=? AND status='available' ORDER BY milestone_order").bind(customer.id).all();
- return out({customer:{name:customer.customer_name,orders:customer.order_count},rewards:rewards.results||[]},200,o);
+ const token=await createLoyaltyToken(customer,env);
+ return out({token,expiresIn:604800,customer:{name:customer.customer_name,orders:customer.order_count},rewards:rewards.results||[]},200,o);
+}
+function base64url(bytes){let binary="";for(const b of bytes)binary+=String.fromCharCode(b);return btoa(binary).replace(/=/g,"").replace(/\\+/g,"-").replace(/\\//g,"_");}
+async function createLoyaltyToken(customer,env){
+ const payload=base64url(new TextEncoder().encode(JSON.stringify({sub:customer.id,email:customer.email,exp:Math.floor(Date.now()/1000)+604800})));
+ const key=await crypto.subtle.importKey("raw",new TextEncoder().encode(env.LOYALTY_OTP_SECRET),{name:"HMAC",hash:"SHA-256"},false,["sign"]);
+ const sig=await crypto.subtle.sign("HMAC",key,new TextEncoder().encode(payload));
+ return payload+"."+base64url(new Uint8Array(sig));
+}
+async function readLoyaltyToken(req,env){
+ const token=(req.headers.get("Authorization")||"").replace(/^Bearer\\s+/i,"");
+ const parts=token.split(".");if(parts.length!==2||!env.LOYALTY_OTP_SECRET)return null;
+ try{
+  const key=await crypto.subtle.importKey("raw",new TextEncoder().encode(env.LOYALTY_OTP_SECRET),{name:"HMAC",hash:"SHA-256"},false,["verify"]);
+  const sig=Uint8Array.from(atob(parts[1].replace(/-/g,"+").replace(/_/g,"/")+"=".repeat((4-parts[1].length%4)%4)),c=>c.charCodeAt(0));
+  if(!await crypto.subtle.verify("HMAC",key,sig,new TextEncoder().encode(parts[0])))return null;
+  const payload=JSON.parse(atob(parts[0].replace(/-/g,"+").replace(/_/g,"/")+"=".repeat((4-parts[0].length%4)%4)));
+  if(!payload.sub||!payload.email||Number(payload.exp)<Math.floor(Date.now()/1000))return null;
+  return payload;
+ }catch{return null;}
+}
+async function loyaltyAccount(req,env,o){
+ if(!env.LOYALTY_DB||!env.LOYALTY_OTP_SECRET)return out({error:"Loyalty account is not configured."},503,o);
+ const session=await readLoyaltyToken(req,env);if(!session)return out({error:"Please sign in again."},401,o);
+ const customer=await env.LOYALTY_DB.prepare("SELECT id,customer_name,order_count FROM loyalty_customers WHERE id=? AND email=?").bind(session.sub,session.email).first();
+ if(!customer)return out({error:"Loyalty account not found."},404,o);
+ const rewards=await env.LOYALTY_DB.prepare("SELECT id,reward_code,reward_name,milestone_order,earned_at FROM loyalty_rewards WHERE customer_id=? AND status='available' ORDER BY milestone_order").bind(customer.id).all();
+ const used=await env.LOYALTY_DB.prepare("SELECT reward_name,milestone_order,redeemed_at FROM loyalty_rewards WHERE customer_id=? AND status='redeemed' ORDER BY milestone_order").bind(customer.id).all();
+ return out({customer:{name:customer.customer_name,orders:customer.order_count},rewards:rewards.results||[],redeemed:used.results||[]},200,o);
 }
 function escapeHtml(value){return String(value||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 async function verifySession(id,env,o){
@@ -72,4 +101,4 @@ if(!r.ok)return out({paid:false,error:"We could not verify this payment. Please 
 if(s.payment_status!=="paid"||s.status!=="complete")return out({paid:false,error:"This payment has not been confirmed."},402,o);
 return out({paid:true,amountTotal:s.amount_total,currency:s.currency,orderReference:s.id.slice(-8).toUpperCase()},200,o);
 }
-export default{async fetch(req,env){const u=new URL(req.url),o=req.headers.get("Origin")||"";if(req.method==="OPTIONS")return new Response(null,{status:204,headers:cors(o)});if(u.pathname==="/stripe-webhook"&&req.method==="POST")return hook(req,env);if(u.pathname==="/health"&&req.method==="GET")return out({ok:true,checkoutConfigured:!!env.STRIPE_SECRET_KEY,webhookConfigured:!!env.STRIPE_WEBHOOK_SECRET,emailConfigured:!!env.RESEND_API_KEY},200,o);if(u.pathname==="/delivery-quote"&&req.method==="GET"){const q=await quote(u.searchParams.get("postcode"),Number(u.searchParams.get("basketSubtotal")||0));return out(q,q.available?200:400,o);}if(u.pathname==="/verify-session"&&req.method==="GET")return verifySession(u.searchParams.get("session_id"),env,o);if(u.pathname==="/loyalty/request-code"&&req.method==="POST")return loyaltyRequestCode(req,env,o);if(u.pathname==="/loyalty/verify-code"&&req.method==="POST")return loyaltyVerifyCode(req,env,o);if(u.pathname==="/create-checkout-session"&&req.method==="POST")return create(req,env,o);return out({error:"Not found"},404,o);}};
+export default{async fetch(req,env){const u=new URL(req.url),o=req.headers.get("Origin")||"";if(req.method==="OPTIONS")return new Response(null,{status:204,headers:cors(o)});if(u.pathname==="/stripe-webhook"&&req.method==="POST")return hook(req,env);if(u.pathname==="/health"&&req.method==="GET")return out({ok:true,checkoutConfigured:!!env.STRIPE_SECRET_KEY,webhookConfigured:!!env.STRIPE_WEBHOOK_SECRET,emailConfigured:!!env.RESEND_API_KEY},200,o);if(u.pathname==="/delivery-quote"&&req.method==="GET"){const q=await quote(u.searchParams.get("postcode"),Number(u.searchParams.get("basketSubtotal")||0));return out(q,q.available?200:400,o);}if(u.pathname==="/verify-session"&&req.method==="GET")return verifySession(u.searchParams.get("session_id"),env,o);if(u.pathname==="/loyalty/request-code"&&req.method==="POST")return loyaltyRequestCode(req,env,o);if(u.pathname==="/loyalty/verify-code"&&req.method==="POST")return loyaltyVerifyCode(req,env,o);if(u.pathname==="/loyalty/account"&&req.method==="GET")return loyaltyAccount(req,env,o);if(u.pathname==="/create-checkout-session"&&req.method==="POST")return create(req,env,o);return out({error:"Not found"},404,o);}};
