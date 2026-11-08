@@ -49,7 +49,7 @@ async function loyaltyVerifyCode(req,env,o){
  if(!env.LOYALTY_DB||!env.LOYALTY_OTP_SECRET)return out({error:"Loyalty sign-in is not configured yet."},503,o);
  let b;try{b=await req.json();}catch{return out({error:"Enter your email and code."},400,o);}
  const email=String(b.email||"").trim().toLowerCase(),code=String(b.code||"").trim();
- if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||!/^\\d{6}$/.test(code))return out({error:"Enter the email and six-digit code."},400,o);
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||!/^\d{6}$/.test(code))return out({error:"Enter the email and six-digit code."},400,o);
  const row=await env.LOYALTY_DB.prepare("SELECT code_hash,expires_at,attempts FROM loyalty_otps WHERE email=?").bind(email).first();
  const now=Math.floor(Date.now()/1000);
  if(!row||now>Number(row.expires_at)||Number(row.attempts)>=5){await env.LOYALTY_DB.prepare("DELETE FROM loyalty_otps WHERE email=?").bind(email).run();return out({error:"That code has expired. Request a new one."},400,o);}
