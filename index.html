@@ -1652,14 +1652,18 @@
       state.deliveryQuote = null;
       document.getElementById('checkout-quote-status').textContent = 'Enter your postcode to calculate delivery.';
       const subtotal = state.cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
+      selectedCheckoutRewardId='';
+      document.getElementById('checkout-loyalty-reward').value='';
+      const basketDiscount = getWebsiteBasketDiscount(subtotal, false);
       const surcharge = subtotal > 0 && subtotal < MIN_ORDER_AMOUNT ? 4 : 0;
       document.getElementById('checkout-item-subtotal').textContent = formatGBP(subtotal);
+      document.getElementById('checkout-discount-row').classList.toggle('hidden', basketDiscount.amount <= 0);
+      document.getElementById('checkout-discount-label').textContent = 'Website offer (' + basketDiscount.percent + '% off)';
+      document.getElementById('checkout-discount-value').textContent = '-' + formatGBP(basketDiscount.amount);
       document.getElementById('checkout-small-order-charge').textContent = formatGBP(surcharge);
       document.getElementById('checkout-small-order-row').classList.toggle('hidden', surcharge === 0);
       document.getElementById('checkout-delivery-fee').textContent = 'To be calculated';
-      document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal + surcharge);
-      document.getElementById('checkout-loyalty-reward').value='';
-      selectedCheckoutRewardId='';
+      document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal - basketDiscount.amount + surcharge);
       refreshCheckoutRewards();
       document.getElementById('checkout-modal').classList.remove('hidden');
       document.getElementById('checkout-modal').classList.add('flex');
@@ -1741,7 +1745,14 @@
       if(id&&subtotal<20){selectedCheckoutRewardId='';document.getElementById('checkout-loyalty-reward').value='';note.textContent='Rewards require at least £20 in food items.';return;}
       note.textContent=id?'Fox Rewards selected. The website basket discount will not apply; only one offer can be used per order. The reward is redeemed only after successful payment.':'No reward selected. Your eligible website basket discount applies automatically.';
       renderCart();
-      if(state.deliveryQuote){const subtotalNow=state.cart.reduce((sum,item)=>sum+(item.unitPrice*item.quantity),0);const discountNow=getWebsiteBasketDiscount(subtotalNow,Boolean(selectedCheckoutRewardId));const feeNow=Number(state.deliveryQuote.deliveryFee||0);const surchargeNow=subtotalNow>0&&subtotalNow<MIN_ORDER_AMOUNT?4:0;document.getElementById('checkout-discount-row').classList.toggle('hidden',discountNow.amount<=0);document.getElementById('checkout-discount-label').textContent='Website offer ('+discountNow.percent+'% off)';document.getElementById('checkout-discount-value').textContent='-'+formatGBP(discountNow.amount);document.getElementById('checkout-final-payable').textContent=formatGBP(subtotalNow-discountNow.amount+surchargeNow+feeNow);}
+      const subtotalNow=state.cart.reduce((sum,item)=>sum+(item.unitPrice*item.quantity),0);
+      const discountNow=getWebsiteBasketDiscount(subtotalNow,Boolean(selectedCheckoutRewardId));
+      const feeNow=state.deliveryQuote?Number(state.deliveryQuote.deliveryFee||0):0;
+      const surchargeNow=subtotalNow>0&&subtotalNow<MIN_ORDER_AMOUNT?4:0;
+      document.getElementById('checkout-discount-row').classList.toggle('hidden',discountNow.amount<=0);
+      document.getElementById('checkout-discount-label').textContent='Website offer ('+discountNow.percent+'% off)';
+      document.getElementById('checkout-discount-value').textContent='-'+formatGBP(discountNow.amount);
+      document.getElementById('checkout-final-payable').textContent=formatGBP(subtotalNow-discountNow.amount+surchargeNow+feeNow);
     }
     async function refreshCheckoutRewards() {
       const select=document.getElementById('checkout-loyalty-reward'),note=document.getElementById('checkout-loyalty-note');
