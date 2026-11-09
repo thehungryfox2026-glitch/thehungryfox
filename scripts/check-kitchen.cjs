@@ -18,6 +18,14 @@ assert.ok(html.includes('FLAVOURS / OPTIONS: '), 'All item flavour and option la
 assert.ok(html.includes("return 'DESSERTS'"), 'Desserts must have their own receipt category');
 assert.ok(html.includes('singara|samosa|spring roll|bao'), 'Side dishes must be grouped under sides and extras');
 assert.ok(html.includes('@page{size:58mm auto'), 'Receipt must target 58mm thermal paper');
+assert.ok(html.includes('id="sound-enabled"'), 'Kitchen dashboard must include a sound-alert toggle');
+assert.ok(html.includes('id="test-sound"'), 'Kitchen dashboard must include a test-sound control');
+assert.ok(html.includes('function playOrderAlert()'), 'New-order sound alert function must exist');
+assert.ok(html.includes('knownOrderIds!==null'), 'Sound must only alert for orders arriving after initial dashboard load');
+assert.ok(html.includes('id="print-test"'), 'Kitchen dashboard must include a 58mm print-test control');
+assert.ok(html.includes('PRINT TEST ONLY — NOT AN ORDER'), 'Print test must be clearly marked as not a real order');
+assert.ok(html.includes('Printing: manual'), 'Dashboard must clearly state printing is manual, not automatic');
+assert.ok(html.includes('localStorage.setItem(\'hungryfox-kitchen-sound\''), 'Sound preference must persist on this device');
 assert.ok(code.includes('await savePaidKitchenOrder(s,env)'), 'Webhook order storage missing');
 assert.ok(code.includes('kitchenAuthorized(req,env)'), 'Kitchen authorization missing');
 assert.ok(code.includes("SELECT * FROM orders WHERE payment_status='paid'"), 'Kitchen query missing');
