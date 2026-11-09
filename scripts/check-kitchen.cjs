@@ -32,7 +32,7 @@ assert.ok(!html.includes("'SIDES & EXTRAS'"), 'Receipts must never invent a Side
 assert.ok(!html.includes("'MAIN ITEMS'"), 'Receipts must never invent a Main Items category');
 assert.ok(!html.includes("'FLAVOURS / OPTIONS: '+i.options"), 'Receipt must not replace menu option labels with a generic heading');
 assert.ok(html.includes("for(const optionLine of receiptOptions(i.options))"), 'Every recorded option label and value must be printed separately');
-const receiptCatalog = JSON.parse(html.match(/const RECEIPT_MENU_CATEGORIES=(\\{[^;]+\\});/)[1]);
+const receiptCatalog = JSON.parse(html.match(/const RECEIPT_MENU_CATEGORIES=(\{[^;]+\});/)[1]);
 const site = fs.readFileSync('index.html', 'utf8');
 const menuItems = [...site.matchAll(/\\{\\s*Product_ID:\\s*'([^']+)',\\s*Product_Name:\\s*'([^']+)',\\s*Category:\\s*'([^']+)'/g)];
 assert.equal(menuItems.length, 100, 'Full current website menu must be audited');
