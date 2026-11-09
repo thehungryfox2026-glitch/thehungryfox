@@ -17,7 +17,9 @@ assert.ok(html.includes('class="brand-logo"'), 'Fox logo must appear in the dash
 assert.ok(html.includes("NEW:{next:'PREPARING',label:'Start preparing'}"), 'New orders must only offer the preparing action');
 assert.ok(html.includes("PREPARING:{next:'READY',label:'Mark ready'}"), 'Preparing orders must only offer the ready action');
 assert.ok(html.includes("READY:{next:'COMPLETED',label:'Mark delivered'}"), 'Ready orders must only offer the delivered action');
-assert.ok(html.includes("add(actions,'span','Delivered')"), 'Completed orders must show delivered without backwards status buttons');
+assert.ok(html.includes("if(o.kitchen_status!=='COMPLETED')"), 'Completed orders must hide the entire action area, including print and status buttons');
+assert.ok(!html.includes("add(actions,'span','Delivered')"), 'Completed orders must not show an extra action label');
+assert.ok(code.includes("img-src data:"), 'Kitchen security policy must allow the embedded approved logo while keeping other image sources blocked');
 assert.ok(!html.includes("for(const status of ['PREPARING','READY','COMPLETED'])"), 'Dashboard must not offer backward status transitions');
 assert.ok(html.includes('.order.print-target .receipt-logo{display:block!important'), 'Fox logo must be visible when printing');
 assert.ok(html.includes('.order.print-target:before{display:none!important}'), 'Duplicate text-only logo heading must be hidden when printing');
