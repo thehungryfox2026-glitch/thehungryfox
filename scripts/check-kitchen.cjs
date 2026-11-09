@@ -27,9 +27,23 @@ assert.ok(code.includes("img-src data:"), 'Kitchen security policy must allow th
 assert.ok(!html.includes("for(const status of ['PREPARING','READY','COMPLETED'])"), 'Dashboard must not offer backward status transitions');
 assert.ok(html.includes('.order.print-target .receipt-logo{display:block!important'), 'Fox logo must be visible when printing');
 assert.ok(html.includes('.order.print-target:before{display:none!important}'), 'Duplicate text-only logo heading must be hidden when printing');
-assert.ok(html.includes('FLAVOURS / OPTIONS: '), 'All item flavour and option labels must be printed');
-assert.ok(html.includes("return 'DESSERTS'"), 'Desserts must have their own receipt category');
-assert.ok(html.includes('singara|samosa|spring roll|bao'), 'Side dishes must be grouped under sides and extras');
+assert.ok(!html.includes("'MEALS & BUNDLES'"), 'Receipts must never invent a Meals & Bundles category');
+assert.ok(!html.includes("'SIDES & EXTRAS'"), 'Receipts must never invent a Sides & Extras category');
+assert.ok(!html.includes("'MAIN ITEMS'"), 'Receipts must never invent a Main Items category');
+assert.ok(!html.includes("'FLAVOURS / OPTIONS: '+i.options"), 'Receipt must not replace menu option labels with a generic heading');
+assert.ok(html.includes("for(const optionLine of receiptOptions(i.options))"), 'Every recorded option label and value must be printed separately');
+const receiptCatalog = JSON.parse(html.match(/const RECEIPT_MENU_CATEGORIES=(\\{[^;]+\\});/)[1]);
+const site = fs.readFileSync('index.html', 'utf8');
+const menuItems = [...site.matchAll(/\\{\\s*Product_ID:\\s*'([^']+)',\\s*Product_Name:\\s*'([^']+)',\\s*Category:\\s*'([^']+)'/g)];
+assert.equal(menuItems.length, 100, 'Full current website menu must be audited');
+for(const item of menuItems){
+  assert.equal(receiptCatalog[item[2]],item[3], 'Receipt category must match website exactly for '+item[2]);
+}
+assert.deepEqual([...new Set(Object.values(receiptCatalog))].sort(), [
+  'Special Featured','Solo Chicken or Upgrade to Meal','Signature Doners & Noodles','Signature Rice',
+  'Sharing Platters','Ultimate Share Bundles','Kids Menu','Fries & Wedges','Premium Sides',
+  'Breads & Sides','Desserts','Drinks'
+].sort(), 'Receipt must use exactly the twelve website menu categories');
 assert.ok(html.includes('@page{size:58mm auto'), 'Receipt must target 58mm thermal paper');
 assert.ok(html.includes('id="sound-enabled"'), 'Kitchen dashboard must include a sound-alert toggle');
 assert.ok(html.includes('id="test-sound"'), 'Kitchen dashboard must include a test-sound control');
@@ -45,7 +59,6 @@ assert.ok(html.includes('localStorage.setItem(\'hungryfox-kitchen-sound\''), 'So
 assert.ok(code.includes('await savePaidKitchenOrder(s,env)'), 'Webhook order storage missing');
 assert.ok(code.includes('kitchenAuthorized(req,env)'), 'Kitchen authorization missing');
 assert.ok(code.includes("SELECT * FROM orders WHERE payment_status='paid'"), 'Kitchen query missing');
-const site = fs.readFileSync('index.html', 'utf8');
 assert.ok(site.includes('id="website-offer-banner"'), 'Website offer banner must exist');
 assert.ok(site.includes('Website Exclusive Offers'), 'Website offer heading must be visible');
 assert.ok(site.includes('10% OFF') && site.includes('15% OFF'), 'Both website offer tiers must be displayed');
