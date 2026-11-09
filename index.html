@@ -394,16 +394,17 @@
   </div>
 
   <!-- Delivery Details Checkout Modal -->
-  <div id="checkout-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="bg-[#131b2e] border border-slate-700 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-      <div class="p-5 border-b border-slate-800 flex justify-between items-center">
-        <h3 class="font-serif text-xl font-bold text-white">Delivery Dispatch Details</h3>
+  <div id="checkout-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4">
+    <div class="bg-[#131b2e] border border-slate-700 w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[96dvh] sm:max-h-[92vh]">
+      <div class="px-4 py-3 sm:px-5 border-b border-slate-800 flex justify-between items-center shrink-0">
+        <h3 class="font-serif text-xl font-bold text-white">Checkout · Delivery details</h3>
         <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white p-1">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
       </div>
 
-      <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 min-h-0 overflow-y-auto md:overflow-hidden flex-1">
+      <div class="p-4 sm:p-5 md:overflow-y-auto custom-scrollbar space-y-3">
         <div>
           <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Name *</label>
           <input type="text" id="cust-name" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" placeholder="Recipient Name" required />
@@ -421,8 +422,8 @@
         <div>
           <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Delivery Postcode *</label>
           <div class="flex gap-2">
-            <input type="text" id="cust-postcode" class="flex-1 bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white uppercase font-mono" placeholder="e.g. RM17 6QJ" required />
-            <button type="button" onclick="calculateCheckoutDeliveryFee()" class="btn-orange px-4 py-2 rounded-lg text-xs font-bold">Query Quote</button>
+            <input type="text" id="cust-postcode" oninput="invalidateCheckoutDeliveryQuote()" onblur="autoCheckCheckoutPostcode()" class="flex-1 bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white uppercase font-mono" placeholder="e.g. RM17 6QJ" required />
+            <button type="button" onclick="calculateCheckoutDeliveryFee()" class="btn-orange px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap">Check delivery &amp; price</button>
           </div>
           <div id="checkout-quote-status" class="text-xs mt-1.5 font-bold"></div>
         </div>
@@ -436,7 +437,7 @@
         </div>
       </div>
 
-      <div class="p-5 border-t border-slate-800 bg-[#0a101d] flex flex-col gap-2">
+      <div class="p-4 sm:p-5 border-t md:border-t-0 md:border-l border-slate-800 bg-[#0a101d] flex flex-col gap-3 md:overflow-y-auto custom-scrollbar">
         <div class="space-y-2 text-xs text-slate-300">
           <div class="flex justify-between">
             <span>Item subtotal</span>
@@ -451,11 +452,11 @@
             <span id="checkout-delivery-fee" class="font-bold text-white">To be calculated</span>
           </div>
           <div class="rounded-xl border border-orange-500/30 bg-[#0b1326] p-3 space-y-2">
-          <label for="checkout-loyalty-reward" class="block text-xs font-bold text-orange-300 uppercase">Use a Fox Rewards reward</label>
+          <label for="checkout-loyalty-reward" class="block text-xs font-bold text-orange-300 uppercase">Fox Rewards (optional)</label>
           <select id="checkout-loyalty-reward" onchange="selectCheckoutReward(this.value)" class="w-full bg-[#131b2e] border border-slate-700 rounded-lg p-2.5 text-xs text-white">
             <option value="">No reward selected</option>
           </select>
-          <p id="checkout-loyalty-note" class="text-[11px] text-slate-400">Sign in to Fox Rewards to view available rewards. Minimum £20 in food items.</p>
+          <p id="checkout-loyalty-note" class="text-[11px] text-slate-400">Already have a reward? Sign in to use it. Minimum £20 in food items.</p>
           <button type="button" onclick="openLoyaltyModal()" class="text-xs text-orange-300 underline">Sign in / view Fox Rewards</button>
         </div>
         <div class="flex justify-between items-center text-sm font-black text-white pt-2 border-t border-slate-800">
@@ -466,6 +467,7 @@
         <p class="text-[11px] text-slate-400">You will be redirected to Stripe's secure checkout. Your order is confirmed only after payment succeeds.</p>
         <button id="place-order-btn" type="button" onclick="submitWebsiteOrder()" class="w-full btn-orange py-3 rounded-xl font-extrabold text-sm">Continue to Secure Payment</button>
         <p id="checkout-submit-status" role="status" class="text-xs text-center text-slate-400"></p>
+      </div>
       </div>
     </div>
   </div>
@@ -516,7 +518,7 @@
 
   <!-- Self-Contained JavaScript Catalog, Option Rules & Ordering Engine -->
   <script>
-    const API_BASE_URL = location.hostname === 'hungryfox-loyalty-test.pages.dev'
+    const API_BASE_URL = (location.hostname === 'hungryfox-loyalty-test.pages.dev' || location.hostname.endsWith('.hungryfox-loyalty-test.pages.dev'))
       ? 'https://website-loyalty-program-hungryfox-api-preview.thehungryfox2026.workers.dev'
       : 'https://hungryfox-api.thehungryfox2026.workers.dev';
     const MIN_ORDER_AMOUNT = 15.00;
@@ -1640,13 +1642,28 @@
       document.getElementById('checkout-modal').classList.remove('flex');
     }
 
+    let checkoutQuotePostcode = '';
+    function invalidateCheckoutDeliveryQuote() {
+      const postcode = document.getElementById('cust-postcode').value.trim().toUpperCase().replace(/\s+/g, '');
+      if (postcode !== checkoutQuotePostcode) {
+        state.deliveryQuote = null;
+        document.getElementById('checkout-delivery-fee').textContent = 'Check postcode';
+        document.getElementById('checkout-quote-status').textContent = 'Check delivery availability and charge for this postcode.';
+      }
+    }
+    function autoCheckCheckoutPostcode() {
+      const postcode = document.getElementById('cust-postcode').value.trim();
+      if (postcode && !state.deliveryQuote) calculateCheckoutDeliveryFee();
+    }
+
     async function calculateCheckoutDeliveryFee() {
       const pc = document.getElementById('cust-postcode').value.trim();
       const status = document.getElementById('checkout-quote-status');
       if (!pc) { status.textContent = 'Enter your postcode first.'; return; }
       const subtotal = state.cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
       state.deliveryQuote = null;
-      status.textContent = 'Querying live quote...';
+      checkoutQuotePostcode = '';
+      status.textContent = 'Checking delivery availability and price...';
       status.className = 'text-xs mt-1.5 text-slate-400 font-bold';
       try {
         const res = await fetch(`${API_BASE_URL}/delivery-quote?postcode=${encodeURIComponent(pc)}&basketSubtotal=${encodeURIComponent(subtotal)}`);
@@ -1657,11 +1674,13 @@
           status.className = 'text-xs mt-1.5 text-amber-400 font-bold';
           document.getElementById('checkout-final-payable').textContent = 'Unavailable';
           renderCart();
-          return;
+          return false;
         }
         const fee = Number(data.deliveryFee || 0);
         const surcharge = subtotal > 0 && subtotal < MIN_ORDER_AMOUNT ? 4 : 0;
+        if (document.getElementById('cust-postcode').value.trim().toUpperCase().replace(/\s+/g, '') !== pc.toUpperCase().replace(/\s+/g, '')) return false;
         state.deliveryQuote = { deliveryFee: fee };
+        checkoutQuotePostcode = pc.toUpperCase().replace(/\s+/g, '');
         status.textContent = fee === 0 ? 'FREE DELIVERY' : `Delivery charge: ${formatGBP(fee)}`;
         status.className = 'text-xs mt-1.5 text-emerald-400 font-bold';
         document.getElementById('checkout-item-subtotal').textContent = formatGBP(subtotal);
@@ -1670,12 +1689,14 @@
         document.getElementById('checkout-delivery-fee').textContent = fee === 0 ? 'FREE' : formatGBP(fee);
         document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal + surcharge + fee);
         renderCart();
+        return true;
       } catch (err) {
         state.deliveryQuote = null;
         status.textContent = 'We could not calculate delivery. Please try again.';
         status.className = 'text-xs mt-1.5 text-red-400 font-bold';
         document.getElementById('checkout-final-payable').textContent = 'Quote required';
         renderCart();
+        return false;
       }
     }
 
@@ -1797,9 +1818,14 @@
         return;
       }
       if (!state.deliveryQuote) {
-        status.textContent = 'Please query and confirm your delivery quote first.';
+        status.textContent = 'Checking delivery for your postcode...';
         status.className = 'text-xs text-center text-amber-300';
-        return;
+        const quoted = await calculateCheckoutDeliveryFee();
+        if (!quoted) {
+          status.textContent = 'Please check your delivery postcode and try again.';
+          document.getElementById('cust-postcode').focus();
+          return;
+        }
       }
       btn.disabled = true;
       btn.textContent = 'Preparing secure checkout...';
