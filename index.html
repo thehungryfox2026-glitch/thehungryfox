@@ -121,10 +121,14 @@
         </div>
       </a>
 
-      <!-- Delivery and partner app message -->
-      <div class="hidden sm:flex flex-col items-center gap-1 text-xs">
-        <span class="font-bold text-emerald-300">We deliver to most local areas · Check your postcode for free delivery</span>
-        <span class="text-slate-300">Prefer delivery apps? Find us on <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="text-orange-400 hover:underline font-bold">Uber Eats</a> &amp; <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener" class="text-orange-400 hover:underline font-bold">Deliveroo</a>.</span>
+      <!-- Delivery message and discreet partner links -->
+      <div class="hidden sm:flex flex-col items-center gap-1.5 text-xs">
+        <span class="font-bold text-emerald-300">We deliver to most local areas · Check your postcode for delivery</span>
+        <div class="flex items-center gap-2 rounded-xl border border-slate-700/80 bg-[#0b1326] px-3 py-2 shadow-sm">
+          <span class="text-slate-400 text-[10px] font-semibold uppercase tracking-wider">Also available on</span>
+          <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="rounded-md border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-1.5 text-emerald-300 font-bold hover:bg-emerald-500/20 transition">Uber Eats</a>
+          <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener" class="rounded-md border border-cyan-500/40 bg-cyan-500/10 px-2.5 py-1.5 text-cyan-300 font-bold hover:bg-cyan-500/20 transition">Deliveroo</a>
+        </div>
       </div>
 
         <button onclick="openLoyaltyModal()" class="hidden sm:inline-flex items-center gap-2 border border-orange-500/50 text-orange-300 hover:bg-orange-500/10 px-3 py-2.5 rounded-full font-bold text-xs transition">Fox Rewards</button>
@@ -362,18 +366,6 @@
         <span>Proceed to Checkout</span>
       </button>
 
-      <!-- External Partner Fallbacks -->
-      <div class="pt-2 text-center">
-        <span class="text-[11px] text-slate-400 block mb-1.5">Or order directly via partner apps:</span>
-        <div class="flex gap-2">
-          <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 rounded-lg text-center transition">
-            Uber Eats
-          </a>
-          <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener" class="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold py-2 rounded-lg text-center transition">
-            Deliveroo
-          </a>
-        </div>
-      </div>
     </div>
   </aside>
 
@@ -1636,7 +1628,7 @@
         if (data.available) {
           result.innerHTML = `<span class="text-emerald-400 font-bold">✓ Delivery available!</span><span class="text-slate-300 ml-1">${Number(data.deliveryFee) === 0 ? 'FREE DELIVERY' : `Delivery charge: ${formatGBP(data.deliveryFee)}`}</span>`;
         } else {
-          result.innerHTML = `<span class="text-amber-400">Far From Us, No Issue — we're still available on:</span> <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="text-orange-400 hover:underline font-bold">Uber Eats</a> <span class="text-slate-300">&amp;</span> <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener" class="text-cyan-400 hover:underline font-bold">Deliveroo</a>`;
+          result.innerHTML = `<span class="text-amber-400">Too far for our own delivery? No worries! You can still try our flavours by ordering through</span> <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="text-orange-400 hover:underline font-bold">Uber Eats</a> <span class="text-slate-300">&amp;</span> <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener" class="text-cyan-400 hover:underline font-bold">Deliveroo</a>`;
         }
       } catch (err) {
         result.innerHTML = '<span class="text-red-400">We could not check this postcode just now. Please try again.</span>';
@@ -1702,7 +1694,7 @@
         const data = await res.json();
         if (!res.ok || data.error) throw new Error(data.error || 'Quote failed');
         if (!data.available) {
-          status.innerHTML = `<span>Far From Us, No Issue — we're still available on:</span> <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="text-orange-400 hover:underline font-bold">Uber Eats</a> <span>&amp;</span> <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener" class="text-cyan-400 hover:underline font-bold">Deliveroo</a>`;
+          status.innerHTML = `<span>Too far for our own delivery? No worries! You can still try our flavours by ordering through</span> <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="text-orange-400 hover:underline font-bold">Uber Eats</a> <span>&amp;</span> <a href="https://deliveroo.co.uk/menu/London/grays/the-hungry-fox-clarence-road-26a-clarence-road/" target="_blank" rel="noopener" class="text-cyan-400 hover:underline font-bold">Deliveroo</a>`;
           status.className = 'text-xs mt-1.5 text-amber-400 font-bold';
           document.getElementById('checkout-final-payable').textContent = 'Unavailable';
           renderCart();
