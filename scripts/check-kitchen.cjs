@@ -14,6 +14,10 @@ new vm.Script(html.slice(scriptStart + 8, scriptEnd), {filename:'kitchen-dashboa
 assert.ok(html.includes("className='receipt-logo'"), 'Approved fox logo must be embedded in each order receipt');
 assert.ok(html.includes('class="brand-header"'), 'Kitchen dashboard must use a branded header');
 assert.ok(html.includes('class="brand-logo"'), 'Fox logo must appear in the dashboard header');
+const logoBase64 = html.match(/<img class="brand-logo" src="data:image\/png;base64,([A-Za-z0-9+/=]+)"/);
+assert.ok(logoBase64, 'Kitchen header must contain the embedded fox logo image');
+assert.equal(logoBase64[1].length % 4, 0, 'Embedded fox logo base64 must be validly padded');
+assert.ok(Buffer.from(logoBase64[1], 'base64').subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10])), 'Embedded fox logo must be a valid PNG');
 assert.ok(html.includes("NEW:{next:'PREPARING',label:'Start preparing'}"), 'New orders must only offer the preparing action');
 assert.ok(html.includes("PREPARING:{next:'READY',label:'Mark ready'}"), 'Preparing orders must only offer the ready action');
 assert.ok(html.includes("READY:{next:'COMPLETED',label:'Mark delivered'}"), 'Ready orders must only offer the delivered action');
