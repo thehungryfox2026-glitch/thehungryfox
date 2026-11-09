@@ -1,0 +1,18 @@
+name: Check kitchen dashboard
+on:
+  pull_request:
+  push:
+    branches:
+      - feature/kitchen-orders-main-review
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check Worker JavaScript syntax
+        run: node --check worker.js
+      - name: Check kitchen dashboard JavaScript and routes
+        run: node scripts/check-kitchen.cjs
