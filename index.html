@@ -159,7 +159,16 @@
       </h1>
       <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
         Piping hot baked & fried chicken feast boxes, fiery buldak noodles, and freshly sizzled doner delivered straight to your door across Grays and Thurrock.
-      </p>
+      </p>      <!-- Reusable website-only basket promotion; set data-active="false" to hide when no offer is running. -->
+      <div id="website-offer-banner" data-active="true" class="max-w-2xl mx-auto py-2 text-center" aria-label="Website exclusive offers">
+        <p class="text-orange-400 text-xs sm:text-sm font-extrabold uppercase tracking-[.16em]">Website Exclusive Offers</p>
+        <div class="mt-2 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-5 text-white text-sm sm:text-base font-extrabold">
+          <span><span class="text-orange-400">10% OFF</span> when you spend £20+</span>
+          <span class="hidden sm:inline text-slate-600" aria-hidden="true">|</span>
+          <span><span class="text-orange-400">15% OFF</span> when you spend £30+</span>
+        </div>
+        <p class="text-slate-400 text-[11px] sm:text-xs mt-1">Discount applied automatically at checkout. No code needed. Based on food subtotal; delivery excluded.</p>
+      </div>
       <div class="max-w-2xl mx-auto rounded-xl border border-orange-500/50 bg-orange-500/10 px-5 py-4 shadow-lg shadow-orange-950/20">
         <p class="text-orange-400 font-extrabold text-sm sm:text-base uppercase tracking-wide">Order direct from our website for better value</p>
         <p class="text-slate-200 text-xs sm:text-sm mt-1 leading-relaxed">Skip third-party platform service fees and enjoy your Hungry Fox favourites for less.</p>
@@ -331,6 +340,10 @@
           <span>Item subtotal</span>
           <span id="cart-subtotal-val" class="font-bold text-white">£0.00</span>
         </div>
+        <div id="cart-discount-row" class="hidden flex justify-between text-emerald-400">
+          <span id="cart-discount-label">Website offer</span>
+          <span id="cart-discount-val" class="font-bold">-£0.00</span>
+        </div>
         <div id="cart-small-order-row" class="flex justify-between">
           <span>Small-order charge</span>
           <span id="cart-small-order-val" class="font-bold text-amber-400">£0.00</span>
@@ -442,6 +455,10 @@
           <div class="flex justify-between">
             <span>Item subtotal</span>
             <span id="checkout-item-subtotal" class="font-bold text-white">£0.00</span>
+          </div>
+          <div id="checkout-discount-row" class="hidden flex justify-between text-emerald-400">
+            <span id="checkout-discount-label">Website offer</span>
+            <span id="checkout-discount-value" class="font-bold">-£0.00</span>
           </div>
           <div id="checkout-small-order-row" class="flex justify-between">
             <span>Small-order charge</span>
@@ -1481,6 +1498,13 @@
     }
 
     // Basket & Calculation State
+    function getWebsiteBasketDiscount(subtotal, rewardSelected = false) {
+      if (rewardSelected) return { amount: 0, percent: 0 };
+      const subtotalPence = Math.round(Number(subtotal || 0) * 100);
+      const percent = subtotalPence >= 3000 ? 15 : (subtotalPence >= 2000 ? 10 : 0);
+      return { amount: Math.round(subtotalPence * percent / 100) / 100, percent };
+    }
+
     function renderCart() {
       const container = document.getElementById('cart-items-container');
       const subtotal = state.cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
@@ -1490,6 +1514,10 @@
       document.getElementById('header-basket-count').textContent = totalCount;
       document.getElementById('cart-drawer-count').textContent = totalCount;
       document.getElementById('cart-subtotal-val').textContent = formatGBP(subtotal);
+      const basketDiscount = getWebsiteBasketDiscount(subtotal, Boolean(selectedCheckoutRewardId));
+      document.getElementById('cart-discount-row').classList.toggle('hidden', basketDiscount.amount <= 0);
+      document.getElementById('cart-discount-label').textContent = 'Website offer (' + basketDiscount.percent + '% off)';
+      document.getElementById('cart-discount-val').textContent = '-' + formatGBP(basketDiscount.amount);
 
       // Apply the £4 surcharge to baskets below £15.00
       const minStatus = document.getElementById('cart-min-status');
@@ -1511,7 +1539,7 @@
       minBar.className = (subtotal >= MIN_ORDER_AMOUNT ? 'bg-emerald-500' : 'bg-orange-500') + ' h-full transition-all duration-300';
       checkoutBtn.disabled = state.cart.length === 0;
 
-      const totalPayable = subtotal + surcharge + (state.deliveryQuote?.deliveryFee || 0);
+      const totalPayable = subtotal - basketDiscount.amount + surcharge + (state.deliveryQuote?.deliveryFee || 0);
       document.getElementById('cart-total-val').textContent = formatGBP(totalPayable);
 
       if (state.cart.length === 0) {
@@ -1683,11 +1711,15 @@
         checkoutQuotePostcode = pc.toUpperCase().replace(/\s+/g, '');
         status.textContent = fee === 0 ? 'FREE DELIVERY' : `Delivery charge: ${formatGBP(fee)}`;
         status.className = 'text-xs mt-1.5 text-emerald-400 font-bold';
+        const basketDiscount = getWebsiteBasketDiscount(subtotal, Boolean(selectedCheckoutRewardId));
         document.getElementById('checkout-item-subtotal').textContent = formatGBP(subtotal);
+        document.getElementById('checkout-discount-row').classList.toggle('hidden', basketDiscount.amount <= 0);
+        document.getElementById('checkout-discount-label').textContent = 'Website offer (' + basketDiscount.percent + '% off)';
+        document.getElementById('checkout-discount-value').textContent = '-' + formatGBP(basketDiscount.amount);
         document.getElementById('checkout-small-order-charge').textContent = formatGBP(surcharge);
         document.getElementById('checkout-small-order-row').classList.toggle('hidden', surcharge === 0);
         document.getElementById('checkout-delivery-fee').textContent = fee === 0 ? 'FREE' : formatGBP(fee);
-        document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal + surcharge + fee);
+        document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal - basketDiscount.amount + surcharge + fee);
         renderCart();
         return true;
       } catch (err) {
@@ -1707,7 +1739,9 @@
       const note=document.getElementById('checkout-loyalty-note');
       const subtotal=state.cart.reduce((sum,item)=>sum+(item.unitPrice*item.quantity),0);
       if(id&&subtotal<20){selectedCheckoutRewardId='';document.getElementById('checkout-loyalty-reward').value='';note.textContent='Rewards require at least £20 in food items.';return;}
-      note.textContent=id?'Reward selected. It will be redeemed only after successful payment.':'No reward selected.';
+      note.textContent=id?'Fox Rewards selected. The website basket discount will not apply; only one offer can be used per order. The reward is redeemed only after successful payment.':'No reward selected. Your eligible website basket discount applies automatically.';
+      renderCart();
+      if(state.deliveryQuote){const subtotalNow=state.cart.reduce((sum,item)=>sum+(item.unitPrice*item.quantity),0);const discountNow=getWebsiteBasketDiscount(subtotalNow,Boolean(selectedCheckoutRewardId));const feeNow=Number(state.deliveryQuote.deliveryFee||0);const surchargeNow=subtotalNow>0&&subtotalNow<MIN_ORDER_AMOUNT?4:0;document.getElementById('checkout-discount-row').classList.toggle('hidden',discountNow.amount<=0);document.getElementById('checkout-discount-label').textContent='Website offer ('+discountNow.percent+'% off)';document.getElementById('checkout-discount-value').textContent='-'+formatGBP(discountNow.amount);document.getElementById('checkout-final-payable').textContent=formatGBP(subtotalNow-discountNow.amount+surchargeNow+feeNow);}
     }
     async function refreshCheckoutRewards() {
       const select=document.getElementById('checkout-loyalty-reward'),note=document.getElementById('checkout-loyalty-note');
@@ -1865,6 +1899,8 @@
       renderMenu();
       renderAllergenMatrix();
       renderCart();
+      const offerBanner = document.getElementById('website-offer-banner');
+      if (offerBanner && offerBanner.dataset.active !== 'true') offerBanner.hidden = true;
       const params = new URLSearchParams(window.location.search);
       const payment = params.get('payment');
       if (payment !== 'success' && payment !== 'cancelled') return;
