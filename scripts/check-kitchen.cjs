@@ -21,4 +21,16 @@ assert.ok(html.includes('@page{size:58mm auto'), 'Receipt must target 58mm therm
 assert.ok(code.includes('await savePaidKitchenOrder(s,env)'), 'Webhook order storage missing');
 assert.ok(code.includes('kitchenAuthorized(req,env)'), 'Kitchen authorization missing');
 assert.ok(code.includes("SELECT * FROM orders WHERE payment_status='paid'"), 'Kitchen query missing');
+const site = fs.readFileSync('index.html', 'utf8');
+assert.ok(site.includes('id="website-offer-banner"'), 'Website offer banner must exist');
+assert.ok(site.includes('Website Exclusive Offers'), 'Website offer heading must be visible');
+assert.ok(site.includes('10% OFF') && site.includes('15% OFF'), 'Both website offer tiers must be displayed');
+assert.ok(site.includes('id="cart-discount-row"') && site.includes('id="checkout-discount-row"'), 'Discount must be shown in basket and checkout totals');
+assert.ok(site.includes('function getWebsiteBasketDiscount'), 'Frontend basket discount calculation must exist');
+assert.ok(code.includes('websiteDiscountPercent=reward?0:'), 'Fox Rewards must not stack with basket promotions');
+assert.ok(code.includes('https://api.stripe.com/v1/coupons'), 'Server must create a Stripe coupon for eligible website offers');
+assert.ok(code.includes('discounts[0][coupon]'), 'Stripe Checkout must receive the automatic basket discount');
+assert.ok(code.includes('subtotal>=3000?15:(subtotal>=2000?10:0)'), 'Server must enforce 15% at £30 and 10% at £20');
+const inlineScripts = [...site.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/g)].map(match => match[1]).filter(script => script.trim());
+for (let i = 0; i < inlineScripts.length; i++) new vm.Script(inlineScripts[i], {filename:'website-inline-'+i+'.js'});
 console.log('Kitchen code syntax and route checks passed');
