@@ -19,3 +19,5 @@ jobs:
 
       - name: Test kitchen authentication and order routes
         run: node scripts/test-kitchen.cjs
+      - name: Test Stripe order storage and webhook retries
+        run: node scripts/test-stripe-kitchen.cjs
