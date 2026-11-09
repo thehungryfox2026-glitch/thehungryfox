@@ -1,6 +1,6 @@
 const vm=require('node:vm');const assert=require('node:assert/strict');const fs=require('node:fs');const code=fs.readFileSync('worker.js','utf8');
-const ms=code.indexOf('const MENU='),me=code.indexOf(';\\nconst cors',ms)+1,hs=code.indexOf('function serverOptionPricePence'),he=code.indexOf('\\nasync function create',hs);
-const context={};vm.runInNewContext(code.slice(ms,me)+'\\n'+code.slice(hs,he)+'\\nthis.price=serverOptionPricePence;this.menu=MENU;',context);
+const ms=code.indexOf('const MENU='),me=code.indexOf(';\nconst cors',ms)+1,hs=code.indexOf('function serverOptionPricePence'),he=code.indexOf('\nasync function create',hs);
+const context={};vm.runInNewContext(code.slice(ms,me)+'\n'+code.slice(hs,he)+'\nthis.price=serverOptionPricePence;this.menu=MENU;',context);
 const p=context.price;
 assert.equal(p('FEA001',{label:'Bread Choice',value:'Garlic Naan',price:0}),99,'Browser cannot zero a paid bread option');
 assert.equal(p('FEA001',{label:'Bread Choice',value:'Plain Naan',price:999}),0,'Browser cannot inflate a free bread option');
