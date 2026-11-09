@@ -71,7 +71,7 @@ async function loyaltyRequestCode(req,env,o){
  await env.LOYALTY_DB.prepare("INSERT INTO loyalty_otps(email,code_hash,expires_at,attempts,sent_at) VALUES(?,?,?,0,?) ON CONFLICT(email) DO UPDATE SET code_hash=excluded.code_hash,expires_at=excluded.expires_at,attempts=0,sent_at=excluded.sent_at").bind(email,hash,now+600,now).run();
  const sent=await fetch("https://api.resend.com/emails",{method:"POST",headers:{Authorization:"Bearer "+env.RESEND_API_KEY,"Content-Type":"application/json"},body:JSON.stringify({from:"The Hungry Fox <orders@thehungryfox.co.uk>",to:[email],subject:"Your Hungry Fox sign-in code",text:"Your Hungry Fox loyalty sign-in code is "+code+". It expires in 10 minutes. If you did not request this, you can ignore this email."})});
  if(!sent.ok){console.error("Loyalty OTP email failed:",await sent.text());return out({error:"We could not send your sign-in code. Please try again shortly."},502,o);}
- return out({ok:true,message:"A sign-in code has been sent if this email is registered with a loyalty account."},200,o);
+ return out({ok:true,message:"A six-digit verification code has been sent to your email."},200,o);
 }
 async function loyaltyVerifyCode(req,env,o){
  if(!env.LOYALTY_DB||!env.LOYALTY_OTP_SECRET)return out({error:"Loyalty sign-in is not configured yet."},503,o);
@@ -85,8 +85,9 @@ async function loyaltyVerifyCode(req,env,o){
  const hash=Array.from(new Uint8Array(digest)).map(x=>x.toString(16).padStart(2,"0")).join("");
  if(hash!==row.code_hash){await env.LOYALTY_DB.prepare("UPDATE loyalty_otps SET attempts=attempts+1 WHERE email=?").bind(email).run();return out({error:"That code is not correct."},400,o);}
  await env.LOYALTY_DB.prepare("DELETE FROM loyalty_otps WHERE email=?").bind(email).run();
+ await env.LOYALTY_DB.prepare("INSERT INTO loyalty_customers(id,email,customer_name) VALUES(?,?,?) ON CONFLICT(email) DO NOTHING").bind(crypto.randomUUID(),email,"Customer").run();
  const customer=await env.LOYALTY_DB.prepare("SELECT id,email,customer_name,order_count FROM loyalty_customers WHERE email=?").bind(email).first();
- if(!customer)return out({error:"No loyalty account was found for that email yet."},404,o);
+ if(!customer)return out({error:"We could not create your rewards account. Please try again."},503,o);
  const rewards=await env.LOYALTY_DB.prepare("SELECT id,reward_code,reward_name,milestone_order,earned_at FROM loyalty_rewards WHERE customer_id=? AND status='available' AND NOT EXISTS (SELECT 1 FROM loyalty_reward_reservations rr WHERE rr.reward_id=loyalty_rewards.id AND rr.expires_at>?) ORDER BY milestone_order").bind(customer.id,Math.floor(Date.now()/1000)).all();
  const token=await createLoyaltyToken(customer,env);
  return out({token,expiresIn:604800,customer:{name:customer.customer_name,orders:customer.order_count},rewards:rewards.results||[]},200,o);
