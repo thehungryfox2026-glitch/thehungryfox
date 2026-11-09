@@ -1,3 +1,22 @@
 name = "hungryfox-api"
 main = "worker.js"
 compatibility_date = "2026-11-04"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hungryfox-orders"
+database_id = "d17b2b33-c64a-4e68-ae53-c5cd36a30f9b"
+
+[[d1_databases]]
+binding = "LOYALTY_DB"
+database_name = "hungryfox-loyalty-production"
+database_id = "295a2656-09ea-41f0-9ac9-de78aeadb2ff"
+migrations_dir = "migrations"
+
+[[previews.d1_databases]]
+binding = "LOYALTY_DB"
+database_name = "hungryfox-loyalty-preview"
+database_id = "82cba031-d300-4bf0-836e-1c5ec415230e"
+migrations_dir = "migrations"
+
+# Cloudflare production Worker Git integration deployment trigger.
