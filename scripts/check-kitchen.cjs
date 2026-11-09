@@ -15,6 +15,8 @@ assert.ok(html.includes("className='receipt-logo'"), 'Approved fox logo must be 
 assert.ok(html.includes('.order.print-target .receipt-logo{display:block!important'), 'Fox logo must be visible when printing');
 assert.ok(html.includes('.order.print-target:before{display:none!important}'), 'Duplicate text-only logo heading must be hidden when printing');
 assert.ok(html.includes('FLAVOURS / OPTIONS: '), 'All item flavour and option labels must be printed');
+assert.ok(html.includes("return 'DESSERTS'"), 'Desserts must have their own receipt category');
+assert.ok(html.includes('singara|samosa|spring roll|bao'), 'Side dishes must be grouped under sides and extras');
 assert.ok(html.includes('@page{size:58mm auto'), 'Receipt must target 58mm thermal paper');
 assert.ok(code.includes('await savePaidKitchenOrder(s,env)'), 'Webhook order storage missing');
 assert.ok(code.includes('kitchenAuthorized(req,env)'), 'Kitchen authorization missing');
