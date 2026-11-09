@@ -516,7 +516,9 @@
 
   <!-- Self-Contained JavaScript Catalog, Option Rules & Ordering Engine -->
   <script>
-    const API_BASE_URL = 'https://hungryfox-api.thehungryfox2026.workers.dev';
+    const API_BASE_URL = location.hostname === 'hungryfox-loyalty-test.pages.dev'
+      ? 'https://website-loyalty-program-hungryfox-api-preview.thehungryfox2026.workers.dev'
+      : 'https://hungryfox-api.thehungryfox2026.workers.dev';
     const MIN_ORDER_AMOUNT = 15.00;
 
     // Verified Category Sequence Ordering
@@ -1626,7 +1628,10 @@
       document.getElementById('checkout-small-order-row').classList.toggle('hidden', surcharge === 0);
       document.getElementById('checkout-delivery-fee').textContent = 'To be calculated';
       document.getElementById('checkout-final-payable').textContent = formatGBP(subtotal + surcharge);
-      document.getElementById('checkout-loyalty-reward').value='';\n      selectedCheckoutRewardId='';\n      refreshCheckoutRewards();\n      document.getElementById('checkout-modal').classList.remove('hidden');
+      document.getElementById('checkout-loyalty-reward').value='';
+      selectedCheckoutRewardId='';
+      refreshCheckoutRewards();
+      document.getElementById('checkout-modal').classList.remove('hidden');
       document.getElementById('checkout-modal').classList.add('flex');
     }
 
@@ -1730,7 +1735,8 @@
         const res=await fetch(API_BASE_URL+'/loyalty/verify-code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:loyaltyEmailForCode||document.getElementById('loyalty-email').value.trim().toLowerCase(),code})});
         const data=await res.json();if(!res.ok)throw new Error(data.error||'That code could not be verified.');
         loyaltySessionToken=data.token;sessionStorage.setItem('hf_loyalty_session',loyaltySessionToken);
-        showLoyaltyAccount(data);\n        refreshCheckoutRewards();
+        showLoyaltyAccount(data);
+        refreshCheckoutRewards();
       }catch(e){loyaltyStatus(e.message,true);}
     }
     async function loadLoyaltyAccount() {
