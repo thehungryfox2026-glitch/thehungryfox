@@ -4,8 +4,8 @@ compatibility_date = "2026-11-04"
 
 [[d1_databases]]
 binding = "LOYALTY_DB"
-database_name = "hungryfox-loyalty"
-database_id = "23c39a4b-3dcd-4aac-bc2e-ae6cf99d062d"
+database_name = "hungryfox-loyalty-production"
+database_id = "295a2656-09ea-41f0-9ac9-de78aeadb2ff"
 migrations_dir = "migrations"
 
 [[previews.d1_databases]]
