@@ -33,7 +33,7 @@ async function savePaidKitchenOrder(session,env){
  if(m.order_source!=="website")return;
  const existing=await env.DB.prepare("SELECT id FROM orders WHERE stripe_session_id=?").bind(session.id).first();
  if(existing)return; // Webhook retries must not create duplicate orders or items.
- const response=await fetch("https://api.stripe.com/v1/checkout/sessions/"+encodeURIComponent(session.id)+"/line_items?limit=100",{headers:{Authorization:"Bearer "+env.STRIPE_SECRET_KEY}});
+ const response=await fetch("https://api.stripe.com/v1/checkout/sessions/"+encodeURIComponent(session.id)+"/line_items?limit=100&expand%5B%5D=data.price.product",{headers:{Authorization:"Bearer "+env.STRIPE_SECRET_KEY}});
  if(!response.ok)throw new Error("Could not retrieve paid order items from Stripe");
  const payload=await response.json();
  if(payload.has_more)throw new Error("Order exceeds first Stripe line-item page");
@@ -44,7 +44,7 @@ async function savePaidKitchenOrder(session,env){
  const insert=env.DB.prepare("INSERT OR IGNORE INTO orders (id,stripe_session_id,order_reference,customer_name,customer_phone,customer_email,delivery_address,postcode,delivery_zone,notes,subtotal_pence,delivery_pence,total_pence,payment_status,kitchen_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,'paid','NEW')").bind(orderId,session.id,session.id.slice(-8).toUpperCase(),String(m.customer_name||"Customer"),String(m.customer_phone||""),String(session.customer_details?.email||session.customer_email||m.customer_email||""),String(m.delivery_address||""),String(m.postcode||""),String(m.delivery_zone||""),String(m.notes||""),total-adjustment,adjustment,total);
  const itemStatements=lines.filter(x=>!String(x.description||"").startsWith("Delivery and minimum-order adjustment")).map(x=>{
   const label=String(x.description||"Hungry Fox item");
-  return env.DB.prepare("INSERT INTO order_items(order_id,product_name,quantity,unit_price_pence,options) SELECT ?,?,?,?,? WHERE EXISTS (SELECT 1 FROM orders WHERE id=?)").bind(orderId,label,Number(x.quantity||1),Math.round(Number(x.amount_subtotal||0)/Math.max(1,Number(x.quantity||1))),"",orderId);
+  return env.DB.prepare("INSERT INTO order_items(order_id,product_name,quantity,unit_price_pence,options) SELECT ?,?,?,?,? WHERE EXISTS (SELECT 1 FROM orders WHERE id=?)").bind(orderId,label,Number(x.quantity||1),Math.round(Number(x.amount_subtotal||0)/Math.max(1,Number(x.quantity||1))),String((x.price&&x.price.product&&typeof x.price.product==="object"&&x.price.product.description)||""),orderId);
  });
  await env.DB.batch([insert,...itemStatements]);
 }
