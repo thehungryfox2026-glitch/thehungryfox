@@ -12,7 +12,7 @@ function serverOptionPricePence(productId,option){
  const fixed={
   "Meal Upgrade":value==="Fries & Drink (+£1.99)"?199:null,
   "Whole Chicken Meal Upgrade":value==="2 Fries & Bottled Drink (+£6.50)"?650:null,
-  "Cheese-Loaded Fries Upgrade":(()=>{const m=value.match(/^(\\d+) portions?$/);return m&&Number(m[1])>=1&&Number(m[1])<=30?Number(m[1])*99:null;})()
+  "Cheese-Loaded Fries Upgrade":(()=>{const m=value.match(/^(\d+) portions?$/);return m&&Number(m[1])>=1&&Number(m[1])<=30?Number(m[1])*99:null;})()
  };
  if(Object.prototype.hasOwnProperty.call(fixed,label))return fixed[label];
  const bread={"Plain Naan":0,"Plain Pitta Bread":0,"Garlic Naan":99,"Peri Peri Pitta Bread":49};
@@ -25,11 +25,11 @@ function serverOptionPricePence(productId,option){
  if(label==="Dessert"){const match=Object.entries(MENU).find(([id,p])=>id.startsWith("DES")&&p[0]===value);return match?money(match[1][1]):null;}
  if(label==="Optional Add-on"){
   if(!["NDL001","DON001","DON002","DON003"].includes(productId))return null;
-  let m=value.match(/^(\\d+) x (.+)$/);if(!m)return null;const qty=Number(m[1]),name=m[2];if(!Number.isInteger(qty)||qty<1||qty>30)return null;
+  let m=value.match(/^(\d+) x (.+)$/);if(!m)return null;const qty=Number(m[1]),name=m[2];if(!Number.isInteger(qty)||qty<1||qty>30)return null;
   const addon={"Fried Egg":99,"Fries":99,"Drink Can":99,"Plain Naan":99,"Plain Pitta Bread":99,"Garlic Naan":149,"Peri Peri Pitta Bread":99,"Mini Singara (4 Pcs)":119,"Vegetable Spring Roll (2 Pcs)":149,"Vegetable Samosa (2 Pcs)":149,"Medium Vegetable Singara (2 Pcs)":149};
   if(name.startsWith("Drink Can (")&&name.endsWith(")")){
-   const selections=name.slice(11,-1).split(/,\\s*/);let surcharge=0;
-   for(const selection of selections){const d=selection.match(/^(\\d+) x (.+)$/);if(!d||!Object.prototype.hasOwnProperty.call(canned,d[2]))return null;surcharge+=Number(d[1])*canned[d[2]];}
+   const selections=name.slice(11,-1).split(/,\s*/);let surcharge=0;
+   for(const selection of selections){const d=selection.match(/^(\d+) x (.+)$/);if(!d||!Object.prototype.hasOwnProperty.call(canned,d[2]))return null;surcharge+=Number(d[1])*canned[d[2]];}
    return qty*99+surcharge;
   }
   return Object.prototype.hasOwnProperty.call(addon,name)?qty*addon[name]:null;
