@@ -1748,8 +1748,10 @@
     }
     function showLoyaltyAccount(data) {
       document.getElementById('loyalty-signin').classList.add('hidden');
+      document.getElementById('loyalty-signin').style.display = 'none';
       document.getElementById('loyalty-code-area').classList.add('hidden');
       document.getElementById('loyalty-account').classList.remove('hidden');
+      document.getElementById('loyalty-account').style.display = 'block';
       document.getElementById('loyalty-customer-name').textContent=data.customer.name||'Fox Rewards member';
       const count=Number(data.customer.orders||0);
       document.getElementById('loyalty-order-progress').textContent=count>=5?'You’ve completed your first five website orders.':count+' of 5 qualifying website orders completed';
@@ -1762,7 +1764,9 @@
     function signOutLoyalty(showMessage=true) {
       loyaltySessionToken='';sessionStorage.removeItem('hf_loyalty_session');
       document.getElementById('loyalty-account').classList.add('hidden');
+      document.getElementById('loyalty-account').style.display = 'none';
       document.getElementById('loyalty-signin').classList.remove('hidden');
+      document.getElementById('loyalty-signin').style.display = 'block';
       document.getElementById('loyalty-code-area').classList.add('hidden');
       if(showMessage)loyaltyStatus('You have been signed out.');
     }
