@@ -21,6 +21,9 @@ assert.ok(html.includes('@page{size:58mm auto'), 'Receipt must target 58mm therm
 assert.ok(html.includes('id="sound-enabled"'), 'Kitchen dashboard must include a sound-alert toggle');
 assert.ok(html.includes('id="test-sound"'), 'Kitchen dashboard must include a test-sound control');
 assert.ok(html.includes('function playOrderAlert()'), 'New-order sound alert function must exist');
+assert.ok(html.includes("osc.type='square'"), 'Kitchen order alert must use a sharper, more audible alarm tone');
+assert.ok(html.includes('exponentialRampToValueAtTime(0.62'), 'Kitchen order alert volume envelope must be substantially louder');
+assert.ok(html.includes('const notes=[880,1175,880,1175,1397,1175,880,1175,1397]'), 'Kitchen order alert must play a repeated urgent multi-tone sequence');
 assert.ok(html.includes('knownOrderIds!==null'), 'Sound must only alert for orders arriving after initial dashboard load');
 assert.ok(html.includes('id="print-test"'), 'Kitchen dashboard must include a 58mm print-test control');
 assert.ok(html.includes('PRINT TEST ONLY — NOT AN ORDER'), 'Print test must be clearly marked as not a real order');
