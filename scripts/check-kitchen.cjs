@@ -34,7 +34,7 @@ assert.ok(!html.includes("'FLAVOURS / OPTIONS: '+i.options"), 'Receipt must not 
 assert.ok(html.includes("for(const optionLine of receiptOptions(i.options))"), 'Every recorded option label and value must be printed separately');
 const receiptCatalog = JSON.parse(html.match(/const RECEIPT_MENU_CATEGORIES=(\{[^;]+\});/)[1]);
 const site = fs.readFileSync('index.html', 'utf8');
-const menuItems = [...site.matchAll(/\\{\\s*Product_ID:\\s*'([^']+)',\\s*Product_Name:\\s*'([^']+)',\\s*Category:\\s*'([^']+)'/g)];
+const menuItems = [...site.matchAll(/\{\s*Product_ID:\s*'([^']+)',\s*Product_Name:\s*'([^']+)',\s*Category:\s*'([^']+)'/g)];
 assert.equal(menuItems.length, 100, 'Full current website menu must be audited');
 for(const item of menuItems){
   assert.equal(receiptCatalog[item[2]],item[3], 'Receipt category must match website exactly for '+item[2]);
