@@ -518,7 +518,7 @@
 
   <!-- Self-Contained JavaScript Catalog, Option Rules & Ordering Engine -->
   <script>
-    const API_BASE_URL = location.hostname === 'hungryfox-loyalty-test.pages.dev'
+    const API_BASE_URL = (location.hostname === 'hungryfox-loyalty-test.pages.dev' || location.hostname.endsWith('.hungryfox-loyalty-test.pages.dev'))
       ? 'https://website-loyalty-program-hungryfox-api-preview.thehungryfox2026.workers.dev'
       : 'https://hungryfox-api.thehungryfox2026.workers.dev';
     const MIN_ORDER_AMOUNT = 15.00;
