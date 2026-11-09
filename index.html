@@ -1698,7 +1698,7 @@
         select.innerHTML='<option value="">No reward selected</option>';
         checkoutRewardData.forEach(r=>{const option=document.createElement('option');option.value=r.id;option.textContent=r.reward_name;select.appendChild(option);});
         note.textContent=checkoutRewardData.length?'Choose one available reward. Minimum £20 in food items.':'No available rewards yet. Keep earning through website orders.';
-      }catch(e){signOutLoyalty(false);select.innerHTML='<option value="">Sign in to view rewards</option>';note.textContent='Please sign in to view your rewards.';}
+      }catch(e){select.innerHTML='<option value="">Rewards temporarily unavailable</option>';note.textContent='Could not load checkout rewards: '+e.message;console.error('Fox Rewards checkout refresh:',e);}
     }
     let loyaltySessionToken = sessionStorage.getItem('hf_loyalty_session') || '';
     let loyaltyEmailForCode = '';
