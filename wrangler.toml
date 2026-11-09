@@ -13,3 +13,5 @@ binding = "LOYALTY_DB"
 database_name = "hungryfox-loyalty-preview"
 database_id = "82cba031-d300-4bf0-836e-1c5ec415230e"
 migrations_dir = "migrations"
+
+# Cloudflare production Worker Git integration deployment trigger.
