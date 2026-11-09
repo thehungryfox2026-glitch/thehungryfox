@@ -18,7 +18,7 @@ if(b.rewardId){
  const held=await env.LOYALTY_DB.prepare("INSERT INTO loyalty_reward_reservations(reward_id,expires_at) VALUES(?,?) ON CONFLICT(reward_id) DO UPDATE SET stripe_session_id=NULL,expires_at=excluded.expires_at,created_at=CURRENT_TIMESTAMP WHERE loyalty_reward_reservations.expires_at<?").bind(reward.id,now+1800,now).run();
  if(!held.meta||held.meta.changes!==1)return out({error:"That reward is already being used in another checkout. Please try again shortly."},409,o);
  reservedRewardId=reward.id;
- const rewardItem=({FREE_4_WINGS:"Free 4 wings (Fox Rewards)",FREE_6_TENDERS:"Free 6 tenders (Fox Rewards)",FREE_HALF_CHICKEN:"Free half chicken (Fox Rewards)",FREE_WINGS_TENDERS:"Free 6 wings + 6 tenders (Fox Rewards)"})[reward.reward_code];
+ const rewardItem=({FREE_6_WINGS:"Free 6 wings (Fox Rewards)",FREE_6_TENDERS:"Free 6 tenders (Fox Rewards)",FREE_HALF_CHICKEN:"Free half chicken (Fox Rewards)",FREE_WINGS_TENDERS:"Free 6 wings + 6 tenders (Fox Rewards)"})[reward.reward_code];
  if(!rewardItem){await env.LOYALTY_DB.prepare("DELETE FROM loyalty_reward_reservations WHERE reward_id=?").bind(reward.id).run();return out({error:"This reward is not configured for checkout."},400,o);}
  rows.push({name:rewardItem,description:"Fox Rewards redemption",unit:0,quantity:1});
 }
@@ -36,7 +36,7 @@ async function recordLoyaltyPaidOrder(s,env){
   env.LOYALTY_DB.prepare("INSERT INTO loyalty_customers(id,email,customer_name) VALUES(?,?,?) ON CONFLICT(email) DO NOTHING").bind(customerId,email,String(m.customer_name||"Customer").slice(0,200)),
   env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_orders(id,customer_id,stripe_session_id,amount_paid_pence) SELECT ?,id,?,? FROM loyalty_customers WHERE email=?").bind(orderId,s.id,Number(s.amount_total||0),email),
   env.LOYALTY_DB.prepare("UPDATE loyalty_customers SET order_count=MIN(5,(SELECT COUNT(*) FROM loyalty_orders WHERE customer_id=loyalty_customers.id)) WHERE email=?").bind(email),
-  env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_rewards(id,customer_id,milestone_order,reward_code,reward_name) SELECT ?,id,2,'FREE_4_WINGS','Free 4 wings' FROM loyalty_customers WHERE email=? AND order_count>=2").bind(crypto.randomUUID(),email),
+  env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_rewards(id,customer_id,milestone_order,reward_code,reward_name) SELECT ?,id,2,'FREE_6_WINGS','Free 6 wings' FROM loyalty_customers WHERE email=? AND order_count>=2").bind(crypto.randomUUID(),email),
   env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_rewards(id,customer_id,milestone_order,reward_code,reward_name) SELECT ?,id,3,'FREE_6_TENDERS','Free 6 tenders' FROM loyalty_customers WHERE email=? AND order_count>=3").bind(crypto.randomUUID(),email),
   env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_rewards(id,customer_id,milestone_order,reward_code,reward_name) SELECT ?,id,4,'FREE_HALF_CHICKEN','Free half chicken' FROM loyalty_customers WHERE email=? AND order_count>=4").bind(crypto.randomUUID(),email),
   env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_rewards(id,customer_id,milestone_order,reward_code,reward_name) SELECT ?,id,5,'FREE_WINGS_TENDERS','Free 6 wings + 6 tenders' FROM loyalty_customers WHERE email=? AND order_count>=5").bind(crypto.randomUUID(),email)
