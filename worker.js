@@ -6,8 +6,38 @@ const out=(d,s=200,o="")=>new Response(JSON.stringify(d),{status:s,headers:{"Con
 const norm=s=>String(s||"").toUpperCase().replace(/\s+/g,"").trim();
 async function quote(input,subtotal=0){const pc=norm(input);if(!/^[A-Z]{1,2}\d[A-Z\d]?\d[A-Z]{2}$/.test(pc))return{available:false,message:"Please enter a valid UK postcode."};const outward=pc.replace(/\d[A-Z]{2}$/,"");let fee=null,zone="";
 if(outward.startsWith("RM17")){fee=0;zone="Grays";}else if(outward.startsWith("RM16")){fee=0;zone="RM16";}else if(outward.startsWith("RM20")){fee=0;zone="West Thurrock";}else if(outward.startsWith("RM15")){fee=1.99;zone="South Ockendon";}else if(outward.startsWith("RM19")){fee=1.99;zone="Purfleet";}else if(pc.startsWith("RM187")){fee=1.99;zone="Tilbury";}else if(pc.startsWith("RM188")){fee=3.99;zone="RM18 8";}else if(pc==="SS170RN"||pc==="SS170QD"||pc==="SS170PP"){fee=3.99;zone="Linford";}if(fee===null)return{available:false,message:"Sorry, this postcode is outside our current delivery area."};const surcharge=subtotal>0&&subtotal<15?4:0;return{available:true,deliveryFee:fee,minimumOrderSurcharge:surcharge,totalDeliveryAndSurcharge:fee+surcharge,zone};}
+function serverOptionPricePence(productId,option){
+ const label=String(option?.label||"").trim(),value=String(option?.value||"").trim();
+ const money=(n)=>Math.round(n*100);
+ const fixed={
+  "Meal Upgrade":value==="Fries & Drink (+£1.99)"?199:null,
+  "Whole Chicken Meal Upgrade":value==="2 Fries & Bottled Drink (+£6.50)"?650:null,
+  "Cheese-Loaded Fries Upgrade":(()=>{const m=value.match(/^(\d+) portions?$/);return m&&Number(m[1])>=1&&Number(m[1])<=30?Number(m[1])*99:null;})()
+ };
+ if(Object.prototype.hasOwnProperty.call(fixed,label))return fixed[label];
+ const bread={"Plain Naan":0,"Plain Pitta Bread":0,"Garlic Naan":99,"Peri Peri Pitta Bread":49};
+ const bundle={"Plain Naan":0,"Plain Pitta Bread":0,"Beans":0,"Coleslaw":0,"Mini Singara (4 Pcs)":119,"Vegetable Spring Roll (2 Pcs)":149,"Vegetable Samosa (2 Pcs)":149,"Medium Vegetable Singara (2 Pcs)":149,"Halloumi Fries (2 Pcs)":119,"Mozzarella Sticks (2 Pcs)":119,"Garlic Naan":99,"Peri Peri Pitta Bread":49,"Onion Rings (4 Pcs)":99,"Garlic Bread (2 Pcs)":99};
+ const canned={"Water":0,"Coke":0,"Diet Coke":0,"Pepsi":0,"Pepsi Max":0,"Tango Orange":0,"Tango Apple":0,"7UP":0,"Dr Pepper":0,"Blackcurrant Fruit Shoot":0,"Orange Fruit Shoot":0,"Red Bull":100};
+ const bottled=new Set(["Water","Bottle Coke","Bottle Diet Coke","Bottle Pepsi","Bottle Pepsi Max","Bottle Tango","Bottle 7UP","Blackcurrant Fruit Shoot","Orange Fruit Shoot"]);
+ if(label==="Bread Choice")return Object.prototype.hasOwnProperty.call(bread,value)?bread[value]:null;
+ if(label==="Bundle Side")return Object.prototype.hasOwnProperty.call(bundle,value)?bundle[value]:null;
+ if(["Drink 1","Drink 2","Meal Drink"].includes(label))return Object.prototype.hasOwnProperty.call(canned,value)?canned[value]:bottled.has(value)?0:null;
+ if(label==="Dessert"){const match=Object.entries(MENU).find(([id,p])=>id.startsWith("DES")&&p[0]===value);return match?money(match[1][1]):null;}
+ if(label==="Optional Add-on"){
+  if(!["NDL001","DON001","DON002","DON003"].includes(productId))return null;
+  let m=value.match(/^(\d+) x (.+)$/);if(!m)return null;const qty=Number(m[1]),name=m[2];if(!Number.isInteger(qty)||qty<1||qty>30)return null;
+  const addon={"Fried Egg":99,"Fries":99,"Drink Can":99,"Plain Naan":99,"Plain Pitta Bread":99,"Garlic Naan":149,"Peri Peri Pitta Bread":99,"Mini Singara (4 Pcs)":119,"Vegetable Spring Roll (2 Pcs)":149,"Vegetable Samosa (2 Pcs)":149,"Medium Vegetable Singara (2 Pcs)":149};
+  if(name.startsWith("Drink Can (")&&name.endsWith(")")){
+   const selections=name.slice(11,-1).split(/,\s*/);let surcharge=0;
+   for(const selection of selections){const d=selection.match(/^(\d+) x (.+)$/);if(!d||!Object.prototype.hasOwnProperty.call(canned,d[2]))return null;surcharge+=Number(d[1])*canned[d[2]];}
+   return qty*99+surcharge;
+  }
+  return Object.prototype.hasOwnProperty.call(addon,name)?qty*addon[name]:null;
+ }
+ return 0;
+}
 async function create(req,env,o){if(!env.STRIPE_SECRET_KEY)return out({error:"Stripe secret key is not configured on this Worker."},503,o);let b;try{b=await req.json();}catch{return out({error:"Invalid order details."},400,o);}const c=b.customer||{},items=b.items;if(!c.name||!c.phone||!c.email||!c.postcode||!c.address||!Array.isArray(items)||!items.length)return out({error:"Complete your delivery details and basket."},400,o);if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email))return out({error:"Enter a valid email address."},400,o);
-let subtotal=0,rows=[];for(const it of items){const p=MENU[it.productId],q=Number(it.quantity);if(!p||!Number.isInteger(q)||q<1||q>30)return out({error:"An item in your basket could not be verified. Refresh and try again."},400,o);let extra=0;const opts=Array.isArray(it.options)?it.options:[];for(const x of opts){const cents=Math.round(Number(x.price||0)*100);if(!Number.isInteger(cents)||![0,30,50,99,100,119,129,199,650].includes(cents))return out({error:"An option price could not be verified."},400,o);extra+=cents;}const unit=Math.round(p[1]*100)+extra;subtotal+=unit*q;const optionDescription=opts.map(x=>String(x.label||"")+": "+String(x.value||"")).join(", ");rows.push({name:p[0],description:optionDescription,unit,quantity:q});}
+let subtotal=0,rows=[];for(const it of items){const p=MENU[it.productId],q=Number(it.quantity);if(!p||!Number.isInteger(q)||q<1||q>30)return out({error:"An item in your basket could not be verified. Refresh and try again."},400,o);let extra=0;const opts=Array.isArray(it.options)?it.options:[];if(it.options!==undefined&&!Array.isArray(it.options))return out({error:"Item options could not be verified."},400,o);for(const x of opts){if(!x||typeof x!=="object"||typeof x.label!=="string"||typeof x.value!=="string")return out({error:"An item option could not be verified."},400,o);const cents=serverOptionPricePence(it.productId,x);if(!Number.isInteger(cents)||cents<0)return out({error:"An item option could not be verified. Please refresh your basket and try again."},400,o);extra+=cents;}const unit=Math.round(p[1]*100)+extra;subtotal+=unit*q;const optionDescription=opts.map(x=>String(x.label||"")+": "+String(x.value||"")).join(", ");rows.push({name:p[0],description:optionDescription,unit,quantity:q});}
 let reward=null,reservedRewardId="";
 if(b.rewardId){
  const session=await readLoyaltyToken(req,env);

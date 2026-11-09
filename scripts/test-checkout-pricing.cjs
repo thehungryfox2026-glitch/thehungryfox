@@ -1,0 +1,18 @@
+const vm=require('node:vm');const assert=require('node:assert/strict');const fs=require('node:fs');const code=fs.readFileSync('worker.js','utf8');
+const ms=code.indexOf('const MENU='),me=code.indexOf(';\nconst cors',ms)+1,hs=code.indexOf('function serverOptionPricePence'),he=code.indexOf('\nasync function create',hs);
+const context={};vm.runInNewContext(code.slice(ms,me)+'\n'+code.slice(hs,he)+'\nthis.price=serverOptionPricePence;this.menu=MENU;',context);
+const p=context.price;
+assert.equal(p('FEA001',{label:'Bread Choice',value:'Garlic Naan',price:0}),99,'Browser cannot zero a paid bread option');
+assert.equal(p('FEA001',{label:'Bread Choice',value:'Plain Naan',price:999}),0,'Browser cannot inflate a free bread option');
+assert.equal(p('FEA001',{label:'Bundle Side',value:'Vegetable Spring Roll (2 Pcs)',price:0}),149);
+assert.equal(p('FEA001',{label:'Meal Drink',value:'Red Bull',price:0}),100);
+assert.equal(p('FEA001',{label:'Drink 1',value:'Bottle Pepsi Max',price:99}),0);
+assert.equal(p('FEA001',{label:'Dessert',value:'Ben & Jerry Cookie Dough',price:0}),649);
+assert.equal(p('CHK001',{label:'Cheese-Loaded Fries Upgrade',value:'3 portions',price:0}),297);
+assert.equal(p('DON001',{label:'Optional Add-on',value:'2 x Garlic Naan',price:0}),298);
+assert.equal(p('DON002',{label:'Optional Add-on',value:'2 x Drink Can (1 x Red Bull, 1 x Pepsi)',price:0}),298);
+assert.equal(p('FEA001',{label:'Optional Add-on',value:'2 x Garlic Naan',price:0}),null,'Add-ons cannot be injected into unsupported products');
+assert.equal(p('FEA001',{label:'Bread Choice',value:'Forged Paid Bread',price:0}),null,'Unknown paid selections are rejected');
+assert.equal(p('FEA001',{label:'Meal Upgrade',value:'Fries & Drink (+£1.99)',price:0}),199);
+assert.equal(p('FEA001',{label:'Unrecognised option',value:'Anything',price:999}),0,'Unknown zero-priced descriptive choices do not add charges');
+console.log('Server-side checkout option pricing tests passed');
