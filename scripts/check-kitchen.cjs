@@ -1,0 +1,14 @@
+const fs = require('node:fs');
+const vm = require('node:vm');
+const assert = require('node:assert/strict');
+const code = fs.readFileSync('worker.js','utf8');
+const match = code.match(/^const KITCHEN_HTML=("(?:\\.|[^"\\])*");/);
+assert.ok(match,'Kitchen HTML constant must exist');
+const html = JSON.parse(match[1]);
+const js = html.match(/<script>([\\s\\S]*?)<\\/script>/);
+assert.ok(js,'Dashboard script must exist');
+new vm.Script(js[1],{filename:'kitchen-dashboard.js'});
+assert.match(code,/await savePaidKitchenOrder\(s,env\)/);
+assert.match(code,/kitchenAuthorized\(req,env\)/);
+assert.match(code,/SELECT \* FROM orders WHERE payment_status='paid'/);
+console.log('Kitchen code syntax and route checks passed');
