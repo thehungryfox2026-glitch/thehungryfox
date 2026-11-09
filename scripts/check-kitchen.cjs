@@ -31,6 +31,6 @@ assert.ok(code.includes('websiteDiscountPercent=reward?0:'), 'Fox Rewards must n
 assert.ok(code.includes('https://api.stripe.com/v1/coupons'), 'Server must create a Stripe coupon for eligible website offers');
 assert.ok(code.includes('discounts[0][coupon]'), 'Stripe Checkout must receive the automatic basket discount');
 assert.ok(code.includes('subtotal>=3000?15:(subtotal>=2000?10:0)'), 'Server must enforce 15% at £30 and 10% at £20');
-const inlineScripts = [...site.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/g)].map(match => match[1]).filter(script => script.trim());
+const inlineScripts = [...site.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\\/script>/g)].map(match => match[1]).filter(script => script.trim());
 for (let i = 0; i < inlineScripts.length; i++) new vm.Script(inlineScripts[i], {filename:'website-inline-'+i+'.js'});
 console.log('Kitchen code syntax and route checks passed');
