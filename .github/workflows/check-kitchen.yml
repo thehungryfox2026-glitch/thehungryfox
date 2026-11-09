@@ -16,3 +16,6 @@ jobs:
         run: node --check worker.js
       - name: Check kitchen dashboard JavaScript and routes
         run: node scripts/check-kitchen.cjs
+
+      - name: Test kitchen authentication and order routes
+        run: node scripts/test-kitchen.cjs
