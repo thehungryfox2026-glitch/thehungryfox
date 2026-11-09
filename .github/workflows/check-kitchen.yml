@@ -21,3 +21,5 @@ jobs:
         run: node scripts/test-kitchen.cjs
       - name: Test Stripe order storage and webhook retries
         run: node scripts/test-stripe-kitchen.cjs
+      - name: Test server-side checkout option pricing
+        run: node scripts/test-checkout-pricing.cjs
