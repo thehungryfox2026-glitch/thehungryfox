@@ -1748,6 +1748,7 @@
     }
     function showLoyaltyAccount(data) {
       document.getElementById('loyalty-signin').classList.add('hidden');
+      document.getElementById('loyalty-code-area').classList.add('hidden');
       document.getElementById('loyalty-account').classList.remove('hidden');
       document.getElementById('loyalty-customer-name').textContent=data.customer.name||'Fox Rewards member';
       const count=Number(data.customer.orders||0);
@@ -1756,7 +1757,7 @@
       const rewards=data.rewards||[];
       if(!rewards.length){const p=document.createElement('p');p.className='text-sm text-slate-400';p.textContent='No rewards available yet. Keep hunting — your next reward is on its way.';list.appendChild(p);}
       rewards.forEach(reward=>{const item=document.createElement('div');item.className='border-t border-slate-700 pt-3';const name=document.createElement('p');name.className='text-sm font-bold text-orange-300';name.textContent=reward.reward_name;const note=document.createElement('p');note.className='text-xs text-slate-400 mt-1';note.textContent='Unlocked after website order '+reward.milestone_order;item.append(name,note);list.appendChild(item);});
-      loyaltyStatus('Your loyalty account is up to date.');
+      loyaltyStatus('Signed in successfully. Your Fox Rewards account is shown above.');
     }
     function signOutLoyalty(showMessage=true) {
       loyaltySessionToken='';sessionStorage.removeItem('hf_loyalty_session');
