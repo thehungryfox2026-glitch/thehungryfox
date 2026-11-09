@@ -16,5 +16,15 @@ async function get(path,headers={}){return worker.fetch(new Request('https://exa
  r=await worker.fetch(new Request('https://example.test/kitchen/api/orders/'+orders[0].id+'/status',{method:'POST',headers:{...auth,'Content-Type':'application/json'},body:JSON.stringify({status:'PREPARING'})}),env);assert.equal(r.status,200);assert.equal(orders[0].kitchen_status,'PREPARING');
  r=await worker.fetch(new Request('https://example.test/kitchen/api/orders/'+orders[0].id+'/status',{method:'POST',headers:{...auth,'Content-Type':'application/json'},body:JSON.stringify({status:'INVALID'})}),env);assert.equal(r.status,400);
  r=await worker.fetch(new Request('https://example.test/kitchen/api/orders',{method:'OPTIONS'}),env);assert.equal(r.status,405);
+ const receipt=(await get('/kitchen',auth));const page=await receipt.text();const match=page.match(/<script>([\\s\\S]*?)<\\/script>/);assert.ok(match,'Kitchen receipt JavaScript should exist');
+ const source=match[1];const money=n=>'£'+(Number(n||0)/100).toFixed(2);
+ function breakdown(itemPrices,deliveryAdjustment,total){const itemsSubtotal=itemPrices.reduce((a,b)=>a+b,0);const adjustment=deliveryAdjustment;const smallOrderFee=itemsSubtotal>0&&itemsSubtotal<1500&&adjustment>=400?400:0;const deliveryFee=adjustment-smallOrderFee;const discount=itemsSubtotal+adjustment-total;return {itemsSubtotal,deliveryFee,smallOrderFee,discount,total};}
+ assert.deepEqual(breakdown([699,799],199,1697),{itemsSubtotal:1498,deliveryFee:199,smallOrderFee:0,discount:0,total:1697});
+ assert.deepEqual(breakdown([699],599,1298),{itemsSubtotal:699,deliveryFee:199,smallOrderFee:400,discount:0,total:1298});
+ assert.deepEqual(breakdown([2000,1000],0,3000),{itemsSubtotal:3000,deliveryFee:0,smallOrderFee:0,discount:0,total:3000});
+ assert.deepEqual(breakdown([1500,1500],399,2899),{itemsSubtotal:3000,deliveryFee:399,smallOrderFee:0,discount:500,total:2899});
+ assert.ok(source.includes("Small-order fee: "),'Receipt should show small-order fee separately');
+ assert.ok(source.includes("Discount: -"),'Receipt should show a discount when applicable');
+ assert.ok(source.includes("TOTAL PAID: "),'Receipt should show total paid');
  console.log('Kitchen functional route tests passed');
 })().catch(e=>{console.error(e);process.exitCode=1});
