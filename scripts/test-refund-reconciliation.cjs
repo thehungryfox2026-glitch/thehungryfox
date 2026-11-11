@@ -63,6 +63,7 @@ async function checkPost(){
  response=await postRefund(request({amount_pence:500,reason:'requested_by_customer'}),env,'order_test');
  assert.equal(response.status,409);
  assert.equal(inserted,1,'Loyalty-linked refund must not reach Stripe');
+ env.LOYALTY_DB.prepare=()=>({bind:()=>({first:async()=>null})});
  postCtx.stripeRefundRequest=async()=>{const e=new Error('Invalid request');e.stripeStatus=400;throw e};
  response=await postRefund(request({amount_pence:500,reason:'duplicate'}),env,'order_test');
  assert.equal(response.status,422,'Definitive Stripe rejection should be reported');
