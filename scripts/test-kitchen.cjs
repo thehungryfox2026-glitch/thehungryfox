@@ -4,7 +4,7 @@ const context={Request,Response,Headers,URL,URLSearchParams,TextEncoder,TextDeco
 vm.createContext(context);vm.runInContext(code,context);
 const worker=context.worker;
 const orders=[{id:'123e4567-e89b-12d3-a456-426614174000',order_reference:'ABC12345',customer_name:'Test Customer',payment_status:'paid',kitchen_status:'NEW',total_pence:2499}];
-const db={prepare(sql){return{bind(...args){return{async run(){if(sql.startsWith('UPDATE orders')){orders[0].kitchen_status=args[0];return{meta:{changes:1}}}throw Error('Unexpected SQL run')},async all(){if(sql.includes('order_items'))return{results:[{product_name:'6 Wings',quantity:1,unit_price_pence:699,options:'BBQ'}]};throw Error('Unexpected SQL all')},async first(){throw Error('Unexpected SQL first')}}},async all(){if(sql.startsWith('SELECT * FROM orders'))return{results:orders};throw Error('Unexpected SQL')}}}};
+const db={prepare(sql){return{bind(...args){return{async run(){if(sql.startsWith('UPDATE orders')){orders[0].kitchen_status=args[0];return{meta:{changes:1}}}throw Error('Unexpected SQL run')},async all(){if(sql.includes('order_items'))return{results:[{product_name:'6 Wings',quantity:1,unit_price_pence:699,options:'BBQ'}]};throw Error('Unexpected SQL all')},async first(){if(sql.includes('FROM order_refunds'))return{refunded_pence:0,pending_refund_pence:0};throw Error('Unexpected SQL first')}}},async all(){if(sql.startsWith('SELECT * FROM orders'))return{results:orders};throw Error('Unexpected SQL')}}}};
 const env={DASHBOARD_PASSWORD:'test-password',DB:db};
 async function get(path,headers={}){return worker.fetch(new Request('https://example.test'+path,{headers}),env)}
 (async()=>{
