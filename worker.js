@@ -104,7 +104,7 @@ async function recordLoyaltyPaidOrder(s,env){
  const statements=[
   env.LOYALTY_DB.prepare("INSERT INTO loyalty_customers(id,email,customer_name) VALUES(?,?,?) ON CONFLICT(email) DO NOTHING").bind(customerId,email,String(m.customer_name||"Customer").slice(0,200)),
   env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_orders(id,customer_id,stripe_session_id,amount_paid_pence) SELECT ?,id,?,? FROM loyalty_customers WHERE email=?").bind(orderId,s.id,Number(s.amount_total||0),email),
-  env.LOYALTY_DB.prepare("UPDATE loyalty_customers SET order_count=MIN(5,(SELECT COUNT(*) FROM loyalty_orders WHERE customer_id=loyalty_customers.id)) WHERE email=?").bind(email),
+  env.LOYALTY_DB.prepare("UPDATE loyalty_customers SET order_count=MIN(5,(SELECT COUNT(*) FROM loyalty_orders WHERE customer_id=loyalty_customers.id AND refunded_at IS NULL)) WHERE email=?").bind(email),
   env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_rewards(id,customer_id,milestone_order,reward_code,reward_name) SELECT ?,id,2,'FREE_6_WINGS','Free 6 wings' FROM loyalty_customers WHERE email=? AND order_count>=2").bind(crypto.randomUUID(),email),
   env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_rewards(id,customer_id,milestone_order,reward_code,reward_name) SELECT ?,id,3,'FREE_6_TENDERS','Free 6 tenders' FROM loyalty_customers WHERE email=? AND order_count>=3").bind(crypto.randomUUID(),email),
   env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_rewards(id,customer_id,milestone_order,reward_code,reward_name) SELECT ?,id,4,'FREE_HALF_CHICKEN','Free half chicken' FROM loyalty_customers WHERE email=? AND order_count>=4").bind(crypto.randomUUID(),email),
@@ -266,6 +266,7 @@ for(const refund of result.data||[]){
   if(env.DB)await env.DB.prepare("UPDATE order_refunds SET stripe_refund_id=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE stripe_refund_id=? OR idempotency_key=?")
    .bind(refund.id,refund.status==="succeeded"?"succeeded":refund.status==="failed"?"failed":refund.status==="canceled"?"canceled":"pending",refund.id,refund.metadata?.hungryfox_refund_key||"stripe-"+refund.id).run();
  }
+ await reconcileFullRefundLoyalty(env,order,refunded);
  return {payment_intent:pi,refunded_pence:refunded,pending_pence:pending,refundable_pence:Math.max(0,order.total_pence-refunded-pending)};
 }
 // Reconcile full refunds only. Partial refunds do not change Fox Rewards progress.
@@ -279,7 +280,7 @@ async function reconcileFullRefundLoyalty(env,order,refundedPence){
   env.LOYALTY_DB.prepare("UPDATE loyalty_orders SET refunded_at=CURRENT_TIMESTAMP WHERE id=? AND refunded_at IS NULL").bind(loyalty.id),
   env.LOYALTY_DB.prepare("UPDATE loyalty_customers SET order_count=MIN(5,(SELECT COUNT(*) FROM loyalty_orders WHERE customer_id=? AND refunded_at IS NULL)) WHERE id=?").bind(loyalty.customer_id,loyalty.customer_id),
   env.LOYALTY_DB.prepare("DELETE FROM loyalty_rewards WHERE customer_id=? AND status='available' AND milestone_order>(SELECT order_count FROM loyalty_customers WHERE id=?)").bind(loyalty.customer_id,loyalty.customer_id),
-  env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_refund_reviews(id,customer_id,loyalty_order_id,reward_id,reason) SELECT lower(hex(randomblob(16))),?, ?,id,'Full refund affects previously redeemed reward' FROM loyalty_rewards WHERE customer_id=? AND status='redeemed'").bind(loyalty.customer_id,loyalty.id,loyalty.customer_id)
+  env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_refund_reviews(id,customer_id,loyalty_order_id,reward_id,reason) SELECT lower(hex(randomblob(16))),?, ?,id,'Full refund affects previously redeemed reward' FROM loyalty_rewards WHERE customer_id=? AND status='redeemed' AND (milestone_order>(SELECT order_count FROM loyalty_customers WHERE id=?) OR redeemed_order_id=?)").bind(loyalty.customer_id,loyalty.id,loyalty.customer_id,loyalty.customer_id,loyalty.id)
  ]);
 }
 async function kitchenRefundDetails(env,id){
@@ -298,15 +299,11 @@ async function kitchenRefund(req,env,id){
  if(!order)return new Response("Order not found",{status:404});
  let state;try{state=await refundState(env,order)}catch(e){return Response.json({error:e.message},{status:502})}
  if(amount>state.refundable_pence)return new Response("Amount exceeds refundable balance",{status:409});
- // Block all dashboard refunds on loyalty-linked orders until a safe reward adjustment is implemented.
- // Partial refunds can also change eligibility; don't leave rewards inconsistent.
+ // Full and partial refunds are permitted under the approved loyalty policy.
+ // Full refunds reconcile on the next Stripe state check; missing loyalty DB blocks safely.
  if(!env.LOYALTY_DB)return Response.json({error:"Fox Rewards verification unavailable. No refund was sent."},{status:503});
- {
-  let loyalty;
-  try{loyalty=await env.LOYALTY_DB.prepare("SELECT id FROM loyalty_orders WHERE stripe_session_id=? LIMIT 1").bind(order.stripe_session_id).first()}
-  catch(e){return Response.json({error:"Unable to verify Fox Rewards eligibility. No refund was sent."},{status:503})}
-  if(loyalty)return Response.json({error:"Fox Rewards is linked to this order. Refunds must be handled in Stripe until loyalty adjustments are ready."},{status:409});
- }
+ try{await env.LOYALTY_DB.prepare("SELECT id FROM loyalty_orders WHERE stripe_session_id=? LIMIT 1").bind(order.stripe_session_id).first()}
+ catch{return Response.json({error:"Unable to verify Fox Rewards. No refund was sent."},{status:503})}
  // A pending Stripe refund may not yet be visible in the refund list. Respect the local lock.
  const active=await env.DB.prepare("SELECT id,status,stripe_refund_id FROM order_refunds WHERE order_id=? AND status IN ('requested','pending') LIMIT 1").bind(id).first();
  if(active)return new Response("A refund attempt is still unresolved. Check the payment in Stripe before attempting another refund.",{status:409});
@@ -320,6 +317,10 @@ async function kitchenRefund(req,env,id){
   const refund=await stripeRefundRequest("refunds",env,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded","Idempotency-Key":"hungryfox-"+key},body:params.toString()});
   const status=refund.status==="succeeded"?"succeeded":refund.status==="failed"?"failed":refund.status==="canceled"?"canceled":"pending";
   await env.DB.prepare("UPDATE order_refunds SET stripe_refund_id=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(refund.id,status,key).run();
+  if(status==="succeeded"&&state.refunded_pence+amount>=order.total_pence){
+   try{await reconcileFullRefundLoyalty(env,order,state.refunded_pence+amount)}
+   catch(e){console.error("Full refund loyalty reconciliation needs retry:",e);return Response.json({ok:true,status,refund_id:refund.id,warning:"Refund succeeded, but Fox Rewards needs reconciliation. Check the order again."},{headers:{"Cache-Control":"no-store"}})}
+  }
   return Response.json({ok:true,status,refund_id:refund.id},{headers:{"Cache-Control":"no-store"}});
  }catch(e){
   // Definitive Stripe client errors mean no refund was created; release the local lock.
