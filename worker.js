@@ -230,6 +230,8 @@ async function stripeRefundRequest(path,env,init={}){
 async function refundState(env,order){
  const session=await stripeRefundRequest("checkout/sessions/"+encodeURIComponent(order.stripe_session_id),env);
  if(!session.payment_intent)throw new Error("No Stripe payment found for this order");
+ if(session.payment_status!=="paid"||session.currency!=="gbp")throw new Error("Stripe payment is not a completed GBP payment; refund processing is paused");
+ if(session.id!==order.stripe_session_id)throw new Error("Stripe checkout session mismatch; refund processing is paused");
  const pi=typeof session.payment_intent==="string"?session.payment_intent:session.payment_intent.id;
  const result=await stripeRefundRequest("refunds?payment_intent="+encodeURIComponent(pi)+"&limit=100",env);
  if(result.has_more)throw new Error("Refund history too large; use Stripe dashboard");
@@ -242,6 +244,7 @@ async function refundState(env,order){
  const seenRefundIds=new Set();
  for(const refund of result.data||[]){
   if(!refund.id||seenRefundIds.has(refund.id)||!Number.isSafeInteger(refund.amount)||refund.amount<=0)throw new Error("Invalid or duplicate Stripe refund data; check Stripe dashboard");
+  if(refund.payment_intent!==pi||refund.currency!=="gbp")throw new Error("Stripe refund does not match the GBP payment; refund processing is paused");
   seenRefundIds.add(refund.id);
   if(!["succeeded","pending","requires_action","failed","canceled"].includes(refund.status))throw new Error("Unknown Stripe refund status; check Stripe dashboard");
   if(["succeeded","pending","requires_action"].includes(refund.status))totalStripeRefunded+=refund.amount;
