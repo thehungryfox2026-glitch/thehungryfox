@@ -268,8 +268,8 @@ async function kitchenRefund(req,env,id){
  let state;try{state=await refundState(env,order)}catch(e){return Response.json({error:e.message},{status:502})}
  if(amount>state.refundable_pence)return new Response("Amount exceeds refundable balance",{status:409});
  // A pending Stripe refund may not yet be visible in the refund list. Respect the local lock.
- const active=await env.DB.prepare("SELECT id FROM order_refunds WHERE order_id=? AND status IN ('requested','pending') LIMIT 1").bind(id).first();
- if(active)return new Response("Another refund is being processed. Check Stripe before trying again.",{status:409});
+ const active=await env.DB.prepare("SELECT id,status,stripe_refund_id FROM order_refunds WHERE order_id=? AND status IN ('requested','pending') LIMIT 1").bind(id).first();
+ if(active)return new Response("A refund attempt is still unresolved. Check the payment in Stripe before attempting another refund.",{status:409});
  const key=crypto.randomUUID();
  try{
   const locked=await env.DB.prepare("INSERT INTO order_refunds (id,order_id,idempotency_key,amount_pence,reason,status) SELECT ?,?,?,?,?, 'requested' WHERE NOT EXISTS (SELECT 1 FROM order_refunds WHERE order_id=? AND status IN ('requested','pending'))").bind(key,id,key,amount,body.reason,id).run();
