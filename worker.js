@@ -279,6 +279,7 @@ async function reconcileFullRefundLoyalty(env,order,refundedPence){
  await env.LOYALTY_DB.batch([
   env.LOYALTY_DB.prepare("UPDATE loyalty_orders SET refunded_at=CURRENT_TIMESTAMP WHERE id=? AND refunded_at IS NULL").bind(loyalty.id),
   env.LOYALTY_DB.prepare("UPDATE loyalty_customers SET order_count=MIN(5,(SELECT COUNT(*) FROM loyalty_orders WHERE customer_id=? AND refunded_at IS NULL)) WHERE id=?").bind(loyalty.customer_id,loyalty.customer_id),
+  env.LOYALTY_DB.prepare("DELETE FROM loyalty_reward_reservations WHERE reward_id IN (SELECT id FROM loyalty_rewards WHERE customer_id=? AND status='available' AND milestone_order>(SELECT order_count FROM loyalty_customers WHERE id=?))").bind(loyalty.customer_id,loyalty.customer_id),
   env.LOYALTY_DB.prepare("DELETE FROM loyalty_rewards WHERE customer_id=? AND status='available' AND milestone_order>(SELECT order_count FROM loyalty_customers WHERE id=?)").bind(loyalty.customer_id,loyalty.customer_id),
   env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_refund_reviews(id,customer_id,loyalty_order_id,reward_id,reason) SELECT lower(hex(randomblob(16))),?, ?,id,'Full refund affects previously redeemed reward' FROM loyalty_rewards WHERE customer_id=? AND status='redeemed' AND (milestone_order>(SELECT order_count FROM loyalty_customers WHERE id=?) OR redeemed_order_id=?)").bind(loyalty.customer_id,loyalty.id,loyalty.customer_id,loyalty.customer_id,loyalty.id)
  ]);
