@@ -16,3 +16,6 @@ CREATE TABLE IF NOT EXISTS order_refunds (
 );
 CREATE INDEX IF NOT EXISTS idx_order_refunds_order_id ON order_refunds(order_id);
 CREATE INDEX IF NOT EXISTS idx_order_refunds_status ON order_refunds(status);
+
+-- Only one unresolved refund attempt per order; prevents double clicks/concurrent requests.
+CREATE UNIQUE INDEX IF NOT EXISTS idx_order_refunds_one_active ON order_refunds(order_id) WHERE status IN ('requested','pending');
