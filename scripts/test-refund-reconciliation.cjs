@@ -1,0 +1,43 @@
+'use strict';
+const fs=require('node:fs');
+const vm=require('node:vm');
+const assert=require('node:assert/strict');
+const code=fs.readFileSync('worker.js','utf8');
+const start=code.indexOf('async function stripeRefundRequest(');
+const end=code.indexOf('async function kitchenRefundDetails(',start);
+assert.ok(start>=0&&end>start,'Refund functions must exist');
+const source=code.slice(start,end);
+let scenario={};
+const audit=[];
+const fetchMock=async (url,options)=>{
+ assert.equal(options.headers.Authorization,'Bearer sk_test_mock');
+ if(url.includes('/checkout/sessions/'))return {ok:true,json:async()=>({payment_intent:'pi_test_123'})};
+ if(url.includes('/refunds?'))return {ok:true,json:async()=>({data:scenario.refunds,has_more:!!scenario.has_more})};
+ throw new Error('Unexpected Stripe request: '+url);
+};
+const DB={prepare(sql){
+ return {bind(...args){return {async run(){audit.push({sql,args});return {meta:{changes:1}}}}}};
+}};
+const ctx=vm.createContext({fetch:fetchMock,URLSearchParams,encodeURIComponent,crypto:require('node:crypto').webcrypto});
+vm.runInContext(source,ctx,{filename:'refund-functions.js'});
+const state=vm.runInContext('refundState',ctx);
+const order={id:'order_test',stripe_session_id:'cs_test_123',total_pence:2000};
+const env={DB,STRIPE_SECRET_KEY:'sk_test_mock'};
+(async()=>{
+ scenario={refunds:[]};audit.length=0;
+ let result=await state(env,order);
+ assert.equal(result.refundable_pence,2000);
+ assert.equal(result.refunded_pence,0);
+ scenario={refunds:[{id:'re_test_1',amount:600,status:'succeeded',reason:'requested_by_customer',metadata:{}}]};
+ audit.length=0;result=await state(env,order);
+ assert.equal(result.refunded_pence,600);
+ assert.equal(result.refundable_pence,1400);
+ assert.ok(audit.some(x=>x.sql.includes('INSERT OR IGNORE INTO order_refunds')),'External Stripe refund must be recorded');
+ scenario={refunds:[{id:'re_test_2',amount:700,status:'pending',metadata:{}}]};
+ result=await state(env,order);
+ assert.equal(result.pending_pence,700);
+ assert.equal(result.refundable_pence,1300);
+ scenario={refunds:[],has_more:true};
+ await assert.rejects(()=>state(env,order),/Refund history too large/);
+ console.log('Refund reconciliation mock tests passed');
+})().catch(e=>{console.error(e);process.exitCode=1});
