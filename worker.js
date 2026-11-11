@@ -269,7 +269,8 @@ async function kitchenRefund(req,env,id){
  if(amount>state.refundable_pence)return new Response("Amount exceeds refundable balance",{status:409});
  // Block all dashboard refunds on loyalty-linked orders until a safe reward adjustment is implemented.
  // Partial refunds can also change eligibility; don't leave rewards inconsistent.
- if(env.LOYALTY_DB){
+ if(!env.LOYALTY_DB)return Response.json({error:"Fox Rewards verification unavailable. No refund was sent."},{status:503});
+ {
   let loyalty;
   try{loyalty=await env.LOYALTY_DB.prepare("SELECT id FROM loyalty_orders WHERE stripe_session_id=? LIMIT 1").bind(order.stripe_session_id).first()}
   catch(e){return Response.json({error:"Unable to verify Fox Rewards eligibility. No refund was sent."},{status:503})}
