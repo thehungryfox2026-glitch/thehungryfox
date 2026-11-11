@@ -224,7 +224,7 @@ function kitchenUnauthorized(){return new Response("Kitchen login required",{sta
 async function stripeRefundRequest(path,env,init={}){
  const r=await fetch("https://api.stripe.com/v1/"+path,{...init,headers:{Authorization:"Bearer "+env.STRIPE_SECRET_KEY,...(init.headers||{})}});
  const data=await r.json().catch(()=>({}));
- if(!r.ok)throw new Error(data.error?.message||"Stripe request failed");
+ if(!r.ok){const error=new Error(data.error?.message||"Stripe request failed");error.stripeStatus=r.status;error.stripeErrorType=data.error?.type||"";throw error;}
  return data;
 }
 async function refundState(env,order){
@@ -290,7 +290,14 @@ async function kitchenRefund(req,env,id){
   await env.DB.prepare("UPDATE order_refunds SET stripe_refund_id=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(refund.id,status,key).run();
   return Response.json({ok:true,status,refund_id:refund.id},{headers:{"Cache-Control":"no-store"}});
  }catch(e){
-  // Keep requested record locked if Stripe response was ambiguous: do not risk a second refund.
+  // Definitive Stripe client errors mean no refund was created; release the local lock.
+  // Network errors and server errors remain locked because Stripe may have accepted the refund.
+  if(e.stripeStatus>=400&&e.stripeStatus<500&&e.stripeStatus!==409&&e.stripeStatus!==429){
+   try{await env.DB.prepare("UPDATE order_refunds SET status='failed',stripe_error=?,updated_at=CURRENT_TIMESTAMP WHERE id=? AND status='requested'").bind(String(e.message).slice(0,500),key).run()}
+   catch{return Response.json({error:"Stripe rejected the refund, but the audit record could not be updated. Check Stripe before retrying."},{status:502})}
+   return Response.json({error:"Stripe rejected the refund. No refund was issued.",detail:e.message},{status:422});
+  }
+  // Preserve the idempotency lock when the Stripe outcome is uncertain.
   return Response.json({error:"Refund not confirmed. Check Stripe before retrying.",detail:e.message},{status:502});
  }
 }
