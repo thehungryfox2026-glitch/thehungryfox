@@ -233,6 +233,14 @@ async function refundState(env,order){
  const pi=typeof session.payment_intent==="string"?session.payment_intent:session.payment_intent.id;
  const result=await stripeRefundRequest("refunds?payment_intent="+encodeURIComponent(pi)+"&limit=100",env);
  if(result.has_more)throw new Error("Refund history too large; use Stripe dashboard");
+ // Do not silently omit a second pending refund due to the one-active-refund DB constraint.
+ const activeStripeRefunds=(result.data||[]).filter(r=>r.status==="pending"||r.status==="requires_action");
+ if(activeStripeRefunds.length>1)throw new Error("Multiple pending Stripe refunds require manual review in Stripe; dashboard refund processing is paused");
+ const seenRefundIds=new Set();
+ for(const refund of result.data||[]){
+  if(!refund.id||seenRefundIds.has(refund.id)||!Number.isSafeInteger(refund.amount)||refund.amount<=0)throw new Error("Invalid or duplicate Stripe refund data; check Stripe dashboard");
+  seenRefundIds.add(refund.id);
+ }
 // If a refund was issued directly in Stripe, persist it against the matching order.
 // This makes the kitchen audit ledger reflect both dashboard and external refunds.
 for(const refund of result.data||[]){
