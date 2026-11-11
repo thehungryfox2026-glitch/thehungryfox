@@ -23,3 +23,6 @@ jobs:
         run: node scripts/test-stripe-kitchen.cjs
       - name: Test server-side checkout option pricing
         run: node scripts/test-checkout-pricing.cjs
+
+      - name: Test Stripe refund reconciliation with mocked payments
+        run: node scripts/test-refund-reconciliation.cjs
