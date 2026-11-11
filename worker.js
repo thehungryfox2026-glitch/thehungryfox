@@ -268,6 +268,20 @@ for(const refund of result.data||[]){
  }
  return {payment_intent:pi,refunded_pence:refunded,pending_pence:pending,refundable_pence:Math.max(0,order.total_pence-refunded-pending)};
 }
+// Reconcile full refunds only. Partial refunds do not change Fox Rewards progress.
+// This runs idempotently, retaining redeemed rewards for manual review.
+async function reconcileFullRefundLoyalty(env,order,refundedPence){
+ if(!env.LOYALTY_DB)throw new Error("Fox Rewards database unavailable");
+ if(refundedPence<order.total_pence)return;
+ const loyalty=await env.LOYALTY_DB.prepare("SELECT id,customer_id,refunded_at FROM loyalty_orders WHERE stripe_session_id=?").bind(order.stripe_session_id).first();
+ if(!loyalty||loyalty.refunded_at)return;
+ await env.LOYALTY_DB.batch([
+  env.LOYALTY_DB.prepare("UPDATE loyalty_orders SET refunded_at=CURRENT_TIMESTAMP WHERE id=? AND refunded_at IS NULL").bind(loyalty.id),
+  env.LOYALTY_DB.prepare("UPDATE loyalty_customers SET order_count=MIN(5,(SELECT COUNT(*) FROM loyalty_orders WHERE customer_id=? AND refunded_at IS NULL)) WHERE id=?").bind(loyalty.customer_id,loyalty.customer_id),
+  env.LOYALTY_DB.prepare("DELETE FROM loyalty_rewards WHERE customer_id=? AND status='available' AND milestone_order>(SELECT order_count FROM loyalty_customers WHERE id=?)").bind(loyalty.customer_id,loyalty.customer_id),
+  env.LOYALTY_DB.prepare("INSERT OR IGNORE INTO loyalty_refund_reviews(id,customer_id,loyalty_order_id,reward_id,reason) SELECT lower(hex(randomblob(16))),?, ?,id,'Full refund affects previously redeemed reward' FROM loyalty_rewards WHERE customer_id=? AND status='redeemed'").bind(loyalty.customer_id,loyalty.id,loyalty.customer_id)
+ ]);
+}
 async function kitchenRefundDetails(env,id){
  if(!env.DB||!env.STRIPE_SECRET_KEY)return new Response("Refund service unavailable",{status:503});
  const order=await env.DB.prepare("SELECT id,stripe_session_id,total_pence,order_reference FROM orders WHERE id=? AND payment_status='paid'").bind(id).first();
