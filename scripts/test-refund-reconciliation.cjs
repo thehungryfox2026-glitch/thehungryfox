@@ -28,6 +28,7 @@ assert.ok(refundStart>=0&&refundEnd>refundStart,'Refund POST handler must exist'
 const postCtx=vm.createContext({
  Response,crypto:require('node:crypto').webcrypto,URLSearchParams,
  refundState:async()=>({payment_intent:'pi_test_123',refunded_pence:0,pending_pence:0,refundable_pence:2000}),
+ reconcileFullRefundLoyalty:async()=>{},
  stripeRefundRequest:async(path,env,init)=>{
   assert.equal(path,'refunds');
   assert.equal(init.method,'POST');
@@ -66,8 +67,8 @@ async function checkPost(){
  assert.equal(response.status,400);
  env.LOYALTY_DB.prepare=()=>({bind:()=>({first:async()=>({id:'loyalty_test'})})});
  response=await postRefund(request({amount_pence:500,reason:'requested_by_customer'}),env,'order_test');
- assert.equal(response.status,409);
- assert.equal(inserted,1,'Loyalty-linked refund must not reach Stripe');
+ assert.equal(response.status,200,'Partial refund must be allowed for loyalty-linked orders');
+ assert.equal(inserted,2,'Loyalty-linked partial refund must reach Stripe');
  env.LOYALTY_DB.prepare=()=>({bind:()=>({first:async()=>null})});
  postCtx.stripeRefundRequest=async()=>{const e=new Error('Invalid request');e.stripeStatus=400;throw e};
  response=await postRefund(request({amount_pence:500,reason:'duplicate'}),env,'order_test');
@@ -81,7 +82,7 @@ async function checkPost(){
 }
 
 const order={id:'order_test',stripe_session_id:'cs_test_123',total_pence:2000};
-const env={DB,STRIPE_SECRET_KEY:'sk_test_mock'};
+const env={DB,STRIPE_SECRET_KEY:'sk_test_mock',LOYALTY_DB:{prepare(){return {bind(){return {async first(){return null}}}}}}};
 (async()=>{
  scenario={refunds:[]};audit.length=0;
  let result=await state(env,order);
