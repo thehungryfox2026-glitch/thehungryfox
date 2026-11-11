@@ -246,8 +246,8 @@ for(const refund of result.data||[]){
  for(const refund of result.data||[]){
   if(refund.status==="succeeded")refunded+=refund.amount;
   if(refund.status==="pending"||refund.status==="requires_action")pending+=refund.amount;
-  if(env.DB)await env.DB.prepare("UPDATE order_refunds SET stripe_refund_id=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE idempotency_key=?")
-   .bind(refund.id,refund.status==="succeeded"?"succeeded":refund.status==="failed"?"failed":refund.status==="canceled"?"canceled":"pending",refund.metadata?.hungryfox_refund_key||"").run();
+  if(env.DB)await env.DB.prepare("UPDATE order_refunds SET stripe_refund_id=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE stripe_refund_id=? OR idempotency_key=?")
+   .bind(refund.id,refund.status==="succeeded"?"succeeded":refund.status==="failed"?"failed":refund.status==="canceled"?"canceled":"pending",refund.id,refund.metadata?.hungryfox_refund_key||"stripe-"+refund.id).run();
  }
  return {payment_intent:pi,refunded_pence:refunded,pending_pence:pending,refundable_pence:Math.max(0,order.total_pence-refunded-pending)};
 }
