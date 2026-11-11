@@ -18,11 +18,12 @@ const order={stripe_session_id:'cs_test_example',total_pence:2899};
   },
   async batch(stmts){
    batches++;
-   assert.equal(stmts.length,4);
+   assert.equal(stmts.length,5);
    assert.match(stmts[0].sql,/UPDATE loyalty_orders SET refunded_at/);
    assert.match(stmts[1].sql,/refunded_at IS NULL/);
-   assert.match(stmts[2].sql,/status='available'/);
-   assert.match(stmts[3].sql,/loyalty_refund_reviews/);
+   assert.match(stmts[2].sql,/DELETE FROM loyalty_reward_reservations/);
+   assert.match(stmts[3].sql,/DELETE FROM loyalty_rewards/);
+   assert.match(stmts[4].sql,/loyalty_refund_reviews/);
    refundedAt='2026-11-11';
   }
  }};
