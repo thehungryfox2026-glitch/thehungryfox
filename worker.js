@@ -233,6 +233,15 @@ async function refundState(env,order){
  const pi=typeof session.payment_intent==="string"?session.payment_intent:session.payment_intent.id;
  const result=await stripeRefundRequest("refunds?payment_intent="+encodeURIComponent(pi)+"&limit=100",env);
  if(result.has_more)throw new Error("Refund history too large; use Stripe dashboard");
+// If a refund was issued directly in Stripe, persist it against the matching order.
+// This makes the kitchen audit ledger reflect both dashboard and external refunds.
+for(const refund of result.data||[]){
+ const status=refund.status==="succeeded"?"succeeded":refund.status==="failed"?"failed":refund.status==="canceled"?"canceled":"pending";
+ const key=refund.metadata?.hungryfox_refund_key||"stripe-"+refund.id;
+ await env.DB.prepare("INSERT OR IGNORE INTO order_refunds (id,order_id,stripe_refund_id,idempotency_key,amount_pence,reason,status) VALUES (?,?,?,?,?,?,?)")
+ .bind(crypto.randomUUID(),order.id,refund.id,key,refund.amount,refund.reason||"requested_by_customer",status).run();
+}
+
  let refunded=0,pending=0;
  for(const refund of result.data||[]){
   if(refund.status==="succeeded")refunded+=refund.amount;
