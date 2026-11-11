@@ -81,3 +81,10 @@ assert.ok(code.includes("Idempotency-Key"), 'Stripe refunds must use an idempote
 assert.ok(code.includes("refundMatch&&req.method===\"POST\""), 'Refund API must require POST');
 assert.ok(code.includes("kitchenAuthorized(req,env)"), 'Refund API must remain under kitchen authentication');
 assert.ok(code.includes('["refund.created","refund.updated","refund.failed","charge.refunded"]'), 'Signed Stripe refund events must reconcile the ledger');
+
+assert.ok(code.includes('SELECT id FROM loyalty_orders WHERE stripe_session_id=? LIMIT 1'), 'Refund must check loyalty-linked orders');
+assert.ok(code.includes('Refunds must be handled in Stripe until loyalty adjustments are ready'), 'Refunds linked to Fox Rewards must be blocked');
+assert.ok(code.includes('INSERT OR IGNORE INTO order_refunds'), 'Stripe-side refunds must be recorded in audit history');
+assert.ok(code.includes("status IN ('requested','pending')"), 'Concurrent refund attempts must be blocked');
+assert.ok(code.includes('if(amount>state.refundable_pence)'), 'Over-refunds must be rejected');
+assert.ok(code.includes('if(!await verify(raw,req.headers.get("Stripe-Signature")'), 'Refund webhook updates must require a verified Stripe signature');
