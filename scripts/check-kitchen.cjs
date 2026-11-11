@@ -21,7 +21,7 @@ assert.ok(Buffer.from(logoBase64[1], 'base64').subarray(0, 8).equals(Buffer.from
 assert.ok(html.includes("NEW:{next:'PREPARING',label:'Start preparing'}"), 'New orders must only offer the preparing action');
 assert.ok(html.includes("PREPARING:{next:'READY',label:'Mark ready'}"), 'Preparing orders must only offer the ready action');
 assert.ok(html.includes("READY:{next:'COMPLETED',label:'Mark delivered'}"), 'Ready orders must only offer the delivered action');
-assert.ok(html.includes("if(o.kitchen_status!=='COMPLETED')"), 'Completed orders must hide the entire action area, including print and status buttons');
+assert.ok(html.includes("if(o.kitchen_status!=='COMPLETED')"), 'Completed orders must hide printing and fulfillment status controls');
 assert.ok(!html.includes("add(actions,'span','Delivered')"), 'Completed orders must not show an extra action label');
 assert.ok(code.includes("img-src data:"), 'Kitchen security policy must allow the embedded approved logo while keeping other image sources blocked');
 assert.ok(!html.includes("for(const status of ['PREPARING','READY','COMPLETED'])"), 'Dashboard must not offer backward status transitions');
@@ -51,7 +51,7 @@ assert.ok(html.includes('function playOrderAlert()'), 'New-order sound alert fun
 assert.ok(html.includes("osc.type='square'"), 'Kitchen order alert must use a sharper, more audible alarm tone');
 assert.ok(html.includes('exponentialRampToValueAtTime(0.62'), 'Kitchen order alert volume envelope must be substantially louder');
 assert.ok(html.includes('const notes=[880,1175,880,1175,1397,1175,880,1175,1397]'), 'Kitchen order alert must play a repeated urgent multi-tone sequence');
-assert.ok(html.includes('knownOrderIds!==null'), 'Sound must only alert for orders arriving after initial dashboard load');
+assert.ok(html.includes('if(pendingAlarm&&soundToggle.checked)playOrderAlert()'), 'Pending new orders must trigger the enabled kitchen alarm');
 assert.ok(html.includes('id="print-test"'), 'Kitchen dashboard must include a 58mm print-test control');
 assert.ok(html.includes('PRINT TEST ONLY — NOT AN ORDER'), 'Print test must be clearly marked as not a real order');
 assert.ok(html.includes('Printing: manual'), 'Dashboard must clearly state printing is manual, not automatic');
@@ -71,3 +71,22 @@ assert.ok(code.includes('subtotal>=3000?15:(subtotal>=2000?10:0)'), 'Server must
 const inlineScripts = site.split('<script').slice(1).map(block => block.slice(block.indexOf('>') + 1, block.indexOf('</script>'))).filter(script => script.trim());
 for (let i = 0; i < inlineScripts.length; i++) new vm.Script(inlineScripts[i], {filename:'website-inline-'+i+'.js'});
 console.log('Kitchen code syntax and route checks passed');
+
+assert.ok(html.includes("add(c,'button','Refund order')"), 'Paid orders must show a refund control even when completed');
+assert.ok(html.includes("if(!confirm('CONFIRM STRIPE REFUND"), 'Real refund requires explicit confirmation');
+assert.ok(html.includes("if(!/^\\d+(?:\\.\\d{1,2})?$/.test(entered.trim()))"), 'Refund amount must validate pounds and pence');
+assert.ok(code.includes("async function kitchenRefund(req,env,id)"), 'Refund must be server-side');
+assert.ok(code.includes("async function refundState(env,order)"), 'Refundable balance must come from Stripe');
+assert.ok(code.includes("Idempotency-Key"), 'Stripe refunds must use an idempotency key');
+assert.ok(code.includes("refundMatch&&req.method===\"POST\""), 'Refund API must require POST');
+assert.ok(code.includes("kitchenAuthorized(req,env)"), 'Refund API must remain under kitchen authentication');
+assert.ok(code.includes('["refund.created","refund.updated","refund.failed","charge.refunded"]'), 'Signed Stripe refund events must reconcile the ledger');
+
+assert.ok(code.includes('SELECT id FROM loyalty_orders WHERE stripe_session_id=? LIMIT 1'), 'Refund must check loyalty-linked orders');
+assert.ok(code.includes('async function reconcileFullRefundLoyalty(env,order,refundedPence)'), 'Fully refunded orders must reconcile Fox Rewards');
+assert.ok(code.includes('if(refundedPence<order.total_pence)return'), 'Partial refunds must preserve Fox Rewards');
+assert.ok(code.includes('loyalty_refund_reviews'), 'Previously redeemed rewards must be flagged for review');
+assert.ok(code.includes('INSERT OR IGNORE INTO order_refunds'), 'Stripe-side refunds must be recorded in audit history');
+assert.ok(code.includes("status IN ('requested','pending')"), 'Concurrent refund attempts must be blocked');
+assert.ok(code.includes('if(amount>state.refundable_pence)'), 'Over-refunds must be rejected');
+assert.ok(code.includes('if(!await verify(raw,req.headers.get("Stripe-Signature")'), 'Refund webhook updates must require a verified Stripe signature');
