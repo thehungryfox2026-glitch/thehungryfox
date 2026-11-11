@@ -267,6 +267,12 @@ async function kitchenRefund(req,env,id){
  if(!order)return new Response("Order not found",{status:404});
  let state;try{state=await refundState(env,order)}catch(e){return Response.json({error:e.message},{status:502})}
  if(amount>state.refundable_pence)return new Response("Amount exceeds refundable balance",{status:409});
+ // A full refund affects loyalty eligibility. Until reward reversal is implemented,
+ // block it for loyalty orders rather than leave customer rewards inconsistent.
+ if(env.LOYALTY_DB&&amount===state.refundable_pence&&state.refunded_pence===0){
+  const loyalty=await env.LOYALTY_DB.prepare("SELECT id FROM loyalty_orders WHERE stripe_session_id=? LIMIT 1").bind(order.stripe_session_id).first();
+  if(loyalty)return Response.json({error:"This order has Fox Rewards history. Use Stripe to issue the refund until automatic loyalty adjustment is ready."},{status:409});
+ }
  // A pending Stripe refund may not yet be visible in the refund list. Respect the local lock.
  const active=await env.DB.prepare("SELECT id,status,stripe_refund_id FROM order_refunds WHERE order_id=? AND status IN ('requested','pending') LIMIT 1").bind(id).first();
  if(active)return new Response("A refund attempt is still unresolved. Check the payment in Stripe before attempting another refund.",{status:409});
