@@ -87,6 +87,7 @@ const env={DB,STRIPE_SECRET_KEY:'sk_test_mock'};
  assert.equal(result.refunded_pence,600);
  assert.equal(result.refundable_pence,1400);
  assert.ok(audit.some(x=>x.sql.includes('INSERT OR IGNORE INTO order_refunds')),'External Stripe refund must be recorded');
+ assert.ok(audit.some(x=>x.sql.includes('WHERE stripe_refund_id=? OR idempotency_key=?')&&x.args[2]==='re_test_1'),'External refund status must reconcile by Stripe refund ID');
  scenario={refunds:[{id:'re_test_2',amount:700,status:'pending',metadata:{}}]};
  result=await state(env,order);
  assert.equal(result.pending_pence,700);
