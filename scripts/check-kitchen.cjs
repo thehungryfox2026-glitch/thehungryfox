@@ -21,7 +21,7 @@ assert.ok(Buffer.from(logoBase64[1], 'base64').subarray(0, 8).equals(Buffer.from
 assert.ok(html.includes("NEW:{next:'PREPARING',label:'Start preparing'}"), 'New orders must only offer the preparing action');
 assert.ok(html.includes("PREPARING:{next:'READY',label:'Mark ready'}"), 'Preparing orders must only offer the ready action');
 assert.ok(html.includes("READY:{next:'COMPLETED',label:'Mark delivered'}"), 'Ready orders must only offer the delivered action');
-assert.ok(html.includes("if(o.kitchen_status!=='COMPLETED')"), 'Completed orders must hide the entire action area, including print and status buttons');
+assert.ok(html.includes("if(o.kitchen_status!=='COMPLETED')"), 'Completed orders must hide printing and fulfillment status controls');
 assert.ok(!html.includes("add(actions,'span','Delivered')"), 'Completed orders must not show an extra action label');
 assert.ok(code.includes("img-src data:"), 'Kitchen security policy must allow the embedded approved logo while keeping other image sources blocked');
 assert.ok(!html.includes("for(const status of ['PREPARING','READY','COMPLETED'])"), 'Dashboard must not offer backward status transitions');
@@ -71,3 +71,13 @@ assert.ok(code.includes('subtotal>=3000?15:(subtotal>=2000?10:0)'), 'Server must
 const inlineScripts = site.split('<script').slice(1).map(block => block.slice(block.indexOf('>') + 1, block.indexOf('</script>'))).filter(script => script.trim());
 for (let i = 0; i < inlineScripts.length; i++) new vm.Script(inlineScripts[i], {filename:'website-inline-'+i+'.js'});
 console.log('Kitchen code syntax and route checks passed');
+
+assert.ok(html.includes("add(c,'button','Refund order')"), 'Paid orders must show a refund control even when completed');
+assert.ok(html.includes("if(!confirm('CONFIRM STRIPE REFUND"), 'Real refund requires explicit confirmation');
+assert.ok(html.includes("if(!/^\\d+(?:\\.\\d{1,2})?$/.test(entered.trim()))"), 'Refund amount must validate pounds and pence');
+assert.ok(code.includes("async function kitchenRefund(req,env,id)"), 'Refund must be server-side');
+assert.ok(code.includes("async function refundState(env,order)"), 'Refundable balance must come from Stripe');
+assert.ok(code.includes("Idempotency-Key"), 'Stripe refunds must use an idempotency key');
+assert.ok(code.includes("refundMatch&&req.method===\"POST\""), 'Refund API must require POST');
+assert.ok(code.includes("kitchenAuthorized(req,env)"), 'Refund API must remain under kitchen authentication');
+assert.ok(code.includes('["refund.created","refund.updated","refund.failed","charge.refunded"]'), 'Signed Stripe refund events must reconcile the ledger');
