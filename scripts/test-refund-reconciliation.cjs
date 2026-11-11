@@ -55,6 +55,11 @@ async function checkPost(){
  assert.equal((await response.json()).refund_id,'re_test_post');
  assert.equal(inserted,1);
  assert.equal(loyaltyReads,1);
+ const savedLoyalty=env.LOYALTY_DB;delete env.LOYALTY_DB;
+ response=await postRefund(request({amount_pence:500,reason:'requested_by_customer'}),env,'order_test');
+ assert.equal(response.status,503,'Missing loyalty database must block refunds');
+ assert.equal(inserted,1,'Missing loyalty database must not issue refunds');
+ env.LOYALTY_DB=savedLoyalty;
  response=await postRefund(request({amount_pence:2001,reason:'requested_by_customer'}),env,'order_test');
  assert.equal(response.status,409);
  response=await postRefund(request({amount_pence:-1,reason:'requested_by_customer'}),env,'order_test');
