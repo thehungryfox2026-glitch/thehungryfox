@@ -21,6 +21,51 @@ const DB={prepare(sql){
 const ctx=vm.createContext({fetch:fetchMock,URLSearchParams,encodeURIComponent,crypto:require('node:crypto').webcrypto});
 vm.runInContext(source,ctx,{filename:'refund-functions.js'});
 const state=vm.runInContext('refundState',ctx);
+
+const refundStart=code.indexOf('async function kitchenRefund(req,env,id){');
+const refundEnd=code.indexOf('async function kitchenOrders(env)',refundStart);
+assert.ok(refundStart>=0&&refundEnd>refundStart,'Refund POST handler must exist');
+const postCtx=vm.createContext({
+ Response,crypto:require('node:crypto').webcrypto,URLSearchParams,
+ refundState:async()=>({payment_intent:'pi_test_123',refunded_pence:0,pending_pence:0,refundable_pence:2000}),
+ stripeRefundRequest:async(path,env,init)=>{
+  assert.equal(path,'refunds');
+  assert.equal(init.method,'POST');
+  assert.equal(init.headers['Content-Type'],'application/x-www-form-urlencoded');
+  assert.ok(init.headers['Idempotency-Key'].startsWith('hungryfox-'));
+  assert.equal(new URLSearchParams(init.body).get('amount'),'500');
+  return {id:'re_test_post',status:'succeeded'};
+ }
+});
+vm.runInContext(code.slice(refundStart,refundEnd),postCtx);
+const postRefund=vm.runInContext('kitchenRefund',postCtx);
+async function checkPost(){
+ let inserted=0,loyaltyReads=0;
+ const env={STRIPE_SECRET_KEY:'sk_test_mock',DB:{prepare(sql){return {bind(...args){return {
+  async first(){
+   if(sql.includes('FROM orders'))return {id:'order_test',stripe_session_id:'cs_test_123',total_pence:2000,order_reference:'TEST'};
+   if(sql.includes('FROM order_refunds'))return null;
+   throw Error('Unexpected first SQL: '+sql);
+  },
+  async run(){if(sql.includes('INSERT INTO order_refunds'))inserted++;return {meta:{changes:1}}}
+ }}}}},LOYALTY_DB:{prepare(sql){return {bind(){return {async first(){loyaltyReads++;return null}}}}}}};
+ const request=body=>({json:async()=>body});
+ let response=await postRefund(request({amount_pence:500,reason:'requested_by_customer'}),env,'order_test');
+ assert.equal(response.status,200);
+ assert.equal((await response.json()).refund_id,'re_test_post');
+ assert.equal(inserted,1);
+ assert.equal(loyaltyReads,1);
+ response=await postRefund(request({amount_pence:2001,reason:'requested_by_customer'}),env,'order_test');
+ assert.equal(response.status,409);
+ response=await postRefund(request({amount_pence:-1,reason:'requested_by_customer'}),env,'order_test');
+ assert.equal(response.status,400);
+ env.LOYALTY_DB.prepare=()=>({bind:()=>({first:async()=>({id:'loyalty_test'})})});
+ response=await postRefund(request({amount_pence:500,reason:'requested_by_customer'}),env,'order_test');
+ assert.equal(response.status,409);
+ assert.equal(inserted,1,'Loyalty-linked refund must not reach Stripe');
+ console.log('Refund POST mock tests passed');
+}
+
 const order={id:'order_test',stripe_session_id:'cs_test_123',total_pence:2000};
 const env={DB,STRIPE_SECRET_KEY:'sk_test_mock'};
 (async()=>{
@@ -40,4 +85,5 @@ const env={DB,STRIPE_SECRET_KEY:'sk_test_mock'};
  scenario={refunds:[],has_more:true};
  await assert.rejects(()=>state(env,order),/Refund history too large/);
  console.log('Refund reconciliation mock tests passed');
+ await checkPost();
 })().catch(e=>{console.error(e);process.exitCode=1});
