@@ -143,4 +143,5 @@ const env={DB,STRIPE_SECRET_KEY:'sk_test_mock',LOYALTY_DB:{prepare(){return {bin
  await assert.rejects(()=>state(env,order),/Refund history too large/);
  console.log('Refund reconciliation mock tests passed');
  await checkPost();
+ require('node:child_process').execFileSync(process.execPath,['scripts/test-loyalty-refunds.cjs'],{stdio:'inherit'});
 })().catch(e=>{console.error(e);process.exitCode=1});
