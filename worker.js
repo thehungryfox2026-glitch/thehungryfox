@@ -236,11 +236,17 @@ async function refundState(env,order){
  // Do not silently omit a second pending refund due to the one-active-refund DB constraint.
  const activeStripeRefunds=(result.data||[]).filter(r=>r.status==="pending"||r.status==="requires_action");
  if(activeStripeRefunds.length>1)throw new Error("Multiple pending Stripe refunds require manual review in Stripe; dashboard refund processing is paused");
+ if(!Number.isSafeInteger(order.total_pence)||order.total_pence<=0||!Number.isSafeInteger(session.amount_total)||session.amount_total!==order.total_pence)
+  throw new Error("Order total does not match Stripe payment; refund processing is paused");
+ let totalStripeRefunded=0;
  const seenRefundIds=new Set();
  for(const refund of result.data||[]){
   if(!refund.id||seenRefundIds.has(refund.id)||!Number.isSafeInteger(refund.amount)||refund.amount<=0)throw new Error("Invalid or duplicate Stripe refund data; check Stripe dashboard");
   seenRefundIds.add(refund.id);
+  if(!["succeeded","pending","requires_action","failed","canceled"].includes(refund.status))throw new Error("Unknown Stripe refund status; check Stripe dashboard");
+  if(["succeeded","pending","requires_action"].includes(refund.status))totalStripeRefunded+=refund.amount;
  }
+if(totalStripeRefunded>order.total_pence)throw new Error("Stripe refunds exceed the order total; refund processing is paused");
 // If a refund was issued directly in Stripe, persist it against the matching order.
 // This makes the kitchen audit ledger reflect both dashboard and external refunds.
 for(const refund of result.data||[]){
