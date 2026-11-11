@@ -83,7 +83,9 @@ assert.ok(code.includes("kitchenAuthorized(req,env)"), 'Refund API must remain u
 assert.ok(code.includes('["refund.created","refund.updated","refund.failed","charge.refunded"]'), 'Signed Stripe refund events must reconcile the ledger');
 
 assert.ok(code.includes('SELECT id FROM loyalty_orders WHERE stripe_session_id=? LIMIT 1'), 'Refund must check loyalty-linked orders');
-assert.ok(code.includes('Refunds must be handled in Stripe until loyalty adjustments are ready'), 'Refunds linked to Fox Rewards must be blocked');
+assert.ok(code.includes('async function reconcileFullRefundLoyalty(env,order,refundedPence)'), 'Fully refunded orders must reconcile Fox Rewards');
+assert.ok(code.includes('if(refundedPence<order.total_pence)return'), 'Partial refunds must preserve Fox Rewards');
+assert.ok(code.includes('loyalty_refund_reviews'), 'Previously redeemed rewards must be flagged for review');
 assert.ok(code.includes('INSERT OR IGNORE INTO order_refunds'), 'Stripe-side refunds must be recorded in audit history');
 assert.ok(code.includes("status IN ('requested','pending')"), 'Concurrent refund attempts must be blocked');
 assert.ok(code.includes('if(amount>state.refundable_pence)'), 'Over-refunds must be rejected');
