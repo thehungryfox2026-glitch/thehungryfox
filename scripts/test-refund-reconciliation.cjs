@@ -40,14 +40,14 @@ const postCtx=vm.createContext({
 vm.runInContext(code.slice(refundStart,refundEnd),postCtx);
 const postRefund=vm.runInContext('kitchenRefund',postCtx);
 async function checkPost(){
- let inserted=0,loyaltyReads=0;
+ let inserted=0,loyaltyReads=0,failedUpdates=0;
  const env={STRIPE_SECRET_KEY:'sk_test_mock',DB:{prepare(sql){return {bind(...args){return {
   async first(){
    if(sql.includes('FROM orders'))return {id:'order_test',stripe_session_id:'cs_test_123',total_pence:2000,order_reference:'TEST'};
    if(sql.includes('FROM order_refunds'))return null;
    throw Error('Unexpected first SQL: '+sql);
   },
-  async run(){if(sql.includes('INSERT INTO order_refunds'))inserted++;return {meta:{changes:1}}}
+  async run(){if(sql.includes('INSERT INTO order_refunds'))inserted++;if(sql.includes("SET status='failed'"))failedUpdates++;return {meta:{changes:1}}}
  }}}}},LOYALTY_DB:{prepare(sql){return {bind(){return {async first(){loyaltyReads++;return null}}}}}}};
  const request=body=>({json:async()=>body});
  let response=await postRefund(request({amount_pence:500,reason:'requested_by_customer'}),env,'order_test');
@@ -63,6 +63,14 @@ async function checkPost(){
  response=await postRefund(request({amount_pence:500,reason:'requested_by_customer'}),env,'order_test');
  assert.equal(response.status,409);
  assert.equal(inserted,1,'Loyalty-linked refund must not reach Stripe');
+ postCtx.stripeRefundRequest=async()=>{const e=new Error('Invalid request');e.stripeStatus=400;throw e};
+ response=await postRefund(request({amount_pence:500,reason:'duplicate'}),env,'order_test');
+ assert.equal(response.status,422,'Definitive Stripe rejection should be reported');
+ assert.equal(failedUpdates,1,'Definitive rejection must release refund lock');
+ postCtx.stripeRefundRequest=async()=>{throw new Error('Network timeout')};
+ response=await postRefund(request({amount_pence:500,reason:'duplicate'}),env,'order_test');
+ assert.equal(response.status,502,'Ambiguous Stripe failure must not be treated as rejected');
+ assert.equal(failedUpdates,1,'Ambiguous Stripe failure must preserve refund lock');
  console.log('Refund POST mock tests passed');
 }
 
