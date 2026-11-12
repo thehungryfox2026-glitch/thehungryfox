@@ -94,6 +94,7 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white">
+<div id="hungryfox-closed-banner" role="status" aria-live="polite" style="display:none;position:sticky;top:0;z-index:90;background:#261b17;color:#fff;padding:14px 18px;text-align:center;font-weight:700;border-bottom:2px solid #f97316">🌙 We're Currently Closed — Online ordering reopens at 11:00 AM. You can still browse our menu.</div>
 
   <!-- Top Announcement Bar -->
   <div class="bg-[#060e20] border-b border-slate-800 text-xs py-2 px-4">
@@ -508,6 +509,10 @@
       ? 'https://website-loyalty-program-hungryfox-api-preview.thehungryfox2026.workers.dev'
       : 'https://hungryfox-api.thehungryfox2026.workers.dev';
     const MIN_ORDER_AMOUNT = 15.00;
+    function hungryFoxOrderingOpen(now=new Date()){const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);const hour=Number(parts.find(p=>p.type==='hour').value),minute=Number(parts.find(p=>p.type==='minute').value);return hour*60+minute>=660||hour*60+minute<120;}
+    function refreshOrderingHours(){const open=hungryFoxOrderingOpen();document.getElementById('hungryfox-closed-banner').style.display=open?'none':'block';const checkout=document.getElementById('checkout-btn');if(checkout)checkout.disabled=!open||state.cart.length===0;}
+    setInterval(refreshOrderingHours,30000);
+    document.addEventListener('DOMContentLoaded',refreshOrderingHours);
 
     // Verified Category Sequence Ordering
     const CATEGORY_ORDER = [
@@ -1514,7 +1519,7 @@
       minStatus.textContent = subtotal >= MIN_ORDER_AMOUNT ? 'No small-order surcharge' : (subtotal > 0 ? '£4.00 small-order surcharge' : 'Your basket is empty');
       minStatus.className = subtotal >= MIN_ORDER_AMOUNT ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold';
       minBar.className = (subtotal >= MIN_ORDER_AMOUNT ? 'bg-emerald-500' : 'bg-orange-500') + ' h-full transition-all duration-300';
-      checkoutBtn.disabled = state.cart.length === 0;
+      checkoutBtn.disabled = state.cart.length === 0 || !hungryFoxOrderingOpen();
 
       const totalPayable = subtotal - basketDiscount.amount + surcharge + (state.deliveryQuote?.deliveryFee || 0);
       document.getElementById('cart-total-val').textContent = formatGBP(totalPayable);
@@ -1625,6 +1630,7 @@
 
     // Checkout Flow
     function initiateCheckout() {
+      if(!hungryFoxOrderingOpen()){refreshOrderingHours();alert('Online ordering is closed. We reopen at 11:00 AM.');return;}
       toggleCartDrawer(false);
       state.deliveryQuote = null;
       document.getElementById('checkout-quote-status').textContent = 'Enter your postcode to calculate delivery.';
@@ -1815,6 +1821,7 @@
     }
 
     async function submitWebsiteOrder() {
+      if(!hungryFoxOrderingOpen()){refreshOrderingHours();alert('Online ordering is closed. We reopen at 11:00 AM.');return;}
       const btn = document.getElementById('place-order-btn');
       const status = document.getElementById('checkout-submit-status');
       const customer = {
