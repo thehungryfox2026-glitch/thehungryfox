@@ -1465,6 +1465,11 @@
         if (quantity > 0 && input.dataset.name !== 'Drink Can') opts.push({ label: 'Optional Add-on', value: quantity + ' x ' + input.dataset.name, price: quantity * Number(input.dataset.price || 0) });
       });
       if (drinkCanQty > 0) {
+        const selectedDrinkQty = drinkFields.reduce((sum, input) => sum + Math.max(0, Math.floor(Number(input.value) || 0)), 0);
+        if (selectedDrinkQty !== drinkCanQty) {
+          alert("Please select exactly " + drinkCanQty + " drink" + (drinkCanQty === 1 ? "" : "s") + " for your Drink Can add-on.");
+          return;
+        }
         const drinkSummary = drinkFields.map(input => Math.max(0, Math.floor(Number(input.value) || 0)) + ' x ' + input.dataset.name).join(', ');
         const extra = drinkFields.reduce((sum, input) => sum + Math.max(0, Math.floor(Number(input.value) || 0)) * Number(input.dataset.surcharge || 0), 0);
         opts.push({ label: 'Optional Add-on', value: drinkCanQty + ' x Drink Can (' + drinkSummary + ')', price: drinkCanQty * 0.99 + extra });
