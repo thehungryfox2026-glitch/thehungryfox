@@ -65,8 +65,8 @@ assert.ok(site.includes('10% OFF') && site.includes('15% OFF'), 'Both website of
 assert.ok(site.includes('id="cart-discount-row"') && site.includes('id="checkout-discount-row"'), 'Discount must be shown in basket and checkout totals');
 assert.ok(site.includes('function getWebsiteBasketDiscount'), 'Frontend basket discount calculation must exist');
 assert.ok(code.includes('websiteDiscountPercent=reward?0:'), 'Fox Rewards must not stack with basket promotions');
-assert.ok(code.includes('https://api.stripe.com/v1/coupons'), 'Server must create a Stripe coupon for eligible website offers');
-assert.ok(code.includes('discounts[0][coupon]'), 'Stripe Checkout must receive the automatic basket discount');
+assert.ok(!code.includes('https://api.stripe.com/v1/coupons'), 'Checkout must not require Stripe coupon-write permission');
+assert.ok(code.includes('const discounted=[]') && code.includes('rows=discounted'), 'Server must apply basket discounts to food line items');
 assert.ok(code.includes('subtotal>=3000?15:(subtotal>=2000?10:0)'), 'Server must enforce 15% at £30 and 10% at £20');
 const inlineScripts = site.split('<script').slice(1).map(block => block.slice(block.indexOf('>') + 1, block.indexOf('</script>'))).filter(script => script.trim());
 for (let i = 0; i < inlineScripts.length; i++) new vm.Script(inlineScripts[i], {filename:'website-inline-'+i+'.js'});
