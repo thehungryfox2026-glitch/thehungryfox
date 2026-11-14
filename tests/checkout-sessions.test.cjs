@@ -8,13 +8,14 @@ const validator=worker.slice(worker.indexOf('function serverOptionPricePence'),w
 const checkout=worker.slice(worker.indexOf('async function create(req,env,o)'),worker.indexOf('async function verify(raw,sig,secret)'));
 const ids=[...index.matchAll(/Product_ID: '([A-Z]{2,4}\d{3})'/g)].map(m=>m[1]);
 const calls=[];
-const create=Function('out','quote','hungryFoxOrderingOpen','fetch','splitReceiptOptions',
+const create=Function('out','quote','hungryFoxOrderingOpen','fetch','splitReceiptOptions','URLSearchParams',
   menuCode+';'+validator+';'+checkout+';return create;')(
   (data,status)=>({data,status}),
   async()=>({available:true,zone:'Grays',totalDeliveryAndSurcharge:0}),
   ()=>true,
   async(url,init)=>{calls.push({url,form:init.body});return{ok:true,json:async()=>({id:'mock_session',url:'https://checkout.stripe.com/mock'})};},
-  value=>value?[value]:[]
+  value=>value?[value]:[],
+  URLSearchParams
 );
 async function checkoutBasket(items){
  const req={json:async()=>({customer:{name:'Test',phone:'07000000000',email:'test@example.com',postcode:'RM17 6QJ',address:'Test address'},items}),headers:{get:()=>null}};
