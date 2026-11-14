@@ -14,5 +14,5 @@ assert.equal(p('DON002',{label:'Optional Add-on',value:'2 x Drink Can (1 x Red B
 assert.equal(p('FEA001',{label:'Optional Add-on',value:'2 x Garlic Naan',price:0}),null,'Add-ons cannot be injected into unsupported products');
 assert.equal(p('FEA001',{label:'Bread Choice',value:'Forged Paid Bread',price:0}),null,'Unknown paid selections are rejected');
 assert.equal(p('FEA001',{label:'Meal Upgrade',value:'Fries & Drink (+£1.99)',price:0}),199);
-assert.equal(p('FEA001',{label:'Unrecognised option',value:'Anything',price:999}),0,'Unknown zero-priced descriptive choices do not add charges');
+assert.equal(p('FEA001',{label:'Unrecognised option',value:'Anything',price:999}),null,'Unknown descriptive choices are rejected before checkout');
 console.log('Server-side checkout option pricing tests passed');
