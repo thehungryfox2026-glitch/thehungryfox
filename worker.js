@@ -29,7 +29,9 @@ function serverOptionPricePence(productId,option){
   const addon={"Fried Egg":99,"Fries":99,"Drink Can":99,"Plain Naan":99,"Plain Pitta Bread":99,"Garlic Naan":149,"Peri Peri Pitta Bread":99,"Mini Singara (4 Pcs)":119,"Vegetable Spring Roll (2 Pcs)":149,"Vegetable Samosa (2 Pcs)":149,"Medium Vegetable Singara (2 Pcs)":149};
   if(name.startsWith("Drink Can (")&&name.endsWith(")")){
    const selections=name.slice(11,-1).split(/,\s*/);let surcharge=0;
-   for(const selection of selections){const d=selection.match(/^(\d+) x (.+)$/);if(!d||!Object.prototype.hasOwnProperty.call(canned,d[2]))return null;surcharge+=Number(d[1])*canned[d[2]];}
+   let selectedCount=0;
+   for(const selection of selections){const d=selection.match(/^(\d+) x (.+)$/);if(!d||!Object.prototype.hasOwnProperty.call(canned,d[2]))return null;const selected=Number(d[1]);if(!Number.isInteger(selected)||selected<1)return null;selectedCount+=selected;surcharge+=selected*canned[d[2]];}
+   if(selectedCount!==qty)return null;
    return qty*99+surcharge;
   }
   return Object.prototype.hasOwnProperty.call(addon,name)?qty*addon[name]:null;
