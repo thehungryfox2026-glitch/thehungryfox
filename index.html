@@ -127,7 +127,7 @@
 
       <!-- Delivery message and discreet partner links -->
       <div class="hidden sm:flex flex-col items-center gap-1.5 text-xs">
-        <span class="font-bold text-emerald-300">We deliver to most local areas · Check your postcode for delivery</span>
+        <span class="font-bold text-emerald-300">FREE DELIVERY IN SELECTED AREAS! · Check your postcode</span>
         <div class="flex items-center gap-2 rounded-xl border border-slate-700/80 bg-[#0b1326] px-3 py-2 shadow-sm">
           <span class="text-slate-400 text-[10px] font-semibold uppercase tracking-wider">Also available on</span>
           <a href="https://www.ubereats.com/store/the-hungry-fox/31MFiKUqX5WDVSWPtoouhA" target="_blank" rel="noopener" class="rounded-md border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-1.5 text-emerald-300 font-bold hover:bg-emerald-500/20 transition">Uber Eats</a>
@@ -182,15 +182,17 @@
         <p class="text-slate-200 text-xs sm:text-sm mt-1 leading-relaxed">Skip third-party platform service fees and enjoy your Hungry Fox favourites for less.</p>
       </div>
 
-      <!-- Postcode Delivery Availability Checker -->
+      <!-- Postcode Delivery Availability Checker: postcode-based, not mileage-based -->
       <div class="pt-4 max-w-md mx-auto">
+        <p class="text-emerald-300 font-extrabold text-base sm:text-lg uppercase tracking-wide mb-2">FREE DELIVERY IN SELECTED AREAS!</p>
+        <p class="text-slate-300 text-xs sm:text-sm mb-3">Delivery charges depend on your postcode. Check below to see your delivery fee.</p>
         <form onsubmit="handlePostcodeCheck(event)" class="flex gap-2">
           <input type="text" id="check-postcode-input" placeholder="Enter your postcode" class="flex-1 bg-[#131b2e] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 uppercase font-mono" required />
           <button type="submit" id="check-postcode-btn" class="btn-orange px-5 py-2.5 rounded-xl text-xs font-bold shrink-0">
-            Check Radius
+            Check Postcode
           </button>
         </form>
-        <p class="text-xs text-emerald-300 mt-3 font-semibold">We deliver across local areas. Enter your postcode to check availability and see your delivery options.</p>
+        <p class="text-xs text-emerald-300 mt-3 font-semibold">Selected local postcodes: FREE delivery · Other eligible areas: £1.99 or £3.99. Your postcode determines availability and the exact fee.</p>
         <div id="check-postcode-result" class="text-xs mt-2.5 hidden"></div>
       </div>
     </div>
