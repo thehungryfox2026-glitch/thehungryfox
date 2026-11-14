@@ -21,7 +21,9 @@ assert.ok(Buffer.from(logoBase64[1], 'base64').subarray(0, 8).equals(Buffer.from
 assert.ok(html.includes("NEW:{next:'PREPARING',label:'Start preparing'}"), 'New orders must only offer the preparing action');
 assert.ok(html.includes("PREPARING:{next:'READY',label:'Mark ready'}"), 'Preparing orders must only offer the ready action');
 assert.ok(html.includes("READY:{next:'COMPLETED',label:'Mark delivered'}"), 'Ready orders must only offer the delivered action');
-assert.ok(html.includes("if(o.kitchen_status!=='COMPLETED')"), 'Completed orders must hide printing and fulfillment status controls');
+assert.ok(html.includes("const print=add(actions,'button','Print receipt')"), 'All orders, including completed orders, must retain receipt printing');
+assert.ok(html.includes("const step=(status==='DELIVERED'||status==='COMPLETED')?null:"), 'Delivered and completed orders must not offer fulfillment status controls');
+assert.ok(html.includes('if(step){const b=add(actions,\'button\',step.label)'), 'Fulfillment status buttons must only be created for active transitions');
 assert.ok(!html.includes("add(actions,'span','Delivered')"), 'Completed orders must not show an extra action label');
 assert.ok(code.includes("img-src data:"), 'Kitchen security policy must allow the embedded approved logo while keeping other image sources blocked');
 assert.ok(!html.includes("for(const status of ['PREPARING','READY','COMPLETED'])"), 'Dashboard must not offer backward status transitions');
