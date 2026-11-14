@@ -36,7 +36,10 @@ function serverOptionPricePence(productId,option){
   }
   return Object.prototype.hasOwnProperty.call(addon,name)?qty*addon[name]:null;
  }
- return 0;
+ // Preserve every existing free customisation label; reject invented labels.
+ const freeLabels=new Set(["Doner Type","Doner Spice","Chicken Portion","Wing Cooking","Snack Choice","Flavour 1","Flavour 2","Seasoning 1","Seasoning 2","Seasoning 3","Seasoning 4","Drizzle","Side","Dip 1","Dip 2","Meal Fries Seasoning","Fries 1 Seasoning","Fries 2 Seasoning","Meal Bottled Drink"]);
+ if(freeLabels.has(label))return value&&value.length<=200?0:null;
+ return null;
 }
 function hungryFoxOrderingOpen(now=new Date()){const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);const hour=Number(parts.find(p=>p.type==='hour').value),minute=Number(parts.find(p=>p.type==='minute').value);return hour*60+minute>=660||hour*60+minute<120;}
 async function create(req,env,o){if(!hungryFoxOrderingOpen())return out({error:'Online ordering is currently closed. We reopen at 11:00 AM UK time.'},403,o);if(!env.STRIPE_SECRET_KEY)return out({error:"Stripe secret key is not configured on this Worker."},503,o);let b;try{b=await req.json();}catch{return out({error:"Invalid order details."},400,o);}const c=b.customer||{},items=b.items;if(!c.name||!c.phone||!c.email||!c.postcode||!c.address||!Array.isArray(items)||!items.length)return out({error:"Complete your delivery details and basket."},400,o);if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email))return out({error:"Enter a valid email address."},400,o);
