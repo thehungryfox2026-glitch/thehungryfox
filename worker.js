@@ -22,7 +22,7 @@ function serverOptionPricePence(productId,option){
  if(label==="Bread Choice")return Object.prototype.hasOwnProperty.call(bread,value)?bread[value]:null;
  if(label==="Bundle Side")return Object.prototype.hasOwnProperty.call(bundle,value)?bundle[value]:null;
  if(["Drink 1","Drink 2","Meal Drink"].includes(label))return Object.prototype.hasOwnProperty.call(canned,value)?canned[value]:bottled.has(value)?0:null;
- if(label==="Dessert"){const match=Object.entries(MENU).find(([id,p])=>id.startsWith("DES")&&p[0]===value);return match?money(match[1][1]):null;}
+ if(label==="Dessert"){if(value==="No Dessert")return 0;const match=Object.entries(MENU).find(([id,p])=>id.startsWith("DES")&&p[0]===value);return match?money(match[1][1]):null;}
  if(label==="Optional Add-on"){
   if(!["NDL001","DON001","DON002","DON003"].includes(productId))return null;
   let m=value.match(/^(\d+) x (.+)$/);if(!m)return null;const qty=Number(m[1]),name=m[2];if(!Number.isInteger(qty)||qty<1||qty>30)return null;
