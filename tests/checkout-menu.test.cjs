@@ -55,3 +55,10 @@ test('no coupon-write dependency and ordering time zone is UK',()=>{
  assert.ok(worker.includes('timeZone:\'Europe/London\''));
  assert.ok(index.includes('timeZone:\'Europe/London\''));
 });
+
+test('unknown checkout option labels are rejected rather than silently free',()=>{
+ assert.equal(serverOptionPricePence('CHK001',{label:'Invented free upgrade',value:'Extra chicken'}),null);
+ assert.equal(serverOptionPricePence('CHK001',{label:'Flavour 1',value:'Plain'}),0);
+ assert.equal(serverOptionPricePence('CHK001',{label:'Seasoning 1',value:'Regular Salt'}),0);
+ assert.equal(serverOptionPricePence('CHK001',{label:'Meal Bottled Drink',value:'Bottle Coke'}),0);
+});
