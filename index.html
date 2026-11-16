@@ -174,6 +174,7 @@
           <span><span class="text-orange-400">10% OFF</span> when you spend £20+</span>
           <span class="hidden sm:inline text-slate-600" aria-hidden="true">|</span>
           <span><span class="text-orange-400">15% OFF</span> when you spend £30+</span>
+          <span><span class="text-orange-400">20% OFF</span> when you spend £50+</span>
         </div>
         <p class="text-slate-400 text-[11px] sm:text-xs mt-1">Discount applied automatically at checkout. No code needed. Based on food subtotal; delivery excluded.</p>
       </div>
@@ -1490,7 +1491,7 @@
     function getWebsiteBasketDiscount(subtotal, rewardSelected = false) {
       if (rewardSelected) return { amount: 0, percent: 0 };
       const subtotalPence = Math.round(Number(subtotal || 0) * 100);
-      const percent = subtotalPence >= 3000 ? 15 : (subtotalPence >= 2000 ? 10 : 0);
+      const percent = subtotalPence >= 5000 ? 20 : (subtotalPence >= 3000 ? 15 : (subtotalPence >= 2000 ? 10 : 0));
       return { amount: Math.round(subtotalPence * percent / 100) / 100, percent };
     }
 
