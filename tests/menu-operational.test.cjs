@@ -16,7 +16,7 @@ test('every product belongs to one of the twelve visible menu categories',()=>{
  const categories=constant('CATEGORY_ORDER');
  assert.equal(categories.length,12);
  assert.equal(new Set(categories).size,12);
- assert.equal(products.length, 110);
+ assert.equal(products.length, 103);
  for(const p of products){
   assert.ok(categories.includes(p.category),p.id+' unknown category '+p.category);
   assert.ok(Number.isFinite(p.price)&&p.price>=0,p.id+' invalid price');
