@@ -18,8 +18,8 @@ function array(name){
  return Function('return '+match[1])();
 }
 test('all menu products exist with exactly matching names and prices',()=>{
- assert.equal(products.length,100);
- assert.equal(Object.keys(MENU).length,100);
+ assert.equal(products.length, 103);
+ assert.equal(Object.keys(MENU).length, 110);
  const seen=new Set();
  for(const [,id,name,,price] of products){
   assert.ok(!seen.has(id),'duplicate '+id);seen.add(id);
