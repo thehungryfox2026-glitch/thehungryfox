@@ -77,3 +77,14 @@ test('free premium side is restricted to the five new bowls and platters',()=>{
  assert.equal(serverOptionPricePence('BWL001',{label:'Premium Side',value:'Invented Side'}),null);
  assert.match(index,/\['BWL001', 'BWL002', 'BWL003', 'BWL004', 'BWL005'\]\.includes\(id\)/);
 });
+
+
+test('only new bowls receive free bread upgrades and four-piece cheese sides',()=>{
+ for(const id of ['BWL001','BWL004','BWL005'])for(const value of ['Plain Naan','Plain Pitta Bread','Garlic Naan','Peri Peri Pitta Bread'])assert.equal(serverOptionPricePence(id,{label:'Bread Choice',value}),0);
+ assert.equal(serverOptionPricePence('FEA001',{label:'Bread Choice',value:'Garlic Naan'}),99);
+ assert.equal(serverOptionPricePence('FEA001',{label:'Bread Choice',value:'Peri Peri Pitta Bread'}),49);
+ for(const id of ['BWL001','BWL002','BWL003','BWL004','BWL005'])for(const value of ['Chilli Cheese Bites (4 Pcs)','Mac N Cheese Bites (4 Pcs)'])assert.equal(serverOptionPricePence(id,{label:'Premium Side',value}),0);
+ assert.equal(serverOptionPricePence('PLT008',{label:'Premium Side',value:'Mac N Cheese Bites (4 Pcs)'}),null);
+ assert.equal(serverOptionPricePence('PLT008',{label:'Included Dips',value:'1 x Hot Chilli'}),0);
+ assert.match(index,/Hot Chilli/);
+});
