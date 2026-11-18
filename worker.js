@@ -21,7 +21,7 @@ function serverOptionPricePence(productId,option){
  const bottled=new Set(["Water","Bottle Coke","Bottle Diet Coke","Bottle Pepsi","Bottle Pepsi Max","Bottle Tango","Bottle 7UP","Blackcurrant Fruit Shoot","Orange Fruit Shoot"]);
  if(label==="Premium Side"){const allowed=new Set(["Mozzarella Sticks (6 Pcs)","Onion Rings (8 Pcs)","Halloumi Fries (6 Pcs)","Mini Singara (8 Pcs)","Chilli Cheese Bites (3 Pcs)","Vegetable Samosa (4 Pcs)","Vegetable Spring Roll (4 Pcs)","Veg Bao Buns (2 Pcs)","Prawn Gyoza (3 Pcs)","Chilli Cheese Bites (6 Pcs)","Mac N Cheese Bites (8 Pcs)","Medium Singara (4 Pcs)","Zinger Crisper Strips (6 Pcs)"]);return ["BWL002","BWL003"].includes(productId)&&allowed.has(value)?0:null;}
  if(label==="Sheekh Kebab Type")return ["BWL001","BWL004"].includes(productId)&&["Chicken Sheekh","Meat Sheekh","Mixed Sheekh"].includes(value)?0:null;
- if(label==="Bread Choice")return Object.prototype.hasOwnProperty.call(bread,value)?bread[value]:null;
+ if(["Bread Choice","Bread 2 Choice"].includes(label))return Object.prototype.hasOwnProperty.call(bread,value)?bread[value]:null;
  if(label==="Bundle Side")return Object.prototype.hasOwnProperty.call(bundle,value)?bundle[value]:null;
  if(["Drink 1","Drink 2","Meal Drink"].includes(label))return Object.prototype.hasOwnProperty.call(canned,value)?canned[value]:bottled.has(value)?0:null;
  if(label==="Dessert"){if(value==="No Dessert")return 0;const match=Object.entries(MENU).find(([id,p])=>id.startsWith("DES")&&p[0]===value);return match?money(match[1][1]):null;}

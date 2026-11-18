@@ -1147,6 +1147,9 @@
 
       if (['BWL001','BWL002','BWL005'].includes(id)) html += renderSelect('Included Dip', 'dip_1', DIP_OPTIONS);
       if (['BWL003','BWL004'].includes(id)) { html += renderSelect('Included Dip 1','dip_1',DIP_OPTIONS); html += renderSelect('Included Dip 2','dip_2',DIP_OPTIONS); }
+      if (id === 'BWL004') {
+        html += '<div class="space-y-1"><label class="block text-xs font-bold text-slate-200 uppercase">Choose Second Bread</label><select id="sel-bread_2" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">' + BREAD_OPTIONS.map(b => '<option value="'+b.name+'" data-price="'+b.price+'">'+b.name+(b.price>0?' (+'+formatGBP(b.price)+')':' (Free)')+'</option>').join('') + '</select></div>';
+      }
       // 8. Choose dip
       if (['PLT004', 'PLT005', 'PLT006', 'PLT007'].includes(id)) {
         html += renderSelect('Included Dip 1', 'dip_1', DIP_OPTIONS);
@@ -1390,6 +1393,8 @@
         total += p;
       }
 
+      const secondBread = document.getElementById('sel-bread_2');
+      if (secondBread) total += Number(secondBread.options[secondBread.selectedIndex]?.getAttribute('data-price') || 0);
       const sideSel = document.getElementById('sel-bundle_side');
       if (sideSel) {
         const p = Number(sideSel.options[sideSel.selectedIndex]?.getAttribute('data-price') || 0);
@@ -1478,6 +1483,7 @@
         { id: 'sel-doner_side', label: 'Side' },
         { id: 'sel-bundle_side', label: 'Bundle Side', priceAttr: true },
         { id: 'sel-bread', label: 'Bread Choice', priceAttr: true },
+        { id: 'sel-bread_2', label: 'Bread 2 Choice', priceAttr: true },
         { id: 'sel-dip_1', label: 'Dip 1' },
         { id: 'sel-dip_2', label: 'Dip 2' },
         { id: 'sel-dip_3', label: 'Dip 3' },
