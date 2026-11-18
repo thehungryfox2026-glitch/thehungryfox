@@ -66,16 +66,16 @@ test('unknown checkout option labels are rejected rather than silently free',()=
 });
 
 
-test('free premium side is restricted to the five new bowls and platters',()=>{
+test('free premium side is restricted to the three bowls and platters that include sides',()=>{
  const premium=['Mozzarella Sticks (6 Pcs)','Onion Rings (8 Pcs)','Halloumi Fries (6 Pcs)','Mini Singara (8 Pcs)','Chilli Cheese Bites (3 Pcs)','Vegetable Samosa (4 Pcs)','Vegetable Spring Roll (4 Pcs)','Veg Bao Buns (2 Pcs)','Prawn Gyoza (3 Pcs)','Chilli Cheese Bites (6 Pcs)','Mac N Cheese Bites (8 Pcs)','Medium Singara (4 Pcs)','Zinger Crisper Strips (6 Pcs)'];
- for(const id of ['BWL001','BWL002','BWL003','BWL004','BWL005']){
+ for(const id of ['BWL002','BWL003','BWL004']){
   for(const value of premium) assert.equal(serverOptionPricePence(id,{label:'Premium Side',value}),0,id+': '+value);
  }
- for(const id of ['PLT008','PLT004','FEA012','BDL008','FEA001','CHK001']){
+ for(const id of ['BWL001','BWL005','PLT008','PLT004','FEA012','BDL008','FEA001','CHK001']){
   assert.equal(serverOptionPricePence(id,{label:'Premium Side',value:premium[0]}),null,id+' must not receive free side');
  }
  assert.equal(serverOptionPricePence('BWL001',{label:'Premium Side',value:'Invented Side'}),null);
- assert.match(index,/\['BWL001', 'BWL002', 'BWL003', 'BWL004', 'BWL005'\]\.includes\(id\)/);
+ assert.match(index,/\['BWL002', 'BWL003', 'BWL004'\]\.includes\(id\)/);
 });
 
 
@@ -83,8 +83,21 @@ test('only new bowls receive free bread upgrades and four-piece cheese sides',()
  for(const id of ['BWL001','BWL004','BWL005'])for(const value of ['Plain Naan','Plain Pitta Bread','Garlic Naan','Peri Peri Pitta Bread'])assert.equal(serverOptionPricePence(id,{label:'Bread Choice',value}),0);
  assert.equal(serverOptionPricePence('FEA001',{label:'Bread Choice',value:'Garlic Naan'}),99);
  assert.equal(serverOptionPricePence('FEA001',{label:'Bread Choice',value:'Peri Peri Pitta Bread'}),49);
- for(const id of ['BWL001','BWL002','BWL003','BWL004','BWL005'])for(const value of ['Chilli Cheese Bites (4 Pcs)','Mac N Cheese Bites (4 Pcs)'])assert.equal(serverOptionPricePence(id,{label:'Premium Side',value}),0);
+ for(const id of ['BWL002','BWL003','BWL004'])for(const value of ['Chilli Cheese Bites (4 Pcs)','Mac N Cheese Bites (4 Pcs)'])assert.equal(serverOptionPricePence(id,{label:'Premium Side',value}),0);
  assert.equal(serverOptionPricePence('PLT008',{label:'Premium Side',value:'Mac N Cheese Bites (4 Pcs)'}),null);
  assert.equal(serverOptionPricePence('PLT008',{label:'Included Dips',value:'1 x Hot Chilli'}),0);
  assert.match(index,/Hot Chilli/);
+});
+
+
+test('five new bowls expose fries seasoning and mixed kebab bread choices are together',()=>{
+ const start=index.indexOf('function openCustomModal(product)');
+ const end=index.indexOf('function renderSelect(',start);
+ const modal=index.slice(start,end);
+ assert.match(modal,/\['BWL001','BWL002','BWL003','BWL004','BWL005'\]\.includes\(id\)\)\s*\{\s*html \+= renderSelect\('Fries Seasoning'/);
+ const first=modal.indexOf('id="sel-bread"');
+ const second=modal.indexOf('id="sel-bread_2"');
+ const dip=modal.indexOf("renderSelect('Included Dip', 'dip_1'");
+ assert.ok(first>=0&&second>first&&dip>second,'Both breads must be adjacent and precede dips');
+ for(const id of ['BWL001','BWL005'])assert.equal(serverOptionPricePence(id,{label:'Premium Side',value:'Mac N Cheese Bites (4 Pcs)'}),null);
 });
