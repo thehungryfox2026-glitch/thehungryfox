@@ -6,6 +6,7 @@
   <title>The Hungry Fox | Sizzling Doner, Chicken & Buldak Noodles | Thurrock, Essex</title>
   <meta name="description" content="Order delicious chicken, wings, tenders, doner, loaded fries and more from The Hungry Fox in Grays, Thurrock. Delivery available. Order direct online.">
   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preload" href="hungry-fox-logo-cream.webp" as="image" type="image/webp">
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   
   <!-- Google Analytics (gtag.js) -->
@@ -47,6 +48,9 @@
       background: #f97316;
       border-radius: 9999px;
     }
+    /* Reserve stable space before the JavaScript-generated menu and navigation render. */
+    #category-nav-bar { min-height: 3rem; }
+    #menu-container { min-height: 36rem; }
     .product-card {
       background: #131b2e;
       border: 1px solid #1e293b;
@@ -94,7 +98,7 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white">
-<div id="hungryfox-closed-banner" role="status" aria-live="polite" style="display:none;position:sticky;top:0;z-index:90;background:#261b17;color:#fff;padding:14px 18px;text-align:center;font-weight:700;border-bottom:2px solid #f97316">🌙 We're Currently Closed — Online ordering reopens at 11:00 AM. You can still browse our menu.</div>
+<div id="hungryfox-closed-banner" role="status" aria-live="polite" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;background:#261b17;color:#fff;padding:14px 18px;text-align:center;font-weight:700;border-bottom:2px solid #f97316">🌙 We're Currently Closed — Online ordering reopens at 11:00 AM. You can still browse our menu.</div>
 
   <!-- Top Announcement Bar -->
   <div class="bg-[#060e20] border-b border-slate-800 text-xs py-2 px-4">
@@ -466,7 +470,7 @@
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
       <div class="md:col-span-2 space-y-3">
         <div class="flex items-center gap-3">
-          <img src="hungry-fox-logo-cream.webp" onerror="this.onerror=null; this.src='hungry-fox-logo-dark.png';" alt="The Hungry Fox" class="h-10 w-auto">
+          <img src="hungry-fox-logo-cream.webp" width="80" height="80" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='hungry-fox-logo-dark.png';" alt="The Hungry Fox" class="h-10 w-auto">
           <span class="font-serif text-xl font-bold text-white tracking-wider">THE HUNGRY FOX</span>
         </div>
         <p class="text-slate-400 text-xs leading-relaxed max-w-sm">
