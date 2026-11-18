@@ -22,8 +22,8 @@ async function checkoutBasket(items){
  const result=await create(req,{STRIPE_SECRET_KEY:'mock'},{});
  return {result,form:calls.at(-1)?.form};
 }
-test('all 103 menu products can create a mocked Stripe checkout session',async()=>{
- assert.equal(ids.length, 103);
+test('all 109 menu products can create a mocked Stripe checkout session',async()=>{
+ assert.equal(ids.length, 109);
  for(const id of ids){
   const {result}=await checkoutBasket([{productId:id,quantity:1,options:[]}]);
   assert.equal(result.status,200,id+': '+JSON.stringify(result.data));
