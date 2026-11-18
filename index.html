@@ -989,7 +989,7 @@
       if (['BWL001', 'BWL004'].includes(id)) html += renderSelect('Sheekh Kebab Type', 'sheekh_type', id === 'BWL001' ? ['Chicken Sheekh', 'Meat Sheekh'] : ['Chicken Sheekh', 'Meat Sheekh', 'Mixed Sheekh']);
       if (id === 'BWL005') html += renderSelect('Doner Type', 'doner_type', DONER_TYPE_OPTIONS);
       if (id === 'BWL004') html += renderSelect('Doner Type', 'doner_type', DONER_TYPE_OPTIONS);
-      if (['BWL002', 'BWL003'].includes(id)) html += renderSelect('Premium Side', 'premium_side', state.products.filter(p=>p.Category==='Premium Sides').map(p=>p.Product_Name));
+      if (['BWL001', 'BWL002', 'BWL003', 'BWL004', 'BWL005'].includes(id)) html += renderSelect('Free Premium Side', 'premium_side', state.products.filter(p=>p.Category==='Premium Sides').map(p=>p.Product_Name));
       if (id === 'RIC002') {
         html += `
           <div class="space-y-1">
