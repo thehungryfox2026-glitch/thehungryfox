@@ -632,15 +632,12 @@
       { name: 'Red Bull', price: 1.00 }
     ];
     const BOTTLED_DRINKS = [
-      'Water',
       'Bottle Coke',
       'Bottle Diet Coke',
       'Bottle Pepsi',
       'Bottle Pepsi Max',
       'Bottle Tango',
-      'Bottle 7UP',
-      'Blackcurrant Fruit Shoot',
-      'Orange Fruit Shoot'
+      'Bottle 7UP'
     ];
 
     const KIDS_DRINKS = ['Water', 'Blackcurrant Fruit Shoot', 'Orange Fruit Shoot'];
@@ -697,8 +694,8 @@
 
       // 5. Sharing Platters
       { Product_ID: 'PLT008', Product_Name: 'Mega Platter', Category: 'Sharing Platters', Price: 46.99, Description: 'Two whole baked chickens (two flavours), 12 baked or fried wings (two flavours), 6 fries (three seasonings, two portions each), 6 dips and 2 bottled drinks.' },
-      { Product_ID: 'PLT009', Product_Name: '40 Wings Platter', Category: 'Sharing Platters', Price: 32.49, Description: 'Forty baked or fried wings with your choice of two flavours. No sides included.' },
-      { Product_ID: 'PLT010', Product_Name: 'Two Whole Chickens Platter', Category: 'Sharing Platters', Price: 21.99, Description: 'Two whole baked chickens, each with its own flavour. No sides included.' },
+      { Product_ID: 'PLT009', Product_Name: '40 Wings', Category: 'Sharing Platters', Price: 32.49, Description: 'Forty baked or fried wings with your choice of two flavours. No sides included.' },
+      { Product_ID: 'PLT010', Product_Name: 'Two Whole Chickens', Category: 'Sharing Platters', Price: 21.99, Description: 'Two whole baked chickens, each with its own flavour. No sides included.' },
       { Product_ID: 'PLT001', Product_Name: '25 Wings', Category: 'Sharing Platters', Price: 20.49, Description: 'Twenty-five wings with your choice of two signature flavors.' },
       { Product_ID: 'PLT002', Product_Name: 'Baked Combo for Family', Category: 'Sharing Platters', Price: 28.49, Description: 'Whole baked chicken, eight baked wings, four portions of fries, and one bottled drink.' },
       { Product_ID: 'PLT003', Product_Name: '25 Tenders', Category: 'Sharing Platters', Price: 26.49, Description: 'Twenty-five tenders with your choice of two signature flavors.' },
@@ -1164,7 +1161,7 @@
       }
 
       if (id === 'PLT008') {
-        for (let i = 1; i <= 6; i++) html += renderSelect('Included Dip ' + i, 'dip_' + i, DIP_OPTIONS);
+        html += '<div class="space-y-2"><label class="block text-xs font-bold text-slate-200 uppercase">Choose Your 6 Dips</label><p id="mega-dip-count" class="text-xs text-slate-300">0 of 6 selected</p><div class="grid grid-cols-2 gap-2">' + DIP_OPTIONS.map((dip, i) => '<label class="flex items-center justify-between gap-2 text-xs text-white"><span>'+esc(dip)+'</span><select class="mega-dip-qty w-14 bg-[#0b1326] border border-slate-700 rounded p-2" data-dip="'+esc(dip)+'" onchange="updateMegaDipCount()">'+Array.from({length:7},(_,n)=>'<option value="'+n+'">'+n+'</option>').join('')+'</select></label>').join('') + '</div></div>';
       }
 
       // 9. Choose drink
@@ -1425,10 +1422,25 @@
       document.getElementById('modal-total-price').textContent = formatGBP(total);
     }
 
+    function updateMegaDipCount() {
+      const total = [...document.querySelectorAll('.mega-dip-qty')].reduce((sum, el) => sum + Number(el.value), 0);
+      const counter = document.getElementById('mega-dip-count');
+      if (counter) { counter.textContent = total + ' of 6 selected'; counter.className = total === 6 ? 'text-xs text-green-400' : 'text-xs text-orange-300'; }
+    }
+
     function confirmAddToCart() {
       if (!state.activeItem) return;
       const p = state.activeItem.product;
       const opts = [];
+      if (p.Product_ID === 'PLT008') {
+        const dips = [...document.querySelectorAll('.mega-dip-qty')];
+        const total = dips.reduce((sum, el) => sum + Number(el.value), 0);
+        if (total !== 6) { alert('Please choose exactly 6 included dips.'); return; }
+        for (const el of dips) {
+          const qty = Number(el.value);
+          if (qty) opts.push({label:'Included Dips',value:qty+' x '+el.dataset.dip,price:0});
+        }
+      }
 
       const fields = [
         { id: 'sel-doner_type', label: 'Doner Type' },
