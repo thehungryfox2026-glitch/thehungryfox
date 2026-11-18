@@ -6,7 +6,8 @@ const menuCode=worker.slice(worker.indexOf('const MENU='),worker.indexOf('};',wo
 const MENU=Function(menuCode+';return MENU')();
 const validator=worker.slice(worker.indexOf('function serverOptionPricePence'),worker.indexOf('function hungryFoxOrderingOpen'));
 const checkout=worker.slice(worker.indexOf('async function create(req,env,o)'),worker.indexOf('async function verify(raw,sig,secret)'));
-const ids=[...index.matchAll(/Product_ID: '([A-Z]{2,4}\d{3})'/g)].map(m=>m[1]);
+const catalogText=index.slice(index.indexOf('const HUNGRY_FOX_PRODUCTS = [')+'const HUNGRY_FOX_PRODUCTS = '.length);
+const ids=Function('return '+catalogText.slice(0,catalogText.indexOf('];')+2))().map(p=>p.Product_ID);
 const calls=[];
 const create=Function('out','quote','hungryFoxOrderingOpen','fetch','splitReceiptOptions','URLSearchParams',
   menuCode+';'+validator+';'+checkout+';return create;')(
