@@ -523,19 +523,19 @@
 
     // Verified Category Sequence Ordering
     const CATEGORY_ORDER = [
-      'Special Featured',
-      'Solo Chicken or Upgrade to Meal',
-      'Signature Doners & Noodles',
-      'Signature Rice',
-      'Ultimate Share Bundles',
-      'Sharing Platters',
-      'Kids Menu',
-      'Fries & Wedges',
-      'Premium Sides',
-      'Breads & Sides',
-      'Desserts',
-      'Drinks'
-    ];
+      "Fox's Bowls & Platters",
+      "Special Featured",
+      "Solo Chicken or Upgrade to Meal",
+      "Signature Doners & Noodles",
+      "Signature Rice",
+      "Ultimate Share Bundles",
+      "Kids Menu",
+      "Fries & Wedges",
+      "Premium Sides",
+      "Breads & Sides",
+      "Desserts",
+      "Drinks"
+];
 
     function getCategoryRank(catName) {
       const idx = CATEGORY_ORDER.indexOf(catName);
@@ -655,10 +655,15 @@
 
     // Complete 99 Products Inventory
     const HUNGRY_FOX_PRODUCTS = [
+      { Product_ID: 'BWL001', Product_Name: "The Sheekh Kebab Bowl", Category: "Fox's Bowls & Platters", Price: 11.99, Description: "Warm bread of your choice topped with grilled Chicken or Meat Sheekh, served with crispy fries, fresh coleslaw and a signature dip." },
+      { Product_ID: 'BWL002', Product_Name: "The Halloumi Bowl", Category: "Fox's Bowls & Platters", Price: 9.99, Description: "Golden pan-fried halloumi slices with crispy fries, fresh coleslaw, one premium side and a signature dip." },
+      { Product_ID: 'BWL003', Product_Name: "The Halloumi Platter", Category: "Fox's Bowls & Platters", Price: 14.99, Description: "Pan-fried halloumi with flavour rice, crispy fries, one premium side, coleslaw and two dips." },
+      { Product_ID: 'BWL004', Product_Name: "The Mixed Kebab Platter", Category: "Fox's Bowls & Platters", Price: 22.99, Description: "Four grilled Sheekh kebabs (chicken, meat or mixed), doner meat, four baked wings and pan-fried halloumi, with flavour rice, fries, two breads, two dips and coleslaw." },
+      { Product_ID: 'BWL005', Product_Name: "The Doner Pita Bowl", Category: "Fox's Bowls & Platters", Price: 11.99, Description: "Bread of your choice topped with Chicken, Meat or Mixed Doner, served with fries, coleslaw and a signature dip." },
       // 1. Special Featured
       { Product_ID: 'FEA004', Product_Name: 'Wings & Fries Combo', Category: 'Special Featured', Price: 6.49, Description: 'Four wings, baked or fried, served with fries, your choice of flavor, and a dip.' },
       { Product_ID: 'FEA007', Product_Name: 'Doner Deluxe Meal', Category: 'Special Featured', Price: 9.49, Description: 'Your choice of doner served with coleslaw or beans and a canned drink.' },
-      { Product_ID: "FEA012", Product_Name: "Doner & Cheese Loaded Fries", Category: "Special Featured", Price: 9.99, Description: "A generous portion of crispy golden fries topped with melted cheese and your choice of Chicken, Lamb, or Mixed Doner meat." },
+      { Product_ID: "FEA012", Product_Name: "Doner & Cheese Loaded Fries", Category: "Fox's Bowls & Platters", Price: 9.99, Description: "A generous portion of crispy golden fries topped with melted cheese and your choice of Chicken, Lamb, or Mixed Doner meat." },
       { Product_ID: 'FEA006', Product_Name: 'Doner Snack Bundle', Category: 'Special Featured', Price: 11.99, Description: 'Your choice of doner with a snack, fries, and a drink.' },
       { Product_ID: 'FEA003', Product_Name: 'Doner Bread Snack Meal', Category: 'Special Featured', Price: 13.49, Description: 'Your choice of chicken, meat, or mixed doner served with bread, a snack, drink, and dip.' },
       { Product_ID: 'FEA010', Product_Name: 'Tenders & Loaded Fries Bundle', Category: 'Special Featured', Price: 11.99, Description: 'Six crispy tenders coated in your choice of flavor, with loaded fries, dip, and canned drink.' },
@@ -684,6 +689,7 @@
       { Product_ID: 'DON003', Product_Name: 'Mixed Doner', Category: 'Signature Doners & Noodles', Price: 8.99, Description: 'Combination of chicken doner and meat doner together.' },
 
       // 4. Signature Rice
+      { Product_ID: 'RIC007', Product_Name: 'Naga Rice', Category: 'Signature Rice', Price: 4.49, Description: 'Aromatic basmati rice seasoned with rich, spicy Naga sauce.' },
       { Product_ID: 'RIC001', Product_Name: 'Flavour Rice', Category: 'Signature Rice', Price: 3.49, Description: 'Savory flavored rice.' },
       { Product_ID: 'RIC002', Product_Name: 'Chicken Rice Bowl', Category: 'Signature Rice', Price: 8.49, Description: 'Signature rice served with your choice of chicken.' },
       { Product_ID: 'RIC003', Product_Name: 'Egg Fried Rice', Category: 'Signature Rice', Price: 4.49, Description: 'Wok-style egg fried rice.' },
@@ -692,17 +698,17 @@
       { Product_ID: 'RIC006', Product_Name: 'Prawn Fried Rice', Category: 'Signature Rice', Price: 5.99, Description: 'Wok-tossed rice with succulent prawns.' },
 
       // 5. Sharing Platters
-      { Product_ID: 'PLT008', Product_Name: 'Mega Platter', Category: 'Sharing Platters', Price: 46.99, Description: 'Two whole baked chickens (two flavours), 12 baked or fried wings (two flavours), 6 fries (three seasonings, two portions each), 6 dips and 2 bottled drinks.' },
-      { Product_ID: 'PLT009', Product_Name: '40 Wings', Category: 'Sharing Platters', Price: 32.49, Description: 'Forty baked or fried wings with your choice of two flavours. No sides included.' },
-      { Product_ID: 'PLT010', Product_Name: 'Two Whole Chickens', Category: 'Sharing Platters', Price: 21.99, Description: 'Two whole baked chickens, each with its own flavour. No sides included.' },
-      { Product_ID: 'PLT001', Product_Name: '25 Wings', Category: 'Sharing Platters', Price: 20.49, Description: 'Twenty-five wings with your choice of two signature flavors.' },
-      { Product_ID: 'PLT002', Product_Name: 'Baked Combo for Family', Category: 'Sharing Platters', Price: 28.49, Description: 'Whole baked chicken, eight baked wings, four portions of fries, and one bottled drink.' },
-      { Product_ID: 'PLT003', Product_Name: '25 Tenders', Category: 'Sharing Platters', Price: 26.49, Description: 'Twenty-five tenders with your choice of two signature flavors.' },
+      { Product_ID: 'PLT008', Product_Name: 'Mega Platter', Category: "Fox's Bowls & Platters", Price: 46.99, Description: 'Two whole baked chickens (two flavours), 12 baked or fried wings (two flavours), 6 fries (three seasonings, two portions each), 6 dips and 2 bottled drinks.' },
+      { Product_ID: 'PLT009', Product_Name: '40 Wings', Category: "Solo Chicken or Upgrade to Meal", Price: 32.49, Description: 'Forty baked or fried wings with your choice of two flavours. No sides included.' },
+      { Product_ID: 'PLT010', Product_Name: 'Two Whole Chickens', Category: "Solo Chicken or Upgrade to Meal", Price: 21.99, Description: 'Two whole baked chickens, each with its own flavour. No sides included.' },
+      { Product_ID: 'PLT001', Product_Name: '25 Wings', Category: "Solo Chicken or Upgrade to Meal", Price: 20.49, Description: 'Twenty-five wings with your choice of two signature flavors.' },
+      { Product_ID: 'PLT002', Product_Name: 'Baked Combo for Family', Category: "Ultimate Share Bundles", Price: 28.49, Description: 'Whole baked chicken, eight baked wings, four portions of fries, and one bottled drink.' },
+      { Product_ID: 'PLT003', Product_Name: '25 Tenders', Category: "Solo Chicken or Upgrade to Meal", Price: 26.49, Description: 'Twenty-five tenders with your choice of two signature flavors.' },
 
-      { Product_ID: "PLT004", Product_Name: "Mac & Cheese Bites Sharebox (20 Pcs)", Category: "Sharing Platters", Price: 14.49, Description: "20 large, crispy golden bites filled with creamy mac and cheese, served hot with your choice of 3 dip sauces. Perfect for sharing!" },
-      { Product_ID: "PLT005", Product_Name: "Chilli Cheese Bites Sharebox (20 Pcs) 🔥", Category: "Sharing Platters", Price: 13.49, Description: "20 spicy, cheesy bites served hot and golden with your choice of 3 dip sauces. A fiery crowd-pleaser built for sharing!" },
-      { Product_ID: "PLT006", Product_Name: "Chicken Nuggets Sharebox (20 Pcs)", Category: "Sharing Platters", Price: 9.49, Description: "20 tender, crispy golden chicken nuggets served hot with your choice of 3 dip sauces. The ultimate shareable classic!" },
-      { Product_ID: "PLT007", Product_Name: "Zinger Crisper Sharebox (15 Pcs)", Category: "Sharing Platters", Price: 11.99, Description: "15 juicy, tender chicken fillet strips in a crispy golden corn breading, served hot with your choice of 3 dip sauces. Great for sharing!" },
+      { Product_ID: "PLT004", Product_Name: "Mac & Cheese Bites Sharebox (20 Pcs)", Category: "Fox's Bowls & Platters", Price: 14.49, Description: "20 large, crispy golden bites filled with creamy mac and cheese, served hot with your choice of 3 dip sauces. Perfect for sharing!" },
+      { Product_ID: "PLT005", Product_Name: "Chilli Cheese Bites Sharebox (20 Pcs) 🔥", Category: "Fox's Bowls & Platters", Price: 13.49, Description: "20 spicy, cheesy bites served hot and golden with your choice of 3 dip sauces. A fiery crowd-pleaser built for sharing!" },
+      { Product_ID: "PLT006", Product_Name: "Chicken Nuggets Sharebox (20 Pcs)", Category: "Fox's Bowls & Platters", Price: 9.49, Description: "20 tender, crispy golden chicken nuggets served hot with your choice of 3 dip sauces. The ultimate shareable classic!" },
+      { Product_ID: "PLT007", Product_Name: "Zinger Crisper Sharebox (15 Pcs)", Category: "Fox's Bowls & Platters", Price: 11.99, Description: "15 juicy, tender chicken fillet strips in a crispy golden corn breading, served hot with your choice of 3 dip sauces. Great for sharing!" },
 
       // 6. Ultimate Share Bundles
       { Product_ID: 'BDL001', Product_Name: '15 Wings Bundle', Category: 'Ultimate Share Bundles', Price: 18.49, Description: 'Fifteen wings, two flavors, two portions of fries, one side, and one bottled drink.' },
@@ -714,7 +720,7 @@
       { Product_ID: 'BND004', Product_Name: 'Baked Combo for 2', Category: 'Ultimate Share Bundles', Price: 18.49, Description: 'Half baked chicken, four baked wings, two portions of fries, and two canned drinks.' },
       { Product_ID: 'BDL007', Product_Name: 'Wings, Tender & Fries Duo', Category: 'Ultimate Share Bundles', Price: 9.99, Description: 'Three wings, three tenders, two portions of fries, and two dips.' },
 
-      { Product_ID: "BDL008", Product_Name: "Doner & Wings Meal", Category: "Ultimate Share Bundles", Price: 11.99, Description: "A generous portion of spiced doner meat served with 4 crispy wings, golden fries, and a can of drink." },
+      { Product_ID: "BDL008", Product_Name: "Doner & Wings Meal", Category: "Fox's Bowls & Platters", Price: 11.99, Description: "A generous portion of spiced doner meat served with 4 crispy wings, golden fries, and a can of drink." },
 
       // 7. Kids Menu
       { Product_ID: 'KID001', Product_Name: 'Kids Chicken Nuggets Meal', Category: 'Kids Menu', Price: 3.99, Description: 'Four chicken nuggets, small fries, and one kids drink.' },
@@ -749,7 +755,7 @@
       { Product_ID: 'SD012', Product_Name: 'Mac N Cheese Bites (8 Pcs)', Category: 'Premium Sides', Price: 5.99, Description: 'Eight delicious mac and cheese bites. Includes 1 free dip.' },
       { Product_ID: 'SD013', Product_Name: 'Medium Singara (4 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Four medium singaras. Includes 1 free dip.' },
 
-      { Product_ID: "SD014", Product_Name: "Zinger Crisper Strips (6 Pcs)", Category: "Premium Sides", Price: 5.49, Description: "6 juicy, tender chicken fillet strips in a crispy golden corn breading, served hot with your choice of dip sauce." },
+      { Product_ID: "SD014", Product_Name: "Zinger Crisper Strips (6 Pcs)", Category: "Fox's Bowls & Platters", Price: 5.49, Description: "6 juicy, tender chicken fillet strips in a crispy golden corn breading, served hot with your choice of dip sauce." },
 
       // 10. Breads & Sides
       { Product_ID: 'BRD001', Product_Name: 'Plain Naan', Category: 'Breads & Sides', Price: 1.29, Description: 'Soft and fluffy plain naan bread.' },
@@ -873,6 +879,7 @@
     }
 
     // Render Menu
+    const MENU_ITEM_ORDER = {"Fox's Bowls & Platters":["BWL001","BWL002","BWL003","BWL004","BWL005","PLT008","PLT004","PLT005","PLT006","BDL008","FEA012","PLT007","SD014"],"Special Featured":["FEA009","FEA003","FEA006","FEA011","FEA001","FEA010","FEA002","FEA007","FEA008","FEA005","FEA004"],"Solo Chicken or Upgrade to Meal":["PLT001","WNG001","PLT003","CHK005","PLT010","PLT009","CHK002","TND001","CHK001","WNG002"],"Signature Doners & Noodles":["NDL001","DON003","DON002","DON001"],"Signature Rice":["RIC002","RIC005","RIC001","RIC003","RIC007","RIC004","RIC006"],"Ultimate Share Bundles":["BDL005","BDL002","BND004","BDL007","BDL001","BDL003","BDL004","BDL006","PLT002"],"Kids Menu":["KID002","KID003","KID001","KID006","KID004","KID005"]};
     function renderMenu() {
       const rawCategories = [...new Set(state.products.map(p => p.Category))];
       const sortedCategories = rawCategories.sort((a, b) => getCategoryRank(a) - getCategoryRank(b));
@@ -886,7 +893,8 @@
       // Menu Section Grid
       const menuContainer = document.getElementById('menu-container');
       menuContainer.innerHTML = sortedCategories.map((cat, idx) => {
-        const items = state.products.filter(p => p.Category === cat);
+        const preferred = MENU_ITEM_ORDER[cat] || [];
+        const items = state.products.filter(p => p.Category === cat).sort((a,b) => { const x=preferred.indexOf(a.Product_ID), y=preferred.indexOf(b.Product_ID); return (x<0?999:x)-(y<0?999:y); });
         return `
           <section id="cat-${idx}" class="space-y-4 pt-4">
             <div class="flex items-center justify-between border-b border-[#2a3859] pb-3">
@@ -917,7 +925,7 @@
     }
 
     function needsModal(productId) {
-      const nonModal = ['RIC001', 'RIC003', 'RIC004', 'RIC005', 'RIC006', 'BRD001', 'BRD002', 'BRD003', 'BRD004', 'BRD007', 'BRD008', 'BRD009', 'SD005'];
+      const nonModal = ['RIC001', 'RIC003', 'RIC004', 'RIC005', 'RIC006', 'RIC007', 'BRD001', 'BRD002', 'BRD003', 'BRD004', 'BRD007', 'BRD008', 'BRD009', 'SD005'];
       if (productId.startsWith('DES') || productId.startsWith('DRK')) return false;
       return !nonModal.includes(productId);
     }
@@ -978,6 +986,10 @@
         html += renderSelect('Doner Spice', 'doner_spice', DONER_SPICE_OPTIONS);
       }
 
+      if (['BWL001', 'BWL004'].includes(id)) html += renderSelect('Sheekh Kebab Type', 'sheekh_type', id === 'BWL001' ? ['Chicken Sheekh', 'Meat Sheekh'] : ['Chicken Sheekh', 'Meat Sheekh', 'Mixed Sheekh']);
+      if (id === 'BWL005') html += renderSelect('Doner Type', 'doner_type', DONER_TYPE_OPTIONS);
+      if (id === 'BWL004') html += renderSelect('Doner Type', 'doner_type', DONER_TYPE_OPTIONS);
+      if (['BWL002', 'BWL003'].includes(id)) html += renderSelect('Premium Side', 'premium_side', state.products.filter(p=>p.Category==='Premium Sides').map(p=>p.Product_Name));
       if (id === 'RIC002') {
         html += `
           <div class="space-y-1">
@@ -1122,7 +1134,7 @@
       }
 
       // 7. Choose bread
-      if (['FEA001', 'FEA002', 'FEA003'].includes(id)) {
+      if (['FEA001', 'FEA002', 'FEA003', 'BWL001', 'BWL004', 'BWL005'].includes(id)) {
         html += `
           <div class="space-y-1">
             <label class="block text-xs font-bold text-slate-200 uppercase">Choose Bread</label>
@@ -1133,6 +1145,8 @@
         `;
       }
 
+      if (['BWL001','BWL002','BWL005'].includes(id)) html += renderSelect('Included Dip', 'dip_1', DIP_OPTIONS);
+      if (['BWL003','BWL004'].includes(id)) { html += renderSelect('Included Dip 1','dip_1',DIP_OPTIONS); html += renderSelect('Included Dip 2','dip_2',DIP_OPTIONS); }
       // 8. Choose dip
       if (['PLT004', 'PLT005', 'PLT006', 'PLT007'].includes(id)) {
         html += renderSelect('Included Dip 1', 'dip_1', DIP_OPTIONS);
@@ -1227,7 +1241,7 @@
       }
 
       // Optional dessert choice for Special Featured, Sharing Platters and Ultimate Share Bundles only.
-      if (['Special Featured', 'Sharing Platters', 'Ultimate Share Bundles'].includes(product.Category)) {
+      if (['Special Featured', "Fox's Bowls & Platters", 'Ultimate Share Bundles'].includes(product.Category)) {
         html += `
           <div class="space-y-1">
             <label class="block text-xs font-bold text-slate-200 uppercase">Got Room For Dessert?</label>
@@ -1443,6 +1457,8 @@
 
       const fields = [
         { id: 'sel-doner_type', label: 'Doner Type' },
+        { id: 'sel-sheekh_type', label: 'Sheekh Kebab Type' },
+        { id: 'sel-premium_side', label: 'Premium Side' },
         { id: 'sel-doner_spice', label: 'Doner Spice' },
         { id: 'rice-portion-select', label: 'Chicken Portion' },
         { id: 'rice-wings-cooking', label: 'Wing Cooking' },

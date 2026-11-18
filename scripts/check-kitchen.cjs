@@ -36,14 +36,15 @@ assert.ok(!html.includes("'FLAVOURS / OPTIONS: '+i.options"), 'Receipt must not 
 assert.ok(html.includes("for(const optionLine of receiptOptions(i.options))"), 'Every recorded option label and value must be printed separately');
 const receiptCatalog = JSON.parse(html.match(/const RECEIPT_MENU_CATEGORIES=(\{[^;]+\});/)[1]);
 const site = fs.readFileSync('index.html', 'utf8');
-const menuItems = [...site.matchAll(/\{\s*Product_ID:\s*'([^']+)',\s*Product_Name:\s*'([^']+)',\s*Category:\s*'([^']+)'/g)];
-assert.equal(menuItems.length, 103, 'Full current website menu must be audited');
+const catalogText=site.slice(site.indexOf('const HUNGRY_FOX_PRODUCTS = [')+'const HUNGRY_FOX_PRODUCTS = '.length);
+const menuItems=Function('return '+catalogText.slice(0,catalogText.indexOf('];')+2))();
+assert.equal(menuItems.length,116,'Full current website menu must be audited');
 for(const item of menuItems){
-  assert.equal(receiptCatalog[item[2]],item[3], 'Receipt category must match website exactly for '+item[2]);
+  assert.equal(receiptCatalog[item.Product_Name],item.Category,'Receipt category must match website exactly for '+item.Product_Name);
 }
 assert.deepEqual([...new Set(Object.values(receiptCatalog))].sort(), [
   'Special Featured','Solo Chicken or Upgrade to Meal','Signature Doners & Noodles','Signature Rice',
-  'Sharing Platters','Ultimate Share Bundles','Kids Menu','Fries & Wedges','Premium Sides',
+  "Fox's Bowls & Platters",'Ultimate Share Bundles','Kids Menu','Fries & Wedges','Premium Sides',
   'Breads & Sides','Desserts','Drinks'
 ].sort(), 'Receipt must use exactly the twelve website menu categories');
 assert.ok(html.includes('@page{size:58mm auto'), 'Receipt must target 58mm thermal paper');

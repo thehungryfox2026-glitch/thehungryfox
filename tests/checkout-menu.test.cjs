@@ -8,7 +8,9 @@ const worker = fs.readFileSync(path.join(__dirname,'../worker.js'),'utf8');
 const menuMatch = worker.match(/const MENU=([\s\S]*?);/);
 assert.ok(menuMatch,'Backend MENU must exist');
 const MENU = Function('return '+menuMatch[1])();
-const products = [...index.matchAll(/\{\s*Product_ID: '([A-Z]{2,4}\d{3})', Product_Name: '([^']+)', Category: '([^']+)', Price: ([\d.]+)/g)];
+const catalogText = index.slice(index.indexOf('const HUNGRY_FOX_PRODUCTS = [') + 'const HUNGRY_FOX_PRODUCTS = '.length);
+const catalog = Function('return '+catalogText.slice(0,catalogText.indexOf('];')+2))();
+const products = catalog.map(p=>[null,p.Product_ID,p.Product_Name,p.Category,String(p.Price)]);
 const priceFunction = worker.slice(worker.indexOf('function serverOptionPricePence'),worker.indexOf('function hungryFoxOrderingOpen'));
 assert.ok(priceFunction.startsWith('function serverOptionPricePence'));
 const serverOptionPricePence = Function('MENU',priceFunction+';return serverOptionPricePence')(MENU);
@@ -19,7 +21,7 @@ function array(name){
 }
 test('all menu products exist with exactly matching names and prices',()=>{
  assert.ok(products.length >= 100, 'unexpected loss of customer-facing menu products');
- assert.equal(Object.keys(MENU).length, products.length + 7, 'unexpected change to backend-only menu entries');
+ assert.equal(Object.keys(MENU).length, products.length, 'unexpected change to backend-only menu entries');
  const seen=new Set();
  for(const [,id,name,,price] of products){
   assert.ok(!seen.has(id),'duplicate '+id);seen.add(id);
