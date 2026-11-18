@@ -64,3 +64,16 @@ test('unknown checkout option labels are rejected rather than silently free',()=
  assert.equal(serverOptionPricePence('CHK001',{label:'Seasoning 1',value:'Regular Salt'}),0);
  assert.equal(serverOptionPricePence('CHK001',{label:'Meal Bottled Drink',value:'Bottle Coke'}),0);
 });
+
+
+test('free premium side is restricted to the five new bowls and platters',()=>{
+ const premium=['Mozzarella Sticks (6 Pcs)','Onion Rings (8 Pcs)','Halloumi Fries (6 Pcs)','Mini Singara (8 Pcs)','Chilli Cheese Bites (3 Pcs)','Vegetable Samosa (4 Pcs)','Vegetable Spring Roll (4 Pcs)','Veg Bao Buns (2 Pcs)','Prawn Gyoza (3 Pcs)','Chilli Cheese Bites (6 Pcs)','Mac N Cheese Bites (8 Pcs)','Medium Singara (4 Pcs)','Zinger Crisper Strips (6 Pcs)'];
+ for(const id of ['BWL001','BWL002','BWL003','BWL004','BWL005']){
+  for(const value of premium) assert.equal(serverOptionPricePence(id,{label:'Premium Side',value}),0,id+': '+value);
+ }
+ for(const id of ['PLT008','PLT004','FEA012','BDL008','FEA001','CHK001']){
+  assert.equal(serverOptionPricePence(id,{label:'Premium Side',value:premium[0]}),null,id+' must not receive free side');
+ }
+ assert.equal(serverOptionPricePence('BWL001',{label:'Premium Side',value:'Invented Side'}),null);
+ assert.match(index,/\['BWL001', 'BWL002', 'BWL003', 'BWL004', 'BWL005'\]\.includes\(id\)/);
+});
