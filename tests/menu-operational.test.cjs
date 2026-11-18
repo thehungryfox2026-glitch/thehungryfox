@@ -10,13 +10,13 @@ function constant(name){
  assert.ok(match,'Missing menu constant: '+name);
  return Function('return ('+match[1]+')')();
 }
-const products=[...html.matchAll(/\{\s*Product_ID: '([A-Z]{2,4}\d{3})', Product_Name: '([^']+)', Category: '([^']+)', Price: ([\d.]+)/g)]
- .map(m=>({id:m[1],name:m[2],category:m[3],price:Number(m[4])}));
+const catalogText=html.slice(html.indexOf('const HUNGRY_FOX_PRODUCTS = [')+'const HUNGRY_FOX_PRODUCTS = '.length);
+const products=Function('return '+catalogText.slice(0,catalogText.indexOf('];')+2))().map(p=>({id:p.Product_ID,name:p.Product_Name,category:p.Category,price:p.Price}));
 test('every product belongs to one of the twelve visible menu categories',()=>{
  const categories=constant('CATEGORY_ORDER');
  assert.equal(categories.length,12);
  assert.equal(new Set(categories).size,12);
- assert.equal(products.length, 103);
+ assert.equal(products.length, 109);
  for(const p of products){
   assert.ok(categories.includes(p.category),p.id+' unknown category '+p.category);
   assert.ok(Number.isFinite(p.price)&&p.price>=0,p.id+' invalid price');
