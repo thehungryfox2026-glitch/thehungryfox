@@ -990,7 +990,7 @@
       if (['BWL001', 'BWL004'].includes(id)) html += renderSelect('Sheekh Kebab Type', 'sheekh_type', id === 'BWL001' ? ['Chicken Sheekh', 'Meat Sheekh'] : ['Chicken Sheekh', 'Meat Sheekh', 'Mixed Sheekh']);
       if (id === 'BWL005') html += renderSelect('Doner Type', 'doner_type', DONER_TYPE_OPTIONS);
       if (id === 'BWL004') html += renderSelect('Doner Type', 'doner_type', DONER_TYPE_OPTIONS);
-      if (['BWL001', 'BWL002', 'BWL003', 'BWL004', 'BWL005'].includes(id)) html += renderSelect('Free Premium Side', 'premium_side', state.products.filter(p=>p.Category==='Premium Sides').map(p=>p.Product_Name).filter(name=>!['Chilli Cheese Bites (3 Pcs)','Chilli Cheese Bites (6 Pcs)','Mac N Cheese Bites (8 Pcs)'].includes(name)).concat(['Chilli Cheese Bites (4 Pcs)','Mac N Cheese Bites (4 Pcs)']));
+      if (['BWL002', 'BWL003', 'BWL004'].includes(id)) html += renderSelect('Free Premium Side', 'premium_side', state.products.filter(p=>p.Category==='Premium Sides').map(p=>p.Product_Name).filter(name=>!['Chilli Cheese Bites (3 Pcs)','Chilli Cheese Bites (6 Pcs)','Mac N Cheese Bites (8 Pcs)'].includes(name)).concat(['Chilli Cheese Bites (4 Pcs)','Mac N Cheese Bites (4 Pcs)']));
       if (id === 'RIC002') {
         html += `
           <div class="space-y-1">
@@ -1147,11 +1147,15 @@
         `;
       }
 
-      if (['BWL001','BWL002','BWL005'].includes(id)) html += renderSelect('Included Dip', 'dip_1', DIP_OPTIONS);
-      if (['BWL003','BWL004'].includes(id)) { html += renderSelect('Included Dip 1','dip_1',DIP_OPTIONS); html += renderSelect('Included Dip 2','dip_2',DIP_OPTIONS); }
       if (id === 'BWL004') {
         html += '<div class="space-y-1"><label class="block text-xs font-bold text-slate-200 uppercase">Choose Second Bread</label><select id="sel-bread_2" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">' + selectedBreadOptions.map(b => '<option value="'+b.name+'" data-price="'+b.price+'">'+b.name+(b.price>0?' (+'+formatGBP(b.price)+')':' (Free)')+'</option>').join('') + '</select></div>';
       }
+
+      if (['BWL001','BWL002','BWL003','BWL004','BWL005'].includes(id)) {
+        html += renderSelect('Fries Seasoning', 'seasoning_1', SEASONING_OPTIONS);
+      }
+      if (['BWL001','BWL002','BWL005'].includes(id)) html += renderSelect('Included Dip', 'dip_1', DIP_OPTIONS);
+      if (['BWL003','BWL004'].includes(id)) { html += renderSelect('Included Dip 1','dip_1',DIP_OPTIONS); html += renderSelect('Included Dip 2','dip_2',DIP_OPTIONS); }
       // 8. Choose dip
       if (['PLT004', 'PLT005', 'PLT006', 'PLT007'].includes(id)) {
         html += renderSelect('Included Dip 1', 'dip_1', DIP_OPTIONS);
