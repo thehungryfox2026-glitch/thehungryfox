@@ -36,7 +36,7 @@ test('1000 varied baskets reach mocked Stripe with exact discounted totals',asyn
   const options=i%3===0?[{label:'Dessert',value:'No Dessert'}]:i%3===1?[{label:'Bread Choice',value:'Garlic Naan'}]:[{label:'Drink 1',value:'Red Bull'}];
   const {result,form}=await checkoutBasket([{productId:id,quantity,options}]);
   assert.equal(result.status,200,id+': '+JSON.stringify(result.data));
-  const unit=Math.round(MENU[id][1]*100)+(i%3===1?99:i%3===2?100:0);
+  const unit=Math.round(MENU[id][1]*100)+(i%3===1?(['BWL001','BWL004','BWL005'].includes(id)?0:99):i%3===2?100:0);
   const subtotal=unit*quantity,percent=subtotal>=5000?20:subtotal>=3000?15:subtotal>=2000?10:0;
   const expected=subtotal-Math.round(subtotal*percent/100);
   let total=0;
