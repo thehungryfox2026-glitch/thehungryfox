@@ -22,12 +22,12 @@ test('every product belongs to one of the twelve visible menu categories',()=>{
   assert.ok(Number.isFinite(p.price)&&p.price>=0,p.id+' invalid price');
  }
 });
-test('all fourteen customer-facing chicken flavours are present once and Plain is first',()=>{
+test('all twelve customer-facing chicken flavours are present once and Plain is first',()=>{
  const flavours=constant('CHICKEN_FLAVOURS');
- assert.equal(flavours.length,14);
- assert.equal(new Set(flavours).size,14);
+ assert.equal(flavours.length,12);
+ assert.equal(new Set(flavours).size,12);
  assert.equal(flavours[0],'Plain');
- for(const flavour of ['Garlic Parmesan','Sticky BBQ','Peri Peri','Buffalo','Honey Sriracha','Smoky Cajun','Spicy Algerian','Mango Habanero','Naga','Volcano','Spicy BBQ','Hot Hot','Seoul Fire']){
+ for(const flavour of ['Garlic Parmesan','Sticky BBQ','Peri Peri','Buffalo','Honey Sriracha','Smoky Cajun','Spicy Algerian','Mango Habanero','Naga','Volcano','Spicy BBQ']){
   assert.equal(flavours.filter(x=>x.split(' (')[0].includes(flavour)).length,1,flavour);
  }
 });
