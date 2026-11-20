@@ -851,6 +851,21 @@
         contains.forEach(x => traces.delete(x));
         return {contains:[...contains],traces:[...traces]};
       };
+      const inheritedBaseProfiles = { PLT009: 'WNG001', PLT010: 'CHK005' };
+      // Guaranteed included components only; optional choices are not assumed.
+      const componentProfiles = {
+        FEA001:['CHK002','FRS001'], FEA002:['CHK001','FRS001'],
+        FEA004:['FRS001'], FEA005:['CHK001','WNG001','FRS001'],
+        FEA008:['NDL001'], FEA009:['FRS001'], FEA010:['TND001','FRS001'],
+        FEA011:['CHK001','FRS001'], PLT002:['CHK005','WNG001','FRS001'],
+        PLT003:['TND001'], BDL001:['FRS001'], BDL002:['FRS001'],
+        BDL003:['TND001','FRS001'], BDL004:['TND001','FRS001'],
+        BDL005:['FRS001'], BDL006:['TND001','FRS001'],
+        BDL007:['TND001','FRS001'], BND004:['CHK002','WNG001','FRS001'],
+        KID006:['FRS001'], FRS003:['FRS001'], FRS004:['FRS001','FRS008'],
+        FRS006:['FRS002'], FRS007:['FRS002','FRS008']
+      };
+      const seasoningChoices = ['No Salt','Regular Salt','Chaat Masala Chilli Salt','Cajun Dust','Peri Peri'];
       const flavourChoice = new Set(['FEA001','FEA002','FEA004','FEA005','FEA009','FEA010','FEA011','CHK001','CHK002','WNG001','WNG002','TND001','CHK005','PLT001','PLT002','PLT003','BDL001','BDL002','BDL003','BDL004','BDL005','BDL006','BDL007','BND004','KID006','RIC002']);
       const variable = new Set(['FEA001','FEA002','FEA003','FEA004','FEA005','FEA006','FEA007','FEA008','FEA009','FEA010','FEA011','PLT001','PLT002','PLT003','BDL001','BDL002','BDL003','BDL004','BDL005','BDL006','BDL007','BND004','RIC002','FRS003','FRS004','FRS006','FRS007','BRD005','BRD006','KID006','KID005']);
       const notes = {
@@ -862,25 +877,27 @@
       };
       body.innerHTML = HUNGRY_FOX_PRODUCTS.map(product => {
         const id = product.Product_ID;
-        const base = latestProfiles[id] !== undefined ? split(latestProfiles[id]) : ingredientProfiles[id] !== undefined ? split(ingredientProfiles[id]) : (drink(id) ? split('|') : null);
-        const isVariable = latestProfiles[id] !== undefined ? false : variable.has(id) || flavourChoice.has(id) || id.startsWith('DON') || id.startsWith('FRS') && !['FRS001','FRS002','FRS005','FRS008','FRS009'].includes(id);
-        const profile = base || {contains:[],traces:[]};
+        const inheritedId = inheritedBaseProfiles[id] || id;
+        const base = latestProfiles[id] !== undefined ? split(latestProfiles[id]) : ingredientProfiles[inheritedId] !== undefined ? split(ingredientProfiles[inheritedId]) : (drink(id) ? split('|') : null);
+        const isVariable = latestProfiles[id] !== undefined ? false : !!inheritedBaseProfiles[id] || variable.has(id) || flavourChoice.has(id) || id.startsWith('DON') || id.startsWith('FRS') && !['FRS001','FRS002','FRS005','FRS008','FRS009'].includes(id);
+        const profile = merge(base, ...(componentProfiles[id] || []).map(componentId => split(latestProfiles[componentId] !== undefined ? latestProfiles[componentId] : (ingredientProfiles[componentId] || '|'))));
         const notesForItem = [];
         if (latestProfiles[id] !== undefined) notesForItem.push('Latest restaurant-supplied declaration; optional breads, dips, flavours, toppings and sides may change the finished dish. Check selected options before ordering with an allergy.');
         else if (notes[id]) notesForItem.push(notes[id]);
-        if (latestProfiles[id] === undefined && flavourChoice.has(id)) notesForItem.push('Chicken flavour affects allergens. Flavours: '+Object.entries(flavourProfiles).map(([name,code]) => { const p=split(code); return name+' (contains: '+(p.contains.join(', ')||'none declared')+'; may contain: '+(p.traces.join(', ')||'none declared')+')'; }).join('; ')+'.');
+        if (latestProfiles[id] === undefined && (flavourChoice.has(id) || !!inheritedBaseProfiles[id])) notesForItem.push('Chicken flavour affects allergens. Flavours: '+Object.entries(flavourProfiles).map(([name,code]) => { const p=split(code); return name+' (contains: '+(p.contains.join(', ')||'none declared')+'; may contain: '+(p.traces.join(', ')||'none declared')+')'; }).join('; ')+'.');
         if (latestProfiles[id] === undefined && (id.startsWith('DON') || ['FEA003','FEA006','FEA007'].includes(id))) notesForItem.push('Selected doner meat, naan/pitta and dip must all be checked together.');
         if (latestProfiles[id] === undefined && id.startsWith('FRS') && !['FRS001','FRS002','FRS005'].includes(id)) notesForItem.push('Loaded toppings, chicken, cheese, sauces and chosen fries/wedges can change the allergen profile.');
         if (id.startsWith('KID')) notesForItem.push('Kids meal also includes fries and selected sealed drink.');
         if (latestProfiles[id] === undefined && (id.startsWith('BDL') || id.startsWith('PLT') || id.startsWith('FEA') || id.startsWith('BND'))) notesForItem.push('Sides, dips, drinks and selected chicken/bread must be considered for the complete meal.');
         if (id === 'BRD005' || id === 'BRD006') notesForItem.push('Dip options: '+Object.entries(dipProfiles).map(([name,code])=>{const p=split(code);return name+' (contains '+(p.contains.join(', ')||'none declared')+'; may contain '+(p.traces.join(', ')||'none declared')+')';}).join('; ')+'.');
         if (!base && !isVariable) notesForItem.push('Ingredient profile not supplied for this standalone item; contact restaurant before ordering with an allergy.');
+        if (isVariable && (id.startsWith('FRS') || id.startsWith('FEA') || id.startsWith('BDL') || id.startsWith('PLT') || id.startsWith('BND') || id.startsWith('KID'))) notesForItem.push('Fries/wedges seasoning options: '+seasoningChoices.join(', ')+'. Selected seasoning must be checked for its own allergen declaration.');
         if (isVariable) notesForItem.push('VARIES BY SELECTION: table shows only the identified base ingredients, not every possible finished combination. Please contact us before ordering with an allergy.');
         else notesForItem.push('Ingredient declaration only; shared-kitchen cross-contact warning applies.');
         return `<tr><td class="sticky left-0 bg-[#131b2e] py-2.5 px-3 font-semibold text-white">${esc(product.Product_Name)}</td>
           ${allergens.map(name => {
-            const status = profile.contains.includes(name) ? 'Contains' : profile.traces.includes(name) ? 'May contain' : isVariable ? 'Varies by selection' : base ? 'Not listed in ingredients' : 'Not confirmed';
-            const colour = status === 'Contains' ? 'text-rose-300' : status === 'May contain' || status === 'Varies by selection' ? 'text-amber-300' : 'text-slate-400';
+            const status = profile.contains.includes(name) ? 'Contains' : profile.traces.includes(name) || isVariable || (!base && !(componentProfiles[id] || []).length) ? 'May contain' : 'Does not contain';
+            const colour = status === 'Contains' ? 'text-rose-300' : status === 'May contain' ? 'text-amber-300' : 'text-slate-400';
             return `<td class="py-2.5 px-2 ${colour} font-semibold">${status}</td>`;
           }).join('')}
           <td class="py-2.5 px-3 text-slate-300 min-w-[280px]">${esc(notesForItem.join(' '))}</td></tr>`;
