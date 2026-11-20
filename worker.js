@@ -66,7 +66,7 @@ if(b.rewardId){
  if(!rewardItem){await env.LOYALTY_DB.prepare("DELETE FROM loyalty_reward_reservations WHERE reward_id=?").bind(reward.id).run();return out({error:"This reward is not configured for checkout."},400,o);}
  rows.push({name:rewardItem,description:"Fox Rewards redemption",unit:0,quantity:1});
 }
-const websiteDiscountPercent=reward?0:(subtotal>=5000?20:(subtotal>=3000?15:(subtotal>=2000?10:0)));const websiteDiscountPence=Math.round(subtotal*websiteDiscountPercent/100);
+const websiteDiscountPercent=reward?0:(subtotal>=3000?25:(subtotal>=2000?20:0));const websiteDiscountPence=Math.round(subtotal*websiteDiscountPercent/100);
 // Apply the website offer to food prices without creating Stripe coupons.
 if(websiteDiscountPence>0){
  let remaining=websiteDiscountPence,remainingFood=subtotal;
