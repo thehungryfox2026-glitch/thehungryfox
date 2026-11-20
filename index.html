@@ -896,7 +896,7 @@
         else notesForItem.push('Ingredient declaration only; shared-kitchen cross-contact warning applies.');
         return `<tr><td class="sticky left-0 bg-[#131b2e] py-2.5 px-3 font-semibold text-white">${esc(product.Product_Name)}</td>
           ${allergens.map(name => {
-            const status = profile.contains.includes(name) ? 'Contains' : profile.traces.includes(name) || isVariable || (!base && !(componentProfiles[id] || []).length) ? 'May contain' : 'Does not contain';
+            const status = profile.contains.includes(name) ? 'Contains' : profile.traces.includes(name) ? 'May contain' : (!base && !(componentProfiles[id] || []).length) ? 'Not confirmed' : 'Does not contain';
             const colour = status === 'Contains' ? 'text-rose-300' : status === 'May contain' ? 'text-amber-300' : 'text-slate-400';
             return `<td class="py-2.5 px-2 ${colour} font-semibold">${status}</td>`;
           }).join('')}
