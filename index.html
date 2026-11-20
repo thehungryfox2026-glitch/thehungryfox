@@ -851,6 +851,7 @@
         contains.forEach(x => traces.delete(x));
         return {contains:[...contains],traces:[...traces]};
       };
+      const inheritedBaseProfiles = { PLT009: 'WNG001', PLT010: 'CHK005' };
       const flavourChoice = new Set(['FEA001','FEA002','FEA004','FEA005','FEA009','FEA010','FEA011','CHK001','CHK002','WNG001','WNG002','TND001','CHK005','PLT001','PLT002','PLT003','BDL001','BDL002','BDL003','BDL004','BDL005','BDL006','BDL007','BND004','KID006','RIC002']);
       const variable = new Set(['FEA001','FEA002','FEA003','FEA004','FEA005','FEA006','FEA007','FEA008','FEA009','FEA010','FEA011','PLT001','PLT002','PLT003','BDL001','BDL002','BDL003','BDL004','BDL005','BDL006','BDL007','BND004','RIC002','FRS003','FRS004','FRS006','FRS007','BRD005','BRD006','KID006','KID005']);
       const notes = {
@@ -862,13 +863,14 @@
       };
       body.innerHTML = HUNGRY_FOX_PRODUCTS.map(product => {
         const id = product.Product_ID;
-        const base = latestProfiles[id] !== undefined ? split(latestProfiles[id]) : ingredientProfiles[id] !== undefined ? split(ingredientProfiles[id]) : (drink(id) ? split('|') : null);
-        const isVariable = latestProfiles[id] !== undefined ? false : variable.has(id) || flavourChoice.has(id) || id.startsWith('DON') || id.startsWith('FRS') && !['FRS001','FRS002','FRS005','FRS008','FRS009'].includes(id);
+        const inheritedId = inheritedBaseProfiles[id] || id;
+        const base = latestProfiles[id] !== undefined ? split(latestProfiles[id]) : ingredientProfiles[inheritedId] !== undefined ? split(ingredientProfiles[inheritedId]) : (drink(id) ? split('|') : null);
+        const isVariable = latestProfiles[id] !== undefined ? false : !!inheritedBaseProfiles[id] || variable.has(id) || flavourChoice.has(id) || id.startsWith('DON') || id.startsWith('FRS') && !['FRS001','FRS002','FRS005','FRS008','FRS009'].includes(id);
         const profile = base || {contains:[],traces:[]};
         const notesForItem = [];
         if (latestProfiles[id] !== undefined) notesForItem.push('Latest restaurant-supplied declaration; optional breads, dips, flavours, toppings and sides may change the finished dish. Check selected options before ordering with an allergy.');
         else if (notes[id]) notesForItem.push(notes[id]);
-        if (latestProfiles[id] === undefined && flavourChoice.has(id)) notesForItem.push('Chicken flavour affects allergens. Flavours: '+Object.entries(flavourProfiles).map(([name,code]) => { const p=split(code); return name+' (contains: '+(p.contains.join(', ')||'none declared')+'; may contain: '+(p.traces.join(', ')||'none declared')+')'; }).join('; ')+'.');
+        if (latestProfiles[id] === undefined && (flavourChoice.has(id) || !!inheritedBaseProfiles[id])) notesForItem.push('Chicken flavour affects allergens. Flavours: '+Object.entries(flavourProfiles).map(([name,code]) => { const p=split(code); return name+' (contains: '+(p.contains.join(', ')||'none declared')+'; may contain: '+(p.traces.join(', ')||'none declared')+')'; }).join('; ')+'.');
         if (latestProfiles[id] === undefined && (id.startsWith('DON') || ['FEA003','FEA006','FEA007'].includes(id))) notesForItem.push('Selected doner meat, naan/pitta and dip must all be checked together.');
         if (latestProfiles[id] === undefined && id.startsWith('FRS') && !['FRS001','FRS002','FRS005'].includes(id)) notesForItem.push('Loaded toppings, chicken, cheese, sauces and chosen fries/wedges can change the allergen profile.');
         if (id.startsWith('KID')) notesForItem.push('Kids meal also includes fries and selected sealed drink.');
