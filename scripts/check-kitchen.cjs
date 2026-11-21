@@ -49,7 +49,7 @@ assert.deepEqual([...new Set(Object.values(receiptCatalog))].sort(), [
 ].sort(), 'Receipt must use exactly the twelve website menu categories');
 assert.ok(html.includes('@page{size:58mm auto'), 'Receipt must target 58mm thermal paper');
 assert.ok(html.includes('id="sound-enabled"'), 'Kitchen dashboard must include a sound-alert toggle');
-assert.ok(html.includes('id="test-sound"'), 'Kitchen dashboard must include a test-sound control');
+assert.ok(html.includes('id="arm-sound"'), 'Kitchen dashboard must include the current activate-order-alarm control');
 assert.ok(html.includes('function playOrderAlert()'), 'New-order sound alert function must exist');
 assert.ok(html.includes("osc.type='square'"), 'Kitchen order alert must use a sharper, more audible alarm tone');
 assert.ok(html.includes('exponentialRampToValueAtTime(0.62'), 'Kitchen order alert volume envelope must be substantially louder');
