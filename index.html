@@ -521,20 +521,7 @@
     document.addEventListener('DOMContentLoaded',refreshOrderingHours);
 
     // Verified Category Sequence Ordering
-    const CATEGORY_ORDER = [
-      "Fox's Bowls & Platters",
-      "Special Featured",
-      "Solo Chicken or Upgrade to Meal",
-      "Signature Doners & Noodles",
-      "Signature Rice",
-      "Ultimate Share Bundles",
-      "Kids Menu",
-      "Fries & Wedges",
-      "Premium Sides",
-      "Breads & Sides",
-      "Desserts",
-      "Drinks"
-];
+    const CATEGORY_ORDER = ["🔥 MEAL COMBOS & BOXES","🍗 CHICKEN & DONERS","💥 SHARE BUNDLES & PLATTERS","🥙 BOWLS, NOODLES & RICE","🍟 FRIES & LOADED FRIES","🥟 SNACKS, SIDES & DIPS","🧒 KIDS MENU","🍡 DESSERTS","🥤 DRINKS"];
 
     function getCategoryRank(catName) {
       const idx = CATEGORY_ORDER.indexOf(catName);
@@ -666,58 +653,58 @@
       { Product_ID: "FEA012", Product_Name: "Doner & Cheese Loaded Fries", Category: "Fox's Bowls & Platters", Price: 9.99, Description: "A generous portion of crispy golden fries topped with melted cheese and your choice of Chicken, Lamb, or Mixed Doner meat." },
       { Product_ID: 'FEA006', Product_Name: 'Doner Snack Bundle', Category: 'Special Featured', Price: 11.99, Description: 'Your choice of doner with a snack, fries, and a drink.' },
       { Product_ID: 'FEA003', Product_Name: 'Doner Bread Snack Meal', Category: 'Special Featured', Price: 13.49, Description: 'Your choice of chicken, meat, or mixed doner served with bread, a snack, drink, and dip.' },
-      { Product_ID: 'FEA010', Product_Name: 'Tenders & Loaded Fries Bundle', Category: 'Special Featured', Price: 11.99, Description: 'Six crispy tenders coated in your choice of flavor, with loaded fries, dip, and canned drink.' },
-      { Product_ID: 'FEA009', Product_Name: 'Wings & Loaded Fries Bundle', Category: 'Special Featured', Price: 11.99, Description: 'Eight wings, baked or fried, with your choice of flavor, loaded fries, dip, and canned drink.' },
+      { Product_ID: 'FEA010', Product_Name: "Tenders & Loaded Fries Bundle 🔥", Category: 'Special Featured', Price: 11.99, Description: 'Six crispy tenders coated in your choice of flavor, with loaded fries, dip, and canned drink.' },
+      { Product_ID: 'FEA009', Product_Name: "Wings & Loaded Fries Bundle 🔥", Category: 'Special Featured', Price: 11.99, Description: 'Eight wings, baked or fried, with your choice of flavor, loaded fries, dip, and canned drink.' },
       { Product_ID: 'FEA008', Product_Name: 'Buldak & Snack Combo', Category: 'Special Featured', Price: 9.99, Description: 'Spicy Buldak Fire Noodles served with your choice of snack, dip, and drink.' },
       { Product_ID: 'FEA002', Product_Name: 'Quarter Chicken & Sides', Category: 'Special Featured', Price: 9.49, Description: 'A quarter baked chicken, coated in your choice of flavor and served with fries and your choice of naan or pitta bread.' },
-      { Product_ID: 'FEA011', Product_Name: 'Quarter Chicken Loaded Fries Bundle', Category: 'Special Featured', Price: 9.99, Description: 'Quarter baked chicken coated in your choice of flavor, served with loaded fries, dip, and canned drink.' },
+      { Product_ID: 'FEA011', Product_Name: "Quarter Chicken Loaded Fries Bundle 🔥", Category: 'Special Featured', Price: 9.99, Description: 'Quarter baked chicken coated in your choice of flavor, served with loaded fries, dip, and canned drink.' },
       { Product_ID: 'FEA001', Product_Name: 'Half Chicken & Sides', Category: 'Special Featured', Price: 11.99, Description: 'A generous half baked chicken, coated in your choice of flavor and served with fries and your choice of naan or pitta bread.' },
-      { Product_ID: 'FEA005', Product_Name: 'Baked Combo for 1', Category: 'Special Featured', Price: 10.99, Description: 'Quarter baked chicken, two baked wings, seasoned fries, and a canned drink.' },
+      { Product_ID: 'FEA005', Product_Name: "Baked Combo for 1 🔥", Category: 'Special Featured', Price: 10.99, Description: 'Quarter baked chicken, two baked wings, seasoned fries, and a canned drink.' },
 
       // 2. Solo Chicken or Upgrade to Meal
-      { Product_ID: 'CHK001', Product_Name: 'Quarter Baked Chicken', Category: 'Solo Chicken or Upgrade to Meal', Price: 5.49, Description: 'Quarter oven-baked chicken coated in your choice of signature flavor.' },
-      { Product_ID: 'CHK002', Product_Name: 'Half Baked Chicken', Category: 'Solo Chicken or Upgrade to Meal', Price: 8.49, Description: 'Half oven-baked chicken coated in your choice of signature flavor.' },
-      { Product_ID: 'WNG001', Product_Name: 'Baked Wings (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 6.99, Description: 'Six oven-baked wings coated in your choice of flavor.' },
-      { Product_ID: 'WNG002', Product_Name: 'Fried Wings (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 6.49, Description: 'Six crispy-coated fried wings coated in your choice of flavor.' },
-      { Product_ID: 'TND001', Product_Name: 'Tenders (6 Pcs)', Category: 'Solo Chicken or Upgrade to Meal', Price: 7.99, Description: 'Six crispy-coated chicken breast tenders coated in your choice of flavor.' },
-      { Product_ID: 'CHK005', Product_Name: 'Whole Baked Chicken', Category: 'Solo Chicken or Upgrade to Meal', Price: 11.99, Description: 'Whole oven-baked chicken coated in your choice of signature flavor.' },
+      { Product_ID: 'CHK001', Product_Name: "Quarter Baked Chicken 🔥", Category: 'Solo Chicken or Upgrade to Meal', Price: 5.49, Description: 'Quarter oven-baked chicken coated in your choice of signature flavor.' },
+      { Product_ID: 'CHK002', Product_Name: "Half Baked Chicken 🔥", Category: 'Solo Chicken or Upgrade to Meal', Price: 8.49, Description: 'Half oven-baked chicken coated in your choice of signature flavor.' },
+      { Product_ID: 'WNG001', Product_Name: "Baked Wings (6 Pcs) 🔥", Category: 'Solo Chicken or Upgrade to Meal', Price: 6.99, Description: 'Six oven-baked wings coated in your choice of flavor.' },
+      { Product_ID: 'WNG002', Product_Name: "Fried Wings (6 Pcs) 🔥", Category: 'Solo Chicken or Upgrade to Meal', Price: 6.49, Description: 'Six crispy-coated fried wings coated in your choice of flavor.' },
+      { Product_ID: 'TND001', Product_Name: "Tenders (6 Pcs) 🔥", Category: 'Solo Chicken or Upgrade to Meal', Price: 7.99, Description: 'Six crispy-coated chicken breast tenders coated in your choice of flavor.' },
+      { Product_ID: 'CHK005', Product_Name: "Whole Baked Chicken 🔥", Category: 'Solo Chicken or Upgrade to Meal', Price: 11.99, Description: 'Whole oven-baked chicken coated in your choice of signature flavor.' },
 
       // 3. Signature Doners & Noodles
-      { Product_ID: 'NDL001', Product_Name: 'Buldak Fire Noodles (HOT)', Category: 'Signature Doners & Noodles', Price: 7.49, Description: 'A portion of spicy Buldak Fire Noodles, made for those who enjoy a fiery kick.' },
+      { Product_ID: 'NDL001', Product_Name: "Buldak Fire Noodles (HOT)🔥", Category: 'Signature Doners & Noodles', Price: 7.49, Description: 'A portion of spicy Buldak Fire Noodles, made for those who enjoy a fiery kick.' },
       { Product_ID: 'DON001', Product_Name: 'Chicken Doner', Category: 'Signature Doners & Noodles', Price: 8.99, Description: 'Sizzling seasoned chicken doner slices.' },
       { Product_ID: 'DON002', Product_Name: 'Meat Doner', Category: 'Signature Doners & Noodles', Price: 8.99, Description: 'Succulent lamb meat doner slices.' },
       { Product_ID: 'DON003', Product_Name: 'Mixed Doner', Category: 'Signature Doners & Noodles', Price: 8.99, Description: 'Combination of chicken doner and meat doner together.' },
 
       // 4. Signature Rice
       { Product_ID: 'RIC007', Product_Name: 'Naga Rice', Category: 'Signature Rice', Price: 4.49, Description: 'Aromatic basmati rice seasoned with rich, spicy Naga sauce.' },
-      { Product_ID: 'RIC001', Product_Name: 'Flavour Rice', Category: 'Signature Rice', Price: 3.49, Description: 'Savory flavored rice.' },
-      { Product_ID: 'RIC002', Product_Name: 'Chicken Rice Bowl', Category: 'Signature Rice', Price: 8.49, Description: 'Signature rice served with your choice of chicken.' },
-      { Product_ID: 'RIC003', Product_Name: 'Egg Fried Rice', Category: 'Signature Rice', Price: 4.49, Description: 'Wok-style egg fried rice.' },
-      { Product_ID: 'RIC004', Product_Name: 'Vegetable Fried Rice', Category: 'Signature Rice', Price: 4.99, Description: 'Fragrant rice fried with mixed garden vegetables.' },
-      { Product_ID: 'RIC005', Product_Name: 'Chicken Fried Rice', Category: 'Signature Rice', Price: 5.49, Description: 'Wok-tossed rice with tender seasoned chicken pieces.' },
-      { Product_ID: 'RIC006', Product_Name: 'Prawn Fried Rice', Category: 'Signature Rice', Price: 5.99, Description: 'Wok-tossed rice with succulent prawns.' },
+      { Product_ID: 'RIC001', Product_Name: "Flavour Rice 🍚", Category: 'Signature Rice', Price: 3.49, Description: 'Savory flavored rice.' },
+      { Product_ID: 'RIC002', Product_Name: "Chicken Rice Bowl 🍗🍚", Category: 'Signature Rice', Price: 8.49, Description: 'Signature rice served with your choice of chicken.' },
+      { Product_ID: 'RIC003', Product_Name: "Egg Fried Rice 🍳🍚", Category: 'Signature Rice', Price: 4.49, Description: 'Wok-style egg fried rice.' },
+      { Product_ID: 'RIC004', Product_Name: "Vegetable Fried Rice 🥦🍚", Category: 'Signature Rice', Price: 4.99, Description: 'Fragrant rice fried with mixed garden vegetables.' },
+      { Product_ID: 'RIC005', Product_Name: "Chicken Fried Rice 🍗🍚", Category: 'Signature Rice', Price: 5.49, Description: 'Wok-tossed rice with tender seasoned chicken pieces.' },
+      { Product_ID: 'RIC006', Product_Name: "Prawn Fried Rice 🍤🍚", Category: 'Signature Rice', Price: 5.99, Description: 'Wok-tossed rice with succulent prawns.' },
 
       // 5. Sharing Platters
-      { Product_ID: 'PLT008', Product_Name: 'Mega Platter', Category: "Fox's Bowls & Platters", Price: 46.99, Description: 'Two whole baked chickens (two flavours), 12 baked or fried wings (two flavours), 6 fries (three seasonings, two portions each), 6 dips and 2 bottled drinks.' },
-      { Product_ID: 'PLT009', Product_Name: '40 Wings', Category: "Solo Chicken or Upgrade to Meal", Price: 32.49, Description: 'Forty baked or fried wings with your choice of two flavours. No sides included.' },
-      { Product_ID: 'PLT010', Product_Name: 'Two Whole Chickens', Category: "Solo Chicken or Upgrade to Meal", Price: 21.99, Description: 'Two whole baked chickens, each with its own flavour. No sides included.' },
-      { Product_ID: 'PLT001', Product_Name: '25 Wings', Category: "Solo Chicken or Upgrade to Meal", Price: 20.49, Description: 'Twenty-five wings with your choice of two signature flavors.' },
-      { Product_ID: 'PLT002', Product_Name: 'Baked Combo for Family', Category: "Ultimate Share Bundles", Price: 28.49, Description: 'Whole baked chicken, eight baked wings, four portions of fries, and one bottled drink.' },
-      { Product_ID: 'PLT003', Product_Name: '25 Tenders', Category: "Solo Chicken or Upgrade to Meal", Price: 26.49, Description: 'Twenty-five tenders with your choice of two signature flavors.' },
+      { Product_ID: 'PLT008', Product_Name: "Mega Family Platter", Category: "Fox's Bowls & Platters", Price: 46.99, Description: 'Two whole baked chickens (two flavours), 12 baked or fried wings (two flavours), 6 fries (three seasonings, two portions each), 6 dips and 2 bottled drinks.' },
+      { Product_ID: 'PLT009', Product_Name: "40 Wings🔥", Category: "Solo Chicken or Upgrade to Meal", Price: 32.49, Description: 'Forty baked or fried wings with your choice of two flavours. No sides included.' },
+      { Product_ID: 'PLT010', Product_Name: "2 Whole Baked Chicken 🔥", Category: "Solo Chicken or Upgrade to Meal", Price: 21.99, Description: 'Two whole baked chickens, each with its own flavour. No sides included.' },
+      { Product_ID: 'PLT001', Product_Name: "25 Wings🔥", Category: "Solo Chicken or Upgrade to Meal", Price: 20.49, Description: 'Twenty-five wings with your choice of two signature flavors.' },
+      { Product_ID: 'PLT002', Product_Name: "Baked Combo for Family 🔥", Category: "Ultimate Share Bundles", Price: 28.49, Description: 'Whole baked chicken, eight baked wings, four portions of fries, and one bottled drink.' },
+      { Product_ID: 'PLT003', Product_Name: "25 Tenders 🔥", Category: "Solo Chicken or Upgrade to Meal", Price: 26.49, Description: 'Twenty-five tenders with your choice of two signature flavors.' },
 
       { Product_ID: "PLT004", Product_Name: "Mac & Cheese Bites Sharebox (20 Pcs)", Category: "Fox's Bowls & Platters", Price: 14.49, Description: "20 large, crispy golden bites filled with creamy mac and cheese, served hot with your choice of 3 dip sauces. Perfect for sharing!" },
       { Product_ID: "PLT005", Product_Name: "Chilli Cheese Bites Sharebox (20 Pcs) 🔥", Category: "Fox's Bowls & Platters", Price: 13.49, Description: "20 spicy, cheesy bites served hot and golden with your choice of 3 dip sauces. A fiery crowd-pleaser built for sharing!" },
       { Product_ID: "PLT006", Product_Name: "Chicken Nuggets Sharebox (20 Pcs)", Category: "Fox's Bowls & Platters", Price: 9.49, Description: "20 tender, crispy golden chicken nuggets served hot with your choice of 3 dip sauces. The ultimate shareable classic!" },
-      { Product_ID: "PLT007", Product_Name: "Zinger Crisper Sharebox (15 Pcs)", Category: "Fox's Bowls & Platters", Price: 11.99, Description: "15 juicy, tender chicken fillet strips in a crispy golden corn breading, served hot with your choice of 3 dip sauces. Great for sharing!" },
+      { Product_ID: "PLT007", Product_Name: "Zinger Crisper Strips (15 Pcs)", Category: "Fox's Bowls & Platters", Price: 11.99, Description: "15 juicy, tender chicken fillet strips in a crispy golden corn breading, served hot with your choice of 3 dip sauces. Great for sharing!" },
 
       // 6. Ultimate Share Bundles
-      { Product_ID: 'BDL001', Product_Name: '15 Wings Bundle', Category: 'Ultimate Share Bundles', Price: 18.49, Description: 'Fifteen wings, two flavors, two portions of fries, one side, and one bottled drink.' },
-      { Product_ID: 'BDL002', Product_Name: '20 Wing Party Bundle', Category: 'Ultimate Share Bundles', Price: 22.49, Description: 'Twenty wings, two flavors, four portions of fries, one side, and one bottled drink.' },
-      { Product_ID: 'BDL003', Product_Name: '15 Tenders Bundle', Category: 'Ultimate Share Bundles', Price: 21.49, Description: 'Fifteen tenders, two flavors, two portions of fries, one side, and one bottled drink.' },
-      { Product_ID: 'BDL004', Product_Name: '20 Tender Party Bundle', Category: 'Ultimate Share Bundles', Price: 27.49, Description: 'Twenty tenders, two flavors, four portions of fries, one side, and one bottled drink.' },
-      { Product_ID: 'BDL005', Product_Name: 'Double Flavour Wings Bundle', Category: 'Ultimate Share Bundles', Price: 15.49, Description: 'Twelve wings, two flavors, two portions of fries, two dips, and two drinks.' },
-      { Product_ID: 'BDL006', Product_Name: 'Wings and Tenders Mix Bundle', Category: 'Ultimate Share Bundles', Price: 15.49, Description: 'Six wings, six tenders, two portions of fries, and two canned drinks.' },
-      { Product_ID: 'BND004', Product_Name: 'Baked Combo for 2', Category: 'Ultimate Share Bundles', Price: 18.49, Description: 'Half baked chicken, four baked wings, two portions of fries, and two canned drinks.' },
+      { Product_ID: 'BDL001', Product_Name: "15 Wings Bundle 🔥", Category: 'Ultimate Share Bundles', Price: 18.49, Description: 'Fifteen wings, two flavors, two portions of fries, one side, and one bottled drink.' },
+      { Product_ID: 'BDL002', Product_Name: "20 Wing Party Bundle 🔥", Category: 'Ultimate Share Bundles', Price: 22.49, Description: 'Twenty wings, two flavors, four portions of fries, one side, and one bottled drink.' },
+      { Product_ID: 'BDL003', Product_Name: "15 Tenders Bundle 🔥", Category: 'Ultimate Share Bundles', Price: 21.49, Description: 'Fifteen tenders, two flavors, two portions of fries, one side, and one bottled drink.' },
+      { Product_ID: 'BDL004', Product_Name: "20 Tender Party Bundle 🔥", Category: 'Ultimate Share Bundles', Price: 27.49, Description: 'Twenty tenders, two flavors, four portions of fries, one side, and one bottled drink.' },
+      { Product_ID: 'BDL005', Product_Name: "Double Flavour Wings Box", Category: 'Ultimate Share Bundles', Price: 15.49, Description: 'Twelve wings, two flavors, two portions of fries, two dips, and two drinks.' },
+      { Product_ID: 'BDL006', Product_Name: "Wings and Tenders Mix Box", Category: 'Ultimate Share Bundles', Price: 15.49, Description: 'Six wings, six tenders, two portions of fries, and two canned drinks.' },
+      { Product_ID: 'BND004', Product_Name: "Baked Combo for 2 🔥", Category: 'Ultimate Share Bundles', Price: 18.49, Description: 'Half baked chicken, four baked wings, two portions of fries, and two canned drinks.' },
       { Product_ID: 'BDL007', Product_Name: 'Wings, Tender & Fries Duo', Category: 'Ultimate Share Bundles', Price: 9.99, Description: 'Three wings, three tenders, two portions of fries, and two dips.' },
 
       { Product_ID: "BDL008", Product_Name: "Doner & Wings Meal", Category: "Fox's Bowls & Platters", Price: 11.99, Description: "A generous portion of spiced doner meat served with 4 crispy wings, golden fries, and a can of drink." },
@@ -732,7 +719,7 @@
 
       // 8. Fries & Wedges
       { Product_ID: 'FRS001', Product_Name: 'Fries (Small)', Category: 'Fries & Wedges', Price: 1.50, Description: 'A portion of golden, crispy skin-on fries.' },
-      { Product_ID: 'FRS002', Product_Name: 'Fries (Large)', Category: 'Fries & Wedges', Price: 2.99, Description: 'A generous portion of golden, crispy skin-on fries.' },
+      { Product_ID: 'FRS002', Product_Name: "Fries", Category: 'Fries & Wedges', Price: 2.99, Description: 'A generous portion of golden, crispy skin-on fries.' },
       { Product_ID: 'FRS003', Product_Name: 'Chicken Loaded Fries', Category: 'Fries & Wedges', Price: 4.99, Description: 'Fries topped with chicken pieces.' },
       { Product_ID: 'FRS004', Product_Name: 'Chicken & Cheese Loaded Fries', Category: 'Fries & Wedges', Price: 5.49, Description: 'Fries loaded with chicken and cheese.' },
       { Product_ID: 'FRS005', Product_Name: 'Wedges', Category: 'Fries & Wedges', Price: 3.49, Description: 'Crispy seasoned potato wedges.' },
@@ -744,15 +731,15 @@
       // 9. Premium Sides
       { Product_ID: 'SD001', Product_Name: 'Mozzarella Sticks (6 Pcs)', Category: 'Premium Sides', Price: 4.99, Description: 'Six delicious mozzarella sticks. Includes 1 free dip.' },
       { Product_ID: 'SD002', Product_Name: 'Onion Rings (8 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Eight crisp onion rings. Includes 1 free dip.' },
-      { Product_ID: 'SD003', Product_Name: 'Halloumi Fries (6 Pcs)', Category: 'Premium Sides', Price: 4.99, Description: 'Six portions of crispy halloumi fries. Includes 1 free dip.' },
-      { Product_ID: 'SD004', Product_Name: 'Mini Singara (8 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Eight mini singara with spiced vegetable filling. Includes 1 free dip.' },
+      { Product_ID: 'SD003', Product_Name: "Halloumi Fries (8 Pcs)", Category: 'Premium Sides', Price: 4.99, Description: 'Eight crispy halloumi fries. Includes 1 free dip.' },
+      { Product_ID: 'SD004', Product_Name: "Mini Singara (Bengali Samosa) (8 Pcs)", Category: 'Premium Sides', Price: 3.49, Description: 'Eight mini singara with spiced vegetable filling. Includes 1 free dip.' },
       { Product_ID: 'SD006', Product_Name: 'Chilli Cheese Bites (3 Pcs)', Category: 'Premium Sides', Price: 2.79, Description: 'Three tasty chilli cheese bites. Includes 1 free dip.' },
       { Product_ID: 'SD007', Product_Name: 'Vegetable Samosa (4 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Four vegetable samosas with aromatic spiced filling. Includes 1 free dip.' },
       { Product_ID: 'SD008', Product_Name: 'Vegetable Spring Roll (4 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Four vegetable spring rolls. Includes 1 free dip.' },
-      { Product_ID: 'SD009', Product_Name: 'Veg Bao Buns (2 Pcs)', Category: 'Premium Sides', Price: 1.99, Description: 'Two fluffy vegetable bao buns. Includes 1 free dip.' },
+      { Product_ID: 'SD009', Product_Name: "Vegetable Bao Buns (2pc)", Category: 'Premium Sides', Price: 1.99, Description: 'Two fluffy vegetable bao buns. Includes 1 free dip.' },
       { Product_ID: 'SD010', Product_Name: 'Prawn Gyoza (3 Pcs)', Category: 'Premium Sides', Price: 1.99, Description: 'Three pieces of pan-fried prawn gyoza. Includes 1 free dip.' },
-      { Product_ID: 'SD011', Product_Name: 'Chilli Cheese Bites (6 Pcs)', Category: 'Premium Sides', Price: 4.99, Description: 'Six tasty chilli cheese bites. Includes 1 free dip.' },
-      { Product_ID: 'SD012', Product_Name: 'Mac N Cheese Bites (8 Pcs)', Category: 'Premium Sides', Price: 5.99, Description: 'Eight delicious mac and cheese bites. Includes 1 free dip.' },
+      { Product_ID: 'SD011', Product_Name: "Chilli Cheese Bites (8 Pcs) 🔥", Category: 'Premium Sides', Price: 4.99, Description: 'Eight tasty chilli cheese bites. Includes 1 free dip.' },
+      { Product_ID: 'SD012', Product_Name: "Mac & Cheese Bites (8 Pcs)", Category: 'Premium Sides', Price: 5.99, Description: 'Eight delicious mac and cheese bites. Includes 1 free dip.' },
       { Product_ID: 'SD013', Product_Name: 'Medium Singara (4 Pcs)', Category: 'Premium Sides', Price: 3.49, Description: 'Four medium singaras. Includes 1 free dip.' },
 
       { Product_ID: "SD014", Product_Name: "Zinger Crisper Strips (6 Pcs)", Category: "Fox's Bowls & Platters", Price: 5.49, Description: "6 juicy, tender chicken fillet strips in a crispy golden corn breading, served hot with your choice of dip sauce." },
@@ -770,10 +757,9 @@
 
       // 11. Desserts
       { Product_ID: 'DES001', Product_Name: 'Honey Roasted Pistachio Mochi (2 Pcs)', Category: 'Desserts', Price: 3.99, Description: 'Two pieces of honey roasted pistachio mochi.' },
-      { Product_ID: 'DES002', Product_Name: 'Strawberry & Cream Mochi (2 Pcs)', Category: 'Desserts', Price: 3.99, Description: 'Two pieces of strawberry and cream mochi.' },
       { Product_ID: 'DES003', Product_Name: 'Pineapple & Mandarin Sorbet Mochi (2 Pcs)', Category: 'Desserts', Price: 3.99, Description: 'Two pieces of vegan fruit sorbet mochi.' },
-      { Product_ID: 'DES004', Product_Name: 'Ben & Jerry Cookie Dough', Category: 'Desserts', Price: 6.49, Description: 'Tub of Ben & Jerry\'s Cookie Dough ice cream.' },
-      { Product_ID: 'DES005', Product_Name: 'Ben & Jerry Caramel Chew Chew', Category: 'Desserts', Price: 6.49, Description: 'Tub of Ben & Jerry\'s Caramel Chew Chew ice cream.' },
+      { Product_ID: 'DES004', Product_Name: "Ben & Jerry's Cookie Dough (465ml)", Category: 'Desserts', Price: 6.49, Description: 'Tub of Ben & Jerry\'s Cookie Dough ice cream.' },
+      { Product_ID: 'DES005', Product_Name: "Ben & Jerry's Caramel Chew Chew (465ml)", Category: 'Desserts', Price: 6.49, Description: 'Tub of Ben & Jerry\'s Caramel Chew Chew ice cream.' },
       { Product_ID: 'DES006', Product_Name: 'Iced Latte Mochi (2 Pcs)', Category: 'Desserts', Price: 3.99, Description: 'Two pieces of iced latte mochi gelato.' },
       { Product_ID: 'DES007', Product_Name: 'Brown Butter Caramel Mochi (2 Pcs)', Category: 'Desserts', Price: 3.99, Description: 'Two pieces of brown butter caramel mochi.' },
       { Product_ID: 'DES008', Product_Name: 'Vegan Chocolate Fudge Mochi (2 Pcs)', Category: 'Desserts', Price: 3.99, Description: 'Two pieces of dairy-free chocolate fudge mochi.' },
@@ -786,8 +772,8 @@
       { Product_ID: 'DRK004', Product_Name: 'Diet Coke', Category: 'Drinks', Price: 1.29, Description: 'A chilled can of Diet Coke.' },
       { Product_ID: 'DRK005', Product_Name: 'Pepsi', Category: 'Drinks', Price: 1.29, Description: 'A chilled can of Pepsi.' },
       { Product_ID: 'DRK006', Product_Name: 'Pepsi Max', Category: 'Drinks', Price: 1.29, Description: 'A chilled can of Pepsi Max.' },
-      { Product_ID: 'DRK007', Product_Name: 'Tango Orange', Category: 'Drinks', Price: 1.29, Description: 'A chilled can of Tango Orange.' },
-      { Product_ID: 'DRK008', Product_Name: 'Tango apple', Category: 'Drinks', Price: 1.29, Description: 'A chilled can of Tango Apple.' },
+      { Product_ID: 'DRK007', Product_Name: "Tango/Fanta Orange", Category: 'Drinks', Price: 1.29, Description: 'A chilled can of Tango Orange.' },
+      { Product_ID: 'DRK008', Product_Name: "Tango Apple", Category: 'Drinks', Price: 1.29, Description: 'A chilled can of Tango Apple.' },
       { Product_ID: 'DRK009', Product_Name: '7up', Category: 'Drinks', Price: 1.29, Description: 'A chilled can of 7UP.' },
       { Product_ID: 'DRK010', Product_Name: 'Dr Pepper', Category: 'Drinks', Price: 1.29, Description: 'A chilled can of Dr Pepper.' },
       { Product_ID: 'DRK011', Product_Name: 'Red Bull', Category: 'Drinks', Price: 2.15, Description: 'A can of Red Bull to give you a boost.' },
@@ -799,6 +785,7 @@
       { Product_ID: 'DRK017', Product_Name: 'Bottle 7up', Category: 'Drinks', Price: 2.99, Description: 'A chilled bottle of 7UP.' }
     ];
 
+    HUNGRY_FOX_PRODUCTS.push({Product_ID:'NDL002',Product_Name:'Creamy Buldak',Category:'Signature Doners & Noodles',Price:8.49,Description:'Creamy Buldak noodles.'},{Product_ID:'SD015',Product_Name:'Chicken Nuggets (8 Pcs)',Category:'Standalone Nuggets',Price:4.49,Description:'Eight chicken nuggets with one included dip.'},{Product_ID:'DES009',Product_Name:"Ben & Jerry's Phish Food (465ml)",Category:'Desserts',Price:6.49,Description:'Ben & Jerry’s Phish Food ice cream, 465ml.'});
     const DESSERT_OPTIONS = HUNGRY_FOX_PRODUCTS
       .filter(product => product.Category === 'Desserts')
       .map(product => ({ name: product.Product_Name, price: product.Price }));
@@ -900,9 +887,9 @@
     }
 
     // Render Menu
-    const MENU_ITEM_ORDER = {"Fox's Bowls & Platters":["BWL001","BWL002","BWL003","BWL004","BWL005","PLT008","PLT004","PLT005","PLT006","BDL008","FEA012","PLT007","SD014"],"Special Featured":["FEA009","FEA003","FEA006","FEA011","FEA001","FEA010","FEA002","FEA007","FEA008","FEA005","FEA004"],"Solo Chicken or Upgrade to Meal":["PLT001","WNG001","PLT003","CHK005","PLT010","PLT009","CHK002","TND001","CHK001","WNG002"],"Signature Doners & Noodles":["NDL001","DON003","DON002","DON001"],"Signature Rice":["RIC002","RIC005","RIC001","RIC003","RIC007","RIC004","RIC006"],"Ultimate Share Bundles":["BDL005","BDL002","BND004","BDL007","BDL001","BDL003","BDL004","BDL006","PLT002"],"Kids Menu":["KID002","KID003","KID001","KID006","KID004","KID005"]};
+    const MENU_ITEM_ORDER = {"🔥 MEAL COMBOS & BOXES":["FEA009","FEA010","FEA011","FEA004","FEA005","FEA002","FEA001","BDL008","FEA007","FEA003","FEA006","FEA008","RIC002"],"🍗 CHICKEN & DONERS":["CHK001","CHK002","CHK005","WNG001","WNG002","TND001","SD014","DON001","DON002","DON003"],"💥 SHARE BUNDLES & PLATTERS":["BDL005","BDL001","BDL002","PLT001","PLT009","BDL006","BDL007","BDL003","BDL004","PLT003","BND004","PLT002","PLT010","PLT005","PLT004","PLT006","PLT007","BWL004","BWL003","PLT008"],"🥙 BOWLS, NOODLES & RICE":["BWL001","BWL005","BWL002","NDL001","NDL002","RIC001","RIC007","RIC003","RIC004","RIC005","RIC006"],"🍟 FRIES & LOADED FRIES":["FRS001","FRS002","FRS005","FRS008","FRS009","FRS003","FRS004","FRS006","FRS007","FEA012"],"🥟 SNACKS, SIDES & DIPS":["SD001","SD002","SD003","SD006","SD011","SD004","SD013","SD007","SD008","SD010","SD009","SD012","SD015","BRD001","BRD007","BRD002","BRD008","BRD009","BRD003","BRD004","BRD005","BRD006"],"🧒 KIDS MENU":["KID001","KID002","KID003","KID004","KID005","KID006"],"🍡 DESSERTS":["DES001","DES003","DES006","DES007","DES008","DES004","DES005","DES009"],"🥤 DRINKS":["DRK001","DRK003","DRK004","DRK005","DRK006","DRK007","DRK008","DRK009","DRK010","DRK011","DRK018","DRK019","DRK012","DRK013","DRK014","DRK015","DRK016","DRK017"]};
     function renderMenu() {
-      const rawCategories = [...new Set(state.products.map(p => p.Category))];
+      const rawCategories = CATEGORY_ORDER.slice();
       const sortedCategories = rawCategories.sort((a, b) => getCategoryRank(a) - getCategoryRank(b));
 
       // Category Pill Navigation
@@ -915,7 +902,7 @@
       const menuContainer = document.getElementById('menu-container');
       menuContainer.innerHTML = sortedCategories.map((cat, idx) => {
         const preferred = MENU_ITEM_ORDER[cat] || [];
-        const items = state.products.filter(p => p.Category === cat).sort((a,b) => { const x=preferred.indexOf(a.Product_ID), y=preferred.indexOf(b.Product_ID); return (x<0?999:x)-(y<0?999:y); });
+        const items = state.products.filter(p => (MENU_ITEM_ORDER[cat] || []).includes(p.Product_ID)).sort((a,b) => { const x=preferred.indexOf(a.Product_ID), y=preferred.indexOf(b.Product_ID); return (x<0?999:x)-(y<0?999:y); });
         return `
           <section id="cat-${idx}" class="space-y-4 pt-4">
             <div class="flex items-center justify-between border-b border-[#2a3859] pb-3">
@@ -1010,7 +997,7 @@
       if (['BWL001', 'BWL004'].includes(id)) html += renderSelect('Sheekh Kebab Type', 'sheekh_type', id === 'BWL001' ? ['Chicken Sheekh', 'Meat Sheekh'] : ['Chicken Sheekh', 'Meat Sheekh', 'Mixed Sheekh']);
       if (id === 'BWL005') html += renderSelect('Doner Type', 'doner_type', DONER_TYPE_OPTIONS);
       if (id === 'BWL004') html += renderSelect('Doner Type', 'doner_type', DONER_TYPE_OPTIONS);
-      if (['BWL002', 'BWL003', 'BWL004'].includes(id)) html += renderSelect('Free Premium Side', 'premium_side', state.products.filter(p=>p.Category==='Premium Sides').map(p=>p.Product_Name).filter(name=>!['Chilli Cheese Bites (3 Pcs)','Chilli Cheese Bites (6 Pcs)','Mac N Cheese Bites (8 Pcs)'].includes(name)).concat(['Chilli Cheese Bites (4 Pcs)','Mac N Cheese Bites (4 Pcs)']));
+      if (['BWL002', 'BWL003', 'BWL004'].includes(id)) html += renderSelect('Free Premium Side', 'premium_side', state.products.filter(p=>p.Category==='Premium Sides').map(p=>p.Product_Name).filter(name=>!['Chilli Cheese Bites (3 Pcs)','Chilli Cheese Bites (8 Pcs) 🔥','Mac & Cheese Bites (8 Pcs)'].includes(name)).concat(['Chilli Cheese Bites (4 Pcs)','Mac N Cheese Bites (4 Pcs)']));
       if (id === 'RIC002') {
         html += `
           <div class="space-y-1">
@@ -1181,8 +1168,8 @@
         html += renderSelect('Included Dip 1', 'dip_1', DIP_OPTIONS);
         html += renderSelect('Included Dip 2', 'dip_2', DIP_OPTIONS);
         html += renderSelect('Included Dip 3', 'dip_3', DIP_OPTIONS);
-      } else if (['FEA003', 'FEA004', 'FEA008', 'FEA009', 'FEA010', 'FEA011', 'BRD005', 'BRD006'].includes(id) || product.Category === 'Premium Sides') {
-        html += renderSelect(product.Category === 'Premium Sides' ? 'Included Free Dip' : 'Choose Dip', 'dip_1', DIP_OPTIONS);
+      } else if (['FEA003', 'FEA004', 'FEA008', 'FEA009', 'FEA010', 'FEA011', 'BRD005', 'BRD006'].includes(id) || id === 'SD015' || product.Category === 'Premium Sides') {
+        html += renderSelect((id === 'SD015' || product.Category === 'Premium Sides') ? 'Included Free Dip' : 'Choose Dip', 'dip_1', DIP_OPTIONS);
       } else if (['BDL005', 'BDL007'].includes(id)) {
         html += `
           <div class="grid grid-cols-2 gap-2">
@@ -1246,7 +1233,7 @@
 
       // Unified optional paid add-ons for Solo Buldak Fire Noodles and all three doner kebabs.
       // All add-ons are optional, start at quantity zero, and have no maximum quantity.
-      if (['NDL001', 'DON001', 'DON002', 'DON003'].includes(id)) {
+      if (['NDL001', 'NDL002', 'DON001', 'DON002', 'DON003'].includes(id)) {
         const addOns = [
           ['Fried Egg', 0.99],
           ['Fries', 0.99],
