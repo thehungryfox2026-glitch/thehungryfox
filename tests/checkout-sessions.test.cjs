@@ -7,7 +7,7 @@ const MENU=Function(menuCode+';return MENU')();
 const validator=worker.slice(worker.indexOf('function serverOptionPricePence'),worker.indexOf('function hungryFoxOrderingOpen'));
 const checkout=worker.slice(worker.indexOf('async function create(req,env,o)'),worker.indexOf('async function verify(raw,sig,secret)'));
 const catalogText=index.slice(index.indexOf('const HUNGRY_FOX_PRODUCTS = [')+'const HUNGRY_FOX_PRODUCTS = '.length);
-const ids=Function('return '+catalogText.slice(0,catalogText.indexOf('];')+2))().map(p=>p.Product_ID);
+const ids=Function('const HUNGRY_FOX_PRODUCTS = '+catalogText.slice(0,catalogText.indexOf('const DESSERT_OPTIONS'))+';return HUNGRY_FOX_PRODUCTS')().map(p=>p.Product_ID);
 const calls=[];
 const create=Function('out','quote','hungryFoxOrderingOpen','fetch','splitReceiptOptions','URLSearchParams',
   menuCode+';'+validator+';'+checkout+';return create;')(
@@ -23,8 +23,8 @@ async function checkoutBasket(items){
  const result=await create(req,{STRIPE_SECRET_KEY:'mock'},{});
  return {result,form:calls.at(-1)?.form};
 }
-test('all 116 menu products can create a mocked Stripe checkout session',async()=>{
- assert.equal(ids.length, 116);
+test('all 118 menu products can create a mocked Stripe checkout session',async()=>{
+ assert.equal(ids.length, 118);
  for(const id of ids){
   const {result}=await checkoutBasket([{productId:id,quantity:1,options:[]}]);
   assert.equal(result.status,200,id+': '+JSON.stringify(result.data));
