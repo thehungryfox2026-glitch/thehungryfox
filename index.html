@@ -544,20 +544,7 @@
       'Mango Habanero (Hot)'
     ];
 
-    const DRIZZLE_OPTIONS = [
-      'No Drizzle',
-      'Garlic Parmesan',
-      'Sticky BBQ',
-      'Peri Peri',
-      'Honey Sriracha',
-      'Spicy Algerian',
-      'Smoky Cajun',
-      'Buffalo',
-      'Spicy BBQ',
-      'Volcano',
-      'Naga Sauce',
-      'Mango Habanero'
-    ];
+    const DRIZZLE_OPTIONS = ['No Drizzle', ...CHICKEN_FLAVOURS.filter(flavour => flavour !== 'Plain')];
 
     const SEASONING_OPTIONS = [
       'No Seasoning',
@@ -822,7 +809,7 @@
       const ingredientProfiles = {"CHK001":"|","CHK002":"|","CHK005":"|","WNG001":"|","WNG002":"Gluten|Celery,Soybeans","TND001":"Gluten|Celery,Eggs,Milk,Mustard,Soybeans","DON001":"Milk,Mustard,Soybeans|Celery,Gluten","DON002":"Gluten,Mustard,Soybeans|","DON003":"Gluten,Milk,Mustard,Soybeans|Celery","RIC001":"|","RIC003":"Eggs|","RIC004":"|","RIC005":"|","RIC006":"Crustaceans|Fish,Molluscs","FRS001":"|","FRS002":"|","FRS005":"Gluten|","FRS008":"Milk|","FRS009":"Gluten,Milk|","SD001":"Gluten,Milk|","SD002":"Gluten|","SD003":"Gluten,Milk|Eggs,Soybeans","SD004":"Gluten|","SD006":"Gluten,Milk|","SD007":"Gluten|","SD008":"Gluten,Sesame,Soybeans|","SD009":"Gluten,Soybeans|Sesame","SD010":"Gluten,Crustaceans,Sesame,Soybeans|","SD011":"Gluten,Milk|","SD012":"Gluten,Milk|","SD013":"Gluten|","BRD001":"Gluten,Milk|","BRD002":"Gluten|Milk,Soybeans","BRD003":"|","BRD004":"Eggs,Mustard|","BRD007":"Gluten|Milk,Mustard,Nuts,Sesame","BRD008":"Gluten|","BRD009":"Gluten|","DES001":"Milk,Nuts,Soybeans|Peanuts","DES002":"Milk,Soybeans|Nuts,Peanuts","DES003":"Soybeans|Nuts,Peanuts","DES004":"Gluten,Eggs,Milk,Soybeans|Nuts,Peanuts","DES005":"Gluten,Eggs,Milk,Soybeans|Nuts,Peanuts","DES006":"Milk,Soybeans|Nuts,Peanuts","DES007":"Milk,Soybeans|Nuts,Peanuts","DES008":"Soybeans|Nuts,Peanuts","NDL001":"Gluten,Soybeans,Sesame|Celery,Crustaceans,Eggs,Fish,Milk,Molluscs,Mustard,Nuts,Peanuts","KID001":"Gluten,Soybeans|Celery","KID002":"Gluten,Milk|","KID003":"Gluten,Milk|Eggs,Soybeans","KID004":"Gluten|","KID005":"Gluten|Celery,Eggs,Milk,Mustard,Soybeans"};
       // Owner-approved latest declarations, 20 November 2026; override only these products.
       const latestProfiles = {"BRD005":"|Eggs,Mustard","BRD006":"|Eggs,Mustard","BWL001":"Gluten,Mustard|Celery,Sulphites,Soybeans","BWL005":"Gluten,Milk,Mustard|Celery,Sulphites,Soybeans","BWL002":"Milk,Gluten|Mustard,Sesame","BWL004":"Gluten,Milk,Mustard,Soybeans|Celery,Sulphites,Sesame,Nuts,Peanuts","BWL003":"Milk,Gluten|Mustard,Sesame","PLT008":"Gluten,Milk,Mustard,Soybeans,Eggs|Celery,Sesame,Peanuts,Nuts,Sulphites,Fish","PLT004":"Gluten,Milk|Mustard,Soybeans,Eggs","PLT005":"Gluten,Milk|Mustard,Soybeans,Eggs","PLT006":"Gluten,Soybeans|Milk,Celery,Mustard,Eggs","BDL008":"Gluten,Milk,Mustard,Soybeans,Eggs|Celery,Sulphites,Sesame","FEA012":"Gluten,Milk,Mustard|Celery,Sulphites,Soybeans","SD014":"Gluten,Soybeans|Milk,Celery,Mustard,Eggs","PLT007":"Gluten,Soybeans|Milk,Celery,Mustard,Eggs","RIC001":"|","RIC007":"Milk,Mustard|Nuts,Peanuts,Gluten,Soybeans","RIC002":"Gluten,Soybeans,Milk,Mustard,Eggs|Celery,Sesame,Peanuts,Nuts","RIC003":"Eggs|Soybeans","RIC004":"|Soybeans","RIC005":"|Soybeans,Gluten","RIC006":"Crustaceans|Fish,Molluscs,Soybeans,Eggs"};
-      const flavourProfiles = {"Plain":"|","Garlic Parmesan":"Milk|","Sticky BBQ":"Sulphites|","Peri Peri":"|","Buffalo":"|Celery,Gluten,Eggs,Milk,Mustard,Soybeans,Sulphites","Honey Sriracha":"|Celery,Gluten,Eggs,Milk,Mustard,Soybeans,Sulphites","Smoky Cajun":"Gluten,Mustard,Soybeans|","Spicy Algerian":"Gluten,Eggs,Mustard|Celery,Milk,Soybeans,Sulphites","Mango Habanero":"|Celery,Gluten,Eggs,Milk,Mustard,Soybeans,Sulphites","Naga":"Milk,Mustard|Nuts,Peanuts","Volcano":"|Celery,Gluten,Eggs,Milk,Mustard,Soybeans,Sulphites","Spicy BBQ":"|Celery,Gluten,Eggs,Milk,Mustard,Soybeans,Sulphites","Hot Hot":"Gluten,Milk|","Seoul Fire":"Gluten,Soybeans|"};
+      const flavourProfiles = {"Plain":"|","Garlic Parmesan":"Milk|","Sticky BBQ":"Sulphites|","Peri Peri":"|","Buffalo":"|Celery,Gluten,Eggs,Milk,Mustard,Soybeans,Sulphites","Honey Sriracha":"|Celery,Gluten,Eggs,Milk,Mustard,Soybeans,Sulphites","Smoky Cajun":"Gluten,Mustard,Soybeans|","Spicy Algerian":"Gluten,Eggs,Mustard|Celery,Milk,Soybeans,Sulphites","Mango Habanero":"|Celery,Gluten,Eggs,Milk,Mustard,Soybeans,Sulphites","Naga":"Milk,Mustard|Nuts,Peanuts","Volcano":"|Celery,Gluten,Eggs,Milk,Mustard,Soybeans,Sulphites","Spicy BBQ":"|Celery,Gluten,Eggs,Milk,Mustard,Soybeans,Sulphites","Seoul Fire":"Gluten,Soybeans|"};
       const dipProfiles = {"Real Mayo":"Eggs|","Garlic Mayo":"Eggs|Mustard","Tomato Ketchup":"|","Sweet Chilli":"|","Doner Hot Chilli":"|","Doner Honey":"|","House Naga Sauce":"Mustard|"};
       const drink = id => id.startsWith('DRK');
       const split = value => { const [contains='', traces=''] = value.split('|'); return { contains: contains ? contains.split(',') : [], traces: traces ? traces.split(',') : [] }; };
