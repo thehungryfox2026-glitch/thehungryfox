@@ -14,7 +14,7 @@ function serverOptionPricePence(productId,option){
   const allowed=["CHK001","CHK002","CHK005","WNG001","WNG002","TND001","SD001","SD002","SD003","SD011","SD015","KID001","KID002","KID003","KID004","KID005","KID006","BDL008"];
   if(!allowed.includes(productId)||(sideMatch[1]==="2"&&productId!=="CHK005"))return null;
   if(sideMatch[2])return value.length>0&&value.length<=80?0:null;
-  const prices={"Fries":0,"Wedges":50,"Cheese Loaded Fries":99,"Cheese Loaded Wedges":149,"Flavour Rice":0};
+  const prices={"Fries":0,"Wedges":50,"Cheese Loaded Fries":99,"Cheese Loaded Wedges":149,"Flavour Rice":50};
   return Object.prototype.hasOwnProperty.call(prices,value)?prices[value]:null;
  }
  const fixed={
