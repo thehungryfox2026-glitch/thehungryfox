@@ -7,7 +7,7 @@ assert.equal(p('FEA001',{label:'Bread Choice',value:'Plain Naan',price:999}),0,'
 assert.equal(p('FEA001',{label:'Bundle Side',value:'Vegetable Spring Roll (2 Pcs)',price:0}),149);
 assert.equal(p('FEA001',{label:'Meal Drink',value:'Red Bull',price:0}),100);
 assert.equal(p('FEA001',{label:'Drink 1',value:'Bottle Pepsi Max',price:99}),0);
-assert.equal(p('FEA001',{label:'Dessert',value:'Ben & Jerry Cookie Dough',price:0}),649);
+assert.equal(p('FEA001',{label:'Dessert',value:"Ben & Jerry's Cookie Dough (465ml)",price:0}),649);
 assert.equal(p('CHK001',{label:'Cheese-Loaded Fries Upgrade',value:'3 portions',price:0}),297);
 assert.equal(p('DON001',{label:'Optional Add-on',value:'2 x Garlic Naan',price:0}),298);
 assert.equal(p('DON002',{label:'Optional Add-on',value:'2 x Drink Can (1 x Red Bull, 1 x Pepsi)',price:0}),298);
