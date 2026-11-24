@@ -112,7 +112,7 @@
           <span class="text-lg" aria-hidden="true">✓</span> 100% HALAL CERTIFIED
         </span>
         <span class="text-slate-500">|</span>
-        <span class="text-slate-300">Open Daily: 11:00 – 23:30</span>
+        <span class="text-slate-300">Open Daily: 11:00 – 22:30</span>
       </div>
       <div class="flex items-center gap-4 text-slate-300">
         <a href="https://ratings.food.gov.uk/business/1981131/the-hungry-fox" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">
@@ -492,7 +492,7 @@
       <div>
         <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Kitchen Hours</h4>
         <p class="text-xs text-slate-300">Monday – Sunday</p>
-        <p class="text-xs font-bold text-orange-400 mt-0.5">11:00 AM – 11:30 PM</p>
+        <p class="text-xs font-bold text-orange-400 mt-0.5">11:00 AM – 10:30 PM</p>
         <p class="text-[11px] text-slate-400 mt-2">Open 7 days a week for delivery across Grays and Thurrock.</p>
       </div>
 
@@ -521,7 +521,7 @@
       ? 'https://website-loyalty-program-hungryfox-api-preview.thehungryfox2026.workers.dev'
       : 'https://hungryfox-api.thehungryfox2026.workers.dev';
     const MIN_ORDER_AMOUNT = 15.00;
-    function hungryFoxOrderingOpen(now=new Date()){const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);const hour=Number(parts.find(p=>p.type==='hour').value),minute=Number(parts.find(p=>p.type==='minute').value);return hour*60+minute>=660||hour*60+minute<120;}
+    function hungryFoxOrderingOpen(now=new Date()){const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);const hour=Number(parts.find(p=>p.type==='hour').value),minute=Number(parts.find(p=>p.type==='minute').value);return hour*60+minute>=660&&hour*60+minute<1350;}
     function refreshOrderingHours(){const open=hungryFoxOrderingOpen();document.getElementById('hungryfox-closed-banner').style.display=open?'none':'block';const checkout=document.getElementById('checkout-btn');if(checkout)checkout.disabled=!open||state.cart.length===0;}
     setInterval(refreshOrderingHours,30000);
     document.addEventListener('DOMContentLoaded',refreshOrderingHours);
