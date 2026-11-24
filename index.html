@@ -968,7 +968,7 @@
     }
 
     // Modal Builder per Exact Specification Rules
-    const SIDE_CHOICES = [['Fries',0],['Wedges',0.50],['Cheese Loaded Fries',0.99],['Cheese Loaded Wedges',1.49],['Flavour Rice',0]];
+    const SIDE_CHOICES = [['Fries',0],['Wedges',0.50],['Cheese Loaded Fries',0.99],['Cheese Loaded Wedges',1.49],['Flavour Rice',0.50]];
     function mealSideFields(n, prefix) {
       return Array.from({length:n},(_,i)=>`<div class="space-y-1"><label class="block text-xs font-bold text-slate-200">Choose Meal Side${n>1?' '+(i+1):''}</label><select class="meal-side-choice w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" data-prefix="${prefix}" data-portion="${i+1}" onchange="this.nextElementSibling.classList.toggle('hidden',this.value==='Flavour Rice');updateModalPrice()">${SIDE_CHOICES.map(([name,price])=>`<option value="${name}" data-price="${price}">${name}${price?' (+'+formatGBP(price)+')':' (Included)'}</option>`).join('')}</select><div>${renderSelect('Side Seasoning',prefix+'_side_season_'+(i+1),SEASONING_OPTIONS)}</div></div>`).join('');
     }
