@@ -9,7 +9,7 @@ const menuMatch = worker.match(/const MENU=([\s\S]*?);/);
 assert.ok(menuMatch,'Backend MENU must exist');
 const MENU = Function('return '+menuMatch[1])();
 const catalogText = index.slice(index.indexOf('const HUNGRY_FOX_PRODUCTS = [') + 'const HUNGRY_FOX_PRODUCTS = '.length);
-const catalog = Function('return '+catalogText.slice(0,catalogText.indexOf('];')+2))();
+const catalog = Function('const HUNGRY_FOX_PRODUCTS = '+catalogText.slice(0,catalogText.indexOf('const DESSERT_OPTIONS'))+';return HUNGRY_FOX_PRODUCTS')();
 const products = catalog.map(p=>[null,p.Product_ID,p.Product_Name,p.Category,String(p.Price)]);
 const priceFunction = worker.slice(worker.indexOf('function serverOptionPricePence'),worker.indexOf('function hungryFoxOrderingOpen'));
 assert.ok(priceFunction.startsWith('function serverOptionPricePence'));

@@ -11,14 +11,15 @@ function constant(name){
  return Function('return ('+match[1]+')')();
 }
 const catalogText=html.slice(html.indexOf('const HUNGRY_FOX_PRODUCTS = [')+'const HUNGRY_FOX_PRODUCTS = '.length);
-const products=Function('return '+catalogText.slice(0,catalogText.indexOf('];')+2))().map(p=>({id:p.Product_ID,name:p.Product_Name,category:p.Category,price:p.Price}));
-test('every product belongs to one of the twelve visible menu categories',()=>{
+const products=Function('const HUNGRY_FOX_PRODUCTS = '+catalogText.slice(0,catalogText.indexOf('const DESSERT_OPTIONS'))+';return HUNGRY_FOX_PRODUCTS')().map(p=>({id:p.Product_ID,name:p.Product_Name,category:p.Category,price:p.Price}));
+test('every product belongs to one of the nine visible menu categories',()=>{
  const categories=constant('CATEGORY_ORDER');
- assert.equal(categories.length,12);
- assert.equal(new Set(categories).size,12);
- assert.equal(products.length, 116);
+ assert.equal(categories.length,9);
+ assert.equal(new Set(categories).size,9);
+ assert.equal(products.length, 118);
  for(const p of products){
-  assert.ok(categories.includes(p.category),p.id+' unknown category '+p.category);
+  const order=constant('MENU_ITEM_ORDER');
+  assert.equal(categories.filter(c=>order[c].includes(p.id)).length,1,p.id+' must appear in exactly one visible category');
   assert.ok(Number.isFinite(p.price)&&p.price>=0,p.id+' invalid price');
  }
 });
@@ -46,4 +47,13 @@ test('delivery-only menu has no collection fulfillment option',()=>{
 test('checkout continues to validate prices on server and use UK timezone',()=>{
  assert.ok(worker.includes('function serverOptionPricePence'));
  assert.ok(worker.includes("timeZone:'Europe/London'"));
+});
+
+test('drizzle mirrors active flavours and retired Hot Hot is absent',()=>{
+ const CHICKEN_FLAVOURS=constant('CHICKEN_FLAVOURS');
+ const expression=html.match(/const DRIZZLE_OPTIONS = ([^;]+);/)[1];
+ const drizzle=Function('CHICKEN_FLAVOURS','return ('+expression+')')(CHICKEN_FLAVOURS);
+ assert.deepEqual(drizzle,['No Drizzle',...CHICKEN_FLAVOURS.filter(x=>x!=='Plain')]);
+ assert.ok(CHICKEN_FLAVOURS.includes('Naga Sauce (Extra Hot)'));
+ assert.ok(!/Hot Hot/i.test(html));
 });
