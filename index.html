@@ -194,14 +194,14 @@
       <!-- Postcode Delivery Availability Checker: postcode-based, not mileage-based -->
       <div id="delivery-checker" class="mt-4 max-w-md mx-auto rounded-2xl border border-emerald-500/40 bg-[#131b2e] p-4 sm:p-5 scroll-mt-28">
         <p class="text-emerald-300 font-extrabold text-base sm:text-lg uppercase tracking-wide mb-2">FREE DELIVERY IN MOST AREAS!</p>
-        <p class="text-slate-300 text-xs sm:text-sm mb-3">Check if we deliver to you and see your exact delivery charge before choosing your food.</p>
+        <p class="text-slate-300 text-xs sm:text-sm mb-3">Your Hungry Fox favourites, delivered to your door. Enter your postcode to find your delivery rate.</p>
         <form onsubmit="handlePostcodeCheck(event)" class="flex gap-2">
           <input type="text" id="check-postcode-input" placeholder="Enter your postcode" aria-label="Delivery postcode" autocomplete="postal-code" class="min-w-0 flex-1 bg-[#131b2e] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500 uppercase font-mono" required />
           <button type="submit" id="check-postcode-btn" class="btn-orange px-5 py-2.5 rounded-xl text-xs font-bold shrink-0">
             Check Postcode
           </button>
         </form>
-        <p class="text-xs text-emerald-300 mt-3 font-semibold">Most local postcodes: FREE delivery. Other eligible areas: £1.99 or £3.99.</p>
+        <p class="text-xs text-emerald-300 mt-3 font-semibold">FREE delivery in most local areas · £1.99 or £3.99 in other eligible areas.</p>
         <div id="check-postcode-result" aria-live="polite" class="text-xs mt-2.5 hidden"></div>
       </div>
     </div>
@@ -1699,7 +1699,7 @@
       btn.disabled = true;
       btn.textContent = 'Checking...';
       result.classList.remove('hidden');
-      result.innerHTML = '<span class="text-slate-400">Checking delivery availability...</span>';
+      result.innerHTML = '<span class="text-slate-400">Finding your delivery rate...</span>';
 
       try {
         const res = await fetch(`${API_BASE_URL}/delivery-quote?postcode=${encodeURIComponent(postcode)}&basketSubtotal=15`);
@@ -1714,7 +1714,7 @@
         result.innerHTML = '<span class="text-red-400">We could not check this postcode just now. Please try again.</span>';
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Check Delivery';
+        btn.textContent = 'Check Postcode';
       }
     }
 
@@ -1723,7 +1723,7 @@
       if(!hungryFoxOrderingOpen()){refreshOrderingHours();alert('Online ordering is closed. We reopen at 11:00 AM.');return;}
       toggleCartDrawer(false);
       state.deliveryQuote = null;
-      document.getElementById('checkout-quote-status').textContent = 'Enter your postcode to calculate delivery.';
+      document.getElementById('checkout-quote-status').textContent = 'Enter your postcode to see your delivery rate.';
       const subtotal = state.cart.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
       selectedCheckoutRewardId='';
       document.getElementById('checkout-loyalty-reward').value='';
@@ -1753,7 +1753,7 @@
       if (postcode !== checkoutQuotePostcode) {
         state.deliveryQuote = null;
         document.getElementById('checkout-delivery-fee').textContent = 'Check postcode';
-        document.getElementById('checkout-quote-status').textContent = 'Check delivery availability and charge for this postcode.';
+        document.getElementById('checkout-quote-status').textContent = 'Enter your postcode to see your delivery rate.';
       }
     }
     function autoCheckCheckoutPostcode() {
