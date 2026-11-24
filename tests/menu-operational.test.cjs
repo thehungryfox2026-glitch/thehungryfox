@@ -47,3 +47,12 @@ test('checkout continues to validate prices on server and use UK timezone',()=>{
  assert.ok(worker.includes('function serverOptionPricePence'));
  assert.ok(worker.includes("timeZone:'Europe/London'"));
 });
+
+test('drizzle mirrors active flavours and retired Hot Hot is absent',()=>{
+ const CHICKEN_FLAVOURS=constant('CHICKEN_FLAVOURS');
+ const expression=html.match(/const DRIZZLE_OPTIONS = ([^;]+);/)[1];
+ const drizzle=Function('CHICKEN_FLAVOURS','return ('+expression+')')(CHICKEN_FLAVOURS);
+ assert.deepEqual(drizzle,['No Drizzle',...CHICKEN_FLAVOURS.filter(x=>x!=='Plain')]);
+ assert.ok(CHICKEN_FLAVOURS.includes('Naga Sauce (Extra Hot)'));
+ assert.ok(!/Hot Hot/i.test(html));
+});
