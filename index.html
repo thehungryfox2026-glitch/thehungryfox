@@ -112,7 +112,7 @@
           <span class="text-lg" aria-hidden="true">✓</span> 100% HALAL CERTIFIED
         </span>
         <span class="text-slate-500">|</span>
-        <span class="text-slate-300">Open Daily: 11:00 – 23:30</span>
+        <span class="text-slate-300">Open Daily: 11:00 – 22:30</span>
       </div>
       <div class="flex items-center gap-4 text-slate-300">
         <a href="https://ratings.food.gov.uk/business/1981131/the-hungry-fox" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">
@@ -492,7 +492,7 @@
       <div>
         <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Kitchen Hours</h4>
         <p class="text-xs text-slate-300">Monday – Sunday</p>
-        <p class="text-xs font-bold text-orange-400 mt-0.5">11:00 AM – 11:30 PM</p>
+        <p class="text-xs font-bold text-orange-400 mt-0.5">11:00 AM – 10:30 PM</p>
         <p class="text-[11px] text-slate-400 mt-2">Open 7 days a week for delivery across Grays and Thurrock.</p>
       </div>
 
@@ -521,7 +521,7 @@
       ? 'https://website-loyalty-program-hungryfox-api-preview.thehungryfox2026.workers.dev'
       : 'https://hungryfox-api.thehungryfox2026.workers.dev';
     const MIN_ORDER_AMOUNT = 15.00;
-    function hungryFoxOrderingOpen(now=new Date()){const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);const hour=Number(parts.find(p=>p.type==='hour').value),minute=Number(parts.find(p=>p.type==='minute').value);return hour*60+minute>=660||hour*60+minute<120;}
+    function hungryFoxOrderingOpen(now=new Date()){const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);const hour=Number(parts.find(p=>p.type==='hour').value),minute=Number(parts.find(p=>p.type==='minute').value);return hour*60+minute>=660&&hour*60+minute<1350;}
     function refreshOrderingHours(){const open=hungryFoxOrderingOpen();document.getElementById('hungryfox-closed-banner').style.display=open?'none':'block';const checkout=document.getElementById('checkout-btn');if(checkout)checkout.disabled=!open||state.cart.length===0;}
     setInterval(refreshOrderingHours,30000);
     document.addEventListener('DOMContentLoaded',refreshOrderingHours);
@@ -968,6 +968,13 @@
     }
 
     // Modal Builder per Exact Specification Rules
+    const SIDE_CHOICES = [['Fries',0],['Wedges',0.50],['Cheese Loaded Fries',0.99],['Cheese Loaded Wedges',1.49],['Flavour Rice',0.50]];
+    function mealSideFields(n, prefix) {
+      return Array.from({length:n},(_,i)=>`<div class="space-y-1"><label class="block text-xs font-bold text-slate-200">Choose Meal Side${n>1?' '+(i+1):''}</label><select class="meal-side-choice w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white" data-prefix="${prefix}" data-portion="${i+1}" onchange="this.nextElementSibling.classList.toggle('hidden',this.value==='Flavour Rice');updateModalPrice()">${SIDE_CHOICES.map(([name,price])=>`<option value="${name}" data-price="${price}">${name}${price?' (+'+formatGBP(price)+')':' (Included)'}</option>`).join('')}</select><div>${renderSelect('Side Seasoning',prefix+'_side_season_'+(i+1),SEASONING_OPTIONS)}</div></div>`).join('');
+    }
+    function activeMealSides() {
+      return [...document.querySelectorAll('.meal-side-choice')].filter(el=>el.dataset.prefix==='included'||document.getElementById(el.dataset.prefix+'-upgrade-chk')?.checked);
+    }
     function openCustomModal(product) {
       state.activeItem = { product, quantity: 1 };
       document.getElementById("modal-quantity").textContent = "1";
@@ -1071,7 +1078,7 @@
       }
 
       // 4. Fries / Wedges Seasoning
-      if (['FRS001', 'FRS002', 'FRS005', 'FEA001', 'FEA002', 'FEA004', 'FEA005', 'FEA006', 'FEA012', 'BDL008', 'KID001', 'KID002', 'KID003', 'KID004', 'KID005', 'KID006'].includes(id)) {
+      if (['FRS001', 'FRS002', 'FRS005', 'FEA001', 'FEA002', 'FEA004', 'FEA005', 'FEA006', 'FEA012'].includes(id)) {
         html += renderSelect(id.includes('Wedges') || id === 'FRS005' ? 'Wedges Seasoning' : 'Fries Seasoning', 'seasoning_1', SEASONING_OPTIONS);
       } else if (['FRS003', 'FRS004', 'FRS006', 'FRS007', 'FRS008', 'FRS009', 'FEA009', 'FEA010', 'FEA011'].includes(id)) {
         // Enforce exact loaded order: Seasoning -> Drizzle -> Dip -> Drink
@@ -1111,11 +1118,12 @@
 
       // Cheese-loaded upgrade for regular fries. The selected number is the number of fries portions upgraded.
       const friesUpgradePortions = { FEA001:1, FEA002:1, FEA004:1, FEA005:1, FEA006:1, KID001:1, KID002:1, KID003:1, KID004:1, KID005:1, KID006:1, BDL001:2, BDL003:2, BDL005:2, BDL006:2, BDL007:2, BND004:2 };
-      if (friesUpgradePortions[id]) {
+      if (friesUpgradePortions[id] && !id.startsWith('KID')) {
         const maxLoaded = friesUpgradePortions[id];
         html += '<div class="space-y-1"><label class="block text-xs font-bold text-slate-200 uppercase">Cheese-Loaded Fries Upgrade</label><select id="sel-fries_upgrade_qty" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2.5 text-xs text-white">' + Array.from({length:maxLoaded+1},(_,n)=>'<option value="'+n+'">'+(n===0?'Keep all regular': 'Load '+n+' portion'+(n===1?'':'s')+' (+'+formatGBP(n*0.99)+')')+'</option>').join('') + '</select><p class="text-[10px] text-slate-400">Adds cheese only. Existing fries seasoning choices remain unchanged. +£0.99 per portion.</p></div>';
       }
 
+      if (id.startsWith('KID') || id === 'BDL008') html += mealSideFields(1,'included');
       // 5. Choose drizzle (Only for loaded items and Chicken Rice Bowl)
       if (['FRS003', 'FRS004', 'FRS006', 'FRS007', 'FRS008', 'FRS009', 'RIC002', 'FEA009', 'FEA010', 'FEA011'].includes(id)) {
         html += renderSelect('Chicken Drizzle', 'drizzle', DRIZZLE_OPTIONS);
@@ -1264,15 +1272,15 @@
       }
 
       // Solo Chicken Optional Meal Upgrade
-      if (['CHK001', 'CHK002', 'WNG001', 'WNG002', 'TND001', 'SD001', 'SD002', 'SD003', 'SD011', 'SD014'].includes(id)) {
+      if (['CHK001', 'CHK002', 'WNG001', 'WNG002', 'TND001', 'SD001', 'SD002', 'SD003', 'SD011', 'SD014', 'SD015'].includes(id)) {
         html += `
           <div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-3">
             <label class="flex items-center gap-2 cursor-pointer font-bold text-xs text-orange-400">
               <input type="checkbox" id="solo-upgrade-chk" onchange="handleSoloMealToggle()" class="w-4 h-4 text-orange-500 rounded bg-[#0b1326] border-slate-700" />
-              Make it a Meal (+£1.99) — Includes Fries & Canned Drink
+              Make it a Meal (+£1.99) — Includes ${id === 'SD014' ? 'Fries' : 'Meal Side'} & Canned Drink
             </label>
             <div id="solo-upgrade-fields" class="hidden space-y-2 pt-2 border-t border-slate-800">
-              <div>
+              ${id === 'SD014' ? `              <div>
                 <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Fries Seasoning</label>
                 <select id="sel-meal_seasoning" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">
                   ${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}
@@ -1282,6 +1290,7 @@
                 <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Cheese-Loaded Fries Upgrade</label>
                 <select id="sel-meal_fries_upgrade_qty" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white"><option value="0">Keep regular fries</option><option value="1">Loaded Fries (+£0.99)</option></select>
               </div>
+` : mealSideFields(1,'solo')}
               <div>
                 <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Canned Drink</label>
                 <select id="sel-meal_drink" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">
@@ -1297,17 +1306,10 @@
           <div class="mt-4 p-3.5 bg-[#060e20] border border-slate-800 rounded-xl space-y-3">
             <label class="flex items-center gap-2 cursor-pointer font-bold text-xs text-orange-400">
               <input type="checkbox" id="whole-upgrade-chk" onchange="handleWholeMealToggle()" class="w-4 h-4 text-orange-500 rounded bg-[#0b1326] border-slate-700" />
-              Whole Chicken Meal (+£6.50) — Includes 2 Fries & Bottled Drink
+              Whole Chicken Meal (+£6.50) — Includes 2 Meal Sides & Bottled Drink
             </label>
             <div id="whole-upgrade-fields" class="hidden space-y-2 pt-2 border-t border-slate-800">
-              <div class="grid grid-cols-2 gap-2">
-                <div><span class="text-[10px] text-slate-400 block mb-0.5">Fries 1 Seasoning</span><select id="sel-whole_seasoning_1" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
-                <div><span class="text-[10px] text-slate-400 block mb-0.5">Fries 2 Seasoning</span><select id="sel-whole_seasoning_2" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">${SEASONING_OPTIONS.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Cheese-Loaded Fries Upgrade</label>
-                <select id="sel-whole_fries_upgrade_qty" onchange="updateModalPrice()" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white"><option value="0">Keep both regular</option><option value="1">Load 1 portion (+£0.99)</option><option value="2">Load both portions (+£1.98)</option></select>
-              </div>
+              ${mealSideFields(2,'whole')}
               <div>
                 <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1">Bottled Drink</label>
                 <select id="sel-whole_drink" class="w-full bg-[#0b1326] border border-slate-700 rounded-lg p-2 text-xs text-white">
@@ -1449,6 +1451,7 @@
         if (wholeFriesUpgrade) total += Math.max(0, Number(wholeFriesUpgrade.value) || 0) * 0.99;
       }
 
+      activeMealSides().forEach(el=>{total += Number(el.selectedOptions[0].dataset.price);});
       const dessertSel = document.getElementById('sel-dessert');
       if (dessertSel) total += Number(dessertSel.options[dessertSel.selectedIndex]?.getAttribute('data-price') || 0);
 
@@ -1552,6 +1555,12 @@
         if (wd) opts.push({ label: 'Meal Bottled Drink', value: wd.value, price: 0 });
       }
 
+      activeMealSides().forEach(el=>{
+        const n=el.dataset.portion;
+        opts.push({label:'Meal Side '+n,value:el.value,price:Number(el.selectedOptions[0].dataset.price)});
+        const seasoning=document.getElementById('sel-'+el.dataset.prefix+'_side_season_'+n);
+        if(el.value!=='Flavour Rice'&&seasoning) opts.push({label:'Meal Side '+n+' Seasoning',value:seasoning.value,price:0});
+      });
       const genericFriesUpgrade = document.getElementById('sel-fries_upgrade_qty');
       if (genericFriesUpgrade) {
         const count = Math.max(0, Number(genericFriesUpgrade.value) || 0);

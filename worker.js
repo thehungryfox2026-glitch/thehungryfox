@@ -9,6 +9,14 @@ if(outward.startsWith("RM17")){fee=0;zone="Grays";}else if(outward.startsWith("R
 function serverOptionPricePence(productId,option){
  const label=String(option?.label||"").trim(),value=String(option?.value||"").trim();
  const money=(n)=>Math.round(n*100);
+ const sideMatch=label.match(/^Meal Side ([12])( Seasoning)?$/);
+ if(sideMatch){
+  const allowed=["CHK001","CHK002","CHK005","WNG001","WNG002","TND001","SD001","SD002","SD003","SD011","SD015","KID001","KID002","KID003","KID004","KID005","KID006","BDL008"];
+  if(!allowed.includes(productId)||(sideMatch[1]==="2"&&productId!=="CHK005"))return null;
+  if(sideMatch[2])return value.length>0&&value.length<=80?0:null;
+  const prices={"Fries":0,"Wedges":50,"Cheese Loaded Fries":99,"Cheese Loaded Wedges":149,"Flavour Rice":50};
+  return Object.prototype.hasOwnProperty.call(prices,value)?prices[value]:null;
+ }
  const fixed={
   "Meal Upgrade":value==="Fries & Drink (+£1.99)"?199:null,
   "Whole Chicken Meal Upgrade":value==="2 Fries & Bottled Drink (+£6.50)"?650:null,
@@ -48,7 +56,7 @@ function serverOptionPricePence(productId,option){
  if(freeLabels.has(label))return value&&value.length<=200?0:null;
  return null;
 }
-function hungryFoxOrderingOpen(now=new Date()){const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);const hour=Number(parts.find(p=>p.type==='hour').value),minute=Number(parts.find(p=>p.type==='minute').value);return hour*60+minute>=660||hour*60+minute<120;}
+function hungryFoxOrderingOpen(now=new Date()){const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);const hour=Number(parts.find(p=>p.type==='hour').value),minute=Number(parts.find(p=>p.type==='minute').value);return hour*60+minute>=660&&hour*60+minute<1350;}
 async function create(req,env,o){if(!hungryFoxOrderingOpen())return out({error:'Online ordering is currently closed. We reopen at 11:00 AM UK time.'},403,o);if(!env.STRIPE_SECRET_KEY)return out({error:"Stripe secret key is not configured on this Worker."},503,o);let b;try{b=await req.json();}catch{return out({error:"Invalid order details."},400,o);}const c=b.customer||{},items=b.items;if(!c.name||!c.phone||!c.email||!c.postcode||!c.address||!Array.isArray(items)||!items.length)return out({error:"Complete your delivery details and basket."},400,o);if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email))return out({error:"Enter a valid email address."},400,o);
 let subtotal=0,rows=[];for(const it of items){const p=MENU[it.productId],q=Number(it.quantity);if(!p||!Number.isInteger(q)||q<1||q>30)return out({error:"An item in your basket could not be verified. Refresh and try again."},400,o);let extra=0;const opts=Array.isArray(it.options)?it.options:[];if(it.options!==undefined&&!Array.isArray(it.options))return out({error:"Item options could not be verified."},400,o);for(const x of opts){if(!x||typeof x!=="object"||typeof x.label!=="string"||typeof x.value!=="string")return out({error:"An item option could not be verified."},400,o);const cents=serverOptionPricePence(it.productId,x);if(!Number.isInteger(cents)||cents<0)return out({error:"An item option could not be verified. Please refresh your basket and try again."},400,o);extra+=cents;}const unit=Math.round(p[1]*100)+extra;subtotal+=unit*q;const optionDescription=opts.map(x=>String(x.label||"")+": "+String(x.value||"")).join(", ");rows.push({name:p[0],description:optionDescription,unit,quantity:q});}
 let reward=null,reservedRewardId="";
